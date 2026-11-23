@@ -43,6 +43,10 @@ interface InputRow {
   defaultValue?: unknown;
   options?: Array<{ id: string; label: string }>;
   validations?: unknown;
+  /** columnFormIPM selector rows (the values the spec sets). */
+  selectors?: Array<{ id: string; type: string; label: string; defaultValue?: unknown }>;
+  /** dataTransferV2 entry types the component offers. */
+  transferTypes?: string[];
 }
 
 function inputRow(component: Component, visible: boolean, full: boolean): InputRow {
@@ -77,6 +81,28 @@ function inputRow(component: Component, visible: boolean, full: boolean): InputR
     }));
   }
   if (validations !== undefined && full) row.validations = validations;
+
+  if (component.subType === "columnFormIPM") {
+    const selectorRows = Array.isArray(component["row"])
+      ? (component["row"] as Array<Record<string, unknown>>)
+      : [];
+    row.selectors = selectorRows.map((selector) => ({
+      id: String(selector["selectorId"] ?? ""),
+      type: String(selector["type"] ?? ""),
+      label: String(selector["label"] ?? selector["selectorId"] ?? ""),
+      ...(selector["defaultValue"] === undefined
+        ? {}
+        : { defaultValue: selector["defaultValue"] }),
+    }));
+    row.defaultValue = selectorRows
+      .filter((selector) => selector["defaultValue"] !== undefined)
+      .map((selector) => `${String(selector["selectorId"])}=${String(selector["defaultValue"])}`)
+      .join(", ");
+  }
+  if (component.subType === "dataTransferV2") {
+    const types = component["dataTransferTypes"];
+    if (Array.isArray(types)) row.transferTypes = types.map((entry) => String(entry));
+  }
   return row;
 }
 
@@ -124,7 +150,11 @@ export async function schemaCommand(args: ParsedArgs): Promise<Record<string, un
     );
   }
 
-  const { mappings } = await loadServiceMappings(definition.mappingDefinitions ?? [], CURRENCY, cache);
+  // PLC_2.0 mappings are selector trees, not flat metered unit maps.
+  const flatMappings = (definition.mappingDefinitions ?? []).filter(
+    (mapping) => mapping.mappingDefinitionVersion !== "PLC_2.0"
+  );
+  const { mappings } = await loadServiceMappings(flatMappings, CURRENCY, cache);
   const prices = createPriceResolver({
     currency: CURRENCY,
     regionName: name,

@@ -62,7 +62,11 @@ export async function pricingCommand(args: ParsedArgs): Promise<Record<string, u
     ]);
   }
 
-  const { mappings } = await loadServiceMappings(definition.mappingDefinitions ?? [], CURRENCY, cache);
+  // PLC_2.0 mappings are selector trees; they are priced by the column form.
+  const flatMappings = (definition.mappingDefinitions ?? []).filter(
+    (mapping) => mapping.mappingDefinitionVersion !== "PLC_2.0"
+  );
+  const { mappings } = await loadServiceMappings(flatMappings, CURRENCY, cache);
   const prices = createPriceResolver({
     currency: CURRENCY,
     regionName: name,
@@ -106,6 +110,18 @@ export async function pricingCommand(args: ParsedArgs): Promise<Record<string, u
     }
   }
 
+  const columnForms = (template.cards ?? []).flatMap((card) =>
+    (card.inputSection?.components ?? [])
+      .filter((component) => component.subType === "columnFormIPM")
+      .map((component) => ({
+        component: component.id,
+        mapping: String(component["mappingDefinitionName"] ?? ""),
+        selectors: (Array.isArray(component["row"])
+          ? (component["row"] as Array<Record<string, unknown>>)
+          : []
+        ).map((selector) => String(selector["selectorId"] ?? "")),
+      }))
+  );
   const missing = rows.filter((row) => row.price === "missing").length;
   return {
     service: { code: definition.serviceCode, name: definition.serviceName.trim() },
@@ -114,10 +130,20 @@ export async function pricingCommand(args: ParsedArgs): Promise<Record<string, u
     template: template.id,
     prices: rows,
     count: `${rows.length} metered units, ${missing} missing`,
-    ...(missing > 0
+    ...(columnForms.length > 0 ? { columnForms } : {}),
+    ...(missing > 0 || columnForms.length > 0
       ? {
           help: [
-            "Missing meters are hidden by displayIf in the web UI; the engine refuses to price them as zero",
+            ...(missing > 0
+              ? [
+                  "Missing meters are hidden by displayIf in the web UI; the engine refuses to price them as zero",
+                ]
+              : []),
+            ...(columnForms.length > 0
+              ? [
+                  "columnFormIPM prices come from the PLC_2.0 index for the selected row values; set them in an estimate file",
+                ]
+              : []),
           ],
         }
       : {}),

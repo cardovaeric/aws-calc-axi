@@ -96,8 +96,8 @@ P2 receipt: `receipts/p2-groups-support.json`.
 
 ## Last commit
 
-`307dbfc` - P3 scanner fixes, native goldens, `update`, and docs. Screenshot capture and the final
-status updates follow in the closing commit.
+`a0c4a16` - screenshot capture, ledger evidence section, and the final status report.
+Previous: `307dbfc` P3 scanner fixes and goldens, `cf69c6a` P1/P2 matrix, `464881e` P0 slice.
 
 ## Final summary
 

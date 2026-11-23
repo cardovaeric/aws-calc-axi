@@ -1,5 +1,8 @@
 .lavish
 .session*
+node_modules/
+*.tsbuildinfo
+.DS_Store
 
 # Large live-analysis captures. Findings and fixtures stay tracked.
 analysis/defs/

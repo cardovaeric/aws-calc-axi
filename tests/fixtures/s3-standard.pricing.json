@@ -1,0 +1,20 @@
+{
+  "manifest": {
+    "serviceId": "s3",
+    "currencyCode": "USD",
+    "source": "s3-standard",
+    "hawkFilePublicationDate": "2026-11-21T17:29:19Z"
+  },
+  "sets": {},
+  "regions": {
+    "US East (Ohio)": {
+      "Standard Storage First 50 TB per GB Mo": { "rateCode": "YPGKVRB2EKTVDJDT.JRTCKXETXF.PGHJ3S3EYE", "price": "0.0230000000" },
+      "Standard Storage Next 450 TB per GB Mo": { "rateCode": "YPGKVRB2EKTVDJDT.JRTCKXETXF.D42MF2PVJS", "price": "0.0220000000" },
+      "Standard Storage Over 500 TB per GB Mo": { "rateCode": "YPGKVRB2EKTVDJDT.JRTCKXETXF.PXJDJ3YRG3", "price": "0.0210000000" },
+      "PUT COPY/POST or LIST requests per Requests": { "rateCode": "GJKK9PMSTKPNGZS9.JRTCKXETXF.6YS6EN2CT7", "price": "0.0000050000" },
+      "GET and all other requests per Requests": { "rateCode": "DJEKB32FV4HNZJZY.JRTCKXETXF.6YS6EN2CT7", "price": "0.0000004000" },
+      "Data Returned by S3 Select in Standard per GB": { "rateCode": "KY84ZWZ85Y5YW4AY.JRTCKXETXF.6YS6EN2CT7", "price": "0.0007000000" },
+      "Data Scanned by S3 Select in Standard per GB": { "rateCode": "AVPHYTRB8KX5N5YE.JRTCKXETXF.6YS6EN2CT7", "price": "0.0020000000" }
+    }
+  }
+}

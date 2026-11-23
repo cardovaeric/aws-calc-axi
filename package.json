@@ -1,0 +1,32 @@
+{
+  "name": "aws-calc-axi",
+  "version": "0.1.0",
+  "description": "Agent eXperience Interface for the AWS Pricing Calculator",
+  "type": "module",
+  "bin": {
+    "aws-calc-axi": "./bin/aws-calc-axi.js"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "node --test --test-reporter=spec 'tests/**/*.test.ts'",
+    "e2e": "node --test --test-concurrency=1 --test-reporter=spec 'e2e/**/*.test.ts'",
+    "ledger": "node --experimental-strip-types scripts/ledger.ts"
+  },
+  "dependencies": {
+    "@toon-format/toon": "^4.4.0",
+    "axi-sdk-js": "^0.1.14",
+    "decimal.js": "^10.6.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.47.0"
+  }
+}

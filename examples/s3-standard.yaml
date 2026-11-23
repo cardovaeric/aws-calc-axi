@@ -1,0 +1,12 @@
+name: axi-e2e S3 Standard
+currency: USD
+locale: en_US
+services:
+  - code: amazonSimpleStorageServiceGroup
+    region: us-east-2
+    subServices:
+      - code: amazonS3Standard
+        set:
+          s3StandardStorageSize:
+            value: 100
+            unit: gb|month

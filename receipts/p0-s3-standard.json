@@ -1,0 +1,85 @@
+{
+  "estimate": "axi-e2e S3 Standard",
+  "url": "https://calculator.aws/#/estimate?id=c2801d129ca309b709d0c514b117fb877b781f36",
+  "savedKey": "c2801d129ca309b709d0c514b117fb877b781f36",
+  "publishedAt": "2026-11-23T15:36:40.113Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 2.3,
+    "upfront": 0,
+    "total12m": 27.6,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonSimpleStorageServiceGroup",
+        "template": "simpleStorageServiceClassesGroup",
+        "region": "us-east-2",
+        "monthly": 2.3,
+        "upfront": 0,
+        "summary": "S3 Standard storage (100 GB per month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonSimpleStorageServiceGroup",
+        "monthly": 2.3,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonS3Standard",
+        "monthly": 2.3,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 2.3,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=c2801d129ca309b709d0c514b117fb877b781f36",
+    "title": "axi-e2e S3 Standard",
+    "monthly": "2.30 USD",
+    "upfront": "0.00 USD",
+    "annual": "27.60 USD",
+    "monthlyValue": 2.3,
+    "upfrontValue": 0,
+    "annualValue": 27.6,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Simple Storage Service (S3)",
+        "upfront": "0.00 USD",
+        "monthly": "2.30 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "S3 Standard storage (100 GB per month)"
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T15:36:41.750Z"
+  },
+  "expectation": {
+    "title": "axi-e2e S3 Standard",
+    "monthly": 2.3,
+    "upfront": 0,
+    "annual": 27.6,
+    "services": [
+      {
+        "name": "Amazon Simple Storage Service (S3)",
+        "monthly": 2.3,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "S3 Standard storage (100 GB per month)"
+      }
+    ],
+    "groups": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

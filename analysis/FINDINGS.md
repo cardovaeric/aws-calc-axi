@@ -275,3 +275,90 @@ curl -s -X POST https://dnd5zrqcec4or.cloudfront.net/Prod/v2/saveAs \
 # retrieve
 curl -s https://d3knqfixx3sbls.cloudfront.net/<savedKey>
 ```
+
+## 9. Data transfer (`dataTransferV2`) pricing
+
+Observed on 2026-11-23 in us-east-2 (US East (Ohio)), S3 data transfer and the
+standalone Data Transfer service.
+
+- Rows are saved as `{value: [{entryType, value, unit, fromRegion|toRegion}]}`
+  with `entryType` in `INBOUND`, `OUTBOUND`, `INTRA_REGION`. A fresh row's unit is
+  `tb_month`; `gb_month` is the other option. The live UI stores an untouched row
+  for every declared type (see the EC2 and S3 payloads in `analysis/`).
+- Pricing comes from `datatransfer-calc.json`. Its regional map mixes meter
+  labels like `DataTransfer External Outbound Next 10 TB` (tiered) and
+  `DataTransfer InterRegion Outbound to <Region>` (flat) plus legacy keys keyed
+  by usage type, which the live converter skips.
+- The live pipeline (`processPrices` / `calculateTransferBlockPrice`):
+  groups meters per destination, derives the region-wide most common tier group,
+  keeps the differing groups as destination overrides, and bills a row against
+  its destination group (or the common group). `INTRA_REGION` bills twice.
+- Every matching meter for one destination is summed. US East (N. Virginia)
+  therefore costs `1024 * (0.01 + 0.015) = 25.60` per TB because both the
+  inter-region meter and the multipath-resilience meter apply.
+- Observed live recomputations in the editor for us-east-2:
+  - External 1 TB outbound: 92.16 (`1024 * 0.09`)
+  - External 200 GB outbound: 18.00
+  - Intra-region 1 GB: 0.02 (`1 * 0.01 * 2`)
+  - Inbound External 1 TB: 0.00
+  - US East (N. Virginia) 1 TB: 25.60
+  - Outbound with a value but no destination: 0.00 with no error. The native
+    engine fails closed instead of publishing a zero.
+- The config summary is `DT <Inbound|Outbound|Intra-Region>: [<region> ](<n> <unit>)`
+  in `INBOUND, OUTBOUND, INTRA_REGION` order, with `External` labelled `Internet`,
+  `External-5G-Carrier` labelled `Carrier`, `other` labelled `All other regions`,
+  and unselected rows labelled `Not selected`.
+- Rehydration gap: the read-only share page drops `dataTransferV2` rows (a
+  foreign-source estimate renders 0), while clicking "Update estimate" opens the
+  editor, rehydrates the saved rows, and computes the values above. The editor
+  recomputation is therefore the live oracle for data transfer receipts.
+
+Reproduce:
+
+```sh
+curl -s --compressed \
+  'https://calculator.aws/pricing/2.0/meteredUnitMaps/datatransfer/USD/current/datatransfer-calc.json' \
+  | jq '.regions["US East (Ohio)"] | with_entries(select(.key | test("Outbound")))'
+```
+
+## 10. `columnFormIPM` (PLC_2.0 instance and storage tables)
+
+Observed on 2026-11-23 with `amazonDynamoDbDaxClusters` in us-east-2.
+
+- The saved component value is a list of rows: `{value: [{"<selectorId>":
+  {"value": "<string>"}}]}`. Each row holds only the component's own selectors;
+  derived tags (vCPU, memory) stay in the component tree.
+- A component points at a PLC_2.0 mapping (`mappingDefinitionVersion:
+  "PLC_2.0"`) whose `mappingDefinitionURL` ends in `/metadata.json`:
+  `pricing/2.0/meteredUnitMaps/<service>/<currency>/current/<source>/metadata.json`.
+  Metadata gives `primarySelectors`, `secondarySelectors`, and available
+  locations.
+- `<base>/primary-selector-aggregations.json` maps selector combinations to
+  derived attributes (for example `Instance Type` to `vCPU` and `Memory`).
+- `<base>/<primary selector values>/index.json` returns
+  `regions[<location>][<metered unit label>]` price records and one `sets` entry
+  whose labels are the candidate meters.
+- Live math (`oe`): the row count comes from the row with
+  `exportValueAs: "count"`, and the pricing model is `Monthly` when a monthly
+  price exists, otherwise `Hourly`. Hourly cost is `price * 730 * count`; the
+  monthly model adds `hourly * 730 * count + monthly * count`. `calculationId`
+  renames the resulting line (`{monthly: "monthly_ipm"}`).
+- Observed for DAX: 3 r5.large nodes at 0.255 per hour =
+  `0.255 * 730 * 3 = 558.45`, summary `DAX nodes (3), DAX instance type
+  (r5.large)`. The share page's recompute probe reproduces both, so the normal
+  probe oracle works for column forms.
+- Not implemented yet (fail closed): tiered PLC_2.0 patterns,
+  reserved/savings-plan models, utilization rows, dependent selectors,
+  aggregation remaps, `disableCalculation` components, sub-components, and
+  repeatable card rows.
+
+Reproduce:
+
+```sh
+curl -s --compressed \
+  'https://calculator.aws/pricing/2.0/meteredUnitMaps/dax/USD/current/dax-instances-calc/metadata.json'
+curl -s --compressed \
+  'https://calculator.aws/pricing/2.0/meteredUnitMaps/dax/USD/current/dax-instances-calc/primary-selector-aggregations.json'
+curl -s --compressed \
+  'https://calculator.aws/pricing/2.0/meteredUnitMaps/dax/USD/current/dax-instances-calc/US%20East%20(Ohio)/r5.large/2/16/index.json'
+```

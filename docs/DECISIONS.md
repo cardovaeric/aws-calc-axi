@@ -131,3 +131,60 @@ self-update. `--check` fetches fresh manifest, region map, runtime config, and l
 reports per-source drift without writing; `--apply` refreshes the cache. `--definitions` extends
 the check to all 441 definitions. The plan treats the data plane as a dependency with drift
 detection, so this is the intended meaning of `update`.
+
+## D-017: Publish budget for this session (2026-11-23)
+
+The day started at 26 links (D-011) against a 25/day cap. The mandated work for this session
+needed: four fixture receipts with probe oracles (8 links), data transfer research probes (4),
+one receipt for the data transfer fixture (1, editor oracle reuses the native link), one receipt
+for the first column-form fixture with its probe (2), and republishing SNS and SQS because the
+engine now writes the live contract's `tb_month` default for untouched data transfer rows
+(4). The default cap stays 25; each publish above it used an explicit
+`AWSCALC_MAX_PUBLISHES_PER_DAY` value (42-46) and the counter stopped at 46 for the day.
+No further links were created after the receipts above.
+
+## D-018: Data transfer pricing follows the live pipeline, including its quirks (2026-11-23)
+
+`src/engine/data-transfer.ts` reproduces `processPrices` / `calculateTransferBlockPrice`:
+per-destination tier groups, the region-wide most-common group, destination overrides, the
+intra-region double charge, and the tier clamp used by the form. Two consequences are deliberate:
+
+- Every meter that applies to one destination is summed. US East (N. Virginia) from Ohio costs
+  `1024 * (0.01 + 0.015) = 25.60` per TB because the inter-region and multipath-resilience meters
+  both apply; the live editor shows the same number, so parity wins over intuition.
+- A row with an amount but no source/destination selection fails closed. The live form quietly
+  bills 0 in that state; publishing a guessed zero contradicts PLAN.md.
+
+The read-only share page does not rehydrate `dataTransferV2` (a foreign-source probe renders 0),
+while the editor recomputes the saved rows correctly. `publish --oracle-editor` therefore opens
+the published link, clicks "Update estimate", and diffs the editor page. Receipts record
+`oracle.kind` as `probe` or `editor-recompute`; older receipts without `kind` are treated as
+probes. The ledger accepts `editor` rows and the E2E matrix re-runs the same editor recompute.
+The editor oracle compares costs, not summaries: the editor rebuilds the summary before the UI
+string table settles, so `(0 TB per month)` and `(0 tb_month)` can both appear. Summary shape is
+covered by unit tests and by the stored native render, where the text is ours.
+
+## D-019: Untouched data transfer rows use the live `tb_month` default (2026-11-23)
+
+Captured native payloads (`analysis/estimate.json`, `analysis/s3-payload.json`) show that an
+untouched `dataTransferV2` row is saved as `value: ""`, `unit: "tb_month"`, with an empty
+`fromRegion`/`toRegion`. The engine previously wrote `gb` from `preferredUnit` and summarized
+"(0 gb)". It now writes the live shape and `"DT <type>: <region> (0 TB per month)"`. SNS and SQS
+were republished because their stored payloads carried the old units; their costs did not change.
+
+## D-020: columnFormIPM covers the simple PLC_2.0 subset first (2026-11-23)
+
+`columnFormIPM` (71 definitions, 63 in us-east-2) is implemented for one row set per component,
+`textInput` / `autoSuggest` / `dropDown` selectors, no dependent selectors, no aggregation
+remaps, no derived tags, one price set, and the hourly or monthly model. The save format matches
+the live converter (`{value: [{selectorId: {value}}]}`) and `calculationId` targets are exposed
+to the maths section. `columnFormIPM` was added to the scanner's known set, so the inventory now
+reports 106 fully supported services (57 evaluate with defaults; most column-form services still
+need explicit selectors because the live form picks the first available option and this engine
+fails closed instead).
+
+Everything outside that subset fails closed with the component id and the unsupported feature:
+tiered PLC_2.0 patterns, reserved/savings-plan models, utilization rows, dependent selectors,
+`remap.constant`, `disableCalculation`, `subComponentsList`, `additionalPricingData`,
+`exportTagsAsValue`, and repeatable rows. PLC_2.0 mappings are also excluded from the flat price
+loader because they are selector trees, not metered unit maps.

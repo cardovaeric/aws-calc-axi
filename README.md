@@ -37,6 +37,7 @@ aws-calc-axi pricing amazonS3Standard --region us-east-2 --unit "Standard Storag
 aws-calc-axi estimate init "Web tier" --out estimate.yaml
 aws-calc-axi cost estimate.yaml --full
 aws-calc-axi publish estimate.yaml --receipt receipts/web.json
+aws-calc-axi publish estimate.yaml --oracle-editor --receipt receipts/dt.json
 aws-calc-axi verify "https://calculator.aws/#/estimate?id=<key>" --expect estimate.yaml
 aws-calc-axi doctor
 aws-calc-axi update --check
@@ -68,6 +69,29 @@ groups:
               s3StandardStorageSize: { value: 100, unit: gb|month }
 ```
 
+Repeatable table inputs (`dataTransferV2`, `columnFormIPM`) take their live saved shape:
+
+```yaml
+services:
+  - code: awsS3DataTransfer                 # non-empty transfer rows
+    region: us-east-2
+    set:
+      dataTransfer:
+        value:
+          - entryType: OUTBOUND             # INBOUND, OUTBOUND, INTRA_REGION
+            value: 1
+            unit: tb_month                  # tb_month or gb_month
+            toRegion: External              # External, other, or a region code
+  - code: amazonDynamoDbDaxClusters         # PLC_2.0 column form
+    region: us-east-2
+    set:
+      columnFormIPM:
+        - Number of nodes: 3
+          Instance Type: r5.large
+```
+
+Unselected transfer rows and unsupported column-form features fail closed with the component id.
+
 ## How verification works
 
 1. `publish` posts the built estimate to the public save endpoint and returns a link.
@@ -77,6 +101,9 @@ groups:
 3. `--oracle` also publishes a recompute probe (same components, non-native `metaData.source`).
    The share page recomputes those from `calculationComponents`, so the probe is a live UI oracle
    for the engine. Both URLs land in the receipt.
+4. `--oracle-editor` opens the published link, clicks "Update estimate", and diffs the editor
+   page instead. Use it for components the read-only probe drops, such as non-empty
+   `dataTransferV2` rows; it creates no extra link.
 
 Links are public and the save endpoint is open, so publishing is explicit, capped at 25 links per
 day (`AWSCALC_MAX_PUBLISHES_PER_DAY`), and reused when a receipt matches the spec hash.
@@ -88,3 +115,5 @@ day (`AWSCALC_MAX_PUBLISHES_PER_DAY`), and reused when a receipt matches the spe
 - `scripts/scan.ts` inventories component subtypes across the catalog and reports what the engine
   can evaluate today (the coverage roadmap).
 - `npm run ledger` regenerates `COVERAGE.md` from the receipts.
+- `analysis/FINDINGS.md` records the live data shapes and the observed recomputations for data
+  transfer (section 9) and `columnFormIPM` (section 10).

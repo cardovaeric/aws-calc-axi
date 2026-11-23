@@ -114,9 +114,9 @@ comparison, the rendered DOM, the oracle, and the verdict.
 
 ## Last commit
 
-`d8f973c` - next session handoff prompt.
-This session: four P3 fixture receipts, native data transfer pricing with the editor oracle,
-native `columnFormIPM` plus the first DAX receipt.
+`8e6a89f` - session findings, decisions, and status.
+Previous: `ebb3f0a` data transfer pricing, `columnFormIPM`, and the P3 receipts; `d8f973c` next
+session handoff prompt.
 
 ## Final summary
 

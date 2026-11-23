@@ -30,9 +30,18 @@ export interface BuiltService {
   evaluated: EvaluatedService;
 }
 
+export interface BuiltGroup {
+  id: string;
+  name: string;
+  path: string;
+  monthly: number;
+  upfront: number;
+}
+
 export interface BuildResult {
   estimate: Estimate;
   services: BuiltService[];
+  groups: BuiltGroup[];
   /** Service-only totals (support is not stored in the estimate). */
   serviceTotal: TotalCost;
   support?:
@@ -84,7 +93,8 @@ async function buildGroup(
   spec: GroupSpec,
   path: string,
   options: BuildOptions,
-  collected: BuiltService[]
+  collected: BuiltService[],
+  collectedGroups: BuiltGroup[]
 ): Promise<GroupAccumulator> {
   const services: Record<string, EstimateService> = {};
   let monthly = 0;
@@ -102,12 +112,13 @@ async function buildGroup(
 
   for (const [index, child] of spec.groups.entries()) {
     const childPath = `${path}.groups[${index}]`;
-    const built = await buildGroup(child, childPath, options, collected);
+    const built = await buildGroup(child, childPath, options, collected, collectedGroups);
     groups[groupId(child.name)] = built.group;
     monthly += built.monthly;
     upfront += built.upfront;
   }
 
+  const id = groupId(spec.name);
   const group: EstimateGroup = {
     name: spec.name,
     services,
@@ -119,6 +130,7 @@ async function buildGroup(
     totalCost: totalCostOf(monthly, upfront),
   };
 
+  collectedGroups.push({ id, name: spec.name, path, monthly, upfront });
   return { group, monthly, upfront };
 }
 
@@ -136,6 +148,7 @@ function buildFlavor(options: BuildOptions): {
 export async function buildEstimate(spec: EstimateSpec, options: BuildOptions = {}): Promise<BuildResult> {
   const now = options.now ?? new Date();
   const collected: BuiltService[] = [];
+  const collectedGroups: BuiltGroup[] = [];
   const services: Record<string, EstimateService> = {};
   const groups: Record<string, EstimateGroup> = {};
   let monthly = 0;
@@ -155,7 +168,7 @@ export async function buildEstimate(spec: EstimateSpec, options: BuildOptions = 
   }
 
   for (const [index, child] of spec.groups.entries()) {
-    const built = await buildGroup(child, `groups[${index}]`, options, collected);
+    const built = await buildGroup(child, `groups[${index}]`, options, collected, collectedGroups);
     groups[groupId(child.name)] = built.group;
     monthly += built.monthly;
     upfront += built.upfront;
@@ -202,6 +215,7 @@ export async function buildEstimate(spec: EstimateSpec, options: BuildOptions = 
   return {
     estimate,
     services: collected,
+    groups: collectedGroups,
     serviceTotal: sumCosts(collected.map((entry) => entry.evaluated.serviceCost)),
     ...(supportReport ? { support: supportReport } : {}),
   };

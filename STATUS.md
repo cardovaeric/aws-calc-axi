@@ -5,72 +5,77 @@ Updated: 2026-11-23 (session 1)
 ## What works now
 
 - TypeScript Node project with a real binary (`bin/aws-calc-axi.js`), native TS execution,
-  `npm run typecheck`, `npm run lint`, `npm test`, `npm run e2e`.
-- Fast version path: `--version`, `-v`, `-V` print the bare version before the CLI graph loads
-  (guarded by a relative timing test).
-- Catalog client: manifest, region map, locations, and the exact region-aware top-level rule
-  (`isActive`, exclude `subService`/`TCOCalculator`, `disableConfigure`, region map or selector
-  children, hide `amazonTechnic`). Derived counts match the live UI: 181 us-east-1, 160 us-east-2.
-- Definition client and pricing client with disk cache, text fetch cache, gzip via fetch, retry
-  with exponential backoff, stale-cache fallback, and `AWSCALC_OFFLINE=1`.
-- Estimate contract types matching the saved JSON quirks (`serviceCost` omits `upfront` when the
-  template has no upfront display; `totalCost` always carries both).
-- Engine (native, deterministic): inputs (`numericInput`, `dropdown`, `fileSize`, `frequency`,
-  `durationInput`, `percentInput`, `checkbox`, display-only text), `displayIf` expressions,
-  `singlePricePoint`, `tieredPricing` + `tieredPricingMath`, `basicMaths` (add/subtract/multiply/
-  divide/exponent/max/min), `rounding`, `variable`, `priceDisplay`, config summaries, subtotals.
-  Unit conversion tables are extracted from the live bundle (size, time, frequency), including
-  frequency table orientation.
-- Selector parents emit `subServices[]` (S3 group -> S3 Standard + data transfer).
-- Publisher: `POST /Prod/v2/saveAs`, public URL, saved-key retrieval, daily publish budget (25).
-- Verifier: opens the public URL with agent-browser in a named session, waits for
-  `[data-monthly-cost]`, and reads the banner, totals, service table, group tree, and support row.
-- CLI: home, `services`, `schema`, `pricing`, `estimate init`, `cost`, `apply`, `publish`,
-  `verify`, `doctor`. TOON output via `axi-sdk-js`; unknown flags exit 2 with the valid set.
-- Support pricing model from `FrontEndUI.json` (basic/business/enterprise/unified, tier table,
-  minimum floor, spend-tier skipping) and the stored support payload.
-- Groups: nested user groups with `Name-uuid` ids, per-group subtotals, top-level `groupSubtotal`,
-  `totalCost`.
+  `npm run typecheck`, `npm run lint`, `npm test`, `npm run e2e`, `npm run ledger`.
+- Fast version path: `--version`, `-v`, `-V` answer before the CLI graph loads.
+- Catalog: manifest, region map, locations, exact region-aware rule. Parity with the live UI:
+  181 us-east-1, 160 us-east-2 (`e2e/catalog.test.ts`).
+- Definition and pricing clients: disk cache, retry/backoff, offline mode, region-less price
+  merging (`Any` bucket), gzip via fetch.
+- Engine: inputs (`numericInput`, `dropdown`, `fileSize`, `frequency`, `durationInput`,
+  `percentInput`, `checkbox`, `dataTransferV2` for empty rows, display-only text), `displayIf`,
+  `singlePricePoint`, `tieredPricing`/`tieredPricingMath`, `pricingComboV2`, `replace`,
+  `concatenate`, `basicMaths`, `maxMin`, `rounding`, `variable`, `priceDisplay`, `[ZERO_COST]`,
+  config summaries, subtotals. Unknown subtypes fail closed with the component path.
+- Selector parents emit `subServices[]`; user groups nest with `Name-uuid` ids; support plans
+  compute from the published tier table.
+- Publisher: `saveAs`, public URL, saved-key retrieval, daily link budget, link reuse from a
+  receipt when the spec hash matches, recompute probe links for the live UI oracle.
+- Verifier: opens the public URL in a named agent-browser session, waits for the estimate name,
+  reads the banner, totals, service/group rows, group tree, and support row; diffs to the cent.
+- CLI: home, `services`, `schema`, `pricing`, `estimate init`, `cost`, `apply`, `publish`
+  (`--oracle`, `--receipt`, link reuse), `verify`, `doctor`.
 
 ## Verified receipts
 
-| Estimate | Region | Fixture | Native monthly | Rendered monthly | Rendered 12m | Verdict |
-| --- | --- | --- | --- | --- | --- | --- |
-| axi-e2e S3 Standard | us-east-2 | 100 GB Standard | 2.30 | 2.30 USD | 27.60 USD | pass |
+| Row | Native monthly | Rendered monthly | Rendered 12m | Oracle | Verdict |
+| --- | --- | --- | --- | --- | --- |
+| S3 Standard 100 GB | 2.30 | 2.30 USD | 27.60 USD | pass | pass |
+| Lambda 10M req / 200 ms / 512 MB | 11.80 | 11.80 USD | 141.60 USD | pass | pass |
+| CloudWatch usage mix | 16.52 | 16.52 USD | 198.24 USD | pass | pass |
+| SNS 1M requests + 1M HTTP | 0.54 | 0.54 USD | 6.48 USD | pass | pass |
+| SQS 1M standard requests | 0.40 | 0.40 USD | 4.80 USD | pass | pass |
+| Groups (S3 + Lambda) + Business Support+ | 14.10 (+29.00 support) | 43.10 USD | 517.20 USD | render-recomputed | pass |
 
-Receipt: `receipts/p0-s3-standard.json` (url
-`https://calculator.aws/#/estimate?id=c2801d129ca309b709d0c514b117fb877b781f36`).
+Public links and full receipts: `COVERAGE.md` and `receipts/`.
+
+P0 receipt: `receipts/p0-s3-standard.json`.
+P1 receipts: `receipts/p1-*.json` (each stores the public link, the stored JSON comparison, the
+rendered DOM, and the recompute probe URL).
+P2 receipt: `receipts/p2-groups-support.json`.
 
 ## Test and lint status
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
 - `npm test`: 51 tests, pass
-- `npm run e2e`: not yet populated (P0 receipt captured manually through the CLI)
+- `npm run e2e`: 7 tests, pass (live DOM, live catalog parity, all ledger rows)
+- `npm run ledger`: 6 rows, all pass
 
 ## Coverage ledger summary
 
-| Service | Template | Region | Fixture | Path | Status |
-| --- | --- | --- | --- | --- | --- |
-| amazonS3Standard | s3Standard | us-east-2 | 100 GB | native | pass |
-| awsS3DataTransfer | awsS3DataTransfer | us-east-2 | empty rows | native | pass (0.00) |
-
-Full ledger lives in `COVERAGE.md`. Only a rendered public page marks a row `pass`.
+6 rows: 5 service fixtures plus 1 group/support fixture. All native, all pass. Details in
+`COVERAGE.md`.
 
 ## Open failures and blockers
 
 - None blocking.
-- Known scope gaps (fail closed, not silently zero): `pricingComboV2`, `concatenate`, `replace`,
-  `dataTransferV2`, `columnFormIPM`, `throughput`, `utilization`, bespoke EC2/Windows/RDS math.
-  These raise `UNSUPPORTED_COMPONENT` with the component path.
+- Publish budget: 25 links/day cap was reached; the P2 gate needed one more link (26 total,
+  explicitly raised for that publish). Nothing else was published after it.
+- Fail-closed gaps (adapter tasks, not silent zeros): non-empty `dataTransferV2` pricing,
+  `columnFormIPM`, `throughput`, `utilization`, bespoke EC2/Windows/RDS math,
+  `ec2PriceDisplay`, `snapShotMaths`, `workloadInstanceMath`.
+- `update` currently resolves to the SDK's npm self-update. The plan's data-plane
+  `update --check|--apply` is not implemented yet; it is the next hardening item.
 
 ## Next three actions
 
-1. Add `pricingComboV2`, `concatenate`, `replace`, `dataTransferV2` and usage inputs, then wire
-   Lambda, CloudWatch, SNS, SQS fixtures into the E2E matrix.
-2. Build `COVERAGE.md` generation from the ledger module and add the P1 smoke matrix E2E test.
-3. Publish the P2 group + Business Support+ estimate and assert the group tree and support line.
+1. Implement `update --check|--apply` (data-plane hashes + drift report) and shadow the SDK
+   self-update.
+2. Implement non-empty data transfer pricing (the biggest remaining generic gap), then add S3
+   data transfer and NAT/VPC-style fixtures.
+3. Expand the ledger with more Tier A services driven by the default-input scanner
+   (`scripts/scan.ts`), fixing each unsupported subtype it reports.
 
 ## Last commit
 
-`pending` - initial P0 slice.
+`464881e` - P0 slice. P1/P2 work is staged for the next commit.

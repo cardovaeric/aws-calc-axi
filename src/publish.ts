@@ -55,6 +55,18 @@ async function recordPublish(): Promise<void> {
   await writeFile(budgetPath(), JSON.stringify(next), "utf8");
 }
 
+/**
+ * Publish a recompute probe: the share page recomputes estimates whose source
+ * is not the calculator itself, which makes the probe a live UI oracle for the
+ * component payload. Probes are not the public receipt link.
+ */
+export async function publishProbe(estimate: Estimate): Promise<PublishResult> {
+  return publishEstimate({
+    ...estimate,
+    metaData: { ...estimate.metaData, source: "aws-calc-axi-probe" },
+  });
+}
+
 /** POST an estimate to the public save endpoint and return the public link. */
 export async function publishEstimate(
   estimate: Estimate,

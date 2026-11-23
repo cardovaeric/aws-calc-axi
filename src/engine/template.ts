@@ -6,13 +6,14 @@ import {
   type ServiceDefinition,
   type Template,
 } from "../data/definitions.ts";
-import type { PriceResolver } from "../data/pricing.ts";
+import { MissingPriceError, type PriceResolver } from "../data/pricing.ts";
 import type { CalculationComponents } from "../contract.ts";
 import { toCents } from "../contract.ts";
 import { evaluateDisplayIf, type ExprContext, type Operand } from "./expression.ts";
 import { evaluateInput } from "./inputs.ts";
 import { evaluateMaths, applyMathsDecimals } from "./maths.ts";
 import {
+  magicPrice,
   resolveTiers,
   singlePricePoint,
   tieredCost,
@@ -211,6 +212,75 @@ function evaluatePricingComponent(
       const tiers = resolveTiers(component, pricingContext);
       runtime.tiers.set(component.id, tiers);
       runtime.values.set(component.id, tiers);
+      return;
+    }
+    case "replace": {
+      const originalId = String(component["originalId"] ?? "");
+      const originalValue = originalId ? runtime.values.get(originalId) : undefined;
+      const replacements = (component["replacements"] as Array<Record<string, unknown>> | undefined) ?? [];
+      const match = replacements.find(
+        (entry) => String(entry["originalString"]) === String(originalValue)
+      );
+      if (!match) {
+        throw new EngineError(
+          `replace "${component.id}" has no mapping for ${originalId}=${String(originalValue)}`,
+          "BAD_DEFINITION",
+          { componentId: component.id, originalId, originalValue }
+        );
+      }
+      runtime.values.set(component.id, String(match["replaceString"] ?? ""));
+      return;
+    }
+    case "concatenate": {
+      const operands = (component["operands"] as Array<Record<string, unknown>> | undefined) ?? [];
+      const parts = operands.map((operand) => {
+        const id = String(operand["variableId"] ?? "");
+        const value = runtime.values.get(id);
+        if (value === undefined || value === null || value === "") {
+          throw new EngineError(
+            `concatenate "${component.id}" needs component "${id}"`,
+            "MISSING_INPUT",
+            { componentId: component.id, referencedId: id }
+          );
+        }
+        return String(value);
+      });
+      runtime.values.set(component.id, parts.join(" "));
+      return;
+    }
+    case "pricingComboV2": {
+      const refers = (component["refers"] as Array<Record<string, unknown>> | undefined) ?? [];
+      const first = refers[0];
+      const variableId = first ? String(first["variableId"] ?? "") : "";
+      const label = variableId ? runtime.values.get(variableId) : undefined;
+      if (typeof label !== "string" || label === "") {
+        throw new EngineError(
+          `pricingComboV2 "${component.id}" needs component "${variableId}" to select a meter`,
+          "MISSING_INPUT",
+          { componentId: component.id, referencedId: variableId }
+        );
+      }
+      const magic = magicPrice(label);
+      if (magic !== undefined) {
+        runtime.values.set(component.id, magic);
+        return;
+      }
+      const mapping = String(component["mappingDefinitionName"] ?? "");
+      const key = first && typeof first["key"] === "string" ? first["key"] : "price";
+      const record = pricingContext.prices.record(mapping, label);
+      if (!record) {
+        throw new MissingPriceError(label, pricingContext.regionName, mapping);
+      }
+      const raw = (record as unknown as Record<string, unknown>)[key];
+      const value = Number(raw);
+      if (!Number.isFinite(value)) {
+        throw new EngineError(
+          `pricingComboV2 "${component.id}" price field "${key}" is "${String(raw)}"`,
+          "BAD_PRICE",
+          { componentId: component.id, label, key }
+        );
+      }
+      runtime.values.set(component.id, value);
       return;
     }
     default:

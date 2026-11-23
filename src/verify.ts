@@ -7,6 +7,7 @@ export interface ServiceRow {
   description: string | null;
   region: string | null;
   configSummary: string | null;
+  status: string | null;
 }
 
 export interface RenderedGroup {
@@ -38,6 +39,11 @@ export interface VerifyOptions {
   timeoutMs?: number;
   /** Text that must appear before extraction (usually the estimate name). */
   waitText?: string;
+  /**
+   * Click "Update estimate" first, which makes the live editor recompute every
+   * service cost from `calculationComponents`. This is the live UI oracle.
+   */
+  recompute?: boolean;
 }
 
 export class BrowserError extends Error {
@@ -97,15 +103,32 @@ const EXTRACTION = String.raw`
   })();
   const bodyText = document.body ? document.body.innerText : "";
   const updatedMatch = /last updated on ([A-Za-z]+ [0-9]{1,2}, [0-9]{4})/.exec(bodyText);
+  const table = document.querySelector("table[aria-label='Estimate Services Table']") || document.querySelector("table");
+  const columns = {};
+  if (table) {
+    Array.from(table.querySelectorAll("thead th")).forEach((th, index) => {
+      const focus = th.getAttribute("data-focus-id") || "";
+      if (focus.startsWith("header-")) {
+        const key = focus.slice("header-".length);
+        if (!key.startsWith("Symbol(")) columns[key] = index;
+      }
+    });
+  }
+  const cellAt = (cells, key, fallbackIndex) => {
+    const index = key in columns ? columns[key] : fallbackIndex;
+    const value = cells[index];
+    return value === undefined ? null : value;
+  };
   const services = Array.from(document.querySelectorAll("table tbody tr")).map((row) => {
     const cells = Array.from(row.querySelectorAll("td")).map((cell) => (cell.textContent || "").trim());
     return {
-      name: cells[1] ?? null,
-      upfront: cells[2] ?? null,
-      monthly: cells[3] ?? null,
-      description: cells[4] ?? null,
-      region: cells[5] ?? null,
-      configSummary: cells[6] ?? null,
+      name: cellAt(cells, "serviceName", 1),
+      upfront: cellAt(cells, "upfrontCost", 2),
+      monthly: cellAt(cells, "monthlyCost", 3),
+      description: cellAt(cells, "description", 4),
+      region: cellAt(cells, "region", 5),
+      configSummary: cellAt(cells, "configSummary", 6),
+      status: cellAt(cells, "status", -1),
     };
   });
   const groups = Array.from(document.querySelectorAll("[data-root-group],[data-parent-group]")).map((el) => ({
@@ -133,24 +156,11 @@ const EXTRACTION = String.raw`
 })()
 `;
 
-/** Open a public estimate URL, wait for it to render, and read the visible DOM. */
-export function readRenderedEstimate(url: string, options: VerifyOptions = {}): RenderedEstimate {
-  const open = runBrowser(["open", url], options);
-  if (open.status !== 0) throw new BrowserError(`open ${url}`, open.stderr || open.stdout);
-
-  if (options.waitText) {
-    runBrowser(["wait", "--text", options.waitText], options);
-  }
-  const wait = runBrowser(["wait", "[data-monthly-cost]"], options);
-  if (wait.status !== 0) {
-    throw new BrowserError(`wait [data-monthly-cost] ${url}`, wait.stderr || wait.stdout);
-  }
-
+function readSnapshot(url: string, options: VerifyOptions): RenderedEstimate {
   const evaluated = runBrowser(["eval", "--json", "--stdin"], options, EXTRACTION);
   if (evaluated.status !== 0) {
     throw new BrowserError(`eval on ${url}`, evaluated.stderr || evaluated.stdout);
   }
-
   const envelope = JSON.parse(evaluated.stdout) as {
     success?: boolean;
     data?: { result?: string };
@@ -161,6 +171,72 @@ export function readRenderedEstimate(url: string, options: VerifyOptions = {}): 
   }
   const parsed = JSON.parse(envelope.data.result) as Omit<RenderedEstimate, "url">;
   return { url, ...parsed };
+}
+
+function sleepSync(ms: number): void {
+  const buffer = new SharedArrayBuffer(4);
+  Atomics.wait(new Int32Array(buffer), 0, 0, ms);
+}
+
+function stableTotals(url: string, options: VerifyOptions): RenderedEstimate {
+  const deadline = Date.now() + (options.timeoutMs ?? 60_000);
+  let previous: string | undefined;
+  let snapshot = readSnapshot(url, options);
+  while (Date.now() < deadline) {
+    const key = `${snapshot.monthlyValue}|${snapshot.upfrontValue}|${snapshot.annualValue}|${snapshot.services.length}`;
+    if (snapshot.monthly !== null && key === previous) return snapshot;
+    previous = key;
+    sleepSync(400);
+    snapshot = readSnapshot(url, options);
+  }
+  return snapshot;
+}
+
+/**
+ * The calculator addresses estimates in the URL fragment. Re-opening a new
+ * estimate on the same origin would otherwise keep the current document, so add
+ * a cache-busting query before the fragment to force a real navigation.
+ */
+export function navigationUrl(url: string): string {
+  if (!url.includes("#")) return url;
+  if (/[?&]axi=\d+/.test(url)) return url;
+  const [base, fragment] = url.split("#", 2) as [string, string];
+  const separator = base.includes("?") ? "&" : "?";
+  return `${base}${separator}axi=${Date.now()}#${fragment}`;
+}
+
+/** Open a public estimate URL, wait for it to render, and read the visible DOM. */
+export function readRenderedEstimate(url: string, options: VerifyOptions = {}): RenderedEstimate {
+  const target = navigationUrl(url);
+  const open = runBrowser(["open", target], options);
+  if (open.status !== 0) throw new BrowserError(`open ${url}`, open.stderr || open.stdout);
+
+  if (options.waitText) {
+    const named = runBrowser(["wait", "--text", options.waitText], options);
+    if (named.status !== 0) {
+      throw new BrowserError(
+        `wait for "${options.waitText}" on ${url}`,
+        named.stderr || "the page never showed the expected estimate name"
+      );
+    }
+  }
+  const wait = runBrowser(["wait", "[data-monthly-cost]"], options);
+  if (wait.status !== 0) {
+    throw new BrowserError(`wait [data-monthly-cost] ${url}`, wait.stderr || wait.stdout);
+  }
+
+  if (options.recompute) {
+    const clicked = runBrowser(
+      ["find", "role", "button", "click", "--name", "Update estimate button"],
+      options
+    );
+    if (clicked.status === 0) {
+      runBrowser(["wait", "--fn", "location.hash === '#/estimate'"], options);
+      return stableTotals(url, options);
+    }
+  }
+
+  return readSnapshot(url, options);
 }
 
 export interface RenderedExpectation {
@@ -176,6 +252,8 @@ export interface RenderedExpectation {
   }>;
   support?: { nameContains?: string; monthly?: number };
   groups?: string[];
+  /** Group rows live in the service table on the landing page. */
+  groupRows?: Array<{ name: string; monthly?: number; upfront?: number }>;
   title?: string;
 }
 
@@ -271,6 +349,24 @@ export function diffRendered(
           ...compareMoney("support:monthly", expectation.support.monthly, moneyValue(row.monthly))
         );
       }
+    }
+  }
+
+  for (const expected of expectation.groupRows ?? []) {
+    const row = rendered.services.find((candidate) => (candidate.name ?? "").trim() === expected.name);
+    if (!row) {
+      mismatches.push({ field: `groupRow:${expected.name}`, expected: "present", actual: "missing" });
+      continue;
+    }
+    if (expected.monthly !== undefined) {
+      mismatches.push(
+        ...compareMoney(`groupRow:${expected.name}:monthly`, expected.monthly, moneyValue(row.monthly))
+      );
+    }
+    if (expected.upfront !== undefined) {
+      mismatches.push(
+        ...compareMoney(`groupRow:${expected.name}:upfront`, expected.upfront, moneyValue(row.upfront))
+      );
     }
   }
 

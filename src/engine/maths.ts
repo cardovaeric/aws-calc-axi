@@ -14,7 +14,7 @@ export function resolveOperandValue(
   get: (id: string) => EngineValue
 ): OperandValue {
   if (operand.constant !== undefined) {
-    const value = operand.constant;
+    const value = Number(operand.constant);
     return { value, invalid: !Number.isFinite(value) };
   }
   const id = operand.variableId ?? operand.id;

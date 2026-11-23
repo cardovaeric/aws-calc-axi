@@ -1,0 +1,10 @@
+name: axi-e2e SQS
+currency: USD
+locale: en_US
+services:
+  - code: amazonSimpleQueueService
+    region: us-east-2
+    set:
+      standardQueueRequests:
+        value: 1
+        unit: perMonth

@@ -85,7 +85,13 @@ export interface Estimate {
 export const CONTRACT_DEFAULTS = {
   locale: "en_US",
   currency: "USD",
-  source: "aws-calc-axi",
+  /**
+   * The share page trusts stored service costs for estimates the calculator
+   * itself produced and recomputes everything else. We publish the same source
+   * value so a link renders exactly like a native estimate; the native UI
+   * recomputation stays the oracle for math parity.
+   */
+  source: "calculator-platform",
 } as const;
 
 /** Round to cents without accumulating binary float error. */

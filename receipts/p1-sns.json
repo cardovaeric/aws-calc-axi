@@ -1,0 +1,119 @@
+{
+  "estimate": "axi-e2e SNS",
+  "specHash": "b0e0994815906e72",
+  "url": "https://calculator.aws/#/estimate?id=850047fba8c4e56935ba54c6867ecc8a9fda80df",
+  "savedKey": "850047fba8c4e56935ba54c6867ecc8a9fda80df",
+  "publishedAt": "2026-11-23T15:52:12.470Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 0.54,
+    "upfront": 0,
+    "total12m": 6.48,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonSimpleNotificationService",
+        "template": "amazonSnsClassesGroup",
+        "region": "us-east-2",
+        "monthly": 0.54,
+        "upfront": 0,
+        "summary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonSimpleNotificationService",
+        "monthly": 0.54,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "standardTopics",
+        "monthly": 0.54,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 0.54,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=850047fba8c4e56935ba54c6867ecc8a9fda80df",
+    "title": "axi-e2e sns",
+    "monthly": "0.54 USD",
+    "upfront": "0.00 USD",
+    "annual": "6.48 USD",
+    "monthlyValue": 0.54,
+    "upfrontValue": 0,
+    "annualValue": 6.48,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Simple Notification Service (SNS)",
+        "upfront": "0.00 USD",
+        "monthly": "0.54 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T15:57:45.366Z"
+  },
+  "oracle": {
+    "url": "https://calculator.aws/#/estimate?id=aa690876131c8ce838c1f1eae0ba65a63c5f75ca",
+    "savedKey": "aa690876131c8ce838c1f1eae0ba65a63c5f75ca",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=aa690876131c8ce838c1f1eae0ba65a63c5f75ca",
+      "title": "axi-e2e SNS",
+      "monthly": "0.54 USD",
+      "upfront": "0.00 USD",
+      "annual": "6.48 USD",
+      "monthlyValue": 0.54,
+      "upfrontValue": 0,
+      "annualValue": 6.48,
+      "estimateDate": "Estimate date: November 23, 2026",
+      "banner": "last updated on November 23, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "Amazon Simple Notification Service (SNS)",
+          "upfront": "0.00 USD",
+          "monthly": "0.54 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)",
+          "status": null
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-23T15:57:48.728Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e sns",
+    "monthly": 0.54,
+    "upfront": 0,
+    "annual": 6.48,
+    "services": [
+      {
+        "name": "Amazon Simple Notification Service (SNS)",
+        "monthly": 0.54,
+        "region": "US East (Ohio)",
+        "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)"
+      }
+    ],
+    "groups": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

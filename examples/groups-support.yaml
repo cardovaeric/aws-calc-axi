@@ -1,0 +1,30 @@
+name: axi-e2e Groups Support
+currency: USD
+locale: en_US
+support: business
+groups:
+  - name: Data
+    services:
+      - code: amazonSimpleStorageServiceGroup
+        region: us-east-2
+        subServices:
+          - code: amazonS3Standard
+            set:
+              s3StandardStorageSize:
+                value: 100
+                unit: gb|month
+    groups:
+      - name: Data Compute
+        services:
+          - code: aWSLambda
+            region: us-east-2
+            template: lambdaWithFreeTier
+            set:
+              selectArchitectureRequests: "1"
+              numberOfRequests:
+                value: 10000000
+                unit: perMonth
+              durationOfEachRequest: 200
+              sizeOfMemoryAllocated:
+                value: 512
+                unit: mb|NA

@@ -1,0 +1,14 @@
+name: axi-e2e CloudWatch
+currency: USD
+locale: en_US
+services:
+  - code: amazonCloudWatch
+    region: us-east-2
+    set:
+      totalNumberOfMetrics: 10
+      metricsForOtherAPIRequests: 1000000
+      sizeOfStandardLogsDataIngested:
+        value: 5
+        unit: gb|NA
+      numberOfDashboards: 3
+      numberOfStandardAlarms: 10

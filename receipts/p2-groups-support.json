@@ -1,0 +1,126 @@
+{
+  "estimate": "axi-e2e Groups Support",
+  "specHash": "fffaf4271487cde0",
+  "url": "https://calculator.aws/#/estimate?id=41bc364a547ab7429de00d8d39cb29f70210d12a",
+  "savedKey": "41bc364a547ab7429de00d8d39cb29f70210d12a",
+  "publishedAt": "2026-11-23T16:01:00.097Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 14.1,
+    "upfront": 0,
+    "total12m": 169.2,
+    "currency": "USD",
+    "supportMonthly": 29,
+    "includingSupportMonthly": 43.1,
+    "includingSupport12m": 517.2,
+    "services": [
+      {
+        "code": "amazonSimpleStorageServiceGroup",
+        "template": "simpleStorageServiceClassesGroup",
+        "region": "us-east-2",
+        "monthly": 2.3,
+        "upfront": 0,
+        "summary": "S3 Standard storage (100 GB per month)"
+      },
+      {
+        "code": "aWSLambda",
+        "template": "lambdaWithFreeTier",
+        "region": "us-east-2",
+        "monthly": 11.8,
+        "upfront": 0,
+        "summary": "Architecture (x86), Number of requests (10000000 per month), Amount of ephemeral storage allocated (512 MB), Architecture (x86), Invoke Mode (Buffered)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [],
+    "totalCost": {
+      "monthly": 14.1,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=41bc364a547ab7429de00d8d39cb29f70210d12a",
+    "title": "axi-e2e Groups Support",
+    "monthly": "43.10 USD",
+    "upfront": "0.00 USD",
+    "annual": "517.20 USD",
+    "monthlyValue": 43.1,
+    "upfrontValue": 0,
+    "annualValue": 517.2,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Business Support+",
+        "upfront": "0.00 USD",
+        "monthly": "29.00 USD",
+        "description": "-",
+        "region": "All regions",
+        "configSummary": "24/7 phone, chat, and email access to Cloud Support Engineers with less than 30 minute response for business-critical issues. Includes AI-powered troubleshooting and full Trusted Advisor.",
+        "status": null
+      },
+      {
+        "name": "Data",
+        "upfront": "0.00 USD",
+        "monthly": "14.10 USD",
+        "description": "Services (1), Groups (1)",
+        "region": "-",
+        "configSummary": "-",
+        "status": null
+      }
+    ],
+    "groups": [
+      {
+        "name": "axi-e2e Groups Support",
+        "root": true,
+        "parent": false
+      },
+      {
+        "name": "Data Data Compute",
+        "root": false,
+        "parent": true
+      },
+      {
+        "name": "Data Compute",
+        "root": false,
+        "parent": true
+      }
+    ],
+    "supportRow": {
+      "name": "Business Support+",
+      "upfront": "0.00 USD",
+      "monthly": "29.00 USD",
+      "description": "-",
+      "region": "All regions",
+      "configSummary": "24/7 phone, chat, and email access to Cloud Support Engineers with less than 30 minute response for business-critical issues. Includes AI-powered troubleshooting and full Trusted Advisor.",
+      "status": null
+    },
+    "capturedAt": "2026-11-23T16:01:29.577Z"
+  },
+  "expectation": {
+    "title": "axi-e2e Groups Support",
+    "monthly": 43.1,
+    "upfront": 0,
+    "annual": 517.2,
+    "services": [],
+    "support": {
+      "nameContains": "Business Support+",
+      "monthly": 29
+    },
+    "groups": [
+      "Data",
+      "Data Compute"
+    ],
+    "groupRows": [
+      {
+        "name": "Data",
+        "monthly": 14.100000000000001,
+        "upfront": 0
+      }
+    ]
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

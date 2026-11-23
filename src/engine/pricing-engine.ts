@@ -14,6 +14,15 @@ export interface Tier {
   price: number;
 }
 
+/** Metered unit labels the live engine resolves without a price file. */
+export const MAGIC_PRICES: Record<string, number> = {
+  "[ZERO_COST]": 0,
+};
+
+export function magicPrice(label: string): number | undefined {
+  return Object.hasOwn(MAGIC_PRICES, label) ? MAGIC_PRICES[label] : undefined;
+}
+
 export interface PricingContext {
   regionCode: string;
   regionName: string;
@@ -69,6 +78,8 @@ function meteredUnitFor(component: Component, context: PricingContext): string {
  */
 export function singlePricePoint(component: Component, context: PricingContext): number {
   const meter = meteredUnitFor(component, context);
+  const magic = magicPrice(meter);
+  if (magic !== undefined) return magic;
   const mapping = mappingName(component);
   if (!context.prices.has(mapping, meter)) {
     throw new MissingPriceError(meter, context.regionName, mapping);

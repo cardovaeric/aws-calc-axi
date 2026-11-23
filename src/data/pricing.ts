@@ -39,6 +39,30 @@ export class MissingPriceError extends Error {
 
 const memo = new Map<string, PricingFile>();
 
+/** Pricing files can carry region-less meters under one of these keys. */
+const NON_REGION_KEYS = ["Any", "any", "", "all", "All", "All regions"];
+
+/**
+ * Merge region-less meters into every regional price map, exactly as the live
+ * data loader does. Without this, meters like CloudWatch's tiered request price
+ * look missing in a region that actually inherits them.
+ */
+export function mergeNonRegionPrices(file: PricingFile): PricingFile {
+  const regions = file.regions ?? {};
+  let shared: Record<string, PriceRecord> = {};
+  for (const key of NON_REGION_KEYS) {
+    const bucket = regions[key];
+    if (bucket) shared = { ...shared, ...bucket };
+  }
+  if (Object.keys(shared).length === 0) return file;
+
+  const merged: Record<string, Record<string, PriceRecord>> = {};
+  for (const [region, prices] of Object.entries(regions)) {
+    merged[region] = NON_REGION_KEYS.includes(region) ? prices : { ...shared, ...prices };
+  }
+  return { ...file, regions: merged };
+}
+
 export async function loadMapping(
   mapping: MappingDefinition,
   currency: string,
@@ -51,8 +75,9 @@ export async function loadMapping(
   if (!file || typeof file.regions !== "object" || file.regions === null) {
     throw new Error(`pricing file ${url} has no regions`);
   }
-  memo.set(url, file);
-  return file;
+  const merged = mergeNonRegionPrices(file);
+  memo.set(url, merged);
+  return merged;
 }
 
 export function clearPricingMemo(): void {
@@ -73,6 +98,8 @@ export interface PriceResolver {
   requirePrice(mappingDefinitionName: string, meteredUnit: string): number;
   /** Whether a metered unit exists in this region (drives displayIf `exists`). */
   has(mappingDefinitionName: string, meteredUnit: string): boolean;
+  /** Raw price record, for definitions that read a non-price field. */
+  record(mappingDefinitionName: string, meteredUnit: string): PriceRecord | undefined;
   regionName: string;
   currency: string;
 }
@@ -109,6 +136,9 @@ export function createPriceResolver(context: PriceContext): PriceResolver {
     },
     has(mappingDefinitionName, meteredUnit) {
       return lookup(mappingDefinitionName, meteredUnit) !== undefined;
+    },
+    record(mappingDefinitionName, meteredUnit) {
+      return lookup(mappingDefinitionName, meteredUnit);
     },
   };
 }

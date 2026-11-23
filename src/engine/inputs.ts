@@ -78,11 +78,13 @@ function required(component: Component): boolean {
   return validationsOf(component)["required"] === true;
 }
 
-function requireNumeric(
-  component: Component,
-  raw: unknown,
-  context: { serviceCode: string; templateId: string }
-): number {
+interface InputValidationContext {
+  serviceCode: string;
+  templateId: string;
+}
+
+/** Parse a numeric input, enforcing presence for required components. */
+function numericValue(component: Component, raw: unknown, context: InputValidationContext): number {
   if (raw === undefined || raw === null || raw === "") {
     if (required(component)) {
       throw new MissingInputError({
@@ -104,7 +106,13 @@ function requireNumeric(
       value: raw,
     });
   }
-  const problem = validationProblem(component, numeric);
+  return numeric;
+}
+
+/** Validations apply to the value in the component's output unit. */
+function assertValid(component: Component, value: number, raw: unknown, context: InputValidationContext): void {
+  if (raw === undefined || raw === null || raw === "") return;
+  const problem = validationProblem(component, value);
   if (problem) {
     throw new InputValidationError({
       serviceCode: context.serviceCode,
@@ -114,6 +122,11 @@ function requireNumeric(
       value: raw,
     });
   }
+}
+
+function requireNumeric(component: Component, raw: unknown, context: InputValidationContext): number {
+  const numeric = numericValue(component, raw, context);
+  assertValid(component, numeric, raw, context);
   return numeric;
 }
 
@@ -159,11 +172,15 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
       const raw = override.value ?? component["defaultValue"];
       const numeric = requireNumeric(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
+      // The live engine keeps the fraction in state and in the summary.
+      const fraction = numeric / 100;
       return {
-        value: numeric / 100,
+        value: fraction,
         present,
-        ...(present ? { saved: { value: numeric } } : {}),
-        ...(displayInSummary && present ? { configSummary: `${label} (${formatNumber(numeric)}%)` } : {}),
+        ...(present ? { saved: { value: fraction } } : {}),
+        ...(displayInSummary && present
+          ? { configSummary: `${label} (${formatNumber(fraction)})` }
+          : {}),
       };
     }
 
@@ -231,14 +248,52 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
       const selectedId = override.unit ?? defaultId;
       const [sizeUnit = outputSize, frequencyUnit = "NA"] = selectedId.split("|");
 
+      if (sizeOptions.length > 0 && !sizeOptions.some((option) => option.id === sizeUnit)) {
+        throw new InputValidationError({
+          serviceCode: context.serviceCode,
+          componentId: component.id,
+          label,
+          problem:
+            `unit "${sizeUnit}" is not one of ` +
+            sizeOptions.map((option) => option.id).join(", "),
+          value: selectedId,
+        });
+      }
+      if (
+        frequencyUnit !== "NA" &&
+        (!isOverrideObject(component["outputFrequency"]) ||
+          String((component["outputFrequency"] as Record<string, unknown>)["id"]) !== "NA")
+      ) {
+        const allowed = new Set([
+          ...frequencyOptions.map((option) => option.id),
+          "month",
+          "day",
+          "hour",
+          "min",
+          "sec",
+          "week",
+          "year",
+        ]);
+        if (!allowed.has(frequencyUnit)) {
+          throw new InputValidationError({
+            serviceCode: context.serviceCode,
+            componentId: component.id,
+            label,
+            problem: `frequency "${frequencyUnit}" is not supported by this input`,
+            value: selectedId,
+          });
+        }
+      }
+
       const raw = override.value ?? component["defaultValue"];
-      const numeric = requireNumeric(component, raw, context);
+      const numeric = numericValue(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
 
       let value = convertSize(numeric, sizeUnit, outputSize);
       if (frequencyUnit !== "NA" && outputFrequency !== "NA") {
         value = convertTime(value, frequencyUnit, outputFrequency);
       }
+      assertValid(component, value, raw, context);
 
       const sizeLabel =
         sizeOptions.find((option) => option.id === sizeUnit)?.label ?? sizeUnit.toUpperCase();
@@ -264,7 +319,7 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
         ? String((component["outputFrequency"] as Record<string, unknown>)["id"] ?? "perMonth")
         : String(component["outputFrequency"] ?? "perMonth");
       const raw = override.value ?? component["defaultValue"];
-      const numeric = requireNumeric(component, raw, context);
+      const numeric = numericValue(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
       const defaultFrequency = component["defaultFrequency"];
       const selectedId = override.unit ?? (defaultFrequency === undefined ? "" : String(defaultFrequency));
@@ -276,8 +331,10 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
           { componentId: component.id }
         );
       }
+      const converted = convertFrequency(numeric, selectedId, outputFrequency);
+      assertValid(component, converted, raw, context);
       return {
-        value: convertFrequency(numeric, selectedId, outputFrequency),
+        value: converted,
         present,
         ...(present ? { saved: { value: raw as string | number, unit: selectedId } } : {}),
         ...(displayInSummary && present
@@ -290,17 +347,43 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
       const options = asOptions(component["dropDownDuration"]);
       const outputUnit = String(component["outputDurationUnit"] ?? "sec");
       const raw = override.value ?? component["defaultValue"];
-      const numeric = requireNumeric(component, raw, context);
+      const numeric = numericValue(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
       const selectedId = override.unit ?? String(component["defaultDuration"] ?? outputUnit);
       const option = options.find((entry) => entry.id === selectedId);
+      const converted = convertTime(numeric, selectedId, outputUnit);
+      assertValid(component, converted, raw, context);
       return {
-        value: convertTime(numeric, selectedId, outputUnit),
+        value: converted,
         present,
         ...(present ? { saved: { value: numeric, unit: selectedId } } : {}),
         ...(displayInSummary && present
           ? { configSummary: `${label} (${formatNumber(numeric)} ${option?.label ?? selectedId})` }
           : {}),
+      };
+    }
+
+    case "dataTransferV2": {
+      const rows = normalizeTransferRows(override.value, component);
+      const billable = rows.some((row) => Number(row["value"]) > 0);
+      if (billable) {
+        throw new EngineError(
+          `dataTransferV2 "${component.id}" has non-zero transfer rows; ` +
+            `data transfer pricing is not implemented yet (${context.serviceCode})`,
+          "UNSUPPORTED_INPUT",
+          {
+            serviceCode: context.serviceCode,
+            templateId: context.templateId,
+            componentId: component.id,
+            subType,
+          }
+        );
+      }
+      return {
+        value: 0,
+        present: true,
+        saved: { value: rows },
+        ...(displayInSummary ? { configSummary: transferSummary(rows) } : {}),
       };
     }
 
@@ -320,4 +403,52 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
 
 function formatNumber(value: number): string {
   return String(Number(value.toFixed(6)));
+}
+
+const TRANSFER_TYPE_LABELS: Record<string, string> = {
+  INBOUND: "Inbound",
+  OUTBOUND: "Outbound",
+  INTRA_REGION: "Intra-Region",
+};
+
+/** Matches the live `DT <type>: <region|Not selected> (<value> <unit>)` summary. */
+function transferSummary(rows: Array<Record<string, unknown>>): string {
+  return rows
+    .map((row) => {
+      const entryType = String(row["entryType"] ?? "");
+      const typeLabel = TRANSFER_TYPE_LABELS[entryType] ?? entryType;
+      const regionValue =
+        entryType === "INBOUND" ? row["fromRegion"] : entryType === "OUTBOUND" ? row["toRegion"] : "";
+      const region = typeof regionValue === "string" && regionValue !== "" ? regionValue : "Not selected";
+      const value = row["value"] === "" || row["value"] === undefined ? 0 : row["value"];
+      return `DT ${typeLabel}: ${region} (${String(value)} ${String(row["unit"] ?? "gb")})`;
+    })
+    .join(", ");
+}
+
+function normalizeTransferRows(
+  raw: unknown,
+  component: Component
+): Array<Record<string, unknown>> {
+  if (Array.isArray(raw) && raw.length > 0) {
+    return raw.map((entry) => {
+      const record = (typeof entry === "object" && entry !== null ? entry : {}) as Record<string, unknown>;
+      const row: Record<string, unknown> = {
+        entryType: String(record["entryType"] ?? "OUTBOUND"),
+        value: record["value"] ?? "",
+        unit: String(record["unit"] ?? component["preferredUnit"] ?? "gb"),
+      };
+      if (row["entryType"] === "INBOUND") row["fromRegion"] = String(record["fromRegion"] ?? "");
+      if (row["entryType"] === "OUTBOUND") row["toRegion"] = String(record["toRegion"] ?? "");
+      return row;
+    });
+  }
+  const types = (component["dataTransferTypes"] as string[] | undefined) ?? ["INBOUND", "OUTBOUND"];
+  return types.map((entryType) => ({
+    entryType,
+    value: "",
+    unit: String(component["preferredUnit"] ?? "gb"),
+    ...(entryType === "INBOUND" ? { fromRegion: "" } : {}),
+    ...(entryType === "OUTBOUND" ? { toRegion: "" } : {}),
+  }));
 }

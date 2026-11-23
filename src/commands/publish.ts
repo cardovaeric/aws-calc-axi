@@ -1,10 +1,11 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import type { ParsedArgs } from "../cli/args.ts";
 import { stringFlag } from "../cli/args.ts";
 import { buildFromSpec, costSummary } from "./cost.ts";
 import { readSpec, requirePositional, twelveMonth } from "./shared.ts";
-import { publishEstimate, retrieveEstimate } from "../publish.ts";
+import { publishEstimate, publishProbe, retrieveEstimate } from "../publish.ts";
 import {
   diffRendered,
   readRenderedEstimate,
@@ -18,6 +19,14 @@ import type { Estimate } from "../contract.ts";
 
 export const publishFlags = {
   "--name": { type: "string" as const, description: "override the estimate name" },
+  "--oracle": {
+    type: "boolean" as const,
+    description: "publish a recompute probe and diff the live UI recomputation",
+  },
+  "--force-publish": {
+    type: "boolean" as const,
+    description: "ignore an existing receipt and create new links",
+  },
   "--receipt": { type: "string" as const, description: "write a JSON receipt to this path" },
   "--session": { type: "string" as const, description: "agent-browser session name" },
   "--refresh": { type: "boolean" as const, description: "ignore the cached data plane" },
@@ -31,6 +40,8 @@ Usage:
 
 Flags:
   --name <text>    override the estimate name (use an axi-e2e prefix for tests)
+  --oracle         publish a recompute probe and diff the live UI recomputation
+  --force-publish  create new links even when a matching receipt exists
   --receipt <path> write a JSON receipt with the rendered DOM snapshot
   --session <name> agent-browser session (default aws-calc-axi-e2e)
   --refresh        ignore the cached data plane
@@ -46,11 +57,19 @@ Examples:
 
 export interface PublicationReceipt {
   estimate: string;
+  specHash: string;
   url: string;
   savedKey: string;
   publishedAt: string;
   expires: string;
   native: Record<string, unknown>;
+  oracle?: {
+    url: string;
+    savedKey: string;
+    recomputed: RenderedEstimate;
+    mismatches: Mismatch[];
+    verdict: "pass" | "fail";
+  };
   stored: {
     services: Array<{ serviceCode: string; monthly: number; upfront: number }>;
     totalCost: Estimate["totalCost"];
@@ -70,7 +89,9 @@ export function expectationFrom(result: BuildResult, spec: EstimateSpec): Render
     monthly,
     upfront,
     annual: twelveMonth(monthly, upfront),
-    services: result.services.map((entry) => ({
+    services: result.services
+      .filter((entry) => entry.path.startsWith("services["))
+      .map((entry) => ({
       name: entry.evaluated.serviceName,
       monthly: entry.evaluated.serviceCost.monthly ?? 0,
       ...(entry.evaluated.serviceCost.upfront === undefined
@@ -85,6 +106,9 @@ export function expectationFrom(result: BuildResult, spec: EstimateSpec): Render
       ? { support: { nameContains: result.support.title, monthly: result.support.cost.monthly } }
       : {}),
     groups: collectGroupNames(spec),
+    groupRows: result.groups
+      .filter((group) => group.path.split(".").length === 1)
+      .map((group) => ({ name: group.name, monthly: group.monthly, upfront: group.upfront })),
   };
 }
 
@@ -121,7 +145,22 @@ export interface PublishOptions {
   name?: string | undefined;
   receiptPath?: string | undefined;
   session?: string | undefined;
+  oracle?: boolean | undefined;
+  forcePublish?: boolean | undefined;
   flags: ParsedArgs["flags"];
+}
+
+function specHashOf(spec: EstimateSpec): string {
+  const canonical = JSON.stringify(spec, Object.keys(spec).sort());
+  return createHash("sha256").update(canonical).digest("hex").slice(0, 16);
+}
+
+async function previousReceipt(path: string): Promise<PublicationReceipt | undefined> {
+  try {
+    return JSON.parse(await readFile(path, "utf8")) as PublicationReceipt;
+  } catch {
+    return undefined;
+  }
 }
 
 export async function runPublish(options: PublishOptions): Promise<{
@@ -132,19 +171,56 @@ export async function runPublish(options: PublishOptions): Promise<{
     ...(options.name ? { name: options.name } : {}),
   });
   const result = await buildFromSpec(spec, options.flags);
-  const publication = await publishEstimate(result.estimate);
+  const specHash = specHashOf(spec);
+  const previous =
+    options.receiptPath && !options.forcePublish
+      ? await previousReceipt(options.receiptPath)
+      : undefined;
+  const reuse = previous && previous.specHash === specHash && previous.url ? previous : undefined;
+
+  const publication = reuse
+    ? {
+        url: reuse.url,
+        savedKey: reuse.savedKey,
+        publishedAt: reuse.publishedAt,
+        response: { reused: true },
+      }
+    : await publishEstimate(result.estimate);
   const stored = await retrieveEstimate(publication.savedKey);
+  const publishedName = stored.name || spec.name;
   const rendered = readRenderedEstimate(publication.url, {
     ...(options.session ? { session: options.session } : {}),
-    waitText: spec.name,
+    waitText: publishedName,
   });
-  const expectation = expectationFrom(result, spec);
+  const expectation = expectationFrom(result, { ...spec, name: publishedName });
   const mismatches = diffRendered(rendered, expectation);
+
+  let oracle: PublicationReceipt["oracle"];
+  if (options.oracle) {
+    const reuseProbe = reuse?.oracle && reuse.oracle.url ? reuse.oracle : undefined;
+    const probe = reuseProbe
+      ? { url: reuseProbe.url, savedKey: reuseProbe.savedKey }
+      : await publishProbe(result.estimate);
+    const recomputed = readRenderedEstimate(probe.url, {
+      ...(options.session ? { session: options.session } : {}),
+      waitText: spec.name,
+    });
+    const oracleMismatches = diffRendered(recomputed, expectationFrom(result, spec));
+    oracle = {
+      url: probe.url,
+      savedKey: probe.savedKey,
+      recomputed,
+      mismatches: oracleMismatches,
+      verdict: oracleMismatches.length === 0 ? "pass" : "fail",
+    };
+  }
+
   const createdOn = stored.metaData.createdOn ?? publication.publishedAt;
   const expires = expiryOf(createdOn);
 
   const receipt: PublicationReceipt = {
     estimate: spec.name,
+    specHash,
     url: publication.url,
     savedKey: publication.savedKey,
     publishedAt: publication.publishedAt,
@@ -162,6 +238,7 @@ export async function runPublish(options: PublishOptions): Promise<{
     },
     stored: storedComparison(stored),
     rendered,
+    ...(oracle ? { oracle } : {}),
     expectation,
     mismatches,
     verdict: mismatches.length === 0 ? "pass" : "fail",
@@ -193,6 +270,9 @@ export function publishOutput(receipt: PublicationReceipt): Record<string, unkno
       expires: receipt.expires,
       render: receipt.verdict,
       verified: receipt.verdict === "pass",
+      ...(receipt.oracle
+        ? { oracle: receipt.oracle.verdict, oracleUrl: receipt.oracle.url }
+        : {}),
       ...(receipt.rendered.banner ? { banner: receipt.rendered.banner } : {}),
     },
     ...(receipt.mismatches.length > 0 ? { mismatches: receipt.mismatches } : {}),
@@ -215,9 +295,11 @@ export async function publishCommand(args: ParsedArgs): Promise<Record<string, u
     name: stringFlag(args.flags, "name"),
     receiptPath,
     session: stringFlag(args.flags, "session"),
+    oracle: args.flags["oracle"] === true,
+    forcePublish: args.flags["force-publish"] === true,
     flags: args.flags,
   });
-  if (receipt.verdict !== "pass") process.exitCode = 1;
+  if (receipt.verdict !== "pass" || receipt.oracle?.verdict === "fail") process.exitCode = 1;
   return publishOutput(receipt);
 }
 

@@ -1,0 +1,114 @@
+{
+  "estimate": "axi-e2e Lambda",
+  "specHash": "57a152b1eb1ea2a8",
+  "url": "https://calculator.aws/#/estimate?id=3336459db750e935468fe72e4d860bbd5d66264c",
+  "savedKey": "3336459db750e935468fe72e4d860bbd5d66264c",
+  "publishedAt": "2026-11-23T15:51:37.497Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 11.8,
+    "upfront": 0,
+    "total12m": 141.6,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "aWSLambda",
+        "template": "lambdaWithFreeTier",
+        "region": "us-east-2",
+        "monthly": 11.8,
+        "upfront": 0,
+        "summary": "Architecture (x86), Number of requests (10000000 per month), Amount of ephemeral storage allocated (512 MB), Architecture (x86), Invoke Mode (Buffered)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "aWSLambda",
+        "monthly": 11.8,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 11.8,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=3336459db750e935468fe72e4d860bbd5d66264c",
+    "title": "axi-e2e lambda",
+    "monthly": "11.80 USD",
+    "upfront": "0.00 USD",
+    "annual": "141.60 USD",
+    "monthlyValue": 11.8,
+    "upfrontValue": 0,
+    "annualValue": 141.6,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS Lambda",
+        "upfront": "0.00 USD",
+        "monthly": "11.80 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Architecture (x86), Number of requests (10000000 per month), Amount of ephemeral storage allocated (512 MB), Architecture (x86), Invoke Mode (Buffered)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T15:57:41.279Z"
+  },
+  "oracle": {
+    "url": "https://calculator.aws/#/estimate?id=cfd56f1dae3a2541ba2808b2a30df4da89e0cd9f",
+    "savedKey": "cfd56f1dae3a2541ba2808b2a30df4da89e0cd9f",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=cfd56f1dae3a2541ba2808b2a30df4da89e0cd9f",
+      "title": "axi-e2e Lambda",
+      "monthly": "11.80 USD",
+      "upfront": "0.00 USD",
+      "annual": "141.60 USD",
+      "monthlyValue": 11.8,
+      "upfrontValue": 0,
+      "annualValue": 141.6,
+      "estimateDate": "Estimate date: November 23, 2026",
+      "banner": "last updated on November 23, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "AWS Lambda",
+          "upfront": "0.00 USD",
+          "monthly": "11.80 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Architecture (x86), Number of requests (10000000 per month), Amount of ephemeral storage allocated (512 MB), Architecture (x86), Invoke Mode (Buffered)",
+          "status": null
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-23T15:57:43.944Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e lambda",
+    "monthly": 11.8,
+    "upfront": 0,
+    "annual": 141.6,
+    "services": [
+      {
+        "name": "AWS Lambda",
+        "monthly": 11.8,
+        "region": "US East (Ohio)",
+        "configSummary": "Architecture (x86), Number of requests (10000000 per month), Amount of ephemeral storage allocated (512 MB), Architecture (x86), Invoke Mode (Buffered)"
+      }
+    ],
+    "groups": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

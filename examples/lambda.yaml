@@ -1,0 +1,16 @@
+name: axi-e2e Lambda
+currency: USD
+locale: en_US
+services:
+  - code: aWSLambda
+    region: us-east-2
+    template: lambdaWithFreeTier
+    set:
+      selectArchitectureRequests: "1"
+      numberOfRequests:
+        value: 10000000
+        unit: perMonth
+      durationOfEachRequest: 200
+      sizeOfMemoryAllocated:
+        value: 512
+        unit: mb|NA

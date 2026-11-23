@@ -65,6 +65,8 @@ const applyFlags: FlagSpecs = {
   "--name": { type: "string", description: "override the estimate name" },
   "--receipt": { type: "string", description: "write a JSON receipt to this path" },
   "--session": { type: "string", description: "agent-browser session name" },
+  "--oracle": { type: "boolean", description: "diff the live UI recomputation too" },
+  "--force-publish": { type: "boolean", description: "create new links ignoring a receipt" },
 };
 
 async function home(): Promise<Record<string, unknown>> {
@@ -163,8 +165,10 @@ async function applyCommand(
     name: stringFlag(args.flags, "name"),
     receiptPath: stringFlag(args.flags, "receipt"),
     session: stringFlag(args.flags, "session"),
+    oracle: args.flags["oracle"] === true,
+    forcePublish: args.flags["force-publish"] === true,
     flags: args.flags,
   });
-  if (receipt.verdict !== "pass") process.exitCode = 1;
+  if (receipt.verdict !== "pass" || receipt.oracle?.verdict === "fail") process.exitCode = 1;
   return publishOutput(receipt);
 }

@@ -71,3 +71,32 @@ hard client-side cap keeps accidental loops from publishing garbage. Counter liv
 The verifier uses `aws-cal-axi-e2e` by default, overridable with `--session` or
 `AGENT_BROWSER_SESSION`. The session is closed at the end of an interactive session, not after
 every publish, so repeated verifications reuse one browser.
+
+## D-009: Publish with the native `metaData.source` (2026-11-23)
+
+The share page trusts stored service costs only when `metaData.source` is the calculator's own
+value; for any other source it recomputes the estimate from `calculationComponents` on load. We
+publish `source: "calculator-platform"` so a link renders exactly like a native estimate, which is
+what PLAN.md describes as a normal public link. Math parity is proven separately with a recompute
+probe: a second copy published with a different source, whose page is the live UI recomputation.
+Both URLs are recorded in each receipt so the oracle can be re-read without publishing again.
+
+## D-010: Link reuse from receipts (2026-11-23)
+
+`publish --receipt <path>` hashes the parsed spec. When the receipt's hash matches and
+`--force-publish` is absent, the existing public link and oracle probe are re-verified instead of
+publishing new ones. This keeps the live-link budget for genuinely new fixtures.
+
+## D-011: P2 link budget exception (2026-11-23)
+
+The session cap is 25 public links. The P0/P1 receipts, the oracle probes, and early exploration
+used 25. The mandatory P2 group + support render receipt needed one more link, created with
+`AWSCALC_MAX_PUBLISHES_PER_DAY=26` for that single publish and nothing after it. The default cap
+stays 25.
+
+## D-012: Group rows are verified from the service table (2026-11-23)
+
+On the landing page of a grouped estimate, the service table lists top-level group rows with
+their subtotals, not the services inside them. The verifier expects `groupRows` (top-level groups)
+instead of individual service rows when services live in groups, and still checks the group tree
+and the recomputed support row.

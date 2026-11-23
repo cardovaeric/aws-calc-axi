@@ -1,0 +1,114 @@
+{
+  "estimate": "axi-e2e CloudWatch",
+  "specHash": "2a0a1a350e72db57",
+  "url": "https://calculator.aws/#/estimate?id=bb5773335aa17b384ef7805a9c9a09c2ca8ade39",
+  "savedKey": "bb5773335aa17b384ef7805a9c9a09c2ca8ade39",
+  "publishedAt": "2026-11-23T15:49:51.935Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 16.52,
+    "upfront": 0,
+    "total12m": 198.24,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonCloudWatch",
+        "template": "CloudWatch",
+        "region": "us-east-2",
+        "monthly": 16.52,
+        "upfront": 0,
+        "summary": "Number of Metrics (includes detailed and custom metrics) (10), Number of other API requests (1000000), Standard Logs: Data Ingested (5 GB), Number of Dashboards (3), Number of Standard Resolution Alarm Metrics (10), Number of mobile OTEL events and spans or spans per visit (70), Mobile sampling rate (1)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonCloudWatch",
+        "monthly": 16.52,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 16.52,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=bb5773335aa17b384ef7805a9c9a09c2ca8ade39",
+    "title": "axi-e2e CloudWatch",
+    "monthly": "16.52 USD",
+    "upfront": "0.00 USD",
+    "annual": "198.24 USD",
+    "monthlyValue": 16.52,
+    "upfrontValue": 0,
+    "annualValue": 198.24,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon CloudWatch",
+        "upfront": "0.00 USD",
+        "monthly": "16.52 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Metrics (includes detailed and custom metrics) (10), Number of other API requests (1000000), Standard Logs: Data Ingested (5 GB), Number of Dashboards (3), Number of Standard Resolution Alarm Metrics (10), Number of mobile OTEL events and spans or spans per visit (70), Mobile sampling rate (1)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T15:56:18.806Z"
+  },
+  "oracle": {
+    "url": "https://calculator.aws/#/estimate?id=00322873c2f78346ee809cec534b51ed582b9e5b",
+    "savedKey": "00322873c2f78346ee809cec534b51ed582b9e5b",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=00322873c2f78346ee809cec534b51ed582b9e5b",
+      "title": "axi-e2e CloudWatch",
+      "monthly": "16.52 USD",
+      "upfront": "0.00 USD",
+      "annual": "198.24 USD",
+      "monthlyValue": 16.52,
+      "upfrontValue": 0,
+      "annualValue": 198.24,
+      "estimateDate": "Estimate date: November 23, 2026",
+      "banner": "last updated on November 23, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "Amazon CloudWatch",
+          "upfront": "0.00 USD",
+          "monthly": "16.52 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Metrics (includes detailed and custom metrics) (10), Number of other API requests (1000000), Standard Logs: Data Ingested (5 GB), Number of Dashboards (3), Number of Standard Resolution Alarm Metrics (10), Number of mobile OTEL events and spans or spans per visit (70), Mobile sampling rate (1)",
+          "status": null
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-23T15:56:21.162Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e CloudWatch",
+    "monthly": 16.52,
+    "upfront": 0,
+    "annual": 198.24,
+    "services": [
+      {
+        "name": "Amazon CloudWatch",
+        "monthly": 16.52,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Metrics (includes detailed and custom metrics) (10), Number of other API requests (1000000), Standard Logs: Data Ingested (5 GB), Number of Dashboards (3), Number of Standard Resolution Alarm Metrics (10), Number of mobile OTEL events and spans or spans per visit (70), Mobile sampling rate (1)"
+      }
+    ],
+    "groups": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

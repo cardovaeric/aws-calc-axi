@@ -20,8 +20,20 @@ components fail closed).
 - Progress and diagnostics go to stderr.
 - Exit codes: 0 success/no-op, 1 error, 2 usage error (unknown flag, missing argument).
 - No interactive prompts. Every command completes with flags alone.
-- Node 24+ required. The binary is `bin/aws-calc-axi.js`; install with `npm link` or run
-  `node bin/aws-calc-axi.js`.
+- Node 24+ required.
+
+## Get the CLI
+
+The skill ships with the CLI in one repository, but installing the skill does not install the
+binary. Pick one:
+
+```sh
+npm i -g github:cardovaeric/aws-calc-axi    # global `aws-calc-axi`
+npx -y github:cardovaeric/aws-calc-axi      # per call, no global install
+```
+
+If you have the repository checked out, `npm install && npm link` works too, or run
+`node bin/aws-calc-axi.js` directly.
 
 ## Discover
 

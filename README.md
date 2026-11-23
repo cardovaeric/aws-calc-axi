@@ -17,10 +17,34 @@ See `PLAN.md` for the locked plan, `analysis/FINDINGS.md` for the live-site evid
 - Node 24+ (runs TypeScript directly through type stripping)
 - `agent-browser` for render verification (`npm i -g agent-browser && agent-browser install`)
 
-## Install and check
+## Install the CLI
 
 ```sh
+# from this repository (recommended for development)
 npm install
+npm link                 # puts `aws-calc-axi` on your PATH
+
+# or install straight from GitHub, no clone
+npm i -g github:cardovaeric/aws-calc-axi
+```
+
+Both need Node 24+. Then run `aws-calc-axi` for the home view.
+
+## Install as an agent skill
+
+```sh
+npx skills add cardovaeric/aws-calc-axi
+```
+
+This installs `.agents/skills/aws-calc-axi/SKILL.md`, the agent-facing guide with the output
+contract, estimate format, publish and oracle rules, and the fail-closed behavior. The skill
+does not install the CLI itself; install it with one of the commands above (or use
+`npx -y github:cardovaeric/aws-calc-axi` per call). The skill is also usable without an install:
+`npx skills use cardovaeric/aws-calc-axi@aws-calc-axi`.
+
+## Check the repo
+
+```sh
 npm run typecheck
 npm run lint
 npm test

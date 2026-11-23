@@ -110,7 +110,14 @@ function numericValue(component: Component, raw: unknown, context: InputValidati
 }
 
 /** Validations apply to the value in the component's output unit. */
-function assertValid(component: Component, value: number, raw: unknown, context: InputValidationContext): void {
+function assertValid(
+  component: Component,
+  value: number,
+  raw: unknown,
+  context: InputValidationContext,
+  fromOverride = true
+): void {
+  if (!fromOverride) return;
   if (raw === undefined || raw === null || raw === "") return;
   const problem = validationProblem(component, value);
   if (problem) {
@@ -158,7 +165,10 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
 
     case "numericInput": {
       const raw = override.value ?? component["defaultValue"];
-      const numeric = requireNumeric(component, raw, context);
+      const numeric =
+        override.value === undefined
+          ? numericValue(component, raw, context)
+          : requireNumeric(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
       return {
         value: numeric,
@@ -170,7 +180,10 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
 
     case "percentInput": {
       const raw = override.value ?? component["defaultValue"];
-      const numeric = requireNumeric(component, raw, context);
+      const numeric =
+        override.value === undefined
+          ? numericValue(component, raw, context)
+          : requireNumeric(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
       // The live engine keeps the fraction in state and in the summary.
       const fraction = numeric / 100;
@@ -186,17 +199,31 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
 
     case "dropdown": {
       const options = asOptions(component["options"]);
-      const raw = override.value ?? override.selected ?? component["defaultDropDownItem"];
+      const noDefault = component["noDefaultItem"] === true;
+      const fallback = noDefault ? undefined : options[0]?.id;
+      const explicit = override.value ?? override.selected;
+      const declared = component["defaultDropDownItem"];
+      let raw = explicit ?? declared ?? fallback;
       const present = raw !== undefined && raw !== null && raw !== "";
-      const selectedId = present ? String(raw) : "";
-      if (present && options.length > 0 && !options.some((option) => option.id === selectedId)) {
-        throw new InputValidationError({
-          serviceCode: context.serviceCode,
-          componentId: component.id,
-          label,
-          problem: `"${selectedId}" is not one of ${options.map((option) => option.id).join(", ")}`,
-          value: raw,
-        });
+      let selectedId = present ? String(raw) : "";
+      if (
+        present &&
+        options.length > 0 &&
+        !options.some((option) => option.id === selectedId)
+      ) {
+        if (explicit !== undefined) {
+          throw new InputValidationError({
+            serviceCode: context.serviceCode,
+            componentId: component.id,
+            label,
+            problem: `"${selectedId}" is not one of ${options.map((option) => option.id).join(", ")}`,
+            value: raw,
+          });
+        }
+        // A definition default that is not in its own option list falls back
+        // the way the live dropdown does: keep the default, select options[0].
+        raw = fallback;
+        selectedId = fallback ?? "";
       }
       if (!present && required(component)) {
         throw new MissingInputError({
@@ -244,7 +271,7 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
         ? `${String(defaultOption["size"] ?? outputSize)}|${String(
             defaultOption["frequency"] ?? "NA"
           )}`
-        : `${outputSize}|NA`;
+        : `${sizeOptions[0]?.id ?? outputSize}|${frequencyOptions[0]?.id ?? "NA"}`;
       const selectedId = override.unit ?? defaultId;
       const [sizeUnit = outputSize, frequencyUnit = "NA"] = selectedId.split("|");
 
@@ -286,6 +313,8 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
       }
 
       const raw = override.value ?? component["defaultValue"];
+      const fromOverride = override.value !== undefined || override.unit !== undefined;
+      // Size validations are expressed in the output unit, so validate after conversion.
       const numeric = numericValue(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
 
@@ -293,7 +322,7 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
       if (frequencyUnit !== "NA" && outputFrequency !== "NA") {
         value = convertTime(value, frequencyUnit, outputFrequency);
       }
-      assertValid(component, value, raw, context);
+      assertValid(component, value, raw, context, fromOverride);
 
       const sizeLabel =
         sizeOptions.find((option) => option.id === sizeUnit)?.label ?? sizeUnit.toUpperCase();
@@ -319,7 +348,10 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
         ? String((component["outputFrequency"] as Record<string, unknown>)["id"] ?? "perMonth")
         : String(component["outputFrequency"] ?? "perMonth");
       const raw = override.value ?? component["defaultValue"];
-      const numeric = numericValue(component, raw, context);
+      const fromOverride = override.value !== undefined || override.unit !== undefined;
+      const numeric = fromOverride
+        ? requireNumeric(component, raw, context)
+        : numericValue(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
       const defaultFrequency = component["defaultFrequency"];
       const selectedId = override.unit ?? (defaultFrequency === undefined ? "" : String(defaultFrequency));
@@ -332,7 +364,8 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
         );
       }
       const converted = convertFrequency(numeric, selectedId, outputFrequency);
-      assertValid(component, converted, raw, context);
+      // Frequency validations apply to the entered amount, not the converted rate.
+      assertValid(component, numeric, raw, context, fromOverride);
       return {
         value: converted,
         present,
@@ -347,12 +380,16 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
       const options = asOptions(component["dropDownDuration"]);
       const outputUnit = String(component["outputDurationUnit"] ?? "sec");
       const raw = override.value ?? component["defaultValue"];
-      const numeric = numericValue(component, raw, context);
+      const fromOverride = override.value !== undefined || override.unit !== undefined;
+      const numeric = fromOverride
+        ? requireNumeric(component, raw, context)
+        : numericValue(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
       const selectedId = override.unit ?? String(component["defaultDuration"] ?? outputUnit);
       const option = options.find((entry) => entry.id === selectedId);
       const converted = convertTime(numeric, selectedId, outputUnit);
-      assertValid(component, converted, raw, context);
+      // Duration validations apply to the entered amount, not the converted value.
+      assertValid(component, numeric, raw, context, fromOverride);
       return {
         value: converted,
         present,

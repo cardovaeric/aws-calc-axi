@@ -1,0 +1,14 @@
+name: axi-e2e Athena
+currency: USD
+locale: en_US
+services:
+  - code: amazonAthena
+    region: us-east-2
+    set:
+      numberOfDPUs: 4
+      numberOfQueries:
+        value: 100
+        unit: perDay
+      dataScannedPerQuery:
+        value: 1
+        unit: gb|NA

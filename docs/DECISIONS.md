@@ -100,3 +100,34 @@ On the landing page of a grouped estimate, the service table lists top-level gro
 their subtotals, not the services inside them. The verifier expects `groupRows` (top-level groups)
 instead of individual service rows when services live in groups, and still checks the group tree
 and the recomputed support row.
+
+## D-013: Definition defaults follow the live UI fallbacks (2026-11-23)
+
+A dropdown with no `defaultDropDownItem` selects its first option, and a declared default that is
+not in the option list also falls back to the first option. This mirrors the live dropdown state
+initialization and unlocks services such as API Gateway where the meaningful default is "None"
+(`[ZERO_COST]`). Explicit user overrides that name an unknown option still fail closed with the
+valid ids.
+
+## D-014: Validations use the unit the live UI validates (2026-11-23)
+
+File size validations are expressed in the component's output unit (for example a memory cap of
+10 GB while the input is in MB), so they run after conversion. Frequency and duration validations
+run on the entered amount, before conversion. Defaults provided by the definition are not
+rejected when they violate their own validations; user overrides are. This keeps the engine
+aligned with the form while refusing bad user input.
+
+## D-015: Native goldens while the link budget is spent (2026-11-23)
+
+Four fixtures (X-Ray, CloudFormation, EventBridge, Athena) compute natively and are frozen in
+`e2e/golden-natives.test.ts`, but they do not have a public render receipt yet because the daily
+link budget was exhausted by the P0-P2 gates. They are not ledger rows: the ledger only counts
+rows whose public page was rendered. The next session publishes them and adds the rows.
+
+## D-016: `update` means the data plane, not the npm package (2026-11-23)
+
+The CLI registers its own `update --check|--apply`, which shadows the SDK's built-in npm
+self-update. `--check` fetches fresh manifest, region map, runtime config, and locations and
+reports per-source drift without writing; `--apply` refreshes the cache. `--definitions` extends
+the check to all 441 definitions. The plan treats the data plane as a dependency with drift
+detection, so this is the intended meaning of `update`.

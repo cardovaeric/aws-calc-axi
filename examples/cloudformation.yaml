@@ -1,0 +1,11 @@
+name: axi-e2e CloudFormation
+currency: USD
+locale: en_US
+services:
+  - code: awsCloudFormation
+    region: us-east-2
+    set:
+      numberOfResources: 100
+      numberOfOps:
+        value: 1000
+        unit: perDay

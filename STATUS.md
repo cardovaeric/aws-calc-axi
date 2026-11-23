@@ -56,26 +56,43 @@ P2 receipt: `receipts/p2-groups-support.json`.
 6 rows: 5 service fixtures plus 1 group/support fixture. All native, all pass. Details in
 `COVERAGE.md`.
 
+## P3 expansion so far
+
+- `scripts/scan.ts` inventories subtypes and evaluates defaults. Current us-east-2 picture:
+  87 of 160 visible services are within the implemented subtype set; 56 evaluate with defaults
+  (22 need inputs, 6 hit genuinely missing regional prices, 0 unsupported subtypes).
+- Fixed from scanner findings: dropdown fallbacks (declared default missing from options falls
+  back to the first option, matching the live UI), display-only components with no `type`
+  (Network Firewall alerts), size validations in output units, frequency/duration validations in
+  the entered unit, percent summary as a fraction.
+- New native fixtures with frozen goldens (no public receipt yet, link budget): X-Ray 50.00,
+  CloudFormation 2736.60, EventBridge 10.00, Athena 14.85.
+- `update --check|--apply` now shadows the SDK self-update and reports data-plane drift for the
+  manifest, region map, runtime config, locations, and (with `--definitions`) every definition.
+
 ## Open failures and blockers
 
 - None blocking.
 - Publish budget: 25 links/day cap was reached; the P2 gate needed one more link (26 total,
-  explicitly raised for that publish). Nothing else was published after it.
+  explicitly raised for that publish). Nothing else was published after it, so the four new
+  native fixtures above have goldens but no rendered receipt yet.
 - Fail-closed gaps (adapter tasks, not silent zeros): non-empty `dataTransferV2` pricing,
-  `columnFormIPM`, `throughput`, `utilization`, bespoke EC2/Windows/RDS math,
-  `ec2PriceDisplay`, `snapShotMaths`, `workloadInstanceMath`.
-- `update` currently resolves to the SDK's npm self-update. The plan's data-plane
-  `update --check|--apply` is not implemented yet; it is the next hardening item.
+  `columnFormIPM` (63 services), `throughput` (29), `utilization` (12), bespoke EC2/Windows/RDS
+  math (`ec2PriceDisplay`, `ec2Variable`, `snapShotMaths`, `workloadInstanceMath`), and pricing
+  `sets`-based instance data.
+- Six services hit missing regional prices for meters present in the definition but absent from
+  the region file (Personalize, Transcribe, ACM, MediaTailor, Firewall Manager, IoT SiteWise).
+  The engine fails closed instead of publishing a zero.
 
 ## Next three actions
 
-1. Implement `update --check|--apply` (data-plane hashes + drift report) and shadow the SDK
-   self-update.
-2. Implement non-empty data transfer pricing (the biggest remaining generic gap), then add S3
-   data transfer and NAT/VPC-style fixtures.
-3. Expand the ledger with more Tier A services driven by the default-input scanner
-   (`scripts/scan.ts`), fixing each unsupported subtype it reports.
+1. Next session: publish receipts for the four native fixtures (X-Ray, CloudFormation,
+   EventBridge, Athena), add their ledger rows, and confirm each rendered total.
+2. Implement non-empty `dataTransferV2` pricing (the biggest generic gap), then add S3 data
+   transfer and NAT-style fixtures.
+3. Implement `columnFormIPM` (repeatable rows) and `throughput` to unlock the next coverage tier.
 
 ## Last commit
 
-`464881e` - P0 slice. P1/P2 work is staged for the next commit.
+`cf69c6a` - P1/P2 matrix. P3 scanner fixes, native goldens, `update`, and docs follow in the next
+commit.

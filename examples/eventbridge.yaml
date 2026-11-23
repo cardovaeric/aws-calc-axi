@@ -1,0 +1,16 @@
+name: axi-e2e EventBridge
+currency: USD
+locale: en_US
+services:
+  - code: amazonEventBridge
+    region: us-east-2
+    set:
+      Size_of_the_payload:
+        value: 1
+        unit: kb|NA
+      Number_of_custom_events:
+        value: 10
+        unit: millionPerMonth
+      Number_of_events_same_account:
+        value: 10
+        unit: millionPerMonth

@@ -99,6 +99,11 @@ export async function fetchCachedJson<T>(url: string, options: CacheOptions = {}
   }
 }
 
+/** Read a cached body without refreshing it. */
+export async function peekCached(url: string): Promise<CachedBody | undefined> {
+  return readEntry(url);
+}
+
 export async function readFileCached(path: string): Promise<string> {
   return readFile(path, "utf8");
 }

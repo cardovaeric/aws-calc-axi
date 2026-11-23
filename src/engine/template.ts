@@ -117,6 +117,14 @@ function sumSubtotals(subtotals: Subtotal[], costType: string): number {
     .reduce((total, subtotal) => new Decimal(total).add(subtotal.value).toNumber(), 0);
 }
 
+const DISPLAY_ONLY_SUBTYPES = new Set([
+  "bodyText",
+  "headerText",
+  "alert",
+  "condition",
+  "conversionDisplay",
+]);
+
 function setHidden(runtime: Runtime, component: Component): void {
   runtime.values.set(component.id, 0);
 }
@@ -129,17 +137,18 @@ function evaluateComponent(
   pricingContext: PricingContext
 ): void {
   const { definition, template } = context;
+  const subType = component.subType ?? "unknown";
+  const type =
+    component.type ??
+    (DISPLAY_ONLY_SUBTYPES.has(subType) ? "display" : "unknown");
+  component = { ...component, type };
 
   if (component.type === "display" || component.type === "maths" || component.type === "variable") {
     if (component.subType === "priceDisplay") {
       evaluatePriceDisplay(runtime, component);
       return;
     }
-    if (
-      component.subType === "conversionDisplay" ||
-      component.subType === "bodyText" ||
-      component.subType === "headerText"
-    ) {
+    if (DISPLAY_ONLY_SUBTYPES.has(component.subType ?? "")) {
       runtime.values.set(component.id, 0);
       return;
     }

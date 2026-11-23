@@ -1,0 +1,8 @@
+name: axi-e2e X-Ray
+currency: USD
+locale: en_US
+services:
+  - code: awsXRay
+    region: us-east-2
+    set:
+      Number_of_requests: 10000000

@@ -9,6 +9,7 @@ import { publishCommand, publishFlags, publishHelp } from "./commands/publish.ts
 import { verifyCommand, verifyFlags, verifyHelp } from "./commands/verify.ts";
 import { doctorCommand, doctorFlags, doctorHelp } from "./commands/doctor.ts";
 import { estimateCommand, estimateFlags, estimateHelp } from "./commands/estimate.ts";
+import { updateCommand, updateFlags, updateHelp } from "./commands/update.ts";
 import { buildFromSpec, costSummary } from "./commands/cost.ts";
 import { publishOutput, runPublish } from "./commands/publish.ts";
 import { booleanFlag, stringFlag, type FlagSpecs } from "./cli/args.ts";
@@ -34,6 +35,7 @@ Usage:
   aws-calc-axi publish <estimate.yaml> [--name ...] [--receipt path]
   aws-calc-axi verify <url> [--expect estimate.yaml]
   aws-calc-axi doctor [--refresh]
+  aws-calc-axi update --check|--apply
 
 Output is TOON on stdout. Progress and diagnostics go to stderr.
 Publishing is explicit: a link counts only after the public page renders and matches.
@@ -57,6 +59,7 @@ const HELP: Record<string, string> = {
   verify: verifyHelp,
   doctor: doctorHelp,
   estimate: estimateHelp,
+  update: updateHelp,
 };
 
 const applyFlags: FlagSpecs = {
@@ -130,6 +133,7 @@ export async function main(): Promise<void> {
       verify: async (args) => verifyCommand(parseArgs("verify", args, verifyFlags)),
       doctor: async (args) => doctorCommand(parseArgs("doctor", args, doctorFlags)),
       estimate: async (args) => estimateCommand(parseArgs("estimate", args, estimateFlags)),
+      update: async (args) => updateCommand(parseArgs("update", args, updateFlags)),
     },
     getCommandHelp: (command) => HELP[command] ?? null,
     home,

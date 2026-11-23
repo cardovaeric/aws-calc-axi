@@ -13,6 +13,11 @@ recomputed the same totals from the stored components.
 | amazonSimpleQueueService | simpleQueueService | us-east-2 | 1M standard requests, no data transfer | native | 0.40 | 0.40 USD | pass | pass | https://calculator.aws/#/estimate?id=1efbacfa9865d0bc674eb0bc0e78e6e5494e77c5 |
 | group: Data -> Data Compute (S3 + Lambda) | simpleStorageServiceClassesGroup + lambdaWithFreeTier | us-east-2 | nested groups with Business Support+ | native | 14.10 | 43.10 USD | none | pass | https://calculator.aws/#/estimate?id=41bc364a547ab7429de00d8d39cb29f70210d12a |
 
+## Evidence
+
+- Receipts: `receipts/` (native result, stored JSON comparison, rendered DOM, probe).
+- Screenshots: `receipts/screenshots/<row id>.png` captured from each public link.
+
 ## Notes
 
 - s3-standard-100gb-use2: P0 vertical slice; selector parent emits subServices[]

@@ -148,6 +148,11 @@ export function formatCoverage(
     );
   }
   lines.push("");
+  lines.push("## Evidence");
+  lines.push("");
+  lines.push("- Receipts: `receipts/` (native result, stored JSON comparison, rendered DOM, probe).");
+  lines.push("- Screenshots: `receipts/screenshots/<row id>.png` captured from each public link.");
+  lines.push("");
   lines.push("## Notes");
   lines.push("");
   for (const entry of entries) {

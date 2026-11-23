@@ -48,8 +48,10 @@ P2 receipt: `receipts/p2-groups-support.json`.
 - `npm run typecheck`: pass
 - `npm run lint`: pass
 - `npm test`: 51 tests, pass
-- `npm run e2e`: 7 tests, pass (live DOM, live catalog parity, all ledger rows)
+- `npm run e2e`: 11 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
+  ledger rows); ran twice back to back with identical results
 - `npm run ledger`: 6 rows, all pass
+- Screenshots of every public link: `receipts/screenshots/`
 
 ## Coverage ledger summary
 
@@ -94,5 +96,48 @@ P2 receipt: `receipts/p2-groups-support.json`.
 
 ## Last commit
 
-`cf69c6a` - P1/P2 matrix. P3 scanner fixes, native goldens, `update`, and docs follow in the next
-commit.
+`307dbfc` - P3 scanner fixes, native goldens, `update`, and docs. Screenshot capture and the final
+status updates follow in the closing commit.
+
+## Final summary
+
+What shipped:
+
+- A working `aws-calc-axi` CLI (native TypeScript, TOON output, no prompts, exit codes per AXI)
+  covering catalog discovery, schemas, prices, estimate files, cost, apply, publish, verify,
+  doctor, and data-plane update.
+- A deterministic engine for the generic calculator surface: inputs, display conditions, single
+  and tiered prices, pricing combos, replaces/concatenations, maths, rounding, config summaries,
+  selector sub-services, nested groups, and support plans.
+- A publish path that emits the calculator's own estimate contract, reuses links, caps link
+  creation, and verifies the public page in a real browser, including a live recompute probe.
+
+What passed:
+
+- `npm run typecheck`, `npm run lint`, `npm test` (57 tests), `npm run e2e` (11 tests, twice),
+  `npm run ledger`.
+- P0: S3 Standard 100 GB, us-east-2: native 2.30, rendered 2.30 monthly / 27.60 total,
+  receipt in `receipts/p0-s3-standard.json`.
+- P1: Lambda 11.80, CloudWatch 16.52, SNS 0.54, SQS 0.40. Every link rendered the native total
+  and its recompute probe recomputed the same numbers in the live UI.
+- P2: nested groups plus Business Support+: service total 14.10, support 29.00 recomputed by the
+  page, rendered 43.10 monthly / 517.20 total, group tree and support row asserted.
+- P3: catalog scan (87/160 services within the implemented subtype set, 56 evaluate with
+  defaults), four new native fixtures frozen as goldens, data-plane update command, screenshots.
+
+What failed (or is not done):
+
+- Non-empty data transfer pricing, `columnFormIPM` tables, throughput/utilization inputs, and the
+  bespoke EC2/Windows/RDS math remain fail-closed adapter tasks. They raise a structured error
+  with the component path instead of publishing a guessed zero.
+- Six services reference meters that are absent from their regional price file; they stay
+  unsupported until the mapping or the display condition is understood.
+- Four native fixtures (X-Ray, CloudFormation, EventBridge, Athena) have goldens but no public
+  receipt yet because the day's 25-link budget (26 with the documented P2 exception) is spent.
+
+What I would do next:
+
+1. Publish receipts for the four native fixtures and add their ledger rows.
+2. Implement non-empty data transfer pricing, then S3 data transfer and NAT-style fixtures.
+3. Implement `columnFormIPM` to unlock the instance/storage calculator tier, one service at a
+   time with the probe oracle.

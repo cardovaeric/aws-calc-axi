@@ -7,6 +7,7 @@ import { buildFromSpec, costSummary } from "./cost.ts";
 import { readSpec, requirePositional, twelveMonth } from "./shared.ts";
 import { publishEstimate, publishProbe, retrieveEstimate } from "../publish.ts";
 import {
+  captureScreenshot,
   diffRendered,
   readRenderedEstimate,
   type Mismatch,
@@ -28,6 +29,7 @@ export const publishFlags = {
     description: "ignore an existing receipt and create new links",
   },
   "--receipt": { type: "string" as const, description: "write a JSON receipt to this path" },
+  "--screenshot": { type: "string" as const, description: "save a PNG of the rendered page" },
   "--session": { type: "string" as const, description: "agent-browser session name" },
   "--refresh": { type: "boolean" as const, description: "ignore the cached data plane" },
   "--offline": { type: "boolean" as const, description: "never touch the network" },
@@ -43,6 +45,7 @@ Flags:
   --oracle         publish a recompute probe and diff the live UI recomputation
   --force-publish  create new links even when a matching receipt exists
   --receipt <path> write a JSON receipt with the rendered DOM snapshot
+  --screenshot <path> save a PNG of the rendered page
   --session <name> agent-browser session (default aws-calc-axi-e2e)
   --refresh        ignore the cached data plane
   --offline        never touch the network
@@ -144,6 +147,7 @@ export interface PublishOptions {
   specPath: string;
   name?: string | undefined;
   receiptPath?: string | undefined;
+  screenshotPath?: string | undefined;
   session?: string | undefined;
   oracle?: boolean | undefined;
   forcePublish?: boolean | undefined;
@@ -248,6 +252,13 @@ export async function runPublish(options: PublishOptions): Promise<{
     await mkdir(dirname(options.receiptPath), { recursive: true });
     await writeFile(options.receiptPath, `${JSON.stringify(receipt, null, 2)}\n`, "utf8");
   }
+  if (options.screenshotPath) {
+    await mkdir(dirname(options.screenshotPath), { recursive: true });
+    captureScreenshot(publication.url, options.screenshotPath, {
+      ...(options.session ? { session: options.session } : {}),
+      waitText: publishedName,
+    });
+  }
 
   return { receipt, result };
 }
@@ -294,6 +305,7 @@ export async function publishCommand(args: ParsedArgs): Promise<Record<string, u
     specPath,
     name: stringFlag(args.flags, "name"),
     receiptPath,
+    screenshotPath: stringFlag(args.flags, "screenshot"),
     session: stringFlag(args.flags, "session"),
     oracle: args.flags["oracle"] === true,
     forcePublish: args.flags["force-publish"] === true,

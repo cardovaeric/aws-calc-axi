@@ -391,6 +391,24 @@ function moneyValue(text: string | null): number | null {
   return Number.isFinite(value) ? value : null;
 }
 
+/** Open an estimate page and save a screenshot of the rendered result. */
+export function captureScreenshot(
+  url: string,
+  path: string,
+  options: VerifyOptions = {}
+): string {
+  const target = navigationUrl(url);
+  const open = runBrowser(["open", target], options);
+  if (open.status !== 0) throw new BrowserError(`open ${url}`, open.stderr || open.stdout);
+  if (options.waitText) {
+    runBrowser(["wait", "--text", options.waitText], options);
+  }
+  runBrowser(["wait", "[data-monthly-cost]"], options);
+  const shot = runBrowser(["screenshot", path], options);
+  if (shot.status !== 0) throw new BrowserError(`screenshot ${url}`, shot.stderr || shot.stdout);
+  return path;
+}
+
 /** Close the named browser session. Safe to call when nothing is running. */
 export function closeBrowser(options: VerifyOptions = {}): void {
   runBrowser(["close"], options);

@@ -275,3 +275,22 @@ export const KNOWN_FREQUENCIES = new Set([
   "billionPerMonth",
   "trillionPerMonth",
 ]);
+
+/**
+ * Throughput units as the live calculator converts them (binary multiples).
+ * The output unit is always MBps.
+ */
+const THROUGHPUT_FACTORS: Record<string, Record<string, { rate: number; operation: "multiply" | "divide" }>> = {
+  kbps: { mbps: { rate: 1024, operation: "divide" }, gbps: { rate: 1048576, operation: "multiply" } },
+  mbps: { kbps: { rate: 1024, operation: "multiply" }, gbps: { rate: 1024, operation: "divide" } },
+  gbps: { kbps: { rate: 1048576, operation: "multiply" }, mbps: { rate: 1024, operation: "multiply" } },
+};
+
+export function convertThroughput(value: number, from: string, to: string): number {
+  if (from === to) return value;
+  const factor = THROUGHPUT_FACTORS[from]?.[to];
+  if (!factor) {
+    throw new Error(`no throughput conversion from "${from}" to "${to}"`);
+  }
+  return factor.operation === "multiply" ? value * factor.rate : value / factor.rate;
+}

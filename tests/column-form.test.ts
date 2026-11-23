@@ -120,49 +120,148 @@ test("an ambiguous price set match fails closed", () => {
   );
 });
 
-test("tiered PLC_2.0 pricing fails closed", () => {
+test("selector patterns pick the price field for the selected term", () => {
+  const component: ColumnFormComponent = {
+    ...DAX,
+    secondaryKey: ["TermType"],
+    calculationId: { hourly: "hourly_ipm" },
+    pricingUnitModel: {
+      riPricingTypes: {
+        hourly: [
+          { TermType: "OnDemand", PurchaseOption: "" },
+          { TermType: "Reserved", PurchaseOption: "No Upfront" },
+        ],
+        upfront: [{ TermType: "Reserved", PurchaseOption: "All Upfront" }],
+      },
+    },
+    additionalPricingData: [{ name: "Database Savings Plans" }],
+    row: [...DAX.row, { label: "Pricing model", type: "dropDown", selectorId: "TermType" }],
+  };
   const data: ColumnFormPricingData = {
     ...DAX_DATA,
-    regionPrices: { "r5.large - Hourly Cost": { price: "0.2550000000" } },
+    setMeters: ["r5.large OnDemand - Hourly Cost"],
+    regionPrices: {
+      "r5.large OnDemand - Hourly Cost": {
+        price: "0.2550000000",
+        TermType: "OnDemand",
+        PurchaseOption: "",
+      } as never,
+    },
   };
+  const result = evaluateColumnForm(component, data, [
+    { "Instance Type": "r5.large", TermType: "OnDemand" },
+  ]);
+  assert.equal(result.monthly, 558.45);
+  assert.equal(result.extraValues["hourly_ipm"], 0.255);
+  assert.equal(result.saved.value[0]?.TermType?.value, "OnDemand");
+});
+
+test("$overridePriceKeyWith reads the named price field", () => {
   const component: ColumnFormComponent = {
     ...DAX,
-    pricingUnitModel: { riPricingTypes: { hourly: ["$price"] } },
+    pricingUnitModel: {
+      riPricingTypes: {
+        hourly: [{ $overridePriceKeyWith: "effectiveHourlyRate", TermType: "OnDemand" }],
+      },
+    },
+    row: [...DAX.row, { label: "Pricing model", type: "dropDown", selectorId: "TermType" }],
+  };
+  const data: ColumnFormPricingData = {
+    ...DAX_DATA,
+    regionPrices: {
+      "r5.large - Hourly Cost": {
+        price: "0.2550000000",
+        effectiveHourlyRate: "0.2000000000",
+        TermType: "OnDemand",
+      } as never,
+    },
+  };
+  const result = evaluateColumnForm(component, data, [
+    { "Instance Type": "r5.large", TermType: "OnDemand" },
+  ]);
+  assert.equal(result.monthly, 438);
+});
+
+test("no matching pricing pattern fails closed", () => {
+  const component: ColumnFormComponent = {
+    ...DAX,
+    pricingUnitModel: { riPricingTypes: { hourly: [{ TermType: "Reserved" }] } },
+    row: [...DAX.row, { label: "Pricing model", type: "dropDown", selectorId: "TermType" }],
   };
   assert.throws(
-    () => evaluateColumnForm(component, data, [{ "Instance Type": "r5.large" }]),
-    /tiered PLC_2.0 pricing/
+    () => evaluateColumnForm(component, DAX_DATA, [{ "Instance Type": "r5.large", TermType: "OnDemand" }]),
+    /no PLC_2.0 pricing pattern matches/
   );
 });
 
-test("disableCalculation components fail closed", () => {
-  const component: ColumnFormComponent = { ...DAX, disableCalculation: true };
+test("Database Savings Plans fail closed", () => {
+  const component: ColumnFormComponent = {
+    ...DAX,
+    pricingUnitModel: { riPricingTypes: { hourly: [{ TermType: "OnDemand" }] } },
+    row: [...DAX.row, { label: "Pricing model", type: "dropDown", selectorId: "TermType" }],
+  };
   assert.throws(
-    () => evaluateColumnForm(component, DAX_DATA, [{ "Instance Type": "r5.large" }]),
-    /disableCalculation/
+    () =>
+      evaluateColumnForm(component, DAX_DATA, [
+        { "Instance Type": "r5.large", TermType: "Database Savings Plans" },
+      ]),
+    /Database Savings Plans pricing/
   );
 });
 
-test("utilization rows fail closed until implemented", () => {
+test("disableCalculation exposes rates without adding a subtotal", () => {
   const component: ColumnFormComponent = {
     ...DAX,
-    row: [...DAX.row, { label: "Utilization", type: "utilization", selectorId: "use" }],
+    disableCalculation: true,
+    calculationId: { hourly: "hourly_rate" },
+    primaryKey: "Instance Type",
+    row: [DAX.row[1]!],
   };
-  assert.throws(
-    () => evaluateColumnForm(component, DAX_DATA, [{ "Instance Type": "r5.large" }]),
-    /"utilization" row/
-  );
+  const data: ColumnFormPricingData = {
+    ...DAX_DATA,
+    setMeters: ["r5.large - Hourly Cost"],
+  };
+  const result = evaluateColumnForm(component, data, [{ "Instance Type": "r5.large" }]);
+  assert.equal(result.monthly, 0);
+  assert.equal(result.extraValues["hourly_rate"], 0.255);
 });
 
-test("dependent selectors fail closed until implemented", () => {
+test("utilization rows are allowed and do not break pricing", () => {
   const component: ColumnFormComponent = {
     ...DAX,
-    row: [...DAX.row, { label: "OS", type: "dropDown", selectorId: "OS", dependent: "Instance Type" }],
+    row: [
+      ...DAX.row,
+      {
+        label: "Utilization (On-Demand only)",
+        type: "utilization",
+        selectorId: "",
+        exportValueAs: "utilizationOut",
+      },
+    ],
   };
-  assert.throws(
-    () => evaluateColumnForm(component, DAX_DATA, [{ "Instance Type": "r5.large" }]),
-    /dependent selectors/
-  );
+  const result = evaluateColumnForm(component, DAX_DATA, [{ "Instance Type": "r5.large" }]);
+  assert.equal(result.monthly, 558.45);
+  assert.equal(result.extraValues["utilizationOut"], 730);
+});
+
+test("dependent selectors use the supplied values", () => {
+  const component: ColumnFormComponent = {
+    ...DAX,
+    secondaryKey: ["TermType"],
+    row: [
+      ...DAX.row,
+      { label: "Term", type: "dropDown", selectorId: "TermType", dependent: "Instance Type" },
+    ],
+  };
+  const data: ColumnFormPricingData = {
+    ...DAX_DATA,
+    setMeters: ["r5.large OnDemand - Hourly Cost"],
+    regionPrices: { "r5.large OnDemand - Hourly Cost": { price: "0.2550000000" } },
+  };
+  const result = evaluateColumnForm(component, data, [
+    { "Instance Type": "r5.large", TermType: "OnDemand" },
+  ]);
+  assert.equal(result.monthly, 558.45);
 });
 
 test("the config summary folds a full pricing strategy block", () => {

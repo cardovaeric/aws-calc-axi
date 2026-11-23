@@ -362,3 +362,61 @@ curl -s --compressed \
 curl -s --compressed \
   'https://calculator.aws/pricing/2.0/meteredUnitMaps/dax/USD/current/dax-instances-calc/US%20East%20(Ohio)/r5.large/2/16/index.json'
 ```
+
+## 11. PLC_2.0 selector patterns, ElastiCache, and throughput
+
+Observed on 2026-11-24 while building the BINUS eDesk migration estimate in
+Asia Pacific (Jakarta).
+
+- `pricingUnitModel.riPricingTypes` arrays are **selector patterns**, not price
+  tiers. Each entry is matched field by field against the price record (for
+  example `{TermType: "OnDemand", PurchaseOption: ""}`), and the first match
+  names the price field (default `price`, override with
+  `$overridePriceKeyWith`). Types with no matching pattern (upfront on an
+  On-Demand row) stay 0. `additionalPricingData` carries Database Savings Plans
+  pricing and is not needed for On-Demand or Reserved.
+- RDS for PostgreSQL `rds-postgresql-calc`:
+  - Metadata primary selectors: `Location, Deployment Option, Instance Type,
+    vCPU, Memory, TermType`; the index path for db.r7g.xlarge/Single-AZ in
+    Jakarta is `.../Asia Pacific (Jakarta)/Single-AZ/db.r7g.xlarge/4/32 GiB/OnDemand/index.json`.
+  - Price record: `price 0.574`, `TermType OnDemand`, `PurchaseOption ""`.
+  - Storage meters are concatenated with **no separator**:
+    `Database Storage Single AZ General Purpose-GP3` (500 GB * 0.138 = 69.00).
+  - `DatabaseInsightsSelected` defaults to Yes and adds 18.25; set it to "0".
+  - Result: `db.r7g.xlarge` + 500 GB gp3 = 488.02/month.
+- ElastiCache:
+  - The serverless `columnFormIPM_dsp` uses `disableCalculation: true`: it
+    exposes the hourly rate through `calculationId` for the surrounding maths
+    and adds no subtotal itself.
+  - The data tiering metadata has no Jakarta location, so its component must
+    not be pre-fetched for this region.
+  - Valkey `cache.t4g.micro`, one node, On-Demand = 14.02/month.
+- `throughput` inputs convert with binary multiples between kbps, mbps, and
+  gbps and output MBps. gp3 defaults to 125 MBps.
+- `concatenate` operands join with an empty separator and support `constant`
+  operands. Joining with a space produced meter names that do not exist.
+
+Reproduce:
+
+```sh
+curl -s --compressed \
+  'https://calculator.aws/pricing/2.0/meteredUnitMaps/rds/USD/current/rds-postgresql-calc/primary-selector-aggregations.json' \
+  | jq '.aggregations[] | select(.selectors.Location=="Asia Pacific (Jakarta)" and .selectors["Instance Type"]=="db.r7g.xlarge")'
+curl -s --compressed \
+  'https://calculator.aws/pricing/2.0/meteredUnitMaps/rds/USD/current/rds-postgresql-calc/Asia%20Pacific%20(Jakarta)/Single-AZ/db.r7g.xlarge/4/32%20GiB/OnDemand/index.json'
+```
+
+## 12. BINUS eDesk migration estimate (external deliverable)
+
+Published 2026-11-24 for `BINUS_School_eDesk_Azure_to_AWS_Technical_
+Assessment_v1.docx`:
+
+`https://calculator.aws/#/estimate?id=658500a0001896a21bbfbe5fe7d2c924fee8d02a`
+
+- Two groups: Production 1,421.73 and Non-production (DEV/UAT) 758.09; total
+  2,179.82/month (26,157.84/year).
+- Every service carries a valid calculator component payload. Costs are the
+  assessment's Section 7 line items; the calculator's native source renders
+  stored costs, so the link matches the document to the cent.
+- The read-only page renders 16 Production and 14 Non-production rows with no
+  service errors.

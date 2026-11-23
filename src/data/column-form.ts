@@ -191,7 +191,7 @@ export async function loadColumnFormPricing(
     options.regionName
   );
   const pathValues = primarySelectors.map((selector) => selectors[selector]);
-  if (pathValues.some((value) => value === undefined || value === "")) {
+  if (pathValues.some((value) => value === undefined)) {
     throw new EngineError(
       `PLC_2.0 aggregation row is missing a primary selector value for ` +
         `${primarySelectors.join(", ")}`,

@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  convertThroughput,
   convertFrequency,
   convertSize,
   convertTime,
@@ -39,4 +40,12 @@ test("prefixed frequency families convert through the base unit", () => {
   assert.equal(convertFrequency(1, "millionPerMonth", "perMonth"), 1_000_000);
   assert.equal(convertFrequency(1, "perMonth", "millionPerMonth"), 0.000001);
   assert.equal(convertFrequency(1, "millionPerDay", "millionPerMonth"), 30.416666666666668);
+});
+
+test("throughput conversion uses binary multiples", () => {
+  assert.equal(convertThroughput(125, "mbps", "mbps"), 125);
+  assert.equal(convertThroughput(1024, "kbps", "mbps"), 1);
+  assert.equal(convertThroughput(1, "gbps", "mbps"), 1024);
+  assert.equal(convertThroughput(1, "mbps", "kbps"), 1024);
+  assert.equal(convertThroughput(1, "gbps", "kbps"), 1048576);
 });

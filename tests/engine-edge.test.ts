@@ -127,3 +127,91 @@ test("percent inputs keep the fraction in state and summary", () => {
   assert.equal(result.value, 1);
   assert.equal(result.configSummary, "Sampling rate (1)");
 });
+
+test("throughput inputs convert to the output unit and summarize the entry", () => {
+  const result = evaluateInput(
+    input({
+      subType: "throughput",
+      label: "Throughput",
+      defaultValue: 125,
+      defaultThroughput: "mbps",
+      outputThroughput: { label: "MBps", value: "mbps" },
+      options: [
+        { label: "kbps", value: "kbps", id: "0" },
+        { label: "MBps", value: "mbps", id: "1" },
+        { label: "Gbps", value: "gbps", id: "2" },
+      ],
+      displayInConfigSummary: true,
+    }),
+    { ...context, overrides: {} }
+  );
+  assert.equal(result.value, 125);
+  assert.deepEqual(result.saved, { value: 125, unit: "mbps" });
+  assert.equal(result.configSummary, "Throughput (125 MBps)");
+});
+
+test("throughput overrides convert gigabytes per second to megabytes", () => {
+  const result = evaluateInput(
+    input({
+      subType: "throughput",
+      defaultValue: 1,
+      defaultThroughput: "gbps",
+      outputThroughput: { label: "MBps", value: "mbps" },
+      options: [{ label: "Gbps", value: "gbps", id: "2" }],
+    }),
+    { ...context, overrides: { field: { value: 1, unit: "gbps" } } }
+  );
+  assert.equal(result.value, 1024);
+  assert.deepEqual(result.saved, { value: 1, unit: "gbps" });
+});
+
+test("concatenate joins constants and components without separators", () => {
+  const definition = {
+    version: "0",
+    serviceName: "test",
+    serviceCode: "test",
+    templates: [
+      {
+        id: "t",
+        cards: [
+          {
+            inputSection: {
+              components: [
+                input({ id: "a", subType: "numericInput", defaultValue: 1 }),
+                input({ id: "b", subType: "dropdown", defaultDropDownItem: "x", options: [{ id: "x", label: "X" }] }),
+              ],
+            },
+            mathsSection: [
+              {
+                components: [
+                  {
+                    type: "pricing",
+                    subType: "concatenate",
+                    id: "joined",
+                    operands: [
+                      { constant: "Database Storage " },
+                      { variableId: "b" },
+                      { constant: " " },
+                      { variableId: "a" },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  } as unknown as ServiceDefinition;
+  const result = evaluateTemplate({
+    definition,
+    template: definition.templates?.[0] as never,
+    regionCode: "us-east-2",
+    regionName: "US East (Ohio)",
+    prices: pricing,
+    overrides: {},
+    ...regionMaps(),
+    columnForms: new Map(),
+  });
+  assert.equal(result.values.get("joined"), "Database Storage x 1");
+});

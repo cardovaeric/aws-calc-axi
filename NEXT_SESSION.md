@@ -19,34 +19,32 @@ Work autonomously and single-threaded. Do not spawn subagent swarms or dynamic w
 
 ## Current state
 
-- `npm run typecheck`, `npm run lint`, `npm test` (87), `npm run e2e` (19), `npm run ledger`
+- `npm run typecheck`, `npm run lint`, `npm test` (94), `npm run e2e` (19), `npm run ledger`
   (12 rows) all pass.
 - 12 ledger rows have public links, rendered-DOM receipts, oracles, and screenshots.
 - Non-empty `dataTransferV2` pricing is native. Because the read-only share page drops these
   rows, those receipts use `publish --oracle-editor` (click "Update estimate" and diff the
   editor). Receipts record `oracle.kind`.
-- `columnFormIPM` is native for the simple PLC_2.0 subset. `examples/dax.yaml` (558.45) is the
-  first row; the scanner now reports 106 of 160 services inside the implemented subtype set and
-  57 evaluating with defaults.
-- The publish budget for 2026-11-23 is spent (46 links; see D-017). A new UTC day starts fresh.
-  Do not raise the cap without a documented reason, and reuse receipts where the spec hash
-  matches.
+- `columnFormIPM` now handles selector-pattern pricing (On-Demand/Reserved), hidden dependent
+  selectors, the 100% utilization row, and `disableCalculation` rate components. RDS for
+  PostgreSQL (db.r7g.xlarge + 500 GB gp3 = 488.02) and ElastiCache Valkey (cache.t4g.micro =
+  14.02) evaluate natively but do not have ledger rows yet.
+- `throughput` inputs are native, which unlocked gp3/EBS and RDS storage. The scanner reports
+  122 of 160 services in the implemented subtype set and 62 evaluating with defaults.
+- The BINUS eDesk migration estimate is published (see FINDINGS section 12, D-022).
+- The publish budget for 2026-11-23 was raised to 58 for the mandated receipts and the client
+  deliverable (D-017, D-022). A new UTC day starts fresh; do not raise the cap without a
+  documented reason, and reuse receipts where the spec hash matches.
 
 ## Next tasks (in order)
 
-1. `columnFormIPM` coverage, one service at a time:
-   - Add the live "first available selector value" fallback (the live form takes the first
-     option from the component tree when a selector has no default), then re-run
-     `SCAN_EVALUATE=1 node scripts/scan.ts`.
-   - Pick services whose defaults then resolve, publish with `--oracle`, add a ledger row and a
-     screenshot.
-   - Extend the adapter in the order the data demands: dependent selectors, `remap.constant`,
-     utilization rows, then tiered PLC_2.0 patterns. Keep everything else fail-closed.
-2. Implement `throughput` (29 services) and `utilization` (12 services) inputs from the live
-   bundle formulas (`performThroughputCalculation`, `calculateUtilizationValue`), with unit
-   tests, a fixture, a receipt, and a ledger row.
-3. Add a data transfer destination-override fixture (inter-region to a region with its own
-   meter) to pin the uncommon-group path in a published receipt.
+1. Add ledger rows with receipts and oracle probes for RDS for PostgreSQL (488.02) and
+   ElastiCache Valkey (14.02), then continue `columnFormIPM` service by service.
+2. Implement `utilization` (12 services) and the EBS `snapShotMaths` adapter, then the EC2
+   pricing-`sets` path (`ec2PriceDisplay`/`ec2Variable`).
+3. Add the live "first available selector value" fallback for column forms (the live form takes
+   the first component-tree option when a selector has no default), re-run
+   `SCAN_EVALUATE=1 node scripts/scan.ts`, and add a data transfer destination-override fixture.
 
 ## Constraints and pitfalls
 
@@ -67,7 +65,11 @@ Work autonomously and single-threaded. Do not spawn subagent swarms or dynamic w
   amount; percent inputs keep the fraction in state and summary.
 - Untouched `dataTransferV2` rows are saved with `unit: "tb_month"`, matching native payloads.
 - PLC_2.0 mappings are selector trees, not flat metered unit maps; keep them out of the flat
-  price loader.
+  price loader. `riPricingTypes` arrays are selector patterns, not price tiers.
+- `concatenate` joins operands with no separator and supports `constant` operands; meter names
+  depend on it.
+- Real client estimates may carry the assessment's stored costs for unsupported rows; document
+  that in the receipt and never claim native math for them.
 
 ## Definition of done for this session
 

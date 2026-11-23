@@ -1,5 +1,5 @@
 import { EngineError, InputValidationError, MissingInputError } from "./errors.ts";
-import { convertSize, convertTime, convertFrequency } from "./units.ts";
+import { convertSize, convertTime, convertFrequency, convertThroughput } from "./units.ts";
 import {
   evaluateTransferRows,
   normalizeRows,
@@ -358,6 +358,53 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
         ...(present ? { saved: { value: raw as string | number, unit: selectedId } } : {}),
         ...(displayInSummary && present
           ? { configSummary: `${label} (${String(raw)} ${optionLabelText})` }
+          : {}),
+      };
+    }
+
+    case "throughput": {
+      // Throughput options carry both an index id and the unit value; the live
+      // state selects the value (for example "mbps").
+      const options = Array.isArray(component["options"])
+        ? (component["options"] as Array<Record<string, unknown>>)
+            .map((option) => ({
+              id: String(option["value"] ?? option["id"] ?? ""),
+              label: String(option["label"] ?? option["value"] ?? ""),
+            }))
+            .filter((option) => option.id !== "")
+        : [];
+      const output = isOverrideObject(component["outputThroughput"])
+        ? String((component["outputThroughput"] as Record<string, unknown>)["value"] ?? "mbps")
+        : "mbps";
+      const raw = override.value ?? component["defaultValue"];
+      const fromOverride = override.value !== undefined || override.unit !== undefined;
+      const numeric = fromOverride
+        ? requireNumeric(component, raw, context)
+        : numericValue(component, raw, context);
+      const present = raw !== undefined && raw !== null && raw !== "";
+      const selectedId =
+        override.unit ?? String(component["defaultThroughput"] ?? output);
+      if (present && options.length > 0 && !options.some((option) => option.id === selectedId)) {
+        throw new InputValidationError({
+          serviceCode: context.serviceCode,
+          componentId: component.id,
+          label,
+          problem:
+            `unit "${selectedId}" is not one of ` +
+            options.map((option) => option.id).join(", "),
+          value: selectedId,
+        });
+      }
+      const converted = convertThroughput(numeric, selectedId, output);
+      // Throughput validations apply to the entered amount.
+      assertValid(component, numeric, raw, context, fromOverride);
+      const option = options.find((entry) => entry.id === selectedId);
+      return {
+        value: converted,
+        present,
+        ...(present ? { saved: { value: numeric, unit: selectedId } } : {}),
+        ...(displayInSummary && present
+          ? { configSummary: `${label} (${String(numeric)} ${option?.label ?? selectedId})` }
           : {}),
       };
     }

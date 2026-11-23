@@ -62,20 +62,20 @@ export async function prepareColumnForms(
         component,
         options.overrides[component.id]
       );
-      const selectors = [primarySelectorOf(component), ...(component.secondaryKey ?? [])];
-      for (const selector of selectors) {
-        if (values[selector] === undefined || values[selector] === "") {
-          throw new EngineError(
-            `columnFormIPM "${component.id}" needs a value for "${selector}"; ` +
-              `set ${component.id} with {"${selector}": <value>}`,
-            "MISSING_INPUT",
-            {
-              componentId: component.id,
-              selectorId: selector,
-              valid: component.row.map((row) => row.selectorId),
-            }
-          );
-        }
+      // Only the primary selector is required; hidden secondary selectors are
+      // filled from the component tree by the live form.
+      const primary = primarySelectorOf(component);
+      if (values[primary] === undefined || values[primary] === "") {
+        throw new EngineError(
+          `columnFormIPM "${component.id}" needs a value for "${primary}"; ` +
+            `set ${component.id} with {"${primary}": <value>}`,
+          "MISSING_INPUT",
+          {
+            componentId: component.id,
+            selectorId: primary,
+            valid: component.row.map((row) => row.selectorId).filter(Boolean),
+          }
+        );
       }
       prepared.set(
         component.id,

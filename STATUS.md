@@ -2,6 +2,9 @@
 
 Updated: 2026-11-23 (session 2)
 
+Full service coverage assessment and implementation plan: `analysis/COVERAGE_ASSESSMENT.md`
+(2026-11-24). It supersedes the scanner picture below for planning.
+
 ## What works now
 
 - Public repository: https://github.com/cardovaeric/aws-calc-axi (default branch `develop`).
@@ -24,10 +27,17 @@ Updated: 2026-11-23 (session 2)
   group, destination overrides, the intra-region double charge, and the live
   `DT <type>: <region> (<n> <unit>)` summary. Unselected rows and unknown destinations fail
   closed.
-- `columnFormIPM` is native for the simple PLC_2.0 subset: one row set per component,
-  `textInput`/`autoSuggest`/`dropDown` selectors, no dependent selectors, no remaps, one price
-  set, hourly or monthly model, `calculationId` targets exposed to the maths section, live save
-  format and summary. Unsupported features fail closed with the component id.
+- `columnFormIPM` is native for the PLC_2.0 row set: `textInput`/`autoSuggest`/`dropDown`
+  selectors, selector-pattern price extraction (On-Demand, Reserved, `$overridePriceKeyWith`),
+  hidden dependent selectors, a 100% utilization row, `disableCalculation` rate components, one
+  price set, hourly or monthly model, `calculationId` targets exposed to the maths section, live
+  save format and summary. Database Savings Plans, aggregation remaps, sub-components, and
+  repeatable rows still fail closed.
+- `throughput` inputs are native (kbps/mbps/gbps with binary conversion to MBps), which unlocks
+  gp3 volume and RDS storage inputs.
+- A real client estimate was built and published for BINUS SCHOOL eDesk:
+  `https://calculator.aws/#/estimate?id=658500a0001896a21bbfbe5fe7d2c924fee8d02a`
+  (Production 1,421.73, Non-production 758.09, total 2,179.82/month). See FINDINGS section 12.
 - Selector parents emit `subServices[]`; user groups nest with `Name-uuid` ids; support plans
   compute from the published tier table.
 - Publisher: `saveAs`, public URL, saved-key retrieval, daily link budget, link reuse from a
@@ -67,7 +77,7 @@ comparison, the rendered DOM, the oracle, and the verdict.
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 87 tests, pass
+- `npm test`: 94 tests, pass
 - `npm run e2e`: 19 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
   ledger rows including the editor-recompute oracle)
 - `npm run ledger`: 12 rows, all pass
@@ -80,11 +90,12 @@ comparison, the rendered DOM, the oracle, and the verdict.
 
 ## Scanner picture (us-east-2)
 
-- `node scripts/scan.ts`: 106 of 160 visible services are within the implemented subtype set
-  (was 87 before `columnFormIPM`), 31 selector children.
-- `SCAN_EVALUATE=1`: 57 evaluate with defaults, 40 need inputs (most column forms need an
+- `node scripts/scan.ts`: 122 of 160 visible services are within the implemented subtype set
+  (87 before `columnFormIPM`, 106 before `throughput`), 31 selector children.
+- `SCAN_EVALUATE=1`: 62 evaluate with defaults, 44 need inputs (column forms often need an
   explicit selector because the live form picks the first available option and this engine
-  fails closed instead), plus the remaining errors on bespoke EC2/Windows/RDS definitions.
+  fails closed instead), 0 unsupported subtype, 16 errors on bespoke EC2/Windows/RDS
+  definitions (`ec2PriceDisplay`, `snapShotMaths`, radios, workloads).
 - `update --check|--apply` shadows the SDK self-update and reports data-plane drift for the
   manifest, region map, runtime config, locations, and (with `--definitions`) every definition.
 
@@ -97,29 +108,28 @@ comparison, the rendered DOM, the oracle, and the verdict.
 - The read-only share page drops `dataTransferV2` when it recomputes a foreign-source estimate
   (it renders 0). The editor recompute is correct, so data transfer receipts use
   `--oracle-editor`. Evidence in `analysis/FINDINGS.md` section 9.
-- Fail-closed gaps (adapter tasks, not silent zeros): `throughput` (29 services), `utilization`
-  (12), bespoke EC2/Windows/RDS math (`ec2PriceDisplay`, `ec2Variable`, `snapShotMaths`,
-  `workloadInstanceMath`), pricing `sets`-based instance data, and the advanced `columnFormIPM`
-  surface listed in `docs/DECISIONS.md` D-020.
+- Fail-closed gaps (adapter tasks, not silent zeros): `utilization` (12 services), bespoke
+  EC2/Windows/RDS math (`ec2PriceDisplay`, `ec2Variable`, `snapShotMaths`,
+  `workloadInstanceMath`), pricing `sets`-based instance data, and the remaining
+  `columnFormIPM` surface (Database Savings Plans, aggregation remaps, sub-components,
+  repeatable rows) listed in `docs/DECISIONS.md` D-020 and D-021.
 - Six services reference meters that are absent from their regional price file (Personalize,
   Transcribe, ACM, MediaTailor, Firewall Manager, IoT SiteWise). The engine fails closed
   instead of publishing a zero.
 
 ## Next three actions
 
-1. Continue `columnFormIPM` service by service: start with services whose defaults resolve
-   (DAX is done), then add the live "first available selector value" fallback so the 40
-   needs-input column forms can evaluate with defaults.
-2. Implement `throughput` (29 services) and `utilization` (12) inputs; both are generic adapters
-   with live formulas in `analysis/bundle.js`.
-3. Add a data transfer fixture with a destination override (for example inter-region to a region
-   with its own meter) to pin the uncommon-group path, which is already unit tested.
+1. Add ledger rows with receipts for RDS for PostgreSQL (488.02) and ElastiCache Valkey (14.02),
+   now that both evaluate natively, then continue `columnFormIPM` service by service.
+2. Implement `utilization` (12 services) and the EBS `snapShotMaths` adapter, then the EC2
+   pricing-`sets` path.
+3. Add the live "first available selector value" fallback for column forms so the 44 needs-input
+   services can evaluate with defaults, and add a data transfer destination-override fixture.
 
 ## Last commit
 
-`e952b90` - skill install docs for the public repository.
-Previous: `691d2fa` skill install documentation, `f049bc3` agent skill and schema/pricing fixes,
-`8e6a89f` session findings, `ebb3f0a` data transfer pricing and `columnFormIPM`.
+See `git log -1`. This session's work: P3 receipts, data transfer pricing, `columnFormIPM`,
+throughput, the BINUS estimate, and the public repository/skill install docs.
 
 ## Final summary
 

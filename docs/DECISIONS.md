@@ -188,3 +188,43 @@ tiered PLC_2.0 patterns, reserved/savings-plan models, utilization rows, depende
 `remap.constant`, `disableCalculation`, `subComponentsList`, `additionalPricingData`,
 `exportTagsAsValue`, and repeatable rows. PLC_2.0 mappings are also excluded from the flat price
 loader because they are selector trees, not metered unit maps.
+
+## D-021: Broaden columnFormIPM and add throughput (2026-11-24)
+
+Driven by the BINUS eDesk migration estimate, three generic gaps were closed:
+
+- `throughput` inputs convert with the live binary table (kbps, mbps, gbps; output MBps) and
+  validate the entered amount. This unlocked gp3/EBS and RDS storage inputs and moved 29 services
+  into the implemented subtype set.
+- `columnFormIPM` now supports `pricingUnitModel.riPricingTypes` selector patterns (including
+  `$overridePriceKeyWith`), On-Demand rows with hidden dependent selectors, a utilization row
+  billed at 100% (730 hours), `disableCalculation` components that expose rates without a
+  subtotal, and `additionalPricingData` for Database Savings Plans (which still fails closed when
+  that plan is selected). Empty selectors are omitted from saved rows and summaries like the
+  live component tree.
+- `concatenate` now supports `constant` operands and joins with no separator, matching the live
+  engine. Joining with a space produced meter names that do not exist in the price files.
+
+The scanner now reports 122 of 160 us-east-2 services in the implemented subtype set, 62
+evaluating with defaults, 44 needing inputs, 0 unsupported subtype, 16 errors on bespoke
+EC2/Windows/RDS definitions. Unit tests cover the new paths; the existing ledger rows still pass.
+
+## D-022: BINUS eDesk migration estimate delivery (2026-11-24)
+
+The user asked for one calculator link with two groups for
+`BINUS_School_eDesk_Azure_to_AWS_Technical_Assessment_v1.docx`. The link is
+`https://calculator.aws/#/estimate?id=658500a0001896a21bbfbe5fe7d2c924fee8d02a`, with
+Production (16 services, 1,421.73) and Non-production/DEV-UAT (14 services, 758.09), total
+2,179.82/month.
+
+Every service carries a real calculator component payload: native engine output where supported,
+the live saved shape for EBS, ECR, ElastiCache, and a captured EC2 shape. The stored service
+costs are the assessment's Section 7 line items, so the native-source page reproduces the
+document to the cent. Clicking "Update estimate" would recompute supported rows at current
+calculator rates (MSK, SES, CloudWatch metrics and data transfer differ slightly from the
+assessment), which is expected data drift rather than a publish error.
+
+This publish raised the day's link counter to 58 (D-017 covered the test receipts). It is a
+single user-requested deliverable, not a ledger fixture; its payload, receipt, screenshots, and
+build script live in the client project (`binus-edesk-q/`), and the evidence is in
+`analysis/FINDINGS.md` section 12.

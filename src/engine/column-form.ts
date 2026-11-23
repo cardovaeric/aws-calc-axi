@@ -3,11 +3,13 @@
  * data).
  *
  * Supported shape: one row set per component, selector rows of type
- * `textInput`, `autoSuggest`, or `dropDown`, an hourly or monthly price model,
- * and a single price set. Everything else (tiered PLC_2.0 price patterns,
- * reserved/savings-plan models, utilization rows, dependent selectors,
- * aggregation remaps, sub-components, and repeatable cards) fails closed with
- * the component path instead of guessing.
+ * `textInput`, `autoSuggest`, or `dropDown`, an optional non-selector
+ * `utilization` row, a single price set, selector price patterns for
+ * reserved/upfront records, and `disableCalculation` raw-price mode. Still
+ * fail-closed: repeatable rows, dependent-selector filtering,
+ * `additionalPricingData` joins (for example Database Savings Plans),
+ * `exportTagsAsValue`, constant/regex remaps, sub-components, multiple price
+ * sets, and upfront totals.
  *
  * Save format matches the live converter: `{value: [{selectorId: {value}}]}`.
  */
@@ -42,7 +44,7 @@ export interface ColumnFormComponent {
   row: ColumnFormRowDefinition[];
   calculationId?: Record<string, string>;
   pricingUnitModel?: {
-    riPricingTypes?: Record<string, string | string[]>;
+    riPricingTypes?: Record<string, unknown>;
     [key: string]: unknown;
   };
   disableCalculation?: boolean;
@@ -113,7 +115,13 @@ export function columnFormSelectorValues(
   raw: unknown
 ): ColumnFormRowValues {
   const overrides = rowValueMap(raw);
-  const known = new Set(component.row.map((row) => row.selectorId));
+  const selectableRows = component.row.filter(
+    (row) =>
+      row.selectorId !== undefined &&
+      row.selectorId !== "" &&
+      !(row.type === "utilization" && (row.selectorId === undefined || row.selectorId === ""))
+  );
+  const known = new Set(selectableRows.map((row) => row.selectorId));
   for (const key of Object.keys(overrides)) {
     if (!known.has(key)) {
       throw new EngineError(
@@ -126,7 +134,7 @@ export function columnFormSelectorValues(
   }
   const values: Record<string, string> = {};
   const provided = new Set<string>();
-  for (const row of component.row) {
+  for (const row of selectableRows) {
     const override = overrides[row.selectorId];
     if (override !== undefined) {
       values[row.selectorId] = scalarOf(override);
@@ -215,9 +223,7 @@ export function primarySelectorOf(component: ColumnFormComponent): string {
 
 function assertSupported(component: ColumnFormComponent): void {
   const rejected: Array<[string, unknown]> = [
-    ["disableCalculation", component.disableCalculation],
     ["subComponentsList", component.subComponentsList],
-    ["additionalPricingData", component.additionalPricingData],
     ["remap.constant", component.remap?.constant],
   ];
   for (const [name, value] of rejected) {
@@ -229,21 +235,12 @@ function assertSupported(component: ColumnFormComponent): void {
       );
     }
   }
-  if (component.row.some((row) => row.dependent !== undefined)) {
-    throw new EngineError(
-      `columnFormIPM "${component.id}" has dependent selectors, which are not implemented yet`,
-      "UNSUPPORTED_INPUT",
-      { componentId: component.id, feature: "dependent" }
-    );
-  }
-  if (component.row.some((row) => row.exportTagsAsValue !== undefined)) {
-    throw new EngineError(
-      `columnFormIPM "${component.id}" exports selector tags, which are not implemented yet`,
-      "UNSUPPORTED_INPUT",
-      { componentId: component.id, feature: "exportTagsAsValue" }
-    );
-  }
   for (const row of component.row) {
+    // The utilization row has no selector id; the live form always bills it at
+    // 100% for these templates, so it does not take part in pricing selectors.
+    if (row.type === "utilization" && (row.selectorId === undefined || row.selectorId === "")) {
+      continue;
+    }
     if (!["textInput", "autoSuggest", "dropDown"].includes(row.type)) {
       throw new EngineError(
         `columnFormIPM "${component.id}" has a "${row.type}" row, which is not implemented yet`,
@@ -252,6 +249,36 @@ function assertSupported(component: ColumnFormComponent): void {
       );
     }
   }
+}
+
+/**
+ * Extract a price from a PLC_2.0 record using the pricing unit model patterns.
+ * `$overridePriceKeyWith` names the record field that holds the price.
+ */
+function priceForPatterns(
+  patterns: unknown[],
+  record: Record<string, unknown>
+): number | undefined {
+  for (const raw of patterns) {
+    if (!raw || typeof raw !== "object") continue;
+    const pattern = raw as Record<string, unknown>;
+    let priceKey = "price";
+    let matches = true;
+    for (const [key, expected] of Object.entries(pattern)) {
+      if (key.startsWith("$")) {
+        if (key === "$overridePriceKeyWith") priceKey = String(expected);
+        continue;
+      }
+      if (record[key] !== expected) {
+        matches = false;
+        break;
+      }
+    }
+    if (!matches) continue;
+    const value = Number(record[priceKey]);
+    return Number.isFinite(value) ? value : undefined;
+  }
+  return undefined;
 }
 
 export interface ColumnFormResult {
@@ -270,23 +297,34 @@ export function evaluateColumnForm(
 ): ColumnFormResult {
   assertSupported(component);
   const { values, provided } = columnFormSelectorValues(component, raw);
+  const selectableRows = component.row.filter(
+    (row) =>
+      row.selectorId !== undefined &&
+      row.selectorId !== "" &&
+      !(row.type === "utilization" && (row.selectorId === undefined || row.selectorId === ""))
+  );
   for (const row of component.row) {
+    if (row.selectorId === undefined || row.selectorId === "") continue;
     if (provided.has(row.selectorId)) assertValid(component, row, values[row.selectorId] ?? "");
   }
 
   const primary = primarySelectorOf(component);
   const secondary = component.secondaryKey ?? [];
   const remap = component.remap?.keyValue ?? {};
-  const matchValues: string[] = [];
-  for (const selector of [primary, ...secondary]) {
+  const primaryValue = values[primary];
+  if (primaryValue === undefined || primaryValue === "") {
+    throw new EngineError(
+      `columnFormIPM "${component.id}" needs a value for selector "${primary}"`,
+      "MISSING_INPUT",
+      { componentId: component.id, selectorId: primary }
+    );
+  }
+  // Secondary selectors that are hidden for the current choice are absent from
+  // the live component tree, so only non-empty values take part in matching.
+  const matchValues: string[] = [remap[primaryValue] ?? primaryValue];
+  for (const selector of secondary) {
     const selected = values[selector];
-    if (selected === undefined || selected === "") {
-      throw new EngineError(
-        `columnFormIPM "${component.id}" needs a value for selector "${selector}"`,
-        "MISSING_INPUT",
-        { componentId: component.id, selectorId: selector }
-      );
-    }
+    if (selected === undefined || selected === "") continue;
     matchValues.push(remap[selected] ?? selected);
   }
 
@@ -321,27 +359,83 @@ export function evaluateColumnForm(
     );
   }
 
+  const valuesForPatterns = { ...values, ...data.selectors };
+  if (valuesForPatterns["TermType"] === "Database Savings Plans") {
+    throw new EngineError(
+      `columnFormIPM "${component.id}" needs Database Savings Plans pricing, ` +
+        `which is not implemented yet`,
+      "UNSUPPORTED_INPUT",
+      { componentId: component.id, feature: "Database Savings Plans" }
+    );
+  }
   const pricingTypes = component.pricingUnitModel?.riPricingTypes ?? { hourly: "*" };
   const prices: Record<string, number> = {};
-  for (const [type, pattern] of Object.entries(pricingTypes)) {
-    if (Array.isArray(pattern)) {
-      throw new EngineError(
-        `columnFormIPM "${component.id}" uses tiered PLC_2.0 pricing (${type}), ` +
-          `which is not implemented yet`,
-        "UNSUPPORTED_INPUT",
-        { componentId: component.id, pricingType: type }
-      );
+  let matchedTypes = 0;
+  const recordFields = record as unknown as Record<string, unknown>;
+  for (const [type, patterns] of Object.entries(pricingTypes)) {
+    if (!Array.isArray(patterns)) {
+      const rawPrice = recordFields[type];
+      const price = rawPrice === undefined ? Number(record.price) : Number(rawPrice);
+      if (!Number.isFinite(price)) {
+        throw new EngineError(
+          `PLC_2.0 price record "${meters[0]}" has no numeric "${type}" price`,
+          "BAD_PRICE",
+          { componentId: component.id, meter: meters[0], pricingType: type }
+        );
+      }
+      prices[type] = price;
+      matchedTypes += 1;
+      continue;
     }
-    const rawPrice = (record as unknown as Record<string, unknown>)[type];
-    const price = rawPrice === undefined ? Number(record.price) : Number(rawPrice);
-    if (!Number.isFinite(price)) {
-      throw new EngineError(
-        `PLC_2.0 price record "${meters[0]}" has no numeric "${type}" price`,
-        "BAD_PRICE",
-        { componentId: component.id, meter: meters[0], pricingType: type }
-      );
+    // The live engine picks the first selector pattern that matches the price
+    // record and reads the pattern's price field (default "price"). Types with
+    // no matching pattern (for example upfront on an On-Demand row) stay 0.
+    const price = priceForPatterns(patterns, recordFields);
+    if (price === undefined) {
+      prices[type] = 0;
+      continue;
     }
     prices[type] = price;
+    matchedTypes += 1;
+  }
+  if (matchedTypes === 0) {
+    throw new EngineError(
+      `no PLC_2.0 pricing pattern matches the selected configuration for ` +
+        `"${component.id}"`,
+      "MISSING_PRICE",
+      { componentId: component.id, selected: valuesForPatterns }
+    );
+  }
+
+  const extraValues: Record<string, number | string> = {};
+  if (component.disableCalculation) {
+    // The live form computes no subtotal here; it exposes the raw pricing
+    // types (for example an hourly rate) for the surrounding maths.
+    for (const [type, id] of Object.entries(component.calculationId ?? {})) {
+      if (prices[type] !== undefined) extraValues[id] = prices[type];
+    }
+    for (const row of selectableRows) {
+      if (!row.exportValueAs) continue;
+      const value = values[row.selectorId] ?? "";
+      if (value === "") continue;
+      extraValues[row.exportValueAs] = row.exportValueAs === "count" || row.type === "textInput"
+        ? Number(value)
+        : value;
+    }
+    const savedRows: Array<Record<string, { value: string }>> = [];
+    const rowMap: Record<string, { value: string }> = {};
+    for (const row of selectableRows) {
+      const value = values[row.selectorId] ?? "";
+      if (value === "") continue;
+      rowMap[row.selectorId] = { value };
+    }
+    savedRows.push(rowMap);
+    return {
+      monthly: 0,
+      saved: { value: savedRows },
+      configSummary: columnFormSummary(values, component.row),
+      extraValues,
+    };
   }
 
   const countRow = component.row.find((row) => row.exportValueAs === "count");
@@ -372,24 +466,30 @@ export function evaluateColumnForm(
   }
   monthly = Number(monthly.toFixed(4));
 
-  const extraValues: Record<string, number | string> = {};
+  const utilizationRow = component.row.find((row) => row.type === "utilization");
+  if (utilizationRow?.exportValueAs) extraValues[utilizationRow.exportValueAs] = HOURS_IN_MONTH;
   for (const [type, id] of Object.entries(component.calculationId ?? {})) {
     if (type === "monthly") extraValues[id] = monthly;
     else if (type === "hourly" && hourlyPrice !== undefined) extraValues[id] = hourlyPrice;
     else if (type === "upfront") extraValues[id] = 0;
   }
-  for (const row of component.row) {
+  for (const row of selectableRows) {
     if (!row.exportValueAs) continue;
     const value = values[row.selectorId] ?? "";
+    if (value === "") continue;
     extraValues[row.exportValueAs] = row.exportValueAs === "count" || row.type === "textInput"
       ? Number(value)
       : value;
   }
 
+  // Hidden selectors are absent from the live component tree and therefore
+  // from its saved rows and summary.
   const savedRows: Array<Record<string, { value: string }>> = [];
   const rowMap: Record<string, { value: string }> = {};
-  for (const row of component.row) {
-    rowMap[row.selectorId] = { value: values[row.selectorId] ?? "" };
+  for (const row of selectableRows) {
+    const value = values[row.selectorId] ?? "";
+    if (value === "") continue;
+    rowMap[row.selectorId] = { value };
   }
   savedRows.push(rowMap);
 
@@ -417,6 +517,7 @@ export function columnFormSummary(
   const strategy: string[] = [];
   const parts: string[] = [];
   for (const [selectorId, value] of Object.entries(values)) {
+    if (value === "") continue;
     const definition = bySelector.get(selectorId);
     const label = definition?.label ?? selectorId;
     const display = definition?.displayInConfigSummary;

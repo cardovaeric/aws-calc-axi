@@ -258,6 +258,7 @@ function evaluatePricingComponent(
     case "concatenate": {
       const operands = (component["operands"] as Array<Record<string, unknown>> | undefined) ?? [];
       const parts = operands.map((operand) => {
+        if (typeof operand["constant"] === "string") return String(operand["constant"]);
         const id = String(operand["variableId"] ?? "");
         const value = runtime.values.get(id);
         if (value === undefined || value === null || value === "") {
@@ -269,7 +270,7 @@ function evaluatePricingComponent(
         }
         return String(value);
       });
-      runtime.values.set(component.id, parts.join(" "));
+      runtime.values.set(component.id, parts.join(""));
       return;
     }
     case "pricingComboV2": {

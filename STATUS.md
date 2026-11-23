@@ -88,6 +88,8 @@ P2 receipt: `receipts/p2-groups-support.json`.
 
 ## Next three actions
 
+See `NEXT_SESSION.md` for the ready-to-paste handoff prompt.
+
 1. Next session: publish receipts for the four native fixtures (X-Ray, CloudFormation,
    EventBridge, Athena), add their ledger rows, and confirm each rendered total.
 2. Implement non-empty `dataTransferV2` pricing (the biggest generic gap), then add S3 data

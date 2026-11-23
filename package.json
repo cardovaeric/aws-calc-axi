@@ -28,5 +28,10 @@
     "eslint": "^9.39.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.47.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cardovaeric/aws-calc-axi.git"
+  },
+  "homepage": "https://github.com/cardovaeric/aws-calc-axi#readme"
 }

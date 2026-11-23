@@ -25,15 +25,19 @@ components fail closed).
 ## Get the CLI
 
 The skill ships with the CLI in one repository, but installing the skill does not install the
-binary. Pick one:
+binary. Clone the repository once and link it:
 
 ```sh
-npm i -g github:cardovaeric/aws-calc-axi    # global `aws-calc-axi`
-npx -y github:cardovaeric/aws-calc-axi      # per call, no global install
+git clone https://github.com/cardovaeric/aws-calc-axi.git
+cd aws-calc-axi
+npm install
+npm link
+aws-calc-axi --version
 ```
 
-If you have the repository checked out, `npm install && npm link` works too, or run
-`node bin/aws-calc-axi.js` directly.
+Node 24+ is required, and the CLI must run from that checkout: it executes the TypeScript
+sources directly, which Node does not allow for files under `node_modules`. If the link is
+undesirable, call `node <checkout>/bin/aws-calc-axi.js` instead.
 
 ## Discover
 

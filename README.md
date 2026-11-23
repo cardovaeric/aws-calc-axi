@@ -20,26 +20,27 @@ See `PLAN.md` for the locked plan, `analysis/FINDINGS.md` for the live-site evid
 ## Install the CLI
 
 ```sh
-# from this repository (recommended for development)
+git clone https://github.com/cardovaeric/aws-calc-axi.git
+cd aws-calc-axi
 npm install
 npm link                 # puts `aws-calc-axi` on your PATH
-
-# or install straight from GitHub, no clone
-npm i -g github:cardovaeric/aws-calc-axi
+aws-calc-axi             # home view
 ```
 
-Both need Node 24+. Then run `aws-calc-axi` for the home view.
+Node 24+ is required. The CLI runs the TypeScript sources directly through Node's type
+stripping, so it must be run from a cloned checkout (Node refuses type stripping for packages
+installed under `node_modules`).
 
 ## Install as an agent skill
 
 ```sh
-npx skills add cardovaeric/aws-calc-axi
+npx skills add cardovaeric/aws-calc-axi --skill aws-calc-axi
 ```
 
 This installs `.agents/skills/aws-calc-axi/SKILL.md`, the agent-facing guide with the output
-contract, estimate format, publish and oracle rules, and the fail-closed behavior. The skill
-does not install the CLI itself; install it with one of the commands above (or use
-`npx -y github:cardovaeric/aws-calc-axi` per call). The skill is also usable without an install:
+contract, estimate format, publish and oracle rules, and the fail-closed behavior. It does not
+install the CLI; use the clone and `npm link` step above so the skill's commands resolve. The
+skill is also readable without installing:
 `npx skills use cardovaeric/aws-calc-axi@aws-calc-axi`.
 
 ## Check the repo

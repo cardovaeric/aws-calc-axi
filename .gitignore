@@ -1,0 +1,9 @@
+.lavish
+.session*
+
+# Large live-analysis captures. Findings and fixtures stay tracked.
+analysis/defs/
+analysis/*.har
+analysis/*.json
+analysis/*.tsv
+analysis/bundle.js

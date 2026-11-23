@@ -20,3 +20,8 @@ Keep this file for knowledge useful to almost every future agent session in this
 Do not repeat what the codebase already shows; point to the authoritative file or command instead.
 Prefer rewriting or pruning existing entries over appending new ones.
 When updating this file, preserve this bar for all agents and keep entries concise.
+
+## Project docs
+
+- `PLAN.md` - locked plan, architecture, coverage tiers, and accuracy gates for aws-calc-axi.
+- `analysis/FINDINGS.md` - live calculator.aws API, schema, and estimate contract evidence.

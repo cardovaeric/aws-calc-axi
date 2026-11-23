@@ -1,0 +1,96 @@
+{
+  "name": "My Estimate",
+  "services": {
+    "ec2Enhancement-0332ee2a-4744-46fa-8db5-c6fcdcbd7276": {
+      "calculationComponents": {
+        "tenancy": {
+          "value": "shared"
+        },
+        "selectedOS": {
+          "value": "linux"
+        },
+        "workloadSelection": {
+          "value": "consistent"
+        },
+        "storageType": {
+          "value": "Storage General Purpose gp3 GB Mo"
+        },
+        "dataTransferForEC2": {
+          "value": [
+            {
+              "entryType": "INBOUND",
+              "value": "",
+              "unit": "tb_month",
+              "fromRegion": ""
+            },
+            {
+              "entryType": "OUTBOUND",
+              "value": "",
+              "unit": "tb_month",
+              "toRegion": ""
+            },
+            {
+              "entryType": "INTRA_REGION",
+              "value": "",
+              "unit": "tb_month"
+            }
+          ]
+        },
+        "workload": {
+          "value": {
+            "workloadType": "consistent",
+            "data": "1"
+          }
+        },
+        "snapshotFrequency": {
+          "value": "0"
+        },
+        "detailedMonitoringCheckbox": {
+          "value": false
+        },
+        "ec2AdvancedPricingMetrics": {
+          "value": 1
+        },
+        "instanceType": {
+          "value": "t4g.nano"
+        },
+        "pricingStrategy": {
+          "value": {
+            "selectedOption": "compute-savings",
+            "term": "3 Year",
+            "upfrontPayment": "None",
+            "model": "computeSavings"
+          }
+        }
+      },
+      "serviceCode": "ec2Enhancement",
+      "region": "us-east-2",
+      "estimateFor": "template",
+      "version": "0.0.68",
+      "description": null,
+      "serviceCost": {
+        "monthly": 100,
+        "upfront": 0
+      },
+      "serviceName": "Amazon EC2",
+      "regionName": "US East (Ohio)",
+      "configSummary": "Tenancy (Shared Instances), Operating system (Linux), Workload (Consistent, Number of instances: 1), Advance EC2 instance (t4g.nano), Pricing strategy (Compute Savings Plans 3yr  No Upfront), Enable monitoring (disabled), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+    }
+  },
+  "groups": {},
+  "groupSubtotal": {
+    "monthly": 100,
+    "upfront": 0
+  },
+  "totalCost": {
+    "monthly": 100,
+    "upfront": 0
+  },
+  "support": {},
+  "metaData": {
+    "locale": "en_US",
+    "currency": "USD",
+    "createdOn": "2026-11-23T14:21:14.047Z",
+    "source": "calculator-platform"
+  }
+}

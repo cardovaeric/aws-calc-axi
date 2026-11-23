@@ -4,6 +4,9 @@ Updated: 2026-11-23 (session 2)
 
 ## What works now
 
+- Public repository: https://github.com/cardovaeric/aws-calc-axi (default branch `develop`).
+  Agents can install the guide with `npx skills add cardovaeric/aws-calc-axi --skill aws-calc-axi`;
+  the CLI itself installs from a clone with `npm install && npm link`.
 - TypeScript Node project with a real binary (`bin/aws-calc-axi.js`), native TS execution,
   `npm run typecheck`, `npm run lint`, `npm test`, `npm run e2e`, `npm run ledger`.
 - Fast version path: `--version`, `-v`, `-V` answer before the CLI graph loads.
@@ -114,9 +117,9 @@ comparison, the rendered DOM, the oracle, and the verdict.
 
 ## Last commit
 
-`8e6a89f` - session findings, decisions, and status.
-Previous: `ebb3f0a` data transfer pricing, `columnFormIPM`, and the P3 receipts; `d8f973c` next
-session handoff prompt.
+`e952b90` - skill install docs for the public repository.
+Previous: `691d2fa` skill install documentation, `f049bc3` agent skill and schema/pricing fixes,
+`8e6a89f` session findings, `ebb3f0a` data transfer pricing and `columnFormIPM`.
 
 ## Final summary
 

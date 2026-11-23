@@ -1,0 +1,116 @@
+{
+  "estimate": "axi-e2e S3 Data Transfer",
+  "specHash": "1d96c52fba600752",
+  "url": "https://calculator.aws/#/estimate?id=2ba8815d844b0c98d3c23d3df0e103b2b38ab662",
+  "savedKey": "2ba8815d844b0c98d3c23d3df0e103b2b38ab662",
+  "publishedAt": "2026-11-23T16:35:20.506Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 92.16,
+    "upfront": 0,
+    "total12m": 1105.92,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsS3DataTransfer",
+        "template": "awsS3DataTransfer",
+        "region": "us-east-2",
+        "monthly": 92.16,
+        "upfront": 0,
+        "summary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsS3DataTransfer",
+        "monthly": 92.16,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 92.16,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=2ba8815d844b0c98d3c23d3df0e103b2b38ab662",
+    "title": "axi-e2e S3 Data Transfer",
+    "monthly": "92.16 USD",
+    "upfront": "0.00 USD",
+    "annual": "1,105.92 USD",
+    "monthlyValue": 92.16,
+    "upfrontValue": 0,
+    "annualValue": 1105.92,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Data Transfer",
+        "upfront": "0.00 USD",
+        "monthly": "92.16 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T16:35:23.470Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=2ba8815d844b0c98d3c23d3df0e103b2b38ab662",
+    "savedKey": "2ba8815d844b0c98d3c23d3df0e103b2b38ab662",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=2ba8815d844b0c98d3c23d3df0e103b2b38ab662",
+      "title": "axi-e2e S3 Data Transfer",
+      "monthly": "92.16 USD",
+      "upfront": "0.00 USD",
+      "annual": "1,105.92 USD",
+      "monthlyValue": 92.16,
+      "upfrontValue": 0,
+      "annualValue": 1105.92,
+      "estimateDate": "Estimate date: November 23, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Data Transfer",
+          "upfront": "0.00 USD",
+          "monthly": "92.16 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-23T16:35:50.137Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e S3 Data Transfer",
+    "monthly": 92.16,
+    "upfront": 0,
+    "annual": 1105.92,
+    "services": [
+      {
+        "name": "Data Transfer",
+        "monthly": 92.16,
+        "region": "US East (Ohio)",
+        "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

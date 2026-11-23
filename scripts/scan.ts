@@ -24,6 +24,7 @@ const KNOWN = {
     "alert",
     "condition",
     "dataTransferV2",
+    "columnFormIPM",
   ]),
   pricing: new Set(["singlePricePoint", "tieredPricing", "pricingComboV2", "replace", "concatenate"]),
   maths: new Set(["basicMaths", "maxMin", "rounding", "tieredPricingMath", "variable", "conversionDisplay", "priceDisplay"]),

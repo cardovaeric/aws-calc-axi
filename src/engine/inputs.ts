@@ -1,5 +1,15 @@
 import { EngineError, InputValidationError, MissingInputError } from "./errors.ts";
 import { convertSize, convertTime, convertFrequency } from "./units.ts";
+import {
+  evaluateTransferRows,
+  normalizeRows,
+  toSavedRows,
+  transferSummary,
+  type TransferContext,
+} from "./data-transfer.ts";
+import type { PriceResolver } from "../data/pricing.ts";
+import type { ColumnFormPricingData } from "../data/column-form.ts";
+import { asColumnFormComponent, evaluateColumnForm } from "./column-form.ts";
 import type { Component } from "../data/definitions.ts";
 import type { CalculationComponentValue } from "../contract.ts";
 import type { EngineValue } from "./expression.ts";
@@ -8,6 +18,8 @@ export interface InputComponentResult {
   value: EngineValue;
   saved?: CalculationComponentValue;
   configSummary?: string;
+  /** Additional values other components reference (IPM calculation ids). */
+  extraValues?: Record<string, number | string>;
   /** False when the input carries no value (left empty), so nothing is saved. */
   present: boolean;
 }
@@ -141,6 +153,14 @@ interface InputContext {
   serviceCode: string;
   templateId: string;
   overrides: Record<string, unknown>;
+  regionName: string;
+  prices: PriceResolver;
+  /** Region code -> display name, including the calculator's virtual keys. */
+  regionNameByCode: Map<string, string>;
+  /** Region display name -> code. */
+  regionCodeByName: Map<string, string>;
+  /** Prefetched PLC_2.0 data for the template's columnFormIPM components. */
+  columnForms: Map<string, ColumnFormPricingData>;
 }
 
 /**
@@ -400,13 +420,12 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
       };
     }
 
-    case "dataTransferV2": {
-      const rows = normalizeTransferRows(override.value, component);
-      const billable = rows.some((row) => Number(row["value"]) > 0);
-      if (billable) {
+    case "columnFormIPM": {
+      const data = context.columnForms.get(component.id);
+      if (!data) {
         throw new EngineError(
-          `dataTransferV2 "${component.id}" has non-zero transfer rows; ` +
-            `data transfer pricing is not implemented yet (${context.serviceCode})`,
+          `columnFormIPM "${component.id}" has no prefetched PLC_2.0 data in ` +
+            `${context.serviceCode}/${context.templateId}`,
           "UNSUPPORTED_INPUT",
           {
             serviceCode: context.serviceCode,
@@ -416,11 +435,49 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
           }
         );
       }
+      const result = evaluateColumnForm(
+        asColumnFormComponent(component),
+        data,
+        override.value
+      );
       return {
-        value: 0,
+        value: result.monthly,
         present: true,
-        saved: { value: rows },
-        ...(displayInSummary ? { configSummary: transferSummary(rows) } : {}),
+        saved: result.saved,
+        ...(result.configSummary !== "" ? { configSummary: result.configSummary } : {}),
+        extraValues: result.extraValues,
+      };
+    }
+
+    case "dataTransferV2": {
+      const rows = normalizeRows(
+        override.value,
+        component["dataTransferTypes"]
+      );
+      const mapping = component["mappingDefinitionName"];
+      if (typeof mapping !== "string" || mapping === "") {
+        throw new EngineError(
+          `dataTransferV2 "${component.id}" has no mappingDefinitionName`,
+          "BAD_DEFINITION",
+          { componentId: component.id }
+        );
+      }
+      const transferContext: TransferContext = {
+        componentId: component.id,
+        regionName: context.regionName,
+        mapping,
+        prices: context.prices,
+        regionNameByCode: context.regionNameByCode,
+        regionCodeByName: context.regionCodeByName,
+      };
+      const evaluated = evaluateTransferRows(rows, transferContext);
+      return {
+        value: evaluated.monthly,
+        present: true,
+        saved: { value: toSavedRows(rows) },
+        ...(displayInSummary
+          ? { configSummary: transferSummary(rows, context.regionNameByCode) }
+          : {}),
       };
     }
 
@@ -440,52 +497,4 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
 
 function formatNumber(value: number): string {
   return String(Number(value.toFixed(6)));
-}
-
-const TRANSFER_TYPE_LABELS: Record<string, string> = {
-  INBOUND: "Inbound",
-  OUTBOUND: "Outbound",
-  INTRA_REGION: "Intra-Region",
-};
-
-/** Matches the live `DT <type>: <region|Not selected> (<value> <unit>)` summary. */
-function transferSummary(rows: Array<Record<string, unknown>>): string {
-  return rows
-    .map((row) => {
-      const entryType = String(row["entryType"] ?? "");
-      const typeLabel = TRANSFER_TYPE_LABELS[entryType] ?? entryType;
-      const regionValue =
-        entryType === "INBOUND" ? row["fromRegion"] : entryType === "OUTBOUND" ? row["toRegion"] : "";
-      const region = typeof regionValue === "string" && regionValue !== "" ? regionValue : "Not selected";
-      const value = row["value"] === "" || row["value"] === undefined ? 0 : row["value"];
-      return `DT ${typeLabel}: ${region} (${String(value)} ${String(row["unit"] ?? "gb")})`;
-    })
-    .join(", ");
-}
-
-function normalizeTransferRows(
-  raw: unknown,
-  component: Component
-): Array<Record<string, unknown>> {
-  if (Array.isArray(raw) && raw.length > 0) {
-    return raw.map((entry) => {
-      const record = (typeof entry === "object" && entry !== null ? entry : {}) as Record<string, unknown>;
-      const row: Record<string, unknown> = {
-        entryType: String(record["entryType"] ?? "OUTBOUND"),
-        value: record["value"] ?? "",
-        unit: String(record["unit"] ?? component["preferredUnit"] ?? "gb"),
-      };
-      if (row["entryType"] === "INBOUND") row["fromRegion"] = String(record["fromRegion"] ?? "");
-      if (row["entryType"] === "OUTBOUND") row["toRegion"] = String(record["toRegion"] ?? "");
-      return row;
-    });
-  }
-  const types = (component["dataTransferTypes"] as string[] | undefined) ?? ["INBOUND", "OUTBOUND"];
-  return types.map((entryType) => ({
-    entryType,
-    value: "",
-    unit: String(component["preferredUnit"] ?? "gb"),
-    ...(entryType === "INBOUND" ? { fromRegion: "" } : {}),
-    ...(entryType === "OUTBOUND" ? { toRegion: "" } : {}),
-  }));
 }

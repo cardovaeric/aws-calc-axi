@@ -1,0 +1,10 @@
+name: axi-e2e DAX
+currency: USD
+locale: en_US
+services:
+  - code: amazonDynamoDbDaxClusters
+    region: us-east-2
+    set:
+      columnFormIPM:
+        - Number of nodes: 3
+          Instance Type: r5.large

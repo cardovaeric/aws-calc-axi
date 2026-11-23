@@ -7,6 +7,7 @@ import type { Catalog } from "../data/catalog.ts";
 import type { Cost } from "../contract.ts";
 import { costOf, costMonthly, sumCosts, toCents } from "../contract.ts";
 import { evaluateTemplate } from "./template.ts";
+import { prepareColumnForms } from "./column-form-loader.ts";
 import { EngineError } from "./errors.ts";
 import type { EvaluatedService } from "./types.ts";
 
@@ -36,9 +37,16 @@ export function isSelectorDefinition(definition: ServiceDefinition): boolean {
   return definition.subType === "subServiceSelector";
 }
 
-async function regionNameFor(regionCode: string, cache?: CacheOptions): Promise<string> {
+interface RegionLookup {
+  name: string;
+  nameByCode: Map<string, string>;
+  codeByName: Map<string, string>;
+}
+
+async function regionLookup(regionCode: string, cache?: CacheOptions): Promise<RegionLookup> {
   const locations = await loadLocations(cache ?? {});
-  const record = Object.values(locations).find((entry) => entry.code === regionCode);
+  const records = Object.values(locations);
+  const record = records.find((entry) => entry.code === regionCode);
   if (!record) {
     throw new EngineError(
       `unknown region "${regionCode}"; run \`aws-calc-axi services --all\` for valid regions`,
@@ -46,7 +54,9 @@ async function regionNameFor(regionCode: string, cache?: CacheOptions): Promise<
       { region: regionCode }
     );
   }
-  return record.name;
+  const nameByCode = new Map(records.map((entry) => [entry.code, entry.name]));
+  const codeByName = new Map(records.map((entry) => [entry.name, entry.code]));
+  return { name: record.name, nameByCode, codeByName };
 }
 
 function serviceNameFor(spec: ServiceSpec, definition: ServiceDefinition, catalog?: Catalog): string {
@@ -56,9 +66,10 @@ function serviceNameFor(spec: ServiceSpec, definition: ServiceDefinition, catalo
 
 async function evaluateSimpleService(
   spec: ServiceSpec,
-  regionName: string,
+  regions: RegionLookup,
   options: ServiceEvaluationOptions
 ): Promise<EvaluatedService> {
+  const regionName = regions.name;
   const definition = await loadDefinition(spec.code, options.cache ?? {});
   const template = templateById(definition, spec.template);
   if (!template) {
@@ -73,8 +84,12 @@ async function evaluateSimpleService(
     );
   }
 
+  // PLC_2.0 mappings are selector trees loaded per columnFormIPM component.
+  const flatMappings = (definition.mappingDefinitions ?? []).filter(
+    (mapping) => mapping.mappingDefinitionVersion !== "PLC_2.0"
+  );
   const { mappings } = await loadServiceMappings(
-    definition.mappingDefinitions ?? [],
+    flatMappings,
     options.currency ?? CURRENCY,
     options.cache ?? {}
   );
@@ -90,13 +105,25 @@ async function evaluateSimpleService(
     ),
   });
 
+  const overrides = spec.set ?? {};
+  const columnForms = await prepareColumnForms({
+    definition,
+    template,
+    overrides,
+    regionName,
+    ...(options.currency ? { currency: options.currency } : {}),
+    ...(options.cache ? { cache: options.cache } : {}),
+  });
   const evaluated = evaluateTemplate({
     definition,
     template,
     regionCode: spec.region,
     regionName,
     prices,
-    overrides: spec.set ?? {},
+    overrides,
+    regionNameByCode: regions.nameByCode,
+    regionCodeByName: regions.codeByName,
+    columnForms,
   });
 
   return {
@@ -121,7 +148,8 @@ export async function evaluateService(
   options: ServiceEvaluationOptions = {}
 ): Promise<EvaluatedService> {
   const definition = await loadDefinition(spec.code, options.cache ?? {});
-  const regionName = await regionNameFor(spec.region, options.cache);
+  const regions = await regionLookup(spec.region, options.cache);
+  const regionName = regions.name;
 
   if (!isSelectorDefinition(definition)) {
     if (spec.subServices && spec.subServices.length > 0) {
@@ -131,7 +159,7 @@ export async function evaluateService(
         { serviceCode: spec.code }
       );
     }
-    return evaluateSimpleService(spec, regionName, options);
+    return evaluateSimpleService(spec, regions, options);
   }
 
   const requested = spec.subServices;
@@ -157,7 +185,7 @@ export async function evaluateService(
           ...(child.template ? { template: child.template } : {}),
           set: child.set ?? {},
         },
-        regionName,
+        regions,
         options
       )
     )

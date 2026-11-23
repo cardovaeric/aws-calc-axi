@@ -6,6 +6,12 @@ export interface PriceRecord {
   price: string;
   rateCode?: string;
   RegionlessRateCode?: string;
+  /** Tiered data transfer meters carry an explicit range in GB. */
+  StartingRange?: string;
+  EndingRange?: string;
+  /** Data transfer meters name their source or destination location. */
+  "To Location"?: string;
+  "From Location"?: string;
 }
 
 export interface PricingFile {
@@ -100,6 +106,8 @@ export interface PriceResolver {
   has(mappingDefinitionName: string, meteredUnit: string): boolean;
   /** Raw price record, for definitions that read a non-price field. */
   record(mappingDefinitionName: string, meteredUnit: string): PriceRecord | undefined;
+  /** Every meter in this region, for definition-driven pricing pipelines. */
+  meters(mappingDefinitionName: string): Record<string, PriceRecord> | undefined;
   regionName: string;
   currency: string;
 }
@@ -139,6 +147,16 @@ export function createPriceResolver(context: PriceContext): PriceResolver {
     },
     record(mappingDefinitionName, meteredUnit) {
       return lookup(mappingDefinitionName, meteredUnit);
+    },
+    meters(mappingDefinitionName) {
+      const file = context.mappings.get(mappingDefinitionName);
+      if (!file) {
+        throw new Error(
+          `pricing mapping "${mappingDefinitionName}" was not loaded; ` +
+            `add it to the definition's mappingDefinitions`
+        );
+      }
+      return file.regions[context.regionName];
     },
   };
 }

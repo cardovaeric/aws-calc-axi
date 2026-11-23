@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import type { ServiceDefinition } from "../src/data/definitions.ts";
 import { evaluateTemplate } from "../src/engine/template.ts";
-import { s3Resolver, fixture } from "./helpers.ts";
+import { regionMaps, s3Resolver, fixture } from "./helpers.ts";
 
 const definition = fixture<ServiceDefinition>("s3-standard.definition.json");
 
@@ -16,6 +16,8 @@ function evaluate(set: Record<string, unknown>) {
     regionName: "US East (Ohio)",
     prices: s3Resolver(),
     overrides: set,
+    ...regionMaps(),
+    columnForms: new Map(),
   });
 }
 

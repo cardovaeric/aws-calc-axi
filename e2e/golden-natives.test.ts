@@ -28,6 +28,17 @@ const CASES = [
     summaryIncludes: "Number of custom events (10 million per month)",
   },
   {
+    spec: "examples/dax.yaml",
+    monthly: 558.45,
+    summary: "DAX nodes (3), DAX instance type (r5.large)",
+  },
+  {
+    spec: "examples/s3-data-transfer.yaml",
+    monthly: 92.16,
+    summary:
+      "DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month)",
+  },
+  {
     spec: "examples/athena.yaml",
     monthly: 14.85,
     summary: "Total number of queries (100 per day), Amount of data scanned per query (1 GB), Number of DPUs (4)",

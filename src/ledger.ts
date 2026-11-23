@@ -18,7 +18,11 @@ export interface LedgerEntry {
   /** Total the banner should show: services + support. */
   expectedRenderedMonthlyCents?: number;
   path: "native" | "bridge" | "unsupported";
-  oracle: "probe" | "none";
+  /**
+   * `probe` is a second public link recomputed by the share page;
+   * `editor` is the published link recomputed by the calculator editor.
+   */
+  oracle: "probe" | "editor" | "none";
   notes?: string;
 }
 
@@ -86,7 +90,87 @@ export const LEDGER: LedgerEntry[] = [
     expectedMonthlyCents: 40,
     path: "native",
     oracle: "probe",
-    notes: "hashed metered unit labels; empty dataTransferV2 renders DT Inbound/Outbound lines",
+    notes:
+      "hashed metered unit labels; untouched dataTransferV2 rows render DT Inbound/Outbound lines",
+  },
+  {
+    id: "xray-requests-use2",
+    service: "awsXRay",
+    template: "template_0",
+    region: "us-east-2",
+    fixture: "10M requests per month, default sampling, no Insights",
+    specPath: "examples/xray.yaml",
+    receiptPath: "receipts/p3-xray.json",
+    expectedMonthlyCents: 5000,
+    path: "native",
+    oracle: "probe",
+    notes: "P3 fixture promoted to a render receipt; single flat per-request rate",
+  },
+  {
+    id: "cloudformation-extensions-use2",
+    service: "awsCloudFormation",
+    template: "CloudFormation",
+    region: "us-east-2",
+    fixture: "100 extensions, 1000 operations per day, 30 seconds each",
+    specPath: "examples/cloudformation.yaml",
+    receiptPath: "receipts/p3-cloudformation.json",
+    expectedMonthlyCents: 273660,
+    path: "native",
+    oracle: "probe",
+    notes: "P3 fixture promoted to a render receipt; frequency and duration conversion",
+  },
+  {
+    id: "eventbridge-custom-events-use2",
+    service: "amazonEventBridge",
+    template: "template_0",
+    region: "us-east-2",
+    fixture: "10M custom events per month, 1 KB payload, same-account events",
+    specPath: "examples/eventbridge.yaml",
+    receiptPath: "receipts/p3-eventbridge.json",
+    expectedMonthlyCents: 1000,
+    path: "native",
+    oracle: "probe",
+    notes: "P3 fixture promoted to a render receipt; payload size drives the metered unit",
+  },
+  {
+    id: "athena-queries-use2",
+    service: "amazonAthena",
+    template: "Athena",
+    region: "us-east-2",
+    fixture: "100 queries per day, 1 GB scanned, 4 DPUs",
+    specPath: "examples/athena.yaml",
+    receiptPath: "receipts/p3-athena.json",
+    expectedMonthlyCents: 1485,
+    path: "native",
+    oracle: "probe",
+    notes: "P3 fixture promoted to a render receipt; per-query day-to-month conversion",
+  },
+  {
+    id: "s3-outbound-transfer-1tb-use2",
+    service: "awsS3DataTransfer",
+    template: "awsS3DataTransfer",
+    region: "us-east-2",
+    fixture: "1 TB/month outbound to the internet",
+    specPath: "examples/s3-data-transfer.yaml",
+    receiptPath: "receipts/p3-s3-data-transfer.json",
+    expectedMonthlyCents: 9216,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "non-empty dataTransferV2; the read-only probe drops these rows, so the editor recompute is the oracle",
+  },
+  {
+    id: "dax-nodes-use2",
+    service: "amazonDynamoDbDaxClusters",
+    template: "dynamoDBDaxNodes",
+    region: "us-east-2",
+    fixture: "3 r5.large DAX nodes, hourly pricing",
+    specPath: "examples/dax.yaml",
+    receiptPath: "receipts/p3-dax.json",
+    expectedMonthlyCents: 55845,
+    path: "native",
+    oracle: "probe",
+    notes: "first columnFormIPM row; PLC_2.0 metadata, aggregations, and index price path",
   },
   {
     id: "groups-support-business-use2",
@@ -125,9 +209,12 @@ export function formatCoverage(
     "One row per service, template, region, and fixture. `pass` means the public page was opened and"
   );
   lines.push(
-    "the rendered DOM matched the native result, and the recompute probe (source not the calculator)"
+    "the rendered DOM matched the native result. The `Oracle` column records the live"
   );
-  lines.push("recomputed the same totals from the stored components.");
+  lines.push(
+    "recomputation: a recompute probe (source not the calculator) or, for rows the read-only probe"
+  );
+  lines.push("drops, the editor recomputation behind `Update estimate` (`oracle: editor`).");
   lines.push("");
   lines.push("| Service | Template | Region | Fixture | Path | Native | Rendered | Oracle | Status | Link |");
   lines.push("| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |");

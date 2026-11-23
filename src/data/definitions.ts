@@ -32,6 +32,8 @@ export interface MappingDefinition {
   mappingDefinitionName: string;
   mappingDefinitionURL: string;
   includeRegions?: boolean;
+  /** PLC_2.0 mappings are selector trees, not flat metered unit maps. */
+  mappingDefinitionVersion?: string;
 }
 
 export interface ServiceDefinition {

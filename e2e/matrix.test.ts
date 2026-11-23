@@ -60,6 +60,7 @@ for (const entry of LEDGER) {
     assert.deepEqual(mismatches, [], "public page still renders the native estimate");
 
     if (entry.oracle === "probe") {
+      assert.equal(receipt.oracle?.kind ?? "probe", "probe", "receipt stores a recompute probe");
       assert.ok(receipt.oracle?.url, "receipt stores a recompute probe URL");
       const recomputed = readRenderedEstimate(receipt.oracle.url, {
         session: SESSION,
@@ -67,6 +68,21 @@ for (const entry of LEDGER) {
       });
       const oracleMismatches = diffRendered(recomputed, expectationFrom(built.result, spec));
       assert.deepEqual(oracleMismatches, [], "live UI recomputation matches the native estimate");
+    }
+    if (entry.oracle === "editor") {
+      assert.equal(receipt.oracle?.kind, "editor-recompute", "receipt stores an editor recompute");
+      assert.ok(receipt.oracle?.url, "receipt stores the editor recompute URL");
+      const recomputed = readRenderedEstimate(receipt.oracle.url, {
+        session: SESSION,
+        waitText: stored.name,
+        recompute: true,
+      });
+      // Editor summaries can lag the UI string table; costs are the signal.
+      const oracleMismatches = diffRendered(
+        recomputed,
+        expectationFrom(built.result, { ...spec, name: stored.name }, false)
+      );
+      assert.deepEqual(oracleMismatches, [], "live editor recomputation matches the native estimate");
     }
   });
 }

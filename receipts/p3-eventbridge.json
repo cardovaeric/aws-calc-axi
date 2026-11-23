@@ -1,0 +1,115 @@
+{
+  "estimate": "axi-e2e EventBridge",
+  "specHash": "8ed2cdadec75582a",
+  "url": "https://calculator.aws/#/estimate?id=170ba0aa4c1ce7f6c1329ab52dfca32faa615902",
+  "savedKey": "170ba0aa4c1ce7f6c1329ab52dfca32faa615902",
+  "publishedAt": "2026-11-23T16:22:59.053Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 10,
+    "upfront": 0,
+    "total12m": 120,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonEventBridge",
+        "template": "template_0",
+        "region": "us-east-2",
+        "monthly": 10,
+        "upfront": 0,
+        "summary": "Size of the payload (1 KB), Number of AWS management events (0 million per month), Number of AWS opt-in data events (0 million per month), Number of custom events (10 million per month), Number of partner events (0 million per month), Number of events delivered to another event bus (0 million per month), Number of events delivered to a service in the same account (10 million per month), Number of events delivered to a service in a different account (0 million per month), Number of invocations (0 million per month), Number of events (0 million per month), Number of replayed events (0 million per month), Number of requests (0 million per month), Number of events (0 million per month), Number of invocations (0 million per month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonEventBridge",
+        "monthly": 10,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 10,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=170ba0aa4c1ce7f6c1329ab52dfca32faa615902",
+    "title": "axi-e2e EventBridge",
+    "monthly": "10.00 USD",
+    "upfront": "0.00 USD",
+    "annual": "120.00 USD",
+    "monthlyValue": 10,
+    "upfrontValue": 0,
+    "annualValue": 120,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon EventBridge",
+        "upfront": "0.00 USD",
+        "monthly": "10.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Size of the payload (1 KB), Number of AWS management events (0 million per month), Number of AWS opt-in data events (0 million per month), Number of custom events (10 million per month), Number of partner events (0 million per month), Number of events delivered to another event bus (0 million per month), Number of events delivered to a service in the same account (10 million per month), Number of events delivered to a service in a different account (0 million per month), Number of invocations (0 million per month), Number of events (0 million per month), Number of replayed events (0 million per month), Number of requests (0 million per month), Number of events (0 million per month), Number of invocations (0 million per month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T16:23:02.697Z"
+  },
+  "oracle": {
+    "url": "https://calculator.aws/#/estimate?id=9d2b769e3692b4827f824317e480e0209670c61a",
+    "savedKey": "9d2b769e3692b4827f824317e480e0209670c61a",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=9d2b769e3692b4827f824317e480e0209670c61a",
+      "title": "axi-e2e EventBridge",
+      "monthly": "10.00 USD",
+      "upfront": "0.00 USD",
+      "annual": "120.00 USD",
+      "monthlyValue": 10,
+      "upfrontValue": 0,
+      "annualValue": 120,
+      "estimateDate": "Estimate date: November 23, 2026",
+      "banner": "last updated on November 23, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "Amazon EventBridge",
+          "upfront": "0.00 USD",
+          "monthly": "10.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Size of the payload (1 KB), Number of AWS management events (0 million per month), Number of AWS opt-in data events (0 million per month), Number of custom events (10 million per month), Number of partner events (0 million per month), Number of events delivered to another event bus (0 million per month), Number of events delivered to a service in the same account (10 million per month), Number of events delivered to a service in a different account (0 million per month), Number of invocations (0 million per month), Number of events (0 million per month), Number of replayed events (0 million per month), Number of requests (0 million per month), Number of events (0 million per month), Number of invocations (0 million per month)",
+          "status": null
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-23T16:23:05.467Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e EventBridge",
+    "monthly": 10,
+    "upfront": 0,
+    "annual": 120,
+    "services": [
+      {
+        "name": "Amazon EventBridge",
+        "monthly": 10,
+        "region": "US East (Ohio)",
+        "configSummary": "Size of the payload (1 KB), Number of AWS management events (0 million per month), Number of AWS opt-in data events (0 million per month), Number of custom events (10 million per month), Number of partner events (0 million per month), Number of events delivered to another event bus (0 million per month), Number of events delivered to a service in the same account (10 million per month), Number of events delivered to a service in a different account (0 million per month), Number of invocations (0 million per month), Number of events (0 million per month), Number of replayed events (0 million per month), Number of requests (0 million per month), Number of events (0 million per month), Number of invocations (0 million per month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

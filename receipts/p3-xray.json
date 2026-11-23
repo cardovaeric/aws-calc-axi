@@ -1,0 +1,115 @@
+{
+  "estimate": "axi-e2e X-Ray",
+  "specHash": "3b07387909f2d039",
+  "url": "https://calculator.aws/#/estimate?id=c0c9753c81e715c286d4cb487d6853830c861818",
+  "savedKey": "c0c9753c81e715c286d4cb487d6853830c861818",
+  "publishedAt": "2026-11-23T16:22:32.414Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 50,
+    "upfront": 0,
+    "total12m": 600,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsXRay",
+        "template": "template_0",
+        "region": "us-east-2",
+        "monthly": 50,
+        "upfront": 0,
+        "summary": "Number of requests per month (10000000), Sampling rate (1), Add X-Ray Insights (No)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsXRay",
+        "monthly": 50,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 50,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=c0c9753c81e715c286d4cb487d6853830c861818",
+    "title": "axi-e2e X-Ray",
+    "monthly": "50.00 USD",
+    "upfront": "0.00 USD",
+    "annual": "600.00 USD",
+    "monthlyValue": 50,
+    "upfrontValue": 0,
+    "annualValue": 600,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS X-Ray",
+        "upfront": "0.00 USD",
+        "monthly": "50.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of requests per month (10000000), Sampling rate (1), Add X-Ray Insights (No)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T16:22:39.214Z"
+  },
+  "oracle": {
+    "url": "https://calculator.aws/#/estimate?id=fa8e6e2ad6e255637d78c51f79fbc3eabd706987",
+    "savedKey": "fa8e6e2ad6e255637d78c51f79fbc3eabd706987",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=fa8e6e2ad6e255637d78c51f79fbc3eabd706987",
+      "title": "axi-e2e X-Ray",
+      "monthly": "50.00 USD",
+      "upfront": "0.00 USD",
+      "annual": "600.00 USD",
+      "monthlyValue": 50,
+      "upfrontValue": 0,
+      "annualValue": 600,
+      "estimateDate": "Estimate date: November 23, 2026",
+      "banner": "last updated on November 23, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "AWS X-Ray",
+          "upfront": "0.00 USD",
+          "monthly": "50.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of requests per month (10000000), Sampling rate (1), Add X-Ray Insights (No)",
+          "status": null
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-23T16:22:41.925Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e X-Ray",
+    "monthly": 50,
+    "upfront": 0,
+    "annual": 600,
+    "services": [
+      {
+        "name": "AWS X-Ray",
+        "monthly": 50,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of requests per month (10000000), Sampling rate (1), Add X-Ray Insights (No)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

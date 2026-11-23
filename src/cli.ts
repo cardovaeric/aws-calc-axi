@@ -70,6 +70,10 @@ const applyFlags: FlagSpecs = {
   "--screenshot": { type: "string", description: "save a PNG of the rendered page" },
   "--session": { type: "string", description: "agent-browser session name" },
   "--oracle": { type: "boolean", description: "diff the live UI recomputation too" },
+  "--oracle-editor": {
+    type: "boolean",
+    description: "diff the live editor recomputation (for dataTransferV2 rows)",
+  },
   "--force-publish": { type: "boolean", description: "create new links ignoring a receipt" },
 };
 
@@ -172,6 +176,7 @@ async function applyCommand(
     screenshotPath: stringFlag(args.flags, "screenshot"),
     session: stringFlag(args.flags, "session"),
     oracle: args.flags["oracle"] === true,
+    oracleEditor: args.flags["oracle-editor"] === true,
     forcePublish: args.flags["force-publish"] === true,
     flags: args.flags,
   });

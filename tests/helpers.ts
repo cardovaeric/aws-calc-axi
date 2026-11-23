@@ -23,3 +23,19 @@ export function resolverFor(
 export function s3Resolver(regionName = "US East (Ohio)"): PriceResolver {
   return resolverFor({ "s3-standard": fixture<PricingFile>("s3-standard.pricing.json") }, regionName);
 }
+
+/** Region maps the engine uses for data transfer labels and lookups. */
+export function regionMaps(): {
+  regionNameByCode: Map<string, string>;
+  regionCodeByName: Map<string, string>;
+} {
+  const pairs: Array<[string, string]> = [
+    ["us-east-1", "US East (N. Virginia)"],
+    ["us-east-2", "US East (Ohio)"],
+    ["us-west-2", "US West (Oregon)"],
+  ];
+  return {
+    regionNameByCode: new Map(pairs),
+    regionCodeByName: new Map(pairs.map(([code, name]) => [name, code])),
+  };
+}

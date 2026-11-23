@@ -7,6 +7,7 @@ import {
   type Template,
 } from "../data/definitions.ts";
 import { MissingPriceError, type PriceResolver } from "../data/pricing.ts";
+import type { ColumnFormPricingData } from "../data/column-form.ts";
 import type { CalculationComponents } from "../contract.ts";
 import { toCents } from "../contract.ts";
 import { evaluateDisplayIf, type ExprContext, type Operand } from "./expression.ts";
@@ -30,6 +31,12 @@ export interface TemplateContext {
   regionName: string;
   prices: PriceResolver;
   overrides: Record<string, unknown>;
+  /** Region code -> display name, including the calculator's virtual keys. */
+  regionNameByCode: Map<string, string>;
+  /** Region display name -> code. */
+  regionCodeByName: Map<string, string>;
+  /** Prefetched PLC_2.0 data for the template's columnFormIPM components. */
+  columnForms: Map<string, ColumnFormPricingData>;
 }
 
 interface Runtime {
@@ -164,8 +171,16 @@ function evaluateComponent(
       serviceCode: definition.serviceCode,
       templateId: template.id,
       overrides: context.overrides,
+      regionName: context.regionName,
+      prices: context.prices,
+      regionNameByCode: context.regionNameByCode,
+      regionCodeByName: context.regionCodeByName,
+      columnForms: context.columnForms,
     });
     runtime.values.set(component.id, result.value);
+    for (const [id, value] of Object.entries(result.extraValues ?? {})) {
+      runtime.values.set(id, value);
+    }
     if (result.saved) runtime.saved[component.id] = result.saved;
     if (result.configSummary) runtime.summary.push(result.configSummary);
     return;

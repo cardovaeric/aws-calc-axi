@@ -1,9 +1,9 @@
 {
   "estimate": "axi-e2e SQS",
   "specHash": "a8cc4640434e91af",
-  "url": "https://calculator.aws/#/estimate?id=1efbacfa9865d0bc674eb0bc0e78e6e5494e77c5",
-  "savedKey": "1efbacfa9865d0bc674eb0bc0e78e6e5494e77c5",
-  "publishedAt": "2026-11-23T15:52:48.427Z",
+  "url": "https://calculator.aws/#/estimate?id=387fceb09cc417abb281cac930295a55b1377a3e",
+  "savedKey": "387fceb09cc417abb281cac930295a55b1377a3e",
+  "publishedAt": "2026-11-23T16:36:09.826Z",
   "expires": "2027-11-23",
   "native": {
     "monthly": 0.4,
@@ -17,7 +17,7 @@
         "region": "us-east-2",
         "monthly": 0.4,
         "upfront": 0,
-        "summary": "Standard queue requests (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)"
+        "summary": "Standard queue requests (1 million per month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month)"
       }
     ]
   },
@@ -35,8 +35,8 @@
     }
   },
   "rendered": {
-    "url": "https://calculator.aws/#/estimate?id=1efbacfa9865d0bc674eb0bc0e78e6e5494e77c5",
-    "title": "axi-e2e sqs",
+    "url": "https://calculator.aws/#/estimate?id=387fceb09cc417abb281cac930295a55b1377a3e",
+    "title": "axi-e2e SQS",
     "monthly": "0.40 USD",
     "upfront": "0.00 USD",
     "annual": "4.80 USD",
@@ -53,19 +53,20 @@
         "monthly": "0.40 USD",
         "description": "-",
         "region": "US East (Ohio)",
-        "configSummary": "Standard queue requests (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)",
+        "configSummary": "Standard queue requests (1 million per month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month)",
         "status": null
       }
     ],
     "groups": [],
     "supportRow": null,
-    "capturedAt": "2026-11-23T15:57:50.115Z"
+    "capturedAt": "2026-11-23T16:36:12.671Z"
   },
   "oracle": {
-    "url": "https://calculator.aws/#/estimate?id=756d073aa350c9aae5293f0726caead58f8d9fd9",
-    "savedKey": "756d073aa350c9aae5293f0726caead58f8d9fd9",
+    "kind": "probe",
+    "url": "https://calculator.aws/#/estimate?id=3a6ef00960772baf5c59851c2540d53e109aa4d3",
+    "savedKey": "3a6ef00960772baf5c59851c2540d53e109aa4d3",
     "recomputed": {
-      "url": "https://calculator.aws/#/estimate?id=756d073aa350c9aae5293f0726caead58f8d9fd9",
+      "url": "https://calculator.aws/#/estimate?id=3a6ef00960772baf5c59851c2540d53e109aa4d3",
       "title": "axi-e2e SQS",
       "monthly": "0.40 USD",
       "upfront": "0.00 USD",
@@ -83,19 +84,19 @@
           "monthly": "0.40 USD",
           "description": "-",
           "region": "US East (Ohio)",
-          "configSummary": "Standard queue requests (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)",
+          "configSummary": "Standard queue requests (1 million per month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month)",
           "status": null
         }
       ],
       "groups": [],
       "supportRow": null,
-      "capturedAt": "2026-11-23T15:57:52.806Z"
+      "capturedAt": "2026-11-23T16:36:15.148Z"
     },
     "mismatches": [],
     "verdict": "pass"
   },
   "expectation": {
-    "title": "axi-e2e sqs",
+    "title": "axi-e2e SQS",
     "monthly": 0.4,
     "upfront": 0,
     "annual": 4.8,
@@ -104,10 +105,11 @@
         "name": "Amazon Simple Queue Service (SQS)",
         "monthly": 0.4,
         "region": "US East (Ohio)",
-        "configSummary": "Standard queue requests (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)"
+        "configSummary": "Standard queue requests (1 million per month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month)"
       }
     ],
-    "groups": []
+    "groups": [],
+    "groupRows": []
   },
   "mismatches": [],
   "verdict": "pass"

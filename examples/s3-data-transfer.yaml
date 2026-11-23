@@ -1,0 +1,13 @@
+name: axi-e2e S3 Data Transfer
+currency: USD
+locale: en_US
+services:
+  - code: awsS3DataTransfer
+    region: us-east-2
+    set:
+      dataTransfer:
+        value:
+          - entryType: OUTBOUND
+            value: 1
+            unit: tb_month
+            toRegion: External

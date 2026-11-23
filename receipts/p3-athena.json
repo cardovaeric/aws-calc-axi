@@ -1,0 +1,115 @@
+{
+  "estimate": "axi-e2e Athena",
+  "specHash": "36db2a3ea38fcd0a",
+  "url": "https://calculator.aws/#/estimate?id=8adc3640728e1d0d4e375e78464521b57b9a8889",
+  "savedKey": "8adc3640728e1d0d4e375e78464521b57b9a8889",
+  "publishedAt": "2026-11-23T16:23:09.135Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 14.85,
+    "upfront": 0,
+    "total12m": 178.2,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonAthena",
+        "template": "Athena",
+        "region": "us-east-2",
+        "monthly": 14.85,
+        "upfront": 0,
+        "summary": "Total number of queries (100 per day), Amount of data scanned per query (1 GB), Number of DPUs (4)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonAthena",
+        "monthly": 14.85,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 14.85,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=8adc3640728e1d0d4e375e78464521b57b9a8889",
+    "title": "axi-e2e Athena",
+    "monthly": "14.85 USD",
+    "upfront": "0.00 USD",
+    "annual": "178.20 USD",
+    "monthlyValue": 14.85,
+    "upfrontValue": 0,
+    "annualValue": 178.2,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Athena",
+        "upfront": "0.00 USD",
+        "monthly": "14.85 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Total number of queries (100 per day), Amount of data scanned per query (1 GB), Number of DPUs (4)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T16:23:12.487Z"
+  },
+  "oracle": {
+    "url": "https://calculator.aws/#/estimate?id=39073986887cb4ed1b44864d833b2ddfa0755dcb",
+    "savedKey": "39073986887cb4ed1b44864d833b2ddfa0755dcb",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=39073986887cb4ed1b44864d833b2ddfa0755dcb",
+      "title": "axi-e2e Athena",
+      "monthly": "14.85 USD",
+      "upfront": "0.00 USD",
+      "annual": "178.20 USD",
+      "monthlyValue": 14.85,
+      "upfrontValue": 0,
+      "annualValue": 178.2,
+      "estimateDate": "Estimate date: November 23, 2026",
+      "banner": "last updated on November 23, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "Amazon Athena",
+          "upfront": "0.00 USD",
+          "monthly": "14.85 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Total number of queries (100 per day), Amount of data scanned per query (1 GB), Number of DPUs (4)",
+          "status": null
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-23T16:23:14.900Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e Athena",
+    "monthly": 14.85,
+    "upfront": 0,
+    "annual": 178.2,
+    "services": [
+      {
+        "name": "Amazon Athena",
+        "monthly": 14.85,
+        "region": "US East (Ohio)",
+        "configSummary": "Total number of queries (100 per day), Amount of data scanned per query (1 GB), Number of DPUs (4)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

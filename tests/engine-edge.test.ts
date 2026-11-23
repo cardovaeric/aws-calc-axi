@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { evaluateInput } from "../src/engine/inputs.ts";
 import { evaluateTemplate } from "../src/engine/template.ts";
 import type { Component, ServiceDefinition } from "../src/data/definitions.ts";
-import { resolverFor } from "./helpers.ts";
+import { regionMaps, resolverFor } from "./helpers.ts";
 
 const pricing = resolverFor({});
 
@@ -11,7 +11,14 @@ function input(component: Partial<Component>): Component {
   return { type: "input", id: "field", ...component } as Component;
 }
 
-const context = { serviceCode: "test", templateId: "t" };
+const context = {
+  serviceCode: "test",
+  templateId: "t",
+  regionName: "US East (Ohio)",
+  prices: pricing,
+  ...regionMaps(),
+  columnForms: new Map(),
+};
 
 test("a dropdown with no default selects the first option, like the live UI", () => {
   const result = evaluateInput(
@@ -101,6 +108,8 @@ test("a display-only alert without a type is skipped, not treated as maths", () 
     regionName: "US East (Ohio)",
     prices: pricing,
     overrides: {},
+    ...regionMaps(),
+    columnForms: new Map(),
   });
   assert.equal(result.serviceCost.monthly, 0);
 });

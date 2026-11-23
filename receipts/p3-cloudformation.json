@@ -1,0 +1,115 @@
+{
+  "estimate": "axi-e2e CloudFormation",
+  "specHash": "4148e402c9af1788",
+  "url": "https://calculator.aws/#/estimate?id=6ad370fe8cbb355e02dfd241e6bdd85f1af6a48f",
+  "savedKey": "6ad370fe8cbb355e02dfd241e6bdd85f1af6a48f",
+  "publishedAt": "2026-11-23T16:22:48.373Z",
+  "expires": "2027-11-23",
+  "native": {
+    "monthly": 2736.6,
+    "upfront": 0,
+    "total12m": 32839.2,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsCloudFormation",
+        "template": "CloudFormation",
+        "region": "us-east-2",
+        "monthly": 2736.6,
+        "upfront": 0,
+        "summary": "Number of third-party extensions managed (100), Total number of operations per extension (1000 per day), Average duration per operation (30 seconds)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsCloudFormation",
+        "monthly": 2736.6,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 2736.6,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=6ad370fe8cbb355e02dfd241e6bdd85f1af6a48f",
+    "title": "axi-e2e CloudFormation",
+    "monthly": "2,736.60 USD",
+    "upfront": "0.00 USD",
+    "annual": "32,839.20 USD",
+    "monthlyValue": 2736.6,
+    "upfrontValue": 0,
+    "annualValue": 32839.2,
+    "estimateDate": "Estimate date: November 23, 2026",
+    "banner": "last updated on November 23, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS CloudFormation",
+        "upfront": "0.00 USD",
+        "monthly": "2,736.60 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of third-party extensions managed (100), Total number of operations per extension (1000 per day), Average duration per operation (30 seconds)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-23T16:22:52.314Z"
+  },
+  "oracle": {
+    "url": "https://calculator.aws/#/estimate?id=6d3e9653e21c1fd8adc7685ecc1cfd0cb95c283a",
+    "savedKey": "6d3e9653e21c1fd8adc7685ecc1cfd0cb95c283a",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=6d3e9653e21c1fd8adc7685ecc1cfd0cb95c283a",
+      "title": "axi-e2e CloudFormation",
+      "monthly": "2,736.60 USD",
+      "upfront": "0.00 USD",
+      "annual": "32,839.20 USD",
+      "monthlyValue": 2736.6,
+      "upfrontValue": 0,
+      "annualValue": 32839.2,
+      "estimateDate": "Estimate date: November 23, 2026",
+      "banner": "last updated on November 23, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "AWS CloudFormation",
+          "upfront": "0.00 USD",
+          "monthly": "2,736.60 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of third-party extensions managed (100), Total number of operations per extension (1000 per day), Average duration per operation (30 seconds)",
+          "status": null
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-23T16:22:55.340Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e CloudFormation",
+    "monthly": 2736.6,
+    "upfront": 0,
+    "annual": 32839.2,
+    "services": [
+      {
+        "name": "AWS CloudFormation",
+        "monthly": 2736.6,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of third-party extensions managed (100), Total number of operations per extension (1000 per day), Average duration per operation (30 seconds)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

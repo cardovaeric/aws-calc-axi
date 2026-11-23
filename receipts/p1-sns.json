@@ -1,9 +1,9 @@
 {
   "estimate": "axi-e2e SNS",
   "specHash": "b0e0994815906e72",
-  "url": "https://calculator.aws/#/estimate?id=850047fba8c4e56935ba54c6867ecc8a9fda80df",
-  "savedKey": "850047fba8c4e56935ba54c6867ecc8a9fda80df",
-  "publishedAt": "2026-11-23T15:52:12.470Z",
+  "url": "https://calculator.aws/#/estimate?id=b6a3ae880542e885780eeaaebaa0eb3e39bbf302",
+  "savedKey": "b6a3ae880542e885780eeaaebaa0eb3e39bbf302",
+  "publishedAt": "2026-11-23T16:38:21.653Z",
   "expires": "2027-11-23",
   "native": {
     "monthly": 0.54,
@@ -17,7 +17,7 @@
         "region": "us-east-2",
         "monthly": 0.54,
         "upfront": 0,
-        "summary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)"
+        "summary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month)"
       }
     ]
   },
@@ -40,8 +40,8 @@
     }
   },
   "rendered": {
-    "url": "https://calculator.aws/#/estimate?id=850047fba8c4e56935ba54c6867ecc8a9fda80df",
-    "title": "axi-e2e sns",
+    "url": "https://calculator.aws/#/estimate?id=b6a3ae880542e885780eeaaebaa0eb3e39bbf302",
+    "title": "axi-e2e SNS",
     "monthly": "0.54 USD",
     "upfront": "0.00 USD",
     "annual": "6.48 USD",
@@ -58,19 +58,20 @@
         "monthly": "0.54 USD",
         "description": "-",
         "region": "US East (Ohio)",
-        "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)",
+        "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month)",
         "status": null
       }
     ],
     "groups": [],
     "supportRow": null,
-    "capturedAt": "2026-11-23T15:57:45.366Z"
+    "capturedAt": "2026-11-23T16:38:24.824Z"
   },
   "oracle": {
-    "url": "https://calculator.aws/#/estimate?id=aa690876131c8ce838c1f1eae0ba65a63c5f75ca",
-    "savedKey": "aa690876131c8ce838c1f1eae0ba65a63c5f75ca",
+    "kind": "probe",
+    "url": "https://calculator.aws/#/estimate?id=9055058f82e557af09cb3e9b8d8712a97decd679",
+    "savedKey": "9055058f82e557af09cb3e9b8d8712a97decd679",
     "recomputed": {
-      "url": "https://calculator.aws/#/estimate?id=aa690876131c8ce838c1f1eae0ba65a63c5f75ca",
+      "url": "https://calculator.aws/#/estimate?id=9055058f82e557af09cb3e9b8d8712a97decd679",
       "title": "axi-e2e SNS",
       "monthly": "0.54 USD",
       "upfront": "0.00 USD",
@@ -88,19 +89,19 @@
           "monthly": "0.54 USD",
           "description": "-",
           "region": "US East (Ohio)",
-          "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)",
+          "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month)",
           "status": null
         }
       ],
       "groups": [],
       "supportRow": null,
-      "capturedAt": "2026-11-23T15:57:48.728Z"
+      "capturedAt": "2026-11-23T16:38:27.635Z"
     },
     "mismatches": [],
     "verdict": "pass"
   },
   "expectation": {
-    "title": "axi-e2e sns",
+    "title": "axi-e2e SNS",
     "monthly": 0.54,
     "upfront": 0,
     "annual": 6.48,
@@ -109,10 +110,11 @@
         "name": "Amazon Simple Notification Service (SNS)",
         "monthly": 0.54,
         "region": "US East (Ohio)",
-        "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 gb), DT Outbound: Not selected (0 gb)"
+        "configSummary": "Requests (1 million per month), HTTP/HTTPS Notifications (1 million per month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month)"
       }
     ],
-    "groups": []
+    "groups": [],
+    "groupRows": []
   },
   "mismatches": [],
   "verdict": "pass"

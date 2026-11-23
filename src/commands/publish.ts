@@ -24,6 +24,11 @@ export const publishFlags = {
     type: "boolean" as const,
     description: "publish a recompute probe and diff the live UI recomputation",
   },
+  "--oracle-editor": {
+    type: "boolean" as const,
+    description:
+      "recompute the published estimate in the live editor and diff it (for components the read-only probe drops, such as dataTransferV2)",
+  },
   "--force-publish": {
     type: "boolean" as const,
     description: "ignore an existing receipt and create new links",
@@ -43,6 +48,8 @@ Usage:
 Flags:
   --name <text>    override the estimate name (use an axi-e2e prefix for tests)
   --oracle         publish a recompute probe and diff the live UI recomputation
+  --oracle-editor  open the published link, click Update estimate, and diff the
+                   live editor recomputation (dataTransferV2 parity)
   --force-publish  create new links even when a matching receipt exists
   --receipt <path> write a JSON receipt with the rendered DOM snapshot
   --screenshot <path> save a PNG of the rendered page
@@ -67,6 +74,13 @@ export interface PublicationReceipt {
   expires: string;
   native: Record<string, unknown>;
   oracle?: {
+    /**
+     * `probe` is a second link whose page recomputes from
+     * `calculationComponents`; `editor-recompute` opens the published link and
+     * uses the calculator editor, which is the only live recomputation path
+     * that rehydrates dataTransferV2 rows.
+     */
+    kind: "probe" | "editor-recompute";
     url: string;
     savedKey: string;
     recomputed: RenderedEstimate;
@@ -83,7 +97,11 @@ export interface PublicationReceipt {
   verdict: "pass" | "fail";
 }
 
-export function expectationFrom(result: BuildResult, spec: EstimateSpec): RenderedExpectation {
+export function expectationFrom(
+  result: BuildResult,
+  spec: EstimateSpec,
+  includeConfigSummary = true
+): RenderedExpectation {
   const monthly =
     Math.round((result.serviceTotal.monthly + (result.support?.cost.monthly ?? 0)) * 100) / 100;
   const upfront = result.serviceTotal.upfront;
@@ -101,7 +119,7 @@ export function expectationFrom(result: BuildResult, spec: EstimateSpec): Render
         ? {}
         : { upfront: entry.evaluated.serviceCost.upfront }),
       region: entry.evaluated.regionName,
-      ...(entry.evaluated.configSummary
+      ...(includeConfigSummary && entry.evaluated.configSummary
         ? { configSummary: entry.evaluated.configSummary }
         : {}),
     })),
@@ -150,6 +168,7 @@ export interface PublishOptions {
   screenshotPath?: string | undefined;
   session?: string | undefined;
   oracle?: boolean | undefined;
+  oracleEditor?: boolean | undefined;
   forcePublish?: boolean | undefined;
   flags: ParsedArgs["flags"];
 }
@@ -200,8 +219,44 @@ export async function runPublish(options: PublishOptions): Promise<{
   const mismatches = diffRendered(rendered, expectation);
 
   let oracle: PublicationReceipt["oracle"];
-  if (options.oracle) {
-    const reuseProbe = reuse?.oracle && reuse.oracle.url ? reuse.oracle : undefined;
+  if (options.oracle && options.oracleEditor) {
+    throw new Error("use either --oracle or --oracle-editor, not both");
+  }
+  if (options.oracleEditor) {
+    // The read-only recompute path silently drops dataTransferV2 (the probe
+    // renders 0), while the editor rehydrates the saved rows. Clicking
+    // Update estimate is therefore the live oracle for these components.
+    const recomputed = readRenderedEstimate(publication.url, {
+      ...(options.session ? { session: options.session } : {}),
+      waitText: publishedName,
+      recompute: true,
+    });
+    // The editor rebuilds the summary before the UI string table settles, so
+    // the same row can render "0 TB per month" or "0 tb_month". Costs are the
+    // deterministic signal; summary shape is covered by unit tests and the
+    // stored native render.
+    const oracleMismatches = diffRendered(
+      recomputed,
+      expectationFrom(result, { ...spec, name: publishedName }, false)
+    );
+    oracle = {
+      kind: "editor-recompute",
+      url: publication.url,
+      savedKey: publication.savedKey,
+      recomputed,
+      mismatches: oracleMismatches,
+      verdict: oracleMismatches.length === 0 ? "pass" : "fail",
+    };
+  } else if (options.oracle) {
+    // Receipts written before the `kind` discriminant are probe oracles.
+    const previousOracle = reuse?.oracle;
+    const reuseProbe =
+      previousOracle &&
+      (previousOracle.kind ?? "probe") === "probe" &&
+      previousOracle.url &&
+      previousOracle.savedKey
+        ? previousOracle
+        : undefined;
     const probe = reuseProbe
       ? { url: reuseProbe.url, savedKey: reuseProbe.savedKey }
       : await publishProbe(result.estimate);
@@ -211,6 +266,7 @@ export async function runPublish(options: PublishOptions): Promise<{
     });
     const oracleMismatches = diffRendered(recomputed, expectationFrom(result, spec));
     oracle = {
+      kind: "probe",
       url: probe.url,
       savedKey: probe.savedKey,
       recomputed,
@@ -308,6 +364,7 @@ export async function publishCommand(args: ParsedArgs): Promise<Record<string, u
     screenshotPath: stringFlag(args.flags, "screenshot"),
     session: stringFlag(args.flags, "session"),
     oracle: args.flags["oracle"] === true,
+    oracleEditor: args.flags["oracle-editor"] === true,
     forcePublish: args.flags["force-publish"] === true,
     flags: args.flags,
   });

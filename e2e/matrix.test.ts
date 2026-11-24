@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { LEDGER } from "../src/ledger.ts";
@@ -12,7 +12,11 @@ import { retrieveEstimate } from "../src/publish.ts";
 import { savedKeyFromUrl } from "../src/endpoints.ts";
 
 const ROOT = join(import.meta.dirname, "..");
-const SESSION = process.env["AGENT_BROWSER_SESSION"] ?? "aws-cal-axi-e2e";
+// One browser per worktree. This repository runs several worktrees at once and
+// a shared session name lets one run navigate away from another's page, which
+// shows up as a timeout or as another estimate's title.
+const SESSION =
+  process.env["AGENT_BROWSER_SESSION"] ?? `aws-cal-axi-e2e-${basename(ROOT)}`;
 
 async function receiptFor(path: string): Promise<PublicationReceipt> {
   return JSON.parse(await readFile(join(ROOT, path), "utf8")) as PublicationReceipt;

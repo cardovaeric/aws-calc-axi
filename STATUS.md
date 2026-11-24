@@ -86,12 +86,15 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 107 tests, pass
+- `npm test`: 126 tests, pass
 - `npm run e2e`: 28 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
   ledger rows including the editor-recompute oracle)
 - `npm run ledger`: 16 rows, all pass
 - `npm run coverage`: 441-row exhaustive tracker in `analysis/COVERAGE_TABLE.md`
-  (382 clean, 33 partial column-form, 17 blocked column-form, 9 blocked by subtype)
+  (382 clean, 33 partial column-form, 16 blocked column-form, 10 blocked by subtype)
+- Selector rows are scored by the children the live calculator serves and name the blocker and
+  the children that carry it (`analysis/FINDINGS.md` section 14, D-027). Two Amazon WorkSpaces
+  children are dangling references in the live manifest and have no surface.
 - Screenshots of every public link: `receipts/screenshots/` (16 PNGs)
 
 ## Coverage ledger summary
@@ -130,6 +133,17 @@ editor at 957.46/month.
 - `percentInput` saves the fraction where the live calculator saves the entered percent, so a
   published estimate with a percent input disagrees with the editor recompute by the square of
   the percent. D-026 has the bundle evidence and the failing Keyspaces 25.69 vs 25.63 oracle.
+- The six P1 selector services are real engine gaps, not tracker noise (`analysis/FINDINGS.md`
+  section 14, D-027). The blockers all live in `src/engine/column-form.ts` and
+  `src/data/column-form.ts` (the column-form worker's files): a `utilization` row with a
+  `selectorId` (Amazon EMR, Amazon WorkSpaces), `remap.constant` (Amazon Chime SDK ptsnAudio and
+  sipTrunking, AWS Mainframe Modernization), dependent selector values derived from the
+  aggregation tree (AWS Elemental MediaLive, MediaConvert, workSpacesPools), and the inverted
+  `remap.keyValue` direction below.
+- `remap.keyValue` is applied in the wrong direction in `src/engine/column-form.ts` (UI value to
+  map value; the live engine maps UI value to the map key) and `matchAggregation` ignores it.
+  25 definitions carry a non-identity map; `realTimeDocumentTranslation` is scored clean but
+  fails at runtime because of it, and MediaConvert cannot reach a price row.
 - Six services reference meters that are absent from their regional price file (Personalize,
   Transcribe, ACM, MediaTailor, Firewall Manager, IoT SiteWise). The engine fails closed
   instead of publishing a zero.

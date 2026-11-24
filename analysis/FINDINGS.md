@@ -681,3 +681,106 @@ the key.
 - `utilization` rows that carry a `selectorId`, `remap.constant`, `additionalPricingData` joins,
   `subComponentsList`, `exportTagsAsValue`, multiple price sets, and tiered PLC_2.0 patterns
   (`StartingRange`/`EndingRange`) remain fail-closed.
+
+## 15. Selector children are real gaps; two WorkSpaces children do not exist (2026-11-24)
+
+The tracker scored `subServiceSelector` rows "by their children" and the six P1 services it
+blocked with `Resolve the non-clean children` needed a verdict. Evidence, live links, and the
+exact bundle lines are in `receipts/selector-children-probe.json`.
+
+### What the rule did
+
+`selector_children` counted the codes in the selector definition's `templates`. A child was
+non-clean when its own row's `static_class` was not `clean`, and a child with no row at all was
+scored `missing-definition`. The parent then collapsed every blocked child to
+`blocked:column-form`, kept its own `missing_subtypes`/`hard_blockers`/`deep_gaps` empty, and got
+the constant action `Resolve the non-clean children`.
+
+### What the live calculator does
+
+A selector is a menu of child services. The parent has no form and no price; the user configures
+exactly one child, and the parent's runtime columns are the evaluation of its `defaultTemplates`
+children. And the menu is built from the live service list, so a declared child that the manifest
+does not define is never offered at all.
+
+### The six services, child by child
+
+| Service | Non-clean children | Cause | Verdict |
+| --- | --- | --- | --- |
+| amazonChimeSdk | ptsnAudio, sipTrunking | `remap.constant` | real gap |
+| amazonEMR | amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode | `utilization` row | real gap |
+| amazonMainframeModernization | mainframeBluAge, mainframeMicroFocus | `input:utilization` + `remap.constant` | real gap |
+| amazonWorkSpaces | amazonWorkspaces, workSpacesCore, workSpacesInstances, workSpacesPools | utilization row, dependent selectors, upfront totals | real gap, and 2 phantom children |
+| awsElementalMediaLive | mediaLiveInput1, mediaLiveOutput1, mediaLiveAudioAddOns | dependent selectors | real gap |
+| elementalMediaConvert | outputConfiguration1, outputConfiguration2 | dependent selectors (+ remap direction) | real gap |
+
+- **Chime SDK.** ptsnAudio has five column forms whose primary key (`NumberType` or `CallType`)
+  has no row: the value can only come from `remap.constant`. Supplying it in the spec is rejected
+  (`INVALID_SPEC`, valid selectors: `FromCountry`), and the engine throws `UNSUPPORTED_INPUT` for
+  `remap.constant` before pricing. The live engine filters candidate price rows by the constant
+  and drops that selector from the label match (bundle offsets 1464986 and 1469061).
+- **EMR.** Each node child has a column-form row of type `utilization` with a `selectorId`.
+  `columnFormIPM "masterNode_generated_0" has a "utilization" row, which is not implemented yet`.
+  The live component exports the row's object value as hours (`{const{totalHour:e}=...}`, offset
+  2890391), so it is a pricing input.
+- **Mainframe Modernization.** Both children use the `utilization` input subtype (the
+  `w1-utilization` branch implements it) and both also carry a component-level
+  `remap.constant`, so they stay blocked after that lands. The parent now reports
+  `blocked:subtype` in `Phase 5 - long tail` instead of claiming a column-form block.
+- **WorkSpaces.** The Personal/Core children have a utilization "Billing option" row (default
+  `{unit:"730",selectedId:"Monthly"}`) and dependent selectors; workSpacesPools has dependent
+  selectors only. The parent fails closed with `Running Mode: "[object Object]"`, because a
+  utilization row's object value is stringified before matching.
+- **MediaLive.** Pipeline, Resolution, Bit Rate, Video Quality, Frame Rate and Reserve Type are
+  dependent rows with no default on most cards. `mediaLiveInput1` prices at defaults (7.30) and
+  `mediaLiveAnywhereChannel` is clean, but the default child pair includes `mediaLiveOutput1`,
+  which fails closed.
+- **MediaConvert.** The live UI resolves the dependent rows to Single pass / 4K / <=30fps / 4 and
+  prices 1000 hours at 1,492.00: `60,000 basic minutes x 4 normalization ratio = 240,000
+  normalized minutes`, then 100,000 x 0.0075 + 140,000 x 0.0053. This engine skips the empty
+  dependent values and matches nothing.
+
+### The one artifact: Amazon WorkSpaces declares two children that do not exist
+
+The live `amazonWorkSpaces` manifest entry lists six `templates`, but the manifest has no service
+entry for `workSpacesThinClient` or `workSpacesSecureBrowser`, and
+`https://d1qsjq9pzbk1k6.cloudfront.net/data/workSpacesThinClient/en_US.json` answers **403**.
+`https://calculator.aws/#/createCalculator/WorkSpaces` offers exactly four children (Personal,
+Core Bundles, Core Managed Instances, and a disabled Pools) and no Thin Client or Secure Browser.
+So those two are dangling references in the live data plane: there is no surface to cover, and
+scoring them `missing-definition` made the parent count two phantom blockers.
+
+### The rule now
+
+- A selector's class is the union of its **served** children, using the same precedence a single
+  service uses (`blocked:subtype` > `blocked:column-form` > `partial:column-form` > `clean`). A
+  parent whose children are blocked by a missing input subtype no longer claims a column-form gap.
+- A declared child with no manifest entry is `selector_unserved`: recorded in its own column,
+  never scored as non-clean, and never hidden. If every declared child is unserved the parent is
+  `no-surface`, which is what the calculator shows.
+- `selector_blockers` names each blocker and the children that carry it
+  (`utilization-selector (amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode)`), the
+  parent's `missing_subtypes`/`hard_blockers`/`deep_gaps` carry the union, and `next_action`
+  repeats the concrete child actions. `Resolve the non-clean children` is gone from the tracker.
+- Worked example, Amazon WorkSpaces: `selector_children=6`, `selector_nonclean` is the four real
+  children, `selector_unserved=workSpacesThinClient;workSpacesSecureBrowser`.
+
+Coverage delta (`npm run coverage -- --evaluate --offline`): `blocked:subtype` 9 to 10 (Amazon
+Mainframe Modernization reclassified), `blocked:column-form` 17 to 16, `clean` 382 unchanged,
+`partial:column-form` 33 unchanged, priorities unchanged. No service became clean by dropping an
+unserved child.
+
+### Second finding: `remap.keyValue` is applied in the wrong direction
+
+`src/engine/column-form.ts` looks up `remap[uiValue]` (UI value to map value). The live engine
+maps the other way: the key is the price token, the value is the UI value
+(`if(d.keyValue[r]===t){t=r;break}`, offsets 1466154 and 1469061). `src/data/column-form.ts`
+`matchAggregation` ignores the remap entirely and requires exact equality with the UI value.
+
+Consequences: MediaConvert cannot reach an aggregation row (`AVC` versus `AVC/H.264`), and
+`realTimeDocumentTranslation` is scored `clean` but fails at runtime with
+`no PLC_2.0 price set matches Basic - Text, HTML` against the definition
+`{"Basic":"Basic - Text, HTML"}`. Section 13 and D-024 attributed that service's missing price to
+region availability, which is wrong. 25 definitions carry a non-identity `remap.keyValue` and 24
+of them are already non-clean, so the fix belongs with the column-form worker rather than in the
+tracker.

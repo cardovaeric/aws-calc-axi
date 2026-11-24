@@ -72,6 +72,12 @@ The verifier uses `aws-cal-axi-e2e` by default, overridable with `--session` or
 `AGENT_BROWSER_SESSION`. The session is closed at the end of an interactive session, not after
 every publish, so repeated verifications reuse one browser.
 
+Addendum 2026-11-24: the E2E matrix harness (`e2e/matrix.test.ts`) appends the worktree name
+(`aws-cal-axi-e2e-<worktree>`) to its default. Several worktrees run at once, and sharing one
+session lets a concurrent run navigate the browser away mid-read: 13 ledger rows failed with
+timeouts or another estimate's title until the session was scoped per worktree. The CLI's
+documented default is unchanged.
+
 ## D-009: Publish with the native `metaData.source` (2026-11-23)
 
 The share page trusts stored service costs only when `metaData.source` is the calculator's own
@@ -359,3 +365,37 @@ are scoped as follows.
 `keyValue` remap is a plain object lookup (`d = (e,t) => t.keyValue[e] || e`, offset 1227218), so
 `"/1\\s?yr/"` keys never match a value. Removing that rule changes eight P0 rows and belongs to
 whoever owns the tracker cleanup, not to this feature.
+
+## D-028: Selector rows score their served children and name them (2026-11-24)
+
+The tracker's selector rule was unverified and it was flagging six P1 services with a single
+opaque line. Verification (`receipts/selector-children-probe.json`, `analysis/FINDINGS.md`
+section 15) found the gaps are real, plus one scoring artifact.
+
+- A selector is the live calculator's service menu: no parent form, no parent price, one child
+  configured, and the parent's runtime columns are its `defaultTemplates` children. Its coverage
+  is the union of the children it serves, with `classifyStatic`'s precedence, so a parent whose
+  children are blocked by a missing input subtype reports `blocked:subtype` rather than
+  `blocked:column-form` (that is Amazon Mainframe Modernization).
+- A declared child that the manifest does not define has no live surface. Amazon WorkSpaces
+  declares six children; `workSpacesThinClient` and `workSpacesSecureBrowser` are absent from the
+  manifest, answer 403 on their definition URL, and are not offered by
+  `https://calculator.aws/#/createCalculator/WorkSpaces`. They are now `selector_unserved`:
+  recorded in their own column, not scored as non-clean, and not hidden. Scoring them made the
+  parent look blocked by two phantom children.
+- The parent row carries the cause: `selector_blockers` pairs each blocker with the children that
+  carry it, the blocker columns hold the union, and `next_action` repeats the concrete child
+  actions. The constant string `Resolve the non-clean children` is removed; the pure rule lives in
+  `scripts/coverage-selector.ts` and is covered by `tests/coverage-selector.test.ts`.
+
+Coverage delta: `blocked:subtype` 9 to 10, `blocked:column-form` 17 to 16, `clean` 382 unchanged,
+P1 23 unchanged. No service is called clean because a child was excluded; the two unserved
+children are listed on the Amazon WorkSpaces row.
+
+What the audit also found, and deliberately did not change here: `remap.keyValue` is applied in
+the wrong direction in `src/engine/column-form.ts` (UI value to map value, while the live engine
+maps UI value to the map key, which is the price token), and `matchAggregation` in
+`src/data/column-form.ts` ignores the remap. That file belongs to the column-form selector worker
+this session. Recorded with the exact components in the probe receipt. It explains why
+`realTimeDocumentTranslation` is statically clean but fails at runtime, and it is one of the two
+reasons MediaConvert cannot reach a price row.

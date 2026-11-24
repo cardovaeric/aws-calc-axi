@@ -1,0 +1,50 @@
+name: axi-e2e dependent selectors
+currency: USD
+locale: en_US
+services:
+  # Reserved rows only exist after the live form renders Term and Purchase
+  # option, which it derives from the price records of the selected term. The
+  # saved row must carry both selectors for the editor to reproduce the cost.
+  - code: amazonElastiCache
+    region: us-east-2
+    set:
+      columnFormIPM_dsp:
+        Cache Engine: Redis
+        TermType: OnDemand
+      columnFormIPM:
+        Number of Nodes: 2
+        Instance Type: cache.m5.xlarge
+        Cache Engine: Redis
+        Instance Family: Standard
+        TermType: Reserved
+        LeaseContractLength: 1yr
+        PurchaseOption: All Upfront
+      columnFormIPMDT:
+        Number of Nodes: 0
+        Instance Type: cache.r6gd.12xlarge
+        Cache Engine: Redis
+        Instance Family: Memory optimized
+        TermType: OnDemand
+  - code: amazonElasticsearchService
+    region: us-east-2
+    set:
+      columnFormIPM_1:
+        Number of Nodes Data instance: 2
+        Instance Type: r5.2xlarge.search
+        TermType: Reserved
+        LeaseContractLength: 1yr
+        PurchaseOption: No Upfront
+      columnFormIPM_2:
+        Number of Nodes Dedicated master: 0
+      columnFormIPM:
+        Number of Nodes: 0
+        Instance Type: ultrawarm1.large.search
+  - code: amazonRedshift
+    region: us-east-2
+    set:
+      columnFormIPM:
+        Number of Nodes: 2
+        Instance Type: ra3.4xlarge
+        TermType: Reserved
+        LeaseContractLength: 1yr
+        PurchaseOption: No Upfront

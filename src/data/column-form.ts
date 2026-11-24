@@ -59,6 +59,14 @@ export interface ColumnFormPricingData {
   setMeters: string[];
   manifest: Plc2Manifest;
   metadataUrl: string;
+  /**
+   * Every aggregation row for the mapping. The selector option tree is built
+   * from these rows, so a dependent selector can offer only the values the
+   * parent allows. Absent for hand-built fixtures.
+   */
+  aggregations?: Plc2Aggregation[];
+  /** True when the supplied values matched an aggregation row exactly. */
+  exactMatch?: boolean;
 }
 
 export interface LoadColumnFormOptions {
@@ -68,7 +76,64 @@ export interface LoadColumnFormOptions {
   regionName: string;
   /** Selector values from the component rows, keyed by selector id. */
   values: Record<string, string>;
+  /**
+   * `remap` from the component. `keyValue` maps a raw price value to the label
+   * the live form shows, and the live engine applies it to the aggregation rows
+   * and the price records before matching (`b` and `o` in analysis/bundle.js).
+   */
+  remap?: { keyValue?: Record<string, string> };
   cache?: CacheOptions;
+}
+
+/** Apply `remap.keyValue` forward, the way live `b`/`o`/`d` do. */
+export function remapValue(
+  keyValue: Record<string, string> | undefined,
+  value: string
+): string {
+  if (!keyValue) return value;
+  return keyValue[value] ?? value;
+}
+
+/** Apply `remap.keyValue` in reverse, the way the live meter list and path do. */
+export function reverseRemapValue(
+  keyValue: Record<string, string> | undefined,
+  value: string
+): string {
+  if (!keyValue) return value;
+  for (const [key, display] of Object.entries(keyValue)) {
+    if (display === value) return key;
+  }
+  return value;
+}
+
+function remapAggregations(
+  aggregations: Plc2Aggregation[],
+  keyValue: Record<string, string> | undefined
+): Plc2Aggregation[] {
+  if (!keyValue) return aggregations;
+  return aggregations.map((row) => {
+    const selectors: Record<string, string> = {};
+    for (const [key, value] of Object.entries(row.selectors)) {
+      selectors[key] = remapValue(keyValue, String(value));
+    }
+    return { ...row, selectors };
+  });
+}
+
+function remapRecords(
+  records: Record<string, PriceRecord>,
+  keyValue: Record<string, string> | undefined
+): Record<string, PriceRecord> {
+  if (!keyValue) return records;
+  const remapped: Record<string, PriceRecord> = {};
+  for (const [meter, record] of Object.entries(records)) {
+    const next: Record<string, unknown> = { ...(record as unknown as Record<string, unknown>) };
+    for (const [key, value] of Object.entries(next)) {
+      if (typeof value === "string") next[key] = remapValue(keyValue, value);
+    }
+    remapped[meter] = next as unknown as PriceRecord;
+  }
+  return remapped;
 }
 
 function requireObject<T>(value: unknown, what: string, url: string): T {
@@ -90,48 +155,101 @@ function metadataBase(metadataUrl: string): string {
   return base;
 }
 
-/** Resolve the one aggregation row that matches the provided selector values. */
+export interface AggregationMatch {
+  /** Selector values for the matched aggregation row. */
+  selectors: Record<string, string>;
+  /** True when an aggregation row matched every supplied value exactly. */
+  exact: boolean;
+  /** Selectors whose supplied value the matched row does not carry. */
+  diffs: string[];
+}
+
+/**
+ * Resolve the aggregation row for the supplied selector values, mirroring the
+ * live engine (`c` in analysis/bundle.js).
+ *
+ * An exact match is a row that carries every supplied value. When there is
+ * none, live falls back to a weighted best match driven by `prioritizedKey`
+ * (default `{"Instance Type": 20, TermType: 10}`) and records which values
+ * differed. The live editor's `Update estimate` refuses such a component
+ * ("Best Match produced invalid options"), so the prefetch uses the fallback to
+ * resolve option sets and then requires an exact match for the values it will
+ * publish.
+ */
+export function resolveAggregationMatch(
+  aggregations: Plc2Aggregation[],
+  values: Record<string, string>,
+  pricingSelectors: string[],
+  regionName: string,
+  prioritizedKey?: Record<string, number>
+): AggregationMatch | undefined {
+  const wanted: Record<string, string> = {};
+  for (const selector of pricingSelectors) {
+    const value = values[selector];
+    if (value !== undefined && value !== "") wanted[selector] = value;
+  }
+  const scores = prioritizedKey ?? { "Instance Type": 20, TermType: 10 };
+  // Prefer this region's rows: derived attributes (vCPU, memory) are region
+  // independent, and the index path always uses the requested region.
+  const regional = aggregations.filter(
+    (row) => row.selectors["Location"] === undefined || row.selectors["Location"] === regionName
+  );
+  const pool = regional.length > 0 ? regional : aggregations;
+  const exact = pool.filter((row) =>
+    Object.entries(wanted).every(([selector, value]) => row.selectors[selector] === value)
+  );
+  if (exact.length > 0) {
+    // Live takes the first aggregation row that carries every supplied value
+    // (`break` in `c`). Selectors the caller did not supply are resolved from
+    // that row's tree in the next pass, which is what makes the state settle.
+    return { selectors: { ...wanted, ...exact[0]!.selectors }, exact: true, diffs: [] };
+  }
+  let best: Record<string, string> | undefined;
+  let bestScore = -1;
+  for (const row of pool) {
+    let score = 0;
+    let weight = pricingSelectors.length;
+    for (const selector of pricingSelectors) {
+      if (row.selectors[selector] === wanted[selector]) {
+        score += scores[selector] ? scores[selector] * weight : weight;
+      }
+      weight -= 1;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = row.selectors;
+    }
+  }
+  if (!best) return undefined;
+  const diffs = Object.keys(wanted).filter((selector) => best![selector] !== wanted[selector]);
+  return { selectors: { ...wanted, ...best }, exact: false, diffs };
+}
+
+/**
+ * Resolve the one aggregation row that matches the provided selector values.
+ * Throws when no row carries every supplied value: the live editor rejects a
+ * "Best Match" component, so a caller that publishes must not accept one.
+ */
 export function matchAggregation(
   aggregations: Plc2Aggregation[],
   values: Record<string, string>,
   pricingSelectors: string[],
   regionName: string
 ): Record<string, string> {
+  const match = resolveAggregationMatch(aggregations, values, pricingSelectors, regionName);
   const wanted: Record<string, string> = {};
   for (const selector of pricingSelectors) {
     const value = values[selector];
     if (value !== undefined && value !== "") wanted[selector] = value;
   }
-  const matches = aggregations.filter((row) =>
-    Object.entries(wanted).every(([selector, value]) => row.selectors[selector] === value)
-  );
-  if (matches.length === 0) {
+  if (!match || !match.exact) {
     throw new EngineError(
       `no PLC_2.0 price row matches ${JSON.stringify(wanted)}`,
       "MISSING_PRICE",
       { values: wanted }
     );
   }
-  // Derived attributes (vCPU, memory) are region independent, and the index
-  // path always uses the requested region, so prefer this region's rows. If
-  // the remaining rows disagree on a derived selector, fail closed.
-  const regional = matches.filter(
-    (row) => row.selectors["Location"] === undefined || row.selectors["Location"] === regionName
-  );
-  const pool = regional.length > 0 ? regional : matches;
-  const first = pool[0]!.selectors;
-  const conflicts = pool.some((row) =>
-    Object.keys(first).some((key) => row.selectors[key] !== first[key])
-  );
-  if (conflicts) {
-    throw new EngineError(
-      `PLC_2.0 selector match is ambiguous for ${JSON.stringify(wanted)} ` +
-        `(${pool.length} rows); add a secondary selector`,
-      "AMBIGUOUS_SELECTION",
-      { values: wanted, matches: pool.length }
-    );
-  }
-  return first;
+  return match.selectors;
 }
 
 export async function loadColumnFormPricing(
@@ -184,12 +302,25 @@ export async function loadColumnFormPricing(
       { url: aggregationsUrl }
     );
   }
-  const selectors = matchAggregation(
-    aggregationFile.aggregations,
+  const keyValue = options.remap?.keyValue;
+  // The live engine remaps the aggregation rows and the price records before it
+  // matches anything (`b` and `o`), so both sides speak the display labels the
+  // form shows (`1000 MBps/TiB`, `No Cache`).
+  const aggregations = remapAggregations(aggregationFile.aggregations, keyValue);
+  const match = resolveAggregationMatch(
+    aggregations,
     options.values,
     pricingSelectors,
     options.regionName
   );
+  if (!match) {
+    throw new EngineError(
+      `no PLC_2.0 price row matches ${JSON.stringify(options.values)}`,
+      "MISSING_PRICE",
+      { values: options.values }
+    );
+  }
+  const selectors = match.selectors;
   const pathValues = primarySelectors.map((selector) => selectors[selector]);
   if (pathValues.some((value) => value === undefined)) {
     throw new EngineError(
@@ -199,23 +330,29 @@ export async function loadColumnFormPricing(
       { selectors, primarySelectors }
     );
   }
-  const indexPath = pathValues.map((value) => encodeURIComponent(String(value))).join("/");
+  // The index path uses the raw price values, so display labels are mapped back.
+  const indexPath = pathValues
+    .map((value) => encodeURIComponent(reverseRemapValue(keyValue, String(value))))
+    .join("/");
   const indexUrl = `${base}/${indexPath}/index.json`;
   const index = requireObject<Plc2Index>(
     await fetchCachedJson(indexUrl, options.cache ?? {}),
     "PLC_2.0 index",
     indexUrl
   );
-  const regionPrices = index.regions?.[options.regionName];
-  if (!regionPrices) {
+  const rawRegionPrices = index.regions?.[options.regionName];
+  if (!rawRegionPrices) {
     throw new EngineError(
       `PLC_2.0 index at ${indexUrl} has no prices for ${options.regionName}`,
       "MISSING_PRICE",
       { url: indexUrl, regionName: options.regionName }
     );
   }
+  const regionPrices = remapRecords(rawRegionPrices, keyValue);
   const firstSet = Object.keys(index.sets ?? {})[0];
-  const setMeters = firstSet ? index.sets[firstSet] ?? [] : [];
+  const setMeters = (firstSet ? index.sets[firstSet] ?? [] : []).map((meter) =>
+    meter
+  );
   if (setMeters.length === 0) {
     throw new EngineError(
       `PLC_2.0 index at ${indexUrl} has no price set`,
@@ -231,5 +368,7 @@ export async function loadColumnFormPricing(
     setMeters,
     manifest: metadata.manifest,
     metadataUrl,
+    aggregations,
+    exactMatch: match.exact,
   };
 }

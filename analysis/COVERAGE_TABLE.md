@@ -13,29 +13,28 @@ no calculator surface.
 | --- | ---: |
 | blocked:column-form | 17 |
 | blocked:subtype | 9 |
-| clean | 382 |
-| partial:column-form | 33 |
+| clean | 399 |
+| partial:column-form | 16 |
 
 | Priority | Services |
 | --- | ---: |
 | P0 | 31 |
-| P1 | 23 |
-| P2 | 132 |
-| P3 | 255 |
+| P1 | 14 |
+| P2 | 139 |
+| P3 | 257 |
 
 | Plan phase | Services |
 | --- | ---: |
 | Conformance passed - add ledger | 16 |
-| Done - ledger receipt | 13 |
-| Phase 1 - receipts | 353 |
-| Phase 2 - column-form v2 | 49 |
+| Done - ledger receipt | 15 |
+| Phase 1 - promote simulation | 1 |
+| Phase 1 - receipts | 367 |
+| Phase 2 - column-form v2 | 32 |
 | Phase 3 - EC2 module | 4 |
 | Phase 5 - long tail | 6 |
 
 | Blocker | Services |
 | --- | ---: |
-| dependent-selectors | 36 |
-| ri-payment-upfront | 19 |
 | additional-pricing-data | 16 |
 | regex-remap | 13 |
 | remap.constant | 8 |
@@ -88,10 +87,11 @@ Priority rules:
 
 The static class is intentionally conservative. A `columnFormIPM` service is
 `partial` only while it uses a feature the engine still fails closed on:
-dependent selectors, additional pricing data, regex key remaps, reserved/upfront
-payment models, sub-components, or unsupported row types. A plain one-row column
-form is native. Runtime `needs-input` is not a failure; it means the service
-needs a fixture with explicit required values.
+additional pricing data, regex key remaps, tiered PLC_2.0 price patterns,
+sub-components, or unsupported row types. A plain one-row column form is native,
+and so are dependent selectors, reserved/upfront payment models, and selector
+price patterns (`analysis/FINDINGS.md` section 14). Runtime `needs-input` is not
+a failure; it means the service needs a fixture with explicit required values.
 
 ## P0 - top services
 
@@ -101,6 +101,8 @@ needs a fixture with explicit required values.
 | P0 | eC2Next | Amazon EC2 | no | 79.2% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:utilization:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1 |
 | P0 | windowsWorkloads | Windows Server and SQL Server on Amazon EC2 | yes | 29.2% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement input:workloadsConditionalComponent:5;input:workloadDropdown:3;input:conditionalCheckboxes:2;input:pricingStrategy:2;input:workloadPriceSetFetcher:1;pricing:workloadStoragePricing:1;input:workflowInstruction:1;input:uploadTable:1;input:dedicatedHostsReviewTable:1;input:dedicatedHostsCostTable:1;maths:dedicatedHostsMath:1;input:sqlSummary:1;input:windowsSummary:1;input:inputField:1;input:windowsWorkloadStorage:1;input:radioTiles:1;maths:instanceRecommendation:1;input:workloadsInstanceSearch:1;input:sqlPassiveNode:1;maths:workloadInstanceMath:1;maths:instanceCostSummary:1;maths:workloadStorageMath:1;maths:storageCostSummary:1;maths:instanceCostSummaryTable:1;maths:storageCostSummaryTable:1;maths:sqlLicenseSummary:1 |
 | P0 | amazonElasticBlockStore | Amazon Elastic Block Store (EBS) | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
+| P0 | amazonRdsCustomForSqlServer | Amazon RDS Custom for SQL Server | yes | 100.0% | clean | - | bad-definition | bad-definition | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonRdsForOutposts | Amazon RDS on AWS Outposts | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P0 | amazonVirtualPrivateCloud | Amazon Virtual Private Cloud (VPC) | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | awsEks | Amazon EKS | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | awsPrivateLinkVpc | AWS PrivateLink | no | 100.0% | clean | - | needs-input | needs-input | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
@@ -116,18 +118,16 @@ needs a fixture with explicit required values.
 | P0 | transitGatewayVpc | Transit Gateway | no | 100.0% | clean | - | needs-input | needs-input | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | vpcRouteServer | VPC Route Server | no | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | vpnConnectionVpc | VPN Connection | no | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
-| P0 | amazonAuroraMySQLCompatible | Amazon Aurora MySQL-Compatible | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | ambiguous | ambiguous | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonEc2DedicatedHosts | Amazon EC2 Dedicated Hosts | no | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | needs-input | needs-input | no | no | Phase 3 - EC2 module | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonRDSAuroraPostgreSQLCompatibleDB | Amazon Aurora PostgreSQL-Compatible DB | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | ambiguous | ambiguous | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonRdsCustomForOracle | Amazon RDS Custom for Oracle | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | ambiguous | ambiguous | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonRdsCustomForSqlServer | Amazon RDS Custom for SQL Server | yes | 100.0% | partial:column-form | dependent-selectors;ri-payment-upfront | ambiguous | ambiguous | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors;ri-payment-upfront |
-| P0 | amazonRdsForDb2 | Amazon RDS for Db2 | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonRdsForOracle | Amazon RDS for Oracle | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | needs-input | needs-input | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonRdsForOutposts | Amazon RDS on AWS Outposts | yes | 100.0% | partial:column-form | dependent-selectors | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P0 | amazonRDSForSQLServer | Amazon RDS for SQL server | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonRDSMariaDB | Amazon RDS for MariaDB | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonRDSMySQLDB | Amazon RDS for MySQL | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P0 | amazonRDSPostgreSQLDB | Amazon RDS for PostgreSQL | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
+| P0 | amazonAuroraMySQLCompatible | Amazon Aurora MySQL-Compatible | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonEc2DedicatedHosts | Amazon EC2 Dedicated Hosts | no | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | no | no | Phase 3 - EC2 module | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonRDSAuroraPostgreSQLCompatibleDB | Amazon Aurora PostgreSQL-Compatible DB | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonRdsCustomForOracle | Amazon RDS Custom for Oracle | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | ok | ok | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonRdsForDb2 | Amazon RDS for Db2 | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonRdsForOracle | Amazon RDS for Oracle | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonRDSForSQLServer | Amazon RDS for SQL server | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonRDSMariaDB | Amazon RDS for MariaDB | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonRDSMySQLDB | Amazon RDS for MySQL | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P0 | amazonRDSPostgreSQLDB | Amazon RDS for PostgreSQL | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
 
 ## P1 - visible blocked or partial
 
@@ -136,26 +136,17 @@ needs a fixture with explicit required values.
 | P1 | amazonChimeSdk | Amazon Chime SDK | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Resolve the non-clean children |
 | P1 | amazonEMR | Amazon EMR | yes | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Resolve the non-clean children |
 | P1 | amazonMainframeModernization | AWS Mainframe Modernization | yes | 81.5% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Resolve the non-clean children |
-| P1 | amazonWorkSpaces | Amazon WorkSpaces | yes | 100.0% | blocked:column-form | - | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Resolve the non-clean children |
+| P1 | amazonWorkSpaces | Amazon WorkSpaces | yes | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Resolve the non-clean children |
 | P1 | aWSDirectoryService | AWS Directory Service | yes | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
-| P1 | awsDeadlineCloud | AWS Deadline Cloud | yes | 97.8% | blocked:subtype | dependent-selectors | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:1 |
-| P1 | awsDirectConnect | AWS Direct Connect | yes | 90.0% | blocked:subtype | dependent-selectors;ri-payment-upfront | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:1 |
+| P1 | awsDeadlineCloud | AWS Deadline Cloud | yes | 97.8% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:1 |
+| P1 | awsDirectConnect | AWS Direct Connect | yes | 90.0% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:1 |
 | P1 | awsElementalMediaConnect | AWS Elemental MediaConnect | yes | 93.8% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 5 - long tail | Implement input:utilization:6 |
 | P1 | awsPcs | AWS PCS | yes | 88.9% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 5 - long tail | Implement input:utilization:4 |
-| P1 | amazonAppStream | Amazon WorkSpaces Applications | yes | 100.0% | partial:column-form | dependent-selectors | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P1 | amazonDocumentDB | Amazon DocumentDB (with MongoDB compatibility) | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors |
-| P1 | amazonElasticsearchService | Amazon OpenSearch Service | yes | 100.0% | partial:column-form | dependent-selectors;ri-payment-upfront | ambiguous | ambiguous | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors;ri-payment-upfront |
-| P1 | amazonFSxForLustre | Amazon FSx for Lustre | yes | 100.0% | partial:column-form | dependent-selectors | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P1 | amazonGameLift | Amazon GameLift Servers | yes | 100.0% | partial:column-form | dependent-selectors | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P1 | amazonKeyspaces | Amazon Keyspaces | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap |
-| P1 | amazonManagedBlockchain | Amazon Managed Blockchain | no | 100.0% | partial:column-form | dependent-selectors | missing-price | unknown-region | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P1 | amazonMemoryDbForRedis | Amazon MemoryDB | yes | 100.0% | partial:column-form | dependent-selectors;ri-payment-upfront | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors;ri-payment-upfront |
-| P1 | amazonNeptune | Amazon Neptune | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap |
-| P1 | amazonRedshift | Amazon Redshift | yes | 100.0% | partial:column-form | dependent-selectors;ri-payment-upfront | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors;ri-payment-upfront |
-| P1 | amazonTimestream | Amazon Timestream | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors |
-| P1 | awsDatabaseMigrationService | AWS Database Migration Service | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors |
-| P1 | awsElementalMediaLive | AWS Elemental MediaLive | yes | 100.0% | partial:column-form | - | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Resolve the non-clean children |
-| P1 | elementalMediaConvert | AWS Elemental MediaConvert | yes | 100.0% | partial:column-form | - | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Resolve the non-clean children |
+| P1 | amazonDocumentDB | Amazon DocumentDB (with MongoDB compatibility) | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
+| P1 | amazonKeyspaces | Amazon Keyspaces | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P1 | amazonNeptune | Amazon Neptune | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
+| P1 | amazonTimestream | Amazon Timestream | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
+| P1 | awsDatabaseMigrationService | AWS Database Migration Service | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 
 ## P2 - visible clean without a receipt
 
@@ -163,6 +154,7 @@ needs a fixture with explicit required values.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | P2 | amazonApiGateway | Amazon API Gateway | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonAppFlow | Amazon AppFlow | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | amazonAppStream | Amazon WorkSpaces Applications | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonAugmentedAi | Amazon Augmented AI | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonBedrock | Amazon Bedrock | yes | 100.0% | clean | - | error | error | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | amazonBedrockAgentCore | Amazon Bedrock AgentCore | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
@@ -185,9 +177,11 @@ needs a fixture with explicit required values.
 | P2 | amazonForecast | Amazon Forecast | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFraudDetector | Amazon Fraud Detector | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSx | Amazon FSx for Windows File Server | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | amazonFSxForLustre | Amazon FSx for Lustre | yes | 100.0% | clean | - | bad-definition | bad-definition | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSxForNetAppOntap | Amazon FSx for NetApp ONTAP | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSxForOpenZfs | Amazon FSx for OpenZFS | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P2 | amazonGameLiftStreams | Amazon GameLift Streams | yes | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | amazonGameLift | Amazon GameLift Servers | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | amazonGameLiftStreams | Amazon GameLift Streams | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonGuardDuty | Amazon GuardDuty | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonHealthImaging | AWS HealthImaging | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonHealthlake | Amazon Healthlake | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -204,9 +198,11 @@ needs a fixture with explicit required values.
 | P2 | amazonLookoutForMetrics | Amazon Lookout for Metrics | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonLookoutForVision | Amazon Lookout for Vision | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonMacie | Amazon Macie | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | amazonManagedBlockchain | Amazon Managed Blockchain | no | 100.0% | clean | - | ok | unknown-region | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonManagedGrafana | Amazon Managed Grafana | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonManagedServiceForPrometheus | Amazon Managed Service for Prometheus | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonManagedWorkflowsForApacheAirflow | Amazon Managed Workflows for Apache Airflow | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | amazonMemoryDbForRedis | Amazon MemoryDB | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonMQ | Amazon MQ | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonNetworkFirewall | AWS Network Firewall | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonOmics | AWS HealthOmics | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
@@ -255,6 +251,7 @@ needs a fixture with explicit required values.
 | P2 | aWSDataTransfer | AWS Data Transfer | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsDeepRacer | AWS DeepRacer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsElasticDisasterRecovery | AWS Elastic Disaster Recovery | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
+| P2 | awsElementalMediaLive | AWS Elemental MediaLive | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | awsElementalMediaPackage | AWS Elemental MediaPackage | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsElementalMediaTailor | AWS Elemental Media Tailor | yes | 100.0% | clean | - | error | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsEntityResolution | AWS Entity Resolution | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -290,6 +287,7 @@ needs a fixture with explicit required values.
 | P2 | awsWebApplicationFirewall | AWS Web Application Firewall (WAF) | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsWickr | AWS Wickr | no | 100.0% | clean | - | needs-input | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | elasticLoadBalancing | Elastic Load Balancing | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
+| P2 | elementalMediaConvert | AWS Elemental MediaConvert | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | locationService | Amazon Location Service | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | migrationHubRefactorSpaces | AWS Migration Hub Refactor Spaces | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | simSpaceWeaver | AWS SimSpace Weaver | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -302,14 +300,14 @@ needs a fixture with explicit required values.
 | P3 | amazonEmrCoreNode | Amazon EMR core node on EC2 | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
 | P3 | amazonEmrMasterNode | Amazon EMR master node on EC2 | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
 | P3 | amazonEmrTaskNode | Amazon EMR task node on EC2 | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
-| P3 | amazonWorkspaces | WorkSpaces Personal | no | 100.0% | blocked:column-form | dependent-selectors;ri-payment-upfront | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
+| P3 | amazonWorkspaces | WorkSpaces Personal | no | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
 | P3 | chimeBusinessCallingAnalysis | Amazon Chime Business Calling analysis | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | chimeCostAnalysis | Amazon Chime Meetings App | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | proxyPhoneSession | Proxy Phone Session | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | ptsnAudio | PSTN Audio | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | sipTrunking | SIP Trunking | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
-| P3 | workSpacesCore | WorkSpaces Core Bundles | no | 100.0% | blocked:column-form | dependent-selectors;ri-payment-upfront | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
-| P3 | workSpacesInstances | WorkSpaces Core Managed Instances | no | 100.0% | blocked:column-form | dependent-selectors;ri-payment-upfront | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
+| P3 | workSpacesCore | WorkSpaces Core Bundles | no | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
+| P3 | workSpacesInstances | WorkSpaces Core Managed Instances | no | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
 | P3 | mainframeBluAge | AWS Blu Age automated refactoring | no | 81.8% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:2 |
 | P3 | mainframeMicroFocus | Micro Focus replatforming | no | 81.3% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:3 |
 | P3 | activeCustomBatchTranslation | Active Custom Batch Translation | no | 100.0% | clean | - | ok | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -336,6 +334,7 @@ needs a fixture with explicit required values.
 | P3 | amazonEbsBackup | EBS | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonEfsBackup | EFS Backup | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonElasticIP | Amazon Elastic IP | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | amazonElasticsearchService | Amazon OpenSearch Service | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonEmrOnEks | Amazon EMR on EKS | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonEmrServerless | Amazon EMR Serverless | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonEventBridge | Amazon EventBridge | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
@@ -349,6 +348,7 @@ needs a fixture with explicit required values.
 | P3 | amazonQuickSightAnomalyDetection | Amazon QuickSight Alerts & Anomaly Detection | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonQuickSightReadersAuthorsSpice | Amazon QuickSight Readers, Authors, SPICE | no | 100.0% | clean | - | ok | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonRdsBackup | RDS | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | amazonRedshift | Amazon Redshift | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonS3 | Amazon S3 | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonS3Backup | S3 | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonS3Glacier | S3 Glacier Flexible Retrieval | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -455,6 +455,9 @@ needs a fixture with explicit required values.
 | P3 | longFormTextToSpeech | Long-form Text-to-Speech | no | 100.0% | clean | - | ok | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | lumaAi | LumaAI | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | mediaLiveAnywhereChannel | MediaLive Anywhere Channel | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | mediaLiveAudioAddOns | MediaLive Add Ons | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | mediaLiveInput1 | MediaLive Inputs | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | mediaLiveOutput1 | MediaLive Outputs | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | medicalIcd10CmOntologyLinkingApi | Medical ICD-10-CM Ontology Linking API | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | medicalNamedEntityAndRelationshipExtractionNeReApi | Medical Named Entity and Relationship Extraction (NERe) API | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | medicalProtectedHealthInformationDataExtractionAndIdentificationPhIdApi | Medical Protected Health Information Data Extraction and Identification (PHId) API | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -477,6 +480,8 @@ needs a fixture with explicit required values.
 | P3 | omicsStorage | HealthOmics Storage | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | omicsWorkflows | HealthOmics Private Workflows | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | openAi | OpenAI | no | 100.0% | clean | - | error | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | outputConfiguration1 | Output Configuration 1 | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | outputConfiguration2 | Output Configuration 2 | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | piiDetection | Detect PII | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | proServeYear1Cost | ProServe Year 1 Price | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | proServeYear2Cost | ProServe Year 2 Price | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -545,14 +550,9 @@ needs a fixture with explicit required values.
 | P3 | workflow2 | Workload 2 | no | 100.0% | clean | - | error | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | workflow3 | Workload 3 | no | 100.0% | clean | - | error | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | workload1 | Workload 1 | no | 100.0% | clean | - | error | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | workSpacesPools | WorkSpaces Pools | no | 100.0% | clean | - | needs-input | unknown-region | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | writer | Writer | no | 100.0% | clean | - | error | error | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | amazonElastiCache | Amazon ElastiCache | yes | 100.0% | partial:column-form | additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront | needs-input | needs-input | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;dependent-selectors;regex-remap;ri-payment-upfront |
-| P3 | mediaLiveAudioAddOns | MediaLive Add Ons | no | 100.0% | partial:column-form | dependent-selectors | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P3 | mediaLiveInput1 | MediaLive Inputs | no | 100.0% | partial:column-form | dependent-selectors | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P3 | mediaLiveOutput1 | MediaLive Outputs | no | 100.0% | partial:column-form | dependent-selectors | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P3 | outputConfiguration1 | Output Configuration 1 | no | 100.0% | partial:column-form | dependent-selectors | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P3 | outputConfiguration2 | Output Configuration 2 | no | 100.0% | partial:column-form | dependent-selectors | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
-| P3 | workSpacesPools | WorkSpaces Pools | no | 100.0% | partial:column-form | dependent-selectors | needs-input | unknown-region | no | no | Phase 2 - column-form v2 | Column-form v2: dependent-selectors |
+| P3 | amazonElastiCache | Amazon ElastiCache | yes | 100.0% | partial:column-form | additional-pricing-data;regex-remap | needs-input | needs-input | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data;regex-remap |
 
 ## Rebuild
 

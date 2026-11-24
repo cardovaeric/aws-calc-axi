@@ -247,15 +247,34 @@ function inventory(definition: ServiceDefinition): {
     if (component["exportTagsAsValue"] !== undefined) gaps.add("export-tags");
     const unitModel = asRecord(component["pricingUnitModel"]);
     const pricingTypes = asRecord(unitModel?.["riPricingTypes"]);
-    if (pricingTypes && Object.values(pricingTypes).some((value) => Array.isArray(value))) {
-      gaps.add("ri-payment-upfront");
+    // Selector price patterns (`[{TermType: "Reserved", PurchaseOption: "All
+    // Upfront"}]`) and their upfront component are native, so a pattern list is
+    // not a gap. Tiered PLC_2.0 price patterns (a contiguous StartingRange /
+    // EndingRange ladder) are still unimplemented.
+    if (
+      pricingTypes &&
+      Object.values(pricingTypes).some(
+        (value) =>
+          Array.isArray(value) &&
+          value.some(
+            (pattern) =>
+              asRecord(pattern)?.["StartingRange"] !== undefined ||
+              asRecord(pattern)?.["EndingRange"] !== undefined
+          )
+      )
+    ) {
+      gaps.add("tiered-plc2-patterns");
     }
     for (const raw of asArray(component["row"])) {
       const row = asRecord(raw);
       if (!row) continue;
       const type = text(row["type"]);
       const selectorId = text(row["selectorId"]);
-      if (row["dependent"] !== undefined) gaps.add("dependent-selectors");
+      // Dependent selectors are native: the option tree is rebuilt from the
+      // aggregation rows and the price records, a value the parent no longer
+      // offers falls to the fixture default or the first offered value, and a
+      // selector with no offered value is dropped from the saved row. Evidence:
+      // analysis/FINDINGS.md section 14 and receipts/p1-dependent-selectors.json.
       if (type === "utilization" && selectorId !== "") hard.add("utilization-selector");
       if (type !== "" && !["textInput", "autoSuggest", "dropDown", "utilization"].includes(type)) {
         hard.add(`row:${type}`);
@@ -774,10 +793,11 @@ Priority rules:
 
 The static class is intentionally conservative. A \`columnFormIPM\` service is
 \`partial\` only while it uses a feature the engine still fails closed on:
-dependent selectors, additional pricing data, regex key remaps, reserved/upfront
-payment models, sub-components, or unsupported row types. A plain one-row column
-form is native. Runtime \`needs-input\` is not a failure; it means the service
-needs a fixture with explicit required values.
+additional pricing data, regex key remaps, tiered PLC_2.0 price patterns,
+sub-components, or unsupported row types. A plain one-row column form is native,
+and so are dependent selectors, reserved/upfront payment models, and selector
+price patterns (\`analysis/FINDINGS.md\` section 14). Runtime \`needs-input\` is not
+a failure; it means the service needs a fixture with explicit required values.
 
 ## P0 - top services
 

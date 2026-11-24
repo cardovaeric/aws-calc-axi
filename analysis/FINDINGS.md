@@ -489,3 +489,195 @@ Consequences:
   form prefetch (every CodeBuild compute type card used to demand the selected card's
   selectors), and count exports with a suffix (`countDT`, `count_1`, ...), which the live
   engine prefix-matches.
+
+## 14. Dependent selectors in `columnFormIPM`
+
+Observed on 2026-11-24 against `analysis/bundle.js` (sha256 `adbd5f41...`, the live
+`.../static/js/bundle.js`), the live definitions, and the live UI in us-east-2. Bundle offsets
+below are byte offsets into `analysis/bundle.js`.
+
+### 14.1 What the declaration means
+
+A row may declare `dependent: "<parent selectorId>"` (or an array of parents). The parent is
+always an earlier row in the same component. Examples:
+
+| Service | Component | Child | Parent |
+| --- | --- | --- | --- |
+| Amazon FSx for Lustre | `columnFormIPM` | `Cache Type` | `Storage type` (the primary key) |
+| Amazon ElastiCache | `columnFormIPM` | `PurchaseOption` | `LeaseContractLength` |
+| Amazon OpenSearch Service | `columnFormIPM_1/2` | `LeaseContractLength` | `PurchaseOption` |
+| Amazon Redshift | `columnFormIPM` | `LeaseContractLength` | `PurchaseOption` |
+
+`dependent` is not a visibility flag. It gates the **option set** of the child.
+
+### 14.2 Where a selector's options come from
+
+Two sources, both fetched per component (`getData`, offset 1471365):
+
+1. **Aggregation rows.** The live engine fetches
+   `.../{mapping}/{location}/primary-selector-aggregations.json` - one file per region - and
+   builds the component tree from the rows of the selected primary value (`h`, offset 1467325;
+   option insert `d`, offset 1466859):
+
+   ```js
+   for (const {selectors:f} of aggregations) {
+     if (r[primary] !== f[primary]) continue;
+     for (const id of secondaryKey) {
+       // no dependent: tree[id][f[id]] = null
+       // dependent:    tree[id][f[parent]][f[id]] = null
+     }
+   }
+   ```
+
+2. **Price records.** A selector that is *absent* from the aggregation row (`!(id in selectors)`)
+   is marked, and after the loop its tree is rebuilt from the regional price records of
+   `index.json` (`if (0 !== u.length)` block, offsets 1467700-1468300):
+
+   ```js
+   for (const meter in regionPrices) tree[id] = nest(record[parent] ...) [record[id]] = null;
+   tree[id] = sortKeysAscending(tree[id]);
+   ```
+
+   This is why `Term` and `Purchase option` exist only for Reserved: On-Demand records carry
+   `LeaseContractLength: ""` and `PurchaseOption: ""`, so the rebuilt tree is empty and the live
+   form *deletes* those rows from the component state (`getValue`, offset 2882623:
+   `return void delete r[selectorId]`).
+
+`remap.keyValue` is applied **forward** to both sources before the tree is built
+(remap helpers at offset 1227218: `b` for aggregation rows, `o` for records,
+`d = (e,t) => t.keyValue[e] || e`), so the tree and the saved values hold the label the form
+shows (`1000 MBps/TiB`, `No Cache`). The index path and the price-set tokens map the other way
+(`u`, offset 1466571: `for (const r in remap.keyValue) if (remap.keyValue[r] === t) { t = r; break }`).
+Regex-looking keys (`"/1\\s?yr/"`) are inert literal keys in that plain lookup; they never match
+a value, so they change nothing.
+
+### 14.3 Value selection, cascade, and the "no default" rule
+
+`getInitialValue` (offset 2881852) runs per row, in definition order, against the parent-narrowed
+option set (`getValue`). For a dropdown:
+
+```js
+const options = Object.keys(narrowedOptions);
+o === "" || !options.includes(o)
+  ? (defaultValue && options.includes(defaultValue) ? defaultValue : options[0])
+  : o
+```
+
+So: keep the current value when the parent still offers it; otherwise fall back to the row's
+`defaultValue` when that is offered, otherwise to the **first offered value**. If the parent
+narrows the set to nothing, the row is dropped from the component state.
+
+`createRows` (offset 2880258) mutates the value map in place during that loop, so each row sees
+the parent's value already resolved in the same pass - the cascade is definition-order, not a
+second render. `generateRowkey` (offset 2883449) prefixes the React key with the parent value
+(`Cache Type_HDD`) purely to force a remount.
+
+Live observations (us-east-2, `window` values read from the DOM):
+
+| Probe | Live result |
+| --- | --- |
+| ElastiCache, Pricing model OnDemand | Rows: Nodes, Instance, Utilization, Cache Engine, Cache Node Type, Pricing model. **No** Term, **no** Purchase option |
+| ElastiCache, Pricing model Reserved | Term `1yr`, Purchase option `All Upfront` appear |
+| OpenSearch, Reserved + All Upfront | Term options `[1yr, 3yr]`, `1yr` selected |
+| OpenSearch, Reserved + No Upfront | Term options `[3yr, 1yr]` - a different set *and* order; `1yr` kept because it is still offered |
+| FSx Lustre, Storage type SSD (default) | Cache Type `No Cache` (only option), Throughput `1000 MBps/TiB` |
+| FSx Lustre, Storage type HDD | Cache Type gains `SSD cache`, Throughput becomes `12 MBps/TiB` |
+| FSx Lustre, HDD + `SSD cache`, then switch to SSD | Cache Type resets to `No Cache`, Throughput to `1000 MBps/TiB` |
+
+The FSx defaults are the proof of the "first offered value" rule: the definition default is
+`50 MBps/TiB`, which no price row carries, so the form selects `1000 MBps/TiB` and the value it
+saves is that label. The `[3yr, 1yr]` order under No Upfront is the price-record order below the
+sorted top level; the sorted top level is what `p` (offset 1467128) produces for record-backed
+selectors only, and it is why `Purchase option` always lists
+`[All Upfront, No Upfront, Partial Upfront]`.
+
+### 14.4 What the saved component holds
+
+`{value: [{selectorId: {value: "<label>"}}]}` with exactly the rows the form rendered, in
+definition order, including auto-selected values, and with dropped selectors absent. Two
+consequences matter for publishing:
+
+- An On-Demand ElastiCache component must **not** carry `LeaseContractLength`/`PurchaseOption`;
+  the editor's rehydration (`getState`, `ae`, offset 2889182) feeds the saved values straight into
+  `getData`, and a value for a dropped selector has no tree to walk.
+- `ae` throws `Best Match produced invalid options` when the saved values do not match an
+  aggregation row (`bestMatchFound` from `c`, offset 1464080), so the published selector state has
+  to be one the aggregation file carries exactly (for the values it supplies).
+
+### 14.5 Price set token selection
+
+`y` (offset 1468802) builds one token per selector, then filters the price set labels
+(`e.filter`) with `String.match`, so tokens are regular expressions:
+
+- token = the value; a selector with `dependent` walks `[parent..., selectorId]` through the
+  option tree (`b`, offset 1468691) and returns the last path element, falling back to the first
+  key where the path breaks;
+- `remap.keyValue` maps a label back to its key;
+- if a token equals a key of `pricingUnitModel.riPaymentOptions`, its unit (`Hrs`, `Quantity`, or
+  `(Quantity|Hrs)`) is added as an extra token - this is what separates an `All Upfront`
+  `Quantity` record from the `Hrs` record of the same term;
+- the service id `es` (and `directconnect`) also matches after commas are stripped from the label
+  (`m`, offset 1468327), which is why `r5.2xlarge.search` matches `r5 2xlarge.search ...`;
+- a price set with exactly one metered unit is returned unfiltered (`1 === e.length`).
+
+`w` (offset 1470103) then prices each type in `riPricingTypes` against every matching metered
+unit, last match wins, so `Partial Upfront` can take its hourly rate from the `Hrs` record and its
+upfront from the `Quantity` record.
+
+### 14.6 Cost model
+
+`re` (offset 2887824) picks the model from the row whose `exportValueAs` starts with
+`pricingModel` via its `mappingValue`, falling back to `Monthly` when a monthly price exists and
+`Hourly` otherwise. `U` (offset 2873279) is the `Reserved` model:
+`monthly = hourly * 730 * count`, `upfront = upfront * count`. `G` is `Hourly`,
+`V` is `Monthly` (`hourly * 730 * count + monthly * count`), `z` is Savings Plans.
+
+### 14.7 Engine state after this section
+
+`src/engine/column-form.ts` now reproduces 14.2-14.6: option tree per region, forward remap,
+record-backed selectors, definition-order resolution with the first-offered default, drop,
+reverse remap for tokens and for the index path, `riPaymentOptions` units, the `es` comma rule,
+per-meter pattern pricing, the four cost models, and the upfront total.
+`src/engine/column-form-loader.ts` resolves the values before it fetches, iterates until they
+settle (a resolved value can be an index-path selector), and refuses a component whose selectors
+only best-match an aggregation row.
+
+Receipt: `receipts/p1-dependent-selectors.json`
+(`https://calculator.aws/#/estimate?id=b03c7fc75c828c53cb388b87aa8dae6f421e2153`).
+Editor recompute pass, mismatches `[]`: ElastiCache 0.00 monthly + 3,482.00 upfront,
+OpenSearch 748.98, Redshift 3,331.72, total 4,080.70 + 3,482.00 upfront, annual 52,450.40.
+
+### 14.8 Which services are genuinely blocked by this
+
+The static tracker listed `dependent-selectors` for 36 services (14 of them P1). That count is
+right about the *presence* of the declaration, but it is not the same as "blocked by dependent
+selectors":
+
+- **Genuinely gated by a parent in the data:** Amazon FSx for Lustre (`Cache Type` under
+  `Storage type`). This is the only one of the four targets where the parent/child pair exists in
+  the aggregation file, so the option set really differs per parent.
+- **Record-derived pairs** (ElastiCache, OpenSearch, Redshift, and the RDS family): the pair is
+  declared in the definition but absent from the aggregation, so the options come from the
+  Reserved price records. Without the record-backed branch the rows never render at all, which is
+  why these services failed: the engine either demanded values nobody could supply, or matched
+  no/ambiguous price sets.
+- **Not a dependency at all:** `awsDeadlineCloud` and `awsDirectConnect` carry the label but their
+  real blocker is `input:utilization`; 24 of the 36 also still need `additional-pricing-data`
+  (Database Savings Plans), `regex-remap`, or `remap.constant`.
+
+While proving this, one further engine bug surfaced inside the same mechanism and was fixed:
+`remap.keyValue` was applied in the wrong direction for price-set tokens, so a service such as
+`realTimeDocumentTranslation` (`{"Basic": "Basic - Text, HTML"}`) looked for the label instead of
+the key.
+
+### 14.9 Still blocked, outside this worktree's ownership
+
+- `FSx for Lustre` resolves its dependent selectors correctly and then fails in
+  `src/engine/template.ts`: the `replace` pricing subtype is implemented as an exact-match
+  lookup, while the live one is a global regex replacement of `originalString` inside the value
+  (`.../bundle.js` offset 2844449, `e.replace(new RegExp(escape(r), "g"), n)`). FSx builds
+  `persThrouput = replace(concatenate(ThroughputCapacity, " test"), " test" -> "")`, so it needs
+  the substring behaviour.
+- `utilization` rows that carry a `selectorId`, `remap.constant`, `additionalPricingData` joins,
+  `subComponentsList`, `exportTagsAsValue`, multiple price sets, and tiered PLC_2.0 patterns
+  (`StartingRange`/`EndingRange`) remain fail-closed.

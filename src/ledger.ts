@@ -227,6 +227,21 @@ export const LEDGER: LedgerEntry[] = [
       "one row per column form; the live 'second row' is a second service (receipts/column-form-rows-probe.json)",
   },
   {
+    id: "dependent-selectors-use2",
+    service: "ElastiCache + OpenSearch + Redshift reserved",
+    template: "amazonElastiCache + amazonElasticsearchService + amazonRedshift",
+    region: "us-east-2",
+    fixture:
+      "ElastiCache 2 x cache.m5.xlarge Reserved 1yr All Upfront, OpenSearch 2 x r5.2xlarge.search Reserved 1yr No Upfront, Redshift 2 x ra3.4xlarge Reserved 1yr No Upfront",
+    specPath: "examples/dependent-selectors.yaml",
+    receiptPath: "receipts/p1-dependent-selectors.json",
+    expectedMonthlyCents: 408070,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "dependent Term/Purchase selectors resolved from the price records; 3,482.00 upfront (analysis/FINDINGS.md section 14)",
+  },
+  {
     id: "groups-support-business-use2",
     service: "group: Data -> Data Compute (S3 + Lambda)",
     template: "simpleStorageServiceClassesGroup + lambdaWithFreeTier",

@@ -1,0 +1,193 @@
+{
+  "estimate": "axi-e2e dependent selectors",
+  "specHash": "ae1cbf25d9fe37eb",
+  "url": "https://calculator.aws/#/estimate?id=b03c7fc75c828c53cb388b87aa8dae6f421e2153",
+  "savedKey": "b03c7fc75c828c53cb388b87aa8dae6f421e2153",
+  "publishedAt": "2026-11-24T14:44:23.451Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 4080.7,
+    "upfront": 3482,
+    "total12m": 52450.4,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonElastiCache",
+        "template": "amazonElastiCache",
+        "region": "us-east-2",
+        "monthly": 0,
+        "upfront": 3482,
+        "summary": "Engine (Redis OSS), Cache Engine (Redis), Pricing strategy (OnDemand), Nodes (2), Instance type (cache.m5.xlarge), Cache Engine (Redis), Cache Node Type (Standard), Pricing strategy (Reserved 1yr All Upfront), Nodes (0), Instance type (cache.r6gd.12xlarge), Cache Engine (Redis), Cache Node Type (Memory optimized), Pricing strategy (OnDemand)"
+      },
+      {
+        "code": "amazonElasticsearchService",
+        "template": "elasticSearchService",
+        "region": "us-east-2",
+        "monthly": 748.98,
+        "upfront": 0,
+        "summary": "Nodes (2), Instance type (r5.2xlarge.search), Instance Node Type (Memory optimized), Storage Type (EBS Only), Pricing strategy (Reserved No Upfront 1yr), Nodes (0), Instance type (r5.2xlarge.search), Instance Node Type (Memory optimized), Storage Type (EBS Only), Pricing strategy (OnDemand), Number of instances (1), Storage for each Amazon OpenSearch Service instance (General Purpose SSD (gp3)), Storage amount per volume (gp3) (0 GB), Number of nodes (0), Instance type (ultrawarm1.large.search), Pricing strategy (OnDemand), Managed storage amount (per UltraWarm instance) (0 TB), Managed storage size (0 GB)"
+      },
+      {
+        "code": "amazonRedshift",
+        "template": "redshift",
+        "region": "us-east-2",
+        "monthly": 3331.72,
+        "upfront": 0,
+        "summary": "Nodes (2), Instance type (ra3.4xlarge), Pricing strategy (Reserved No Upfront 1yr)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonElastiCache",
+        "monthly": 0,
+        "upfront": 3482
+      },
+      {
+        "serviceCode": "amazonElasticsearchService",
+        "monthly": 748.98,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonRedshift",
+        "monthly": 3331.72,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 4080.7,
+      "upfront": 3482
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=b03c7fc75c828c53cb388b87aa8dae6f421e2153",
+    "title": "axi-e2e dependent selectors",
+    "monthly": "4,080.70 USD",
+    "upfront": "3,482.00 USD",
+    "annual": "52,450.40 USD",
+    "monthlyValue": 4080.7,
+    "upfrontValue": 3482,
+    "annualValue": 52450.4,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon ElastiCache",
+        "upfront": "3,482.00 USD",
+        "monthly": "0.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Engine (Redis OSS), Cache Engine (Redis), Pricing strategy (OnDemand), Nodes (2), Instance type (cache.m5.xlarge), Cache Engine (Redis), Cache Node Type (Standard), Pricing strategy (Reserved 1yr All Upfront), Nodes (0), Instance type (cache.r6gd.12xlarge), Cache Engine (Redis), Cache Node Type (Memory optimized), Pricing strategy (OnDemand)",
+        "status": null
+      },
+      {
+        "name": "Amazon OpenSearch Service",
+        "upfront": "0.00 USD",
+        "monthly": "748.98 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Nodes (2), Instance type (r5.2xlarge.search), Instance Node Type (Memory optimized), Storage Type (EBS Only), Pricing strategy (Reserved No Upfront 1yr), Nodes (0), Instance type (r5.2xlarge.search), Instance Node Type (Memory optimized), Storage Type (EBS Only), Pricing strategy (OnDemand), Number of instances (1), Storage for each Amazon OpenSearch Service instance (General Purpose SSD (gp3)), Storage amount per volume (gp3) (0 GB), Number of nodes (0), Instance type (ultrawarm1.large.search), Pricing strategy (OnDemand), Managed storage amount (per UltraWarm instance) (0 TB), Managed storage size (0 GB)",
+        "status": null
+      },
+      {
+        "name": "Amazon Redshift",
+        "upfront": "0.00 USD",
+        "monthly": "3,331.72 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Nodes (2), Instance type (ra3.4xlarge), Pricing strategy (Reserved No Upfront 1yr)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T14:44:31.410Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=b03c7fc75c828c53cb388b87aa8dae6f421e2153",
+    "savedKey": "b03c7fc75c828c53cb388b87aa8dae6f421e2153",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=b03c7fc75c828c53cb388b87aa8dae6f421e2153",
+      "title": "axi-e2e dependent selectors",
+      "monthly": "4,080.70 USD",
+      "upfront": "3,482.00 USD",
+      "annual": "52,450.40 USD",
+      "monthlyValue": 4080.7,
+      "upfrontValue": 3482,
+      "annualValue": 52450.4,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon ElastiCache",
+          "upfront": "3,482.00 USD",
+          "monthly": "0.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Engine (Redis OSS), Cache Engine (Redis), Pricing strategy (OnDemand), Nodes (2), Instance type (cache.m5.xlarge), Cache Engine (Redis), Cache Node Type (Standard), Pricing strategy (Reserved 1yr All Upfront), Nodes (0), Instance type (cache.r6gd.12xlarge), Cache Engine (Redis), Cache Node Type (Memory optimized), Pricing strategy (OnDemand)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon OpenSearch Service",
+          "upfront": "0.00 USD",
+          "monthly": "748.98 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Nodes (2), Instance type (r5.2xlarge.search), Instance Node Type (Memory optimized), Storage Type (EBS Only), Pricing strategy (Reserved No Upfront 1yr), Nodes (0), Instance type (r5.2xlarge.search), Instance Node Type (Memory optimized), Storage Type (EBS Only), Pricing strategy (OnDemand), Number of instances (1), Storage for each Amazon OpenSearch Service instance (General Purpose SSD (gp3)), Number of nodes (0), Instance type (ultrawarm1.large.search), Pricing strategy (OnDemand)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Redshift",
+          "upfront": "0.00 USD",
+          "monthly": "3,331.72 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Nodes (2), Instance type (ra3.4xlarge), Pricing strategy (Reserved No Upfront 1yr)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T14:44:59.610Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e dependent selectors",
+    "monthly": 4080.7,
+    "upfront": 3482,
+    "annual": 52450.4,
+    "services": [
+      {
+        "name": "Amazon ElastiCache",
+        "monthly": 0,
+        "upfront": 3482,
+        "region": "US East (Ohio)",
+        "configSummary": "Engine (Redis OSS), Cache Engine (Redis), Pricing strategy (OnDemand), Nodes (2), Instance type (cache.m5.xlarge), Cache Engine (Redis), Cache Node Type (Standard), Pricing strategy (Reserved 1yr All Upfront), Nodes (0), Instance type (cache.r6gd.12xlarge), Cache Engine (Redis), Cache Node Type (Memory optimized), Pricing strategy (OnDemand)"
+      },
+      {
+        "name": "Amazon OpenSearch Service",
+        "monthly": 748.98,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Nodes (2), Instance type (r5.2xlarge.search), Instance Node Type (Memory optimized), Storage Type (EBS Only), Pricing strategy (Reserved No Upfront 1yr), Nodes (0), Instance type (r5.2xlarge.search), Instance Node Type (Memory optimized), Storage Type (EBS Only), Pricing strategy (OnDemand), Number of instances (1), Storage for each Amazon OpenSearch Service instance (General Purpose SSD (gp3)), Storage amount per volume (gp3) (0 GB), Number of nodes (0), Instance type (ultrawarm1.large.search), Pricing strategy (OnDemand), Managed storage amount (per UltraWarm instance) (0 TB), Managed storage size (0 GB)"
+      },
+      {
+        "name": "Amazon Redshift",
+        "monthly": 3331.72,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Nodes (2), Instance type (ra3.4xlarge), Pricing strategy (Reserved No Upfront 1yr)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

@@ -19,6 +19,7 @@ import {
   asColumnFormComponent,
   columnFormSelectorValues,
   primarySelectorOf,
+  resolveColumnFormSelectors,
 } from "./column-form.ts";
 import { evaluateDisplayIf, type ExprContext } from "./expression.ts";
 import { CURRENCY } from "../endpoints.ts";
@@ -121,6 +122,76 @@ function collectReferencedIds(expr: unknown, into: Set<string>): void {
 
 type Visibility = (card: Card, component: Component) => boolean;
 
+/**
+ * Fetch the PLC_2.0 data for the values the live form would actually hold.
+ *
+ * The live form re-fetches on every selector change and rewrites the value map
+ * from the rebuilt component tree, so its steady state is a fixed point: the
+ * fetched price set is the one for the values that end up saved. Some of those
+ * values are also index-path selectors (ElastiCache prices its path on
+ * `Cache Engine` and `TermType`), so resolving them can move the path. Iterate
+ * until the values stop changing, then require an exact aggregation match - the
+ * live editor's `Update estimate` refuses a component whose selectors only
+ * best-match a row.
+ */
+async function convergeColumnForm(options: {
+  component: ReturnType<typeof asColumnFormComponent>;
+  initial: Record<string, string>;
+  raw: unknown;
+  mappingUrl: string;
+  currency: string;
+  regionName: string;
+  cache?: CacheOptions;
+}): Promise<ColumnFormPricingData> {
+  const { component } = options;
+  let values = options.initial;
+  let data: ColumnFormPricingData | undefined;
+  let resolvedValues: Record<string, string> = values;
+  for (let attempt = 0; attempt < 4; attempt += 1) {
+    data = await loadColumnFormPricing({
+      mappingUrl: options.mappingUrl,
+      currency: options.currency,
+      regionName: options.regionName,
+      values,
+      ...(component.remap?.keyValue ? { remap: component.remap } : {}),
+      ...(options.cache ? { cache: options.cache } : {}),
+    });
+    resolvedValues = resolveColumnFormSelectors(component, options.raw, data).values;
+    if (sameSelectorValues(resolvedValues, values)) {
+      if (data.exactMatch === false) {
+        throw new EngineError(
+          `columnFormIPM "${component.id}" selector values ${JSON.stringify(values)} ` +
+            `do not match a PLC_2.0 aggregation row; the live editor rejects ` +
+            `"Best Match" components, so this configuration cannot be published`,
+          "MISSING_PRICE",
+          { componentId: component.id, values }
+        );
+      }
+      return data;
+    }
+    values = resolvedValues;
+  }
+  throw new EngineError(
+    `columnFormIPM "${component.id}" selector values did not settle after 4 ` +
+      `passes; resolved ${JSON.stringify(resolvedValues)}`,
+    "UNSTABLE_SELECTION",
+    { componentId: component.id, values: resolvedValues }
+  );
+}
+
+function sameSelectorValues(
+  left: Record<string, string>,
+  right: Record<string, string>
+): boolean {
+  const keys = new Set([...Object.keys(left), ...Object.keys(right)]);
+  for (const key of keys) {
+    const a = left[key] ?? "";
+    const b = right[key] ?? "";
+    if (a !== b) return false;
+  }
+  return true;
+}
+
 export function columnFormVisibility(
   template: Template,
   overrides: Record<string, unknown>
@@ -189,14 +260,14 @@ export async function prepareColumnForms(
           { componentId: component.id, mappingDefinitionName: mappingName }
         );
       }
-      const { values } = columnFormSelectorValues(
+      const { values: initial } = columnFormSelectorValues(
         component,
         options.overrides[component.id]
       );
-      // Only the primary selector is required; hidden secondary selectors are
-      // filled from the component tree by the live form.
+      // Only the primary selector is required; every other selector is
+      // resolved from the component tree the way the live form does it.
       const primary = primarySelectorOf(component);
-      if (values[primary] === undefined || values[primary] === "") {
+      if (initial[primary] === undefined || initial[primary] === "") {
         throw new EngineError(
           `columnFormIPM "${component.id}" needs a value for "${primary}"; ` +
             `set ${component.id} with {"${primary}": <value>}`,
@@ -210,11 +281,13 @@ export async function prepareColumnForms(
       }
       prepared.set(
         component.id,
-        await loadColumnFormPricing({
+        await convergeColumnForm({
+          component,
+          initial,
+          raw: options.overrides[component.id],
           mappingUrl: mapping.mappingDefinitionURL,
           currency,
           regionName: options.regionName,
-          values,
           ...(options.cache ? { cache: options.cache } : {}),
         })
       );

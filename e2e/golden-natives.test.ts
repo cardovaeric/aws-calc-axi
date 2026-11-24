@@ -82,6 +82,33 @@ for (const testCase of CASES) {
   });
 }
 
+test("native golden examples/dependent-selectors.yaml (dependent selectors)", async () => {
+  const spec = await loadSpecFile(join(ROOT, "examples/dependent-selectors.yaml"));
+  const { result } = await buildFromSpec(spec);
+  assert.equal(result.serviceTotal.monthly, 4080.7);
+  assert.equal(result.serviceTotal.upfront, 3482);
+  const monthly = result.services.map((entry) => entry.evaluated.serviceCost.monthly);
+  assert.deepEqual(monthly, [0, 748.98, 3331.72]);
+  const summaries = result.services.map((entry) => entry.evaluated.configSummary);
+  // Only a Reserved row renders Term and Purchase option, and the saved row
+  // carries both so the editor can reproduce the price.
+  assert.ok(summaries[0]?.includes("Pricing strategy (Reserved 1yr All Upfront)"));
+  assert.ok(summaries[1]?.includes("Pricing strategy (Reserved No Upfront 1yr)"));
+  assert.ok(summaries[2]?.includes("Pricing strategy (Reserved No Upfront 1yr)"));
+  const saved = result.services.map(
+    (entry) => entry.evaluated.calculationComponents["columnFormIPM"] as
+      | { value: Array<Record<string, { value: string }>> }
+      | undefined
+  );
+  assert.deepEqual(saved[2]?.value[0], {
+    "Number of Nodes": { value: "2" },
+    "Instance Type": { value: "ra3.4xlarge" },
+    TermType: { value: "Reserved" },
+    PurchaseOption: { value: "No Upfront" },
+    LeaseContractLength: { value: "1yr" },
+  });
+});
+
 /**
  * A live column form holds one row per component; a second configuration is a
  * second service (receipts/column-form-rows-probe.json). The batch fixture

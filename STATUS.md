@@ -7,7 +7,7 @@ Full service coverage assessment and implementation plan: `analysis/COVERAGE_ASS
 
 ## What works now
 
-- Public repository: https://github.com/cardovaeric/aws-calc-axi (default branch `develop`).
+- Public repository: https://github.com/cardovaeric/aws-calc-axi (default branch `main`).
   Agents can install the guide with `npx skills add cardovaeric/aws-calc-axi --skill aws-calc-axi`;
   the CLI itself installs from a clone with `npm install && npm link`.
 - TypeScript Node project with a real binary (`bin/aws-calc-axi.js`), native TS execution,

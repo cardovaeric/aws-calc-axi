@@ -292,8 +292,16 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
             defaultOption["frequency"] ?? "NA"
           )}`
         : `${sizeOptions[0]?.id ?? outputSize}|${frequencyOptions[0]?.id ?? "NA"}`;
-      const selectedId = override.unit ?? defaultId;
-      const [sizeUnit = outputSize, frequencyUnit = "NA"] = selectedId.split("|");
+      // The live wire format is always `<size>|<frequency>`. A bare size
+      // override keeps the component's default frequency.
+      const requestedId = override.unit ?? defaultId;
+      const [requestedSize = outputSize, requestedFrequency] = requestedId.split("|");
+      const defaultFrequency = defaultId.split("|")[1] ?? "NA";
+      const sizeUnit = requestedSize;
+      const frequencyUnit = requestedId.includes("|")
+        ? (requestedFrequency ?? defaultFrequency)
+        : defaultFrequency;
+      const selectedId = `${sizeUnit}|${frequencyUnit}`;
 
       if (sizeOptions.length > 0 && !sizeOptions.some((option) => option.id === sizeUnit)) {
         throw new InputValidationError({

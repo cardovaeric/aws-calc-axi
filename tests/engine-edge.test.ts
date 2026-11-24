@@ -215,3 +215,43 @@ test("concatenate joins constants and components without separators", () => {
   });
   assert.equal(result.values.get("joined"), "Database Storage x 1");
 });
+
+test("a bare size override keeps the component's default frequency", () => {
+  const result = evaluateInput(
+    input({
+      subType: "fileSize",
+      label: "Storage amount",
+      dropDownSize: [
+        { label: "MB", id: "mb" },
+        { label: "GB", id: "gb" },
+      ],
+      defaultOption: { size: "gb", frequency: "NA" },
+      outputSize: "gb",
+      outputFrequency: "NA",
+      defaultValue: 100,
+      displayInConfigSummary: true,
+    }),
+    { ...context, overrides: { field: { value: 500, unit: "gb" } } }
+  );
+  assert.equal(result.value, 500);
+  assert.deepEqual(result.saved, { value: 500, unit: "gb|NA" });
+  assert.equal(result.configSummary, "Storage amount (500 GB)");
+});
+
+test("a bare size override on a monthly input keeps the monthly frequency", () => {
+  const result = evaluateInput(
+    input({
+      subType: "fileSize",
+      label: "Amount",
+      dropDownSize: [{ label: "GB", id: "gb" }],
+      dropDownFrequency: [{ label: "month", id: "month" }],
+      defaultOption: { size: "gb", frequency: "month" },
+      outputSize: "gb",
+      outputFrequency: "month",
+      defaultValue: 100,
+    }),
+    { ...context, overrides: { field: { value: 250, unit: "gb" } } }
+  );
+  assert.equal(result.value, 250);
+  assert.deepEqual(result.saved, { value: 250, unit: "gb|month" });
+});

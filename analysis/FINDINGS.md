@@ -408,15 +408,37 @@ curl -s --compressed \
 
 ## 12. BINUS eDesk migration estimate (external deliverable)
 
-Published 2026-11-24 for `BINUS_School_eDesk_Azure_to_AWS_Technical_
-Assessment_v1.docx`:
+Final public link (generated on 2026-11-24 by publishing the component payload,
+clicking "Update estimate", then "Share" in the calculator editor):
 
-`https://calculator.aws/#/estimate?id=658500a0001896a21bbfbe5fe7d2c924fee8d02a`
+`https://calculator.aws/#/estimate?id=80c119fedeab83ca5fa8a7da79dad61d77c93374`
 
-- Two groups: Production 1,421.73 and Non-production (DEV/UAT) 758.09; total
-  2,179.82/month (26,157.84/year).
-- Every service carries a valid calculator component payload. Costs are the
-  assessment's Section 7 line items; the calculator's native source renders
-  stored costs, so the link matches the document to the cent.
-- The read-only page renders 16 Production and 14 Non-production rows with no
-  service errors.
+- Two groups: Production 1,429.13 and Non-production (DEV/UAT) 762.50; total
+  2,191.63/month (26,299.56/year). 16 and 14 services.
+- The page reloads as a normal read-only estimate with no status column. The
+  editor view after Update lists the recomputed rows (the "Cost updated" labels
+  are an editor artifact and are not stored in the shared link).
+- The stored service costs are the calculator's recomputation. Relative to the
+  assessment's Section 7 line items the live Jakarta rates differ for: NAT
+  (48.97 vs 48.00), MSK (98.79/93.99 vs 91.59/89.19), SES (16.00/1.60 vs
+  10.00/2.00), CloudWatch Logs (73.97/11.05 vs 76.65/12.00), Application
+  Signals (28.71 vs 29.00), CloudWatch metrics/alarms (4.00 vs 9.00), and data
+  transfer (13.20/1.98 vs 12.00/2.00). EKS, EC2, EBS, ALB, RDS, ElastiCache,
+  S3, and Secrets match the assessment.
+- Custom line text goes in the `description` field, not `configSummary`. The
+  calculator recomputes `configSummary` from components on Update; the
+  description survives and renders in the Description column.
+- `fileSize` inputs must be saved as `<size>|<frequency>` (`gb|NA`,
+  `gb|month`, `gb|hour`). A bare `gb` renders as "(100 undefined)" in the
+  recomputed summary and the input is ignored (EBS/RDS/MSK storage showed 0).
+  The engine now normalizes bare size overrides to the component's default
+  frequency before saving.
+- EC2 read-only cause: the captured EC2 payload carried components from an
+  older template (`dataTransferForEC2`, `detailedMonitoringCheckbox`,
+  `ec2AdvancedPricingMetrics`) and an invalid On-Demand pricing strategy
+  (`model: "ondemand"`). Rebuilding it with the current template inputs and
+  `{selectedOption: "on-demand", term: "1 year", utilizationValue: "100",
+  utilizationUnit: "%Utilized/Month"}` makes it editable and it recomputes
+  `3 x m6i.large = 262.80` (and `2 x m6i.large = 175.20`).
+- The pre-Share payload is reproducible with `binus-edesk-q/make-aws-estimate.ts`
+  (link `f957a0d8...`); the shared link above is the authoritative result.

@@ -19,7 +19,7 @@ Work autonomously and single-threaded. Do not spawn subagent swarms or dynamic w
 
 ## Current state
 
-- `npm run typecheck`, `npm run lint`, `npm test` (94), `npm run e2e` (19), `npm run ledger`
+- `npm run typecheck`, `npm run lint`, `npm test` (96), `npm run e2e` (19), `npm run ledger`
   (12 rows) all pass.
 - 12 ledger rows have public links, rendered-DOM receipts, oracles, and screenshots.
 - Non-empty `dataTransferV2` pricing is native. Because the read-only share page drops these
@@ -31,7 +31,11 @@ Work autonomously and single-threaded. Do not spawn subagent swarms or dynamic w
   14.02) evaluate natively but do not have ledger rows yet.
 - `throughput` inputs are native, which unlocked gp3/EBS and RDS storage. The scanner reports
   122 of 160 services in the implemented subtype set and 62 evaluating with defaults.
-- The BINUS eDesk migration estimate is published (see FINDINGS section 12, D-022).
+- The BINUS eDesk migration estimate is published and was regenerated through the calculator's
+  Update -> Share flow:
+  `https://calculator.aws/#/estimate?id=80c119fedeab83ca5fa8a7da79dad61d77c93374`
+  (Production 1,429.13, Non-production 762.50, total 2,191.63). See FINDINGS section 12, D-022,
+  D-023.
 - The publish budget for 2026-11-23 was raised to 58 for the mandated receipts and the client
   deliverable (D-017, D-022). A new UTC day starts fresh; do not raise the cap without a
   documented reason, and reuse receipts where the spec hash matches.
@@ -64,6 +68,12 @@ Work autonomously and single-threaded. Do not spawn subagent swarms or dynamic w
 - File size validations use the output unit; frequency and duration validations use the entered
   amount; percent inputs keep the fraction in state and summary.
 - Untouched `dataTransferV2` rows are saved with `unit: "tb_month"`, matching native payloads.
+- `fileSize` saved units are always `<size>|<frequency>` (`gb|NA`, `gb|month`, `gb|hour`); bare
+  size overrides are normalized to the component's default frequency.
+- Published estimates put custom line text in `description`; the calculator recomputes
+  `configSummary` on Update, so never store custom text there.
+- Generate client links through the calculator's Update -> Share flow so the stored costs are
+  the calculator's own recomputation.
 - PLC_2.0 mappings are selector trees, not flat metered unit maps; keep them out of the flat
   price loader. `riPricingTypes` arrays are selector patterns, not price tiers.
 - `concatenate` joins operands with no separator and supports `constant` operands; meter names

@@ -1,0 +1,1670 @@
+{
+  "name": "axi-sim EKS VPC EBS RDS EC2 full surface v3",
+  "services": {},
+  "groups": {
+    "EKS-de2e1957-8633-430c-a1b6-c7e23508698a": {
+      "name": "EKS",
+      "services": {
+        "awsEks-4c4624eb-d452-4866-8b3d-b428ce54a491": {
+          "calculationComponents": {
+            "numberOfEKSClusters": {
+              "value": 2
+            },
+            "numberOfEKSClusters_es": {
+              "value": 1
+            },
+            "argoCDCapabilities": {
+              "value": 1
+            },
+            "argoCDApplicationsPerCapability": {
+              "value": 5
+            },
+            "ackCapabilities": {
+              "value": 1
+            },
+            "ackResourcesPerCapability": {
+              "value": 10
+            },
+            "kroCapabilities": {
+              "value": 1
+            },
+            "kroRGDInstancesPerCapability": {
+              "value": 3
+            },
+            "numberOfHybridNodes": {
+              "value": 10,
+              "unit": "perMonth"
+            },
+            "numberOfVCPUperNode": {
+              "value": 8
+            }
+          },
+          "serviceCode": "awsEks",
+          "region": "us-east-2",
+          "estimateFor": "Amazon EKS",
+          "version": "0.0.40",
+          "description": null,
+          "serviceCost": {
+            "monthly": 1711.16
+          },
+          "serviceName": "Amazon EKS",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (2), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (5), Number of ACK capabilities (1), Number of ACK resources per ACK capability (10), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (3), Number of hybrid nodes (10 per month), Number of vCPU per hybrid node (8)"
+        }
+      },
+      "groups": {},
+      "groupSubtotal": {
+        "monthly": 1711.16
+      },
+      "totalCost": {
+        "monthly": 1711.16,
+        "upfront": 0
+      }
+    },
+    "VPC-25695585-a618-49fe-ab44-4cd84e06c2e2": {
+      "name": "VPC",
+      "services": {
+        "amazonVirtualPrivateCloud-1c9d9f6b-b1e9-455e-b102-175675f7f420": {
+          "calculationComponents": {},
+          "serviceCode": "amazonVirtualPrivateCloud",
+          "region": "us-east-2",
+          "estimateFor": "virtualPrivateCloudSubServiceSelector",
+          "version": "0.0.101",
+          "description": null,
+          "serviceCost": {
+            "monthly": 2481.08
+          },
+          "serviceName": "Amazon Virtual Private Cloud (VPC)",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Number of Site-to-Site VPN Connections (2), Number of subnet associations (2), Working days per month (22) Number of network assessments per month (2), Number of ENIs (elastic network interfaces) (10) Number of connectivity analysis per month (10) Number of traffic mirroring sessions (2) Number of In-use public IPv4 addresses (2), Number of Idle public IPv4 addresses (1) Number of active IP addresses (100) DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month), DT Intra-Region: (0 TB per month) Number of Route Server endpoints (2) Number of NAT Gateways (2), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (2) Number of Transit Gateway attachments (2), Number of Multicast Receivers (1) Number of VPC Interface endpoints per AWS region (2) Number of Availability Zones that Gateway Load Balancer is deployed to (2), Total processed bytes (1 TB per month), Average number of new connections/flows (10 per second), Average connection/flow duration (10 seconds), Number of Gateway Load Balancer Endpoints (2) Number of Attachments (2), Number of Transit Gateway Peering Connections (1)",
+          "subServices": [
+            {
+              "calculationComponents": {
+                "numberOfSiteToSiteVPNConnections": {
+                  "value": 2
+                },
+                "averageDurationForEachConnection": {
+                  "value": 12,
+                  "unit": "perDay"
+                },
+                "vpnConnection_numberOfClientSubnets": {
+                  "value": 2
+                },
+                "vpnConnection_numberOfClientConnections": {
+                  "value": 10,
+                  "unit": "perDay"
+                },
+                "vpnConnection_clientAvgDuration": {
+                  "value": 8,
+                  "unit": "perDay"
+                },
+                "vpnConnection_numberOfWorkDays": {
+                  "value": 22
+                }
+              },
+              "serviceCode": "vpnConnectionVpc",
+              "region": "us-east-2",
+              "estimateFor": "VPNConnection",
+              "version": "0.0.19",
+              "description": null,
+              "serviceCost": {
+                "monthly": 270.5
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfNetworkAssessment": {
+                  "value": 2
+                },
+                "numberOfElasticNetworkInterface": {
+                  "value": 10
+                }
+              },
+              "serviceCode": "networkAccessAnalyzerVpc",
+              "region": "us-east-2",
+              "estimateFor": "template_NetworkAccessAnalyzer",
+              "version": "0.0.7",
+              "description": null,
+              "serviceCost": {
+                "monthly": 0.04
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfConnectivityAnalysis": {
+                  "value": 10
+                }
+              },
+              "serviceCode": "reachabilityAnalyzerVpc",
+              "region": "us-east-2",
+              "estimateFor": "template_ReachabilityAnalyzer",
+              "version": "0.0.7",
+              "description": null,
+              "serviceCost": {
+                "monthly": 1
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfTrafficMirroringSession": {
+                  "value": 2
+                }
+              },
+              "serviceCode": "trafficMirroringVpc",
+              "region": "us-east-2",
+              "estimateFor": "template_TrafficMirror",
+              "version": "0.0.8",
+              "description": null,
+              "serviceCost": {
+                "monthly": 21.9
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfInusepublicipv4address": {
+                  "value": 2
+                },
+                "numberOfIdlepublicipv4address": {
+                  "value": 1
+                }
+              },
+              "serviceCode": "publicIpv4Address",
+              "region": "us-east-2",
+              "estimateFor": "ipv4publicaddress",
+              "version": "0.0.17",
+              "description": null,
+              "serviceCost": {
+                "monthly": 10.95
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfActiveIPaddress": {
+                  "value": 100
+                }
+              },
+              "serviceCode": "ipamVpc",
+              "region": "us-east-2",
+              "estimateFor": "template_IPAM",
+              "version": "0.0.8",
+              "description": null,
+              "serviceCost": {
+                "monthly": 19.71
+              }
+            },
+            {
+              "calculationComponents": {
+                "dataTransfer": {
+                  "value": [
+                    {
+                      "entryType": "INBOUND",
+                      "value": "",
+                      "unit": "tb_month",
+                      "fromRegion": ""
+                    },
+                    {
+                      "entryType": "INTRA_REGION",
+                      "value": "",
+                      "unit": "tb_month"
+                    },
+                    {
+                      "entryType": "OUTBOUND",
+                      "value": "1",
+                      "unit": "tb_month",
+                      "toRegion": "External"
+                    }
+                  ]
+                }
+              },
+              "serviceCode": "dataTransferVpc",
+              "region": "us-east-2",
+              "estimateFor": "dataTransfer",
+              "version": "0.0.9",
+              "description": null,
+              "serviceCost": {
+                "monthly": 92.16
+              }
+            },
+            {
+              "calculationComponents": {
+                "Number_of_route_server_end_points": {
+                  "value": 2
+                }
+              },
+              "serviceCode": "vpcRouteServer",
+              "region": "us-east-2",
+              "estimateFor": "template_VPC_Route_Server",
+              "version": "0.0.5",
+              "description": null,
+              "serviceCost": {
+                "monthly": 1095
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfGateways": {
+                  "value": 2
+                },
+                "dataProcessedPerNATGateway": {
+                  "value": 1,
+                  "unit": "tb|month"
+                },
+                "regionalNatGatewayCount": {
+                  "value": 1
+                },
+                "regionalNatGatewayAzCount": {
+                  "value": 2
+                },
+                "regionalNatGatewayDataProcessed": {
+                  "value": 500,
+                  "unit": "gb|month"
+                }
+              },
+              "serviceCode": "networkAddressTranslationNatGatewayVpc",
+              "region": "us-east-2",
+              "estimateFor": "networkAddressTranslationGateway",
+              "version": "0.0.19",
+              "description": null,
+              "serviceCost": {
+                "monthly": 246.06
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfTransitGatewayAttachments": {
+                  "value": 2
+                },
+                "dataProcessedPerTransitGatewayAttachment": {
+                  "value": 1,
+                  "unit": "tb|month"
+                },
+                "Number_of_multicast_receivers": {
+                  "value": 1
+                },
+                "Multicast_data_processed_per_Transit_Gateway_receiver": {
+                  "value": 100,
+                  "unit": "gb|month"
+                }
+              },
+              "serviceCode": "transitGatewayVpc",
+              "region": "us-east-2",
+              "estimateFor": "transitGateway",
+              "version": "0.0.19",
+              "description": null,
+              "serviceCost": {
+                "monthly": 115.96
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfInterfaceVPCEndpointsPerRegion": {
+                  "value": 2
+                },
+                "numberOfAvailabilityZonesEndpointsDeployed": {
+                  "value": 2
+                },
+                "dataProcessedByEachVPCENIAZ": {
+                  "value": 1,
+                  "unit": "tb|month"
+                }
+              },
+              "serviceCode": "awsPrivateLinkVpc",
+              "region": "us-east-2",
+              "estimateFor": "awsPrivateLink",
+              "version": "0.0.17",
+              "description": null,
+              "serviceCost": {
+                "monthly": 39.44
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfGatewayAZs": {
+                  "value": 2
+                },
+                "sizeOfProcessedDataPerGLB": {
+                  "value": 1,
+                  "unit": "tb|month"
+                },
+                "averageNumberOfNewGLBConnections": {
+                  "value": 10,
+                  "unit": "perSecond"
+                },
+                "averageGLBConnectionDuration": {
+                  "value": 10,
+                  "unit": "sec"
+                },
+                "numberOfGatewayLoadBalancerEndpoints": {
+                  "value": 2
+                }
+              },
+              "serviceCode": "gatewayLoadBalancerVpc",
+              "region": "us-east-2",
+              "estimateFor": "template_5",
+              "version": "0.0.38",
+              "description": null,
+              "serviceCost": {
+                "monthly": 40.53
+              }
+            },
+            {
+              "calculationComponents": {
+                "numberOfAttachments": {
+                  "value": 2
+                },
+                "numberOfPeeringConnections": {
+                  "value": 1
+                },
+                "dataProcessed": {
+                  "value": 1,
+                  "unit": "tb|month"
+                }
+              },
+              "serviceCode": "cloudWan",
+              "region": "us-east-2",
+              "estimateFor": "cloudwan",
+              "version": "0.0.20",
+              "description": null,
+              "serviceCost": {
+                "monthly": 527.83
+              }
+            }
+          ]
+        }
+      },
+      "groups": {},
+      "groupSubtotal": {
+        "monthly": 2481.08
+      },
+      "totalCost": {
+        "monthly": 2481.08,
+        "upfront": 0
+      }
+    },
+    "EBS-63fe3027-ea5b-4190-8585-ec30a4798b03": {
+      "name": "EBS",
+      "services": {
+        "amazonElasticBlockStore-da8b4881-b742-4033-aa34-dc2be0816c76": {
+          "calculationComponents": {
+            "numberOfInstances": {
+              "value": 2
+            },
+            "durationOfInstanceRuns": {
+              "value": 730,
+              "unit": "hours"
+            },
+            "storageType": {
+              "value": "Storage General Purpose gp3 GB Mo"
+            },
+            "storageAmount": {
+              "value": 500,
+              "unit": "gb|NA"
+            },
+            "gp3Iops": {
+              "value": 6000
+            },
+            "gp3Throughput": {
+              "value": 500,
+              "unit": "mbps"
+            },
+            "snapshotFrequency": {
+              "value": "30"
+            },
+            "snapshotAmount": {
+              "value": 10,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonElasticBlockStore",
+          "region": "us-east-2",
+          "estimateFor": "elasticBlockStore",
+          "version": "0.0.159",
+          "description": null,
+          "serviceCost": {
+            "monthly": 205
+          },
+          "serviceName": "Amazon Elastic Block Store (EBS)",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (gp3) (6000), General Purpose SSD (gp3) - Throughput (500 MBps), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+        },
+        "amazonElasticBlockStore-a833d7ce-1b3d-462b-92b3-0ced2c98ec97": {
+          "calculationComponents": {
+            "numberOfInstances": {
+              "value": 2
+            },
+            "durationOfInstanceRuns": {
+              "value": 730,
+              "unit": "hours"
+            },
+            "storageType": {
+              "value": "Storage Provisioned IOPS io2 GB month"
+            },
+            "storageAmount": {
+              "value": 500,
+              "unit": "gb|NA"
+            },
+            "iops2": {
+              "value": 64000
+            },
+            "snapshotFrequency": {
+              "value": "3"
+            },
+            "snapshotAmount": {
+              "value": 5,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonElasticBlockStore",
+          "region": "us-east-2",
+          "estimateFor": "elasticBlockStore",
+          "version": "0.0.159",
+          "description": null,
+          "serviceCost": {
+            "monthly": 7247.75
+          },
+          "serviceName": "Amazon Elastic Block Store (EBS)",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io2) (64000), Snapshot Frequency (Weekly), Amount changed per snapshot (5 GB)"
+        },
+        "amazonElasticBlockStore-490b1954-b476-4ab8-9124-5ef6342150c5": {
+          "calculationComponents": {
+            "numberOfInstances": {
+              "value": 2
+            },
+            "durationOfInstanceRuns": {
+              "value": 730,
+              "unit": "hours"
+            },
+            "storageType": {
+              "value": "Storage General Purpose GB Mo"
+            },
+            "storageAmount": {
+              "value": 500,
+              "unit": "gb|NA"
+            },
+            "snapshotFrequency": {
+              "value": "1"
+            },
+            "snapshotAmount": {
+              "value": 10,
+              "unit": "gb|NA"
+            },
+            "numberOfSnapshotsToRestore": {
+              "value": 1
+            },
+            "numberOfGETAPIRequests": {
+              "value": 10000,
+              "unit": "perMonth"
+            },
+            "numberOfDirectAPIListRequests": {
+              "value": 10000,
+              "unit": "perMonth"
+            },
+            "numberOfDirectAPIPUTRequests": {
+              "value": 10000,
+              "unit": "perMonth"
+            }
+          },
+          "serviceCode": "amazonElasticBlockStore",
+          "region": "us-east-2",
+          "estimateFor": "elasticBlockStore",
+          "version": "0.0.159",
+          "description": null,
+          "serviceCost": {
+            "monthly": 794
+          },
+          "serviceName": "Amazon Elastic Block Store (EBS)",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Monthly), Amount changed per snapshot (10 GB), Number of snapshots to restore (1)"
+        },
+        "amazonElasticBlockStore-11aef766-89ab-4a85-9b28-e9ec7eed65ab": {
+          "calculationComponents": {
+            "numberOfInstances": {
+              "value": 2
+            },
+            "durationOfInstanceRuns": {
+              "value": 730,
+              "unit": "hours"
+            },
+            "storageType": {
+              "value": "Storage Provisioned IOPS GB Mo"
+            },
+            "storageAmount": {
+              "value": 500,
+              "unit": "gb|NA"
+            },
+            "snapshotFrequency": {
+              "value": "30"
+            },
+            "snapshotAmount": {
+              "value": 10,
+              "unit": "gb|NA"
+            },
+            "iops": {
+              "value": 3000
+            }
+          },
+          "serviceCode": "amazonElasticBlockStore",
+          "region": "us-east-2",
+          "estimateFor": "elasticBlockStore",
+          "version": "0.0.159",
+          "description": null,
+          "serviceCost": {
+            "monthly": 580
+          },
+          "serviceName": "Amazon Elastic Block Store (EBS)",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Storage Provisioned IOPS GB Mo"
+        },
+        "amazonElasticBlockStore-164bba95-2f06-433d-892c-5600daf5b702": {
+          "calculationComponents": {
+            "numberOfInstances": {
+              "value": 2
+            },
+            "durationOfInstanceRuns": {
+              "value": 730,
+              "unit": "hours"
+            },
+            "storageType": {
+              "value": "Storage Throughput Optimized HDD GB Mo"
+            },
+            "storageAmount": {
+              "value": 500,
+              "unit": "gb|NA"
+            },
+            "snapshotFrequency": {
+              "value": "30"
+            },
+            "snapshotAmount": {
+              "value": 10,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonElasticBlockStore",
+          "region": "us-east-2",
+          "estimateFor": "elasticBlockStore",
+          "version": "0.0.159",
+          "description": null,
+          "serviceCost": {
+            "monthly": 110
+          },
+          "serviceName": "Amazon Elastic Block Store (EBS)",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Storage Throughput Optimized HDD GB Mo"
+        },
+        "amazonElasticBlockStore-394f436d-a1a1-4f6e-a481-8753676fe8b1": {
+          "calculationComponents": {
+            "numberOfInstances": {
+              "value": 2
+            },
+            "durationOfInstanceRuns": {
+              "value": 730,
+              "unit": "hours"
+            },
+            "storageType": {
+              "value": "Storage Cold HDD GB Mo"
+            },
+            "storageAmount": {
+              "value": 500,
+              "unit": "gb|NA"
+            },
+            "snapshotFrequency": {
+              "value": "30"
+            },
+            "snapshotAmount": {
+              "value": 10,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonElasticBlockStore",
+          "region": "us-east-2",
+          "estimateFor": "elasticBlockStore",
+          "version": "0.0.159",
+          "description": null,
+          "serviceCost": {
+            "monthly": 80
+          },
+          "serviceName": "Amazon Elastic Block Store (EBS)",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Storage Cold HDD GB Mo"
+        },
+        "amazonElasticBlockStore-9114d107-0418-4f74-8f1a-031fa761b6db": {
+          "calculationComponents": {
+            "numberOfInstances": {
+              "value": 2
+            },
+            "durationOfInstanceRuns": {
+              "value": 730,
+              "unit": "hours"
+            },
+            "storageType": {
+              "value": "Storage Magnetic GB Mo"
+            },
+            "storageAmount": {
+              "value": 500,
+              "unit": "gb|NA"
+            },
+            "snapshotFrequency": {
+              "value": "30"
+            },
+            "snapshotAmount": {
+              "value": 10,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonElasticBlockStore",
+          "region": "us-east-2",
+          "estimateFor": "elasticBlockStore",
+          "version": "0.0.159",
+          "description": null,
+          "serviceCost": {
+            "monthly": 115
+          },
+          "serviceName": "Amazon Elastic Block Store (EBS)",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Storage Magnetic GB Mo"
+        }
+      },
+      "groups": {},
+      "groupSubtotal": {
+        "monthly": 9131.75
+      },
+      "totalCost": {
+        "monthly": 9131.75,
+        "upfront": 0
+      }
+    },
+    "RDS-f03ad979-828b-4b15-8d65-44d5c7ff9df5": {
+      "name": "RDS",
+      "services": {
+        "amazonRDSMySQLDB-f4a36483-cc3c-47ed-87fb-52610c4c43f6": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.t3.micro"
+                  },
+                  "Deployment Option": {
+                    "value": "Single-AZ"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  }
+                }
+              ]
+            },
+            "createRDSProxy": {
+              "value": "1"
+            },
+            "storageType": {
+              "value": "General Purpose-GP3"
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            },
+            "DatabaseInsightsSelected": {
+              "value": "1"
+            },
+            "addRDSExtendedSupport": {
+              "value": "1"
+            },
+            "RDSExtendedSupportYear": {
+              "value": "year12"
+            },
+            "numberOfHoursOnES": {
+              "value": 100,
+              "unit": "perMonth"
+            },
+            "additionalBackupStorage": {
+              "value": 50,
+              "unit": "gb|NA"
+            },
+            "snapshotExport": {
+              "value": 10,
+              "unit": "perMonth"
+            }
+          },
+          "serviceCode": "amazonRDSMySQLDB",
+          "region": "us-east-2",
+          "estimateFor": "mySQLDB",
+          "version": "0.0.135",
+          "description": null,
+          "serviceCost": {
+            "monthly": 88.91,
+            "upfront": 0
+          },
+          "serviceName": "Amazon RDS for MySQL",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Nodes (1), Instance type (db.t3.micro), Deployment option (Single-AZ), Pricing strategy (OnDemand), Storage for each RDS instance (General Purpose SSD (gp3)), Storage amount (100 GB), Number of hours running on Amazon RDS Extended Support (100 per month), Additional backup storage (50 GB), Total Size of Backup Processed for Export (GB) (10 per month)"
+        },
+        "amazonRDSPostgreSQLDB-339f701f-2d7b-4a9b-8308-2cb29a5ec2f0": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.t3.micro"
+                  },
+                  "Deployment Option": {
+                    "value": "Single-AZ"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  }
+                }
+              ]
+            },
+            "createRDSProxy": {
+              "value": "1"
+            },
+            "storageVolume": {
+              "value": "General Purpose"
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            },
+            "DatabaseInsightsSelected": {
+              "value": "1"
+            },
+            "addRDSExtendedSupport": {
+              "value": "1"
+            },
+            "RDSExtendedSupportYear": {
+              "value": "year12"
+            },
+            "numberOfHoursOnES": {
+              "value": 100,
+              "unit": "perMonth"
+            },
+            "additionalBackupStorage": {
+              "value": 50,
+              "unit": "gb|NA"
+            },
+            "snapshotExport": {
+              "value": 10,
+              "unit": "perMonth"
+            }
+          },
+          "serviceCode": "amazonRDSPostgreSQLDB",
+          "region": "us-east-2",
+          "estimateFor": "rdsForPostgreSQL",
+          "version": "0.0.111",
+          "description": null,
+          "serviceCost": {
+            "monthly": 89.64,
+            "upfront": 0
+          },
+          "serviceName": "Amazon RDS for PostgreSQL",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Nodes (1), Instance Type (db.t3.micro), Deployment Option (Single-AZ), Pricing Model (OnDemand), Storage volume (General Purpose SSD (gp2)), Storage amount (100 GB), Number of hours running on Amazon RDS Extended Support (100 per month), Additional backup storage (50 GB), Total Size of Backup Processed for Export (GB) (10 per month)"
+        },
+        "amazonRDSMariaDB-49ea2efc-040d-45ba-bf2e-3f23b4566cd8": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.t3.micro"
+                  },
+                  "Deployment Option": {
+                    "value": "Single-AZ"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  }
+                }
+              ]
+            },
+            "createRDSProxy": {
+              "value": "1"
+            },
+            "storageVolume": {
+              "value": "General Purpose"
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            },
+            "DatabaseInsightsSelected": {
+              "value": "1"
+            },
+            "additionalBackupStorage": {
+              "value": 50,
+              "unit": "gb|NA"
+            },
+            "snapshotExport": {
+              "value": 10,
+              "unit": "perMonth"
+            }
+          },
+          "serviceCode": "amazonRDSMariaDB",
+          "region": "us-east-2",
+          "estimateFor": "rdsForMariaDB",
+          "version": "0.0.132",
+          "description": null,
+          "serviceCost": {
+            "monthly": 68.91,
+            "upfront": 0
+          },
+          "serviceName": "Amazon RDS for MariaDB",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Nodes (1), Instance type (db.t3.micro), Deployment selection (Single-AZ), Pricing strategy (OnDemand), Storage volume (General Purpose SSD (gp2)), Storage amount (100 GB), Additional backup storage (50 GB), Total Size of Backup Processed for Export (GB) (10 per month)"
+        },
+        "amazonRdsForOracle-88b281f9-7752-4672-a4e7-8c7c2820fe85": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.m5.large"
+                  },
+                  "Deployment Option": {
+                    "value": "Single-AZ"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  },
+                  "License Model": {
+                    "value": "License included"
+                  },
+                  "Database Edition": {
+                    "value": "Standard Two"
+                  }
+                }
+              ]
+            },
+            "storageType": {
+              "value": "General Purpose-GP3"
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            },
+            "DatabaseInsightsSelected": {
+              "value": "1"
+            },
+            "additionalBackupStorage": {
+              "value": 50,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonRdsForOracle",
+          "region": "us-east-2",
+          "estimateFor": "rdsForOracle",
+          "version": "0.0.88",
+          "description": null,
+          "serviceCost": {
+            "monthly": 354.24,
+            "upfront": 0
+          },
+          "serviceName": "Amazon RDS for Oracle",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Nodes (1), Instance type (db.m5.large), Deployment option (Single-AZ), License (License included), Database edition (Standard Two), Pricing strategy (OnDemand), Storage for each RDS instance (General Purpose SSD (gp3)), Storage amount (100 GB), Would you be enabling Database Insights with the database? (Yes), Additional backup storage (50 GB)"
+        },
+        "amazonRdsCustomForOracle-921db6fe-efd3-48a5-9022-ae39aec5b188": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.m5.large"
+                  },
+                  "Database Edition": {
+                    "value": "Enterprise"
+                  },
+                  "Deployment Option": {
+                    "value": "Single-AZ"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  }
+                }
+              ]
+            },
+            "storageType": {
+              "value": "General Purpose SSD"
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            },
+            "additionalBackupStorage": {
+              "value": 50,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonRdsCustomForOracle",
+          "region": "us-east-2",
+          "estimateFor": "rdsForCustom",
+          "version": "0.0.29",
+          "description": null,
+          "serviceCost": {
+            "monthly": 165.9,
+            "upfront": 0
+          },
+          "serviceName": "Amazon RDS Custom for Oracle",
+          "regionName": "US East (Ohio)",
+          "configSummary": "Number of RDS Custom for Oracle instances (1), Instance type (db.m5.large), Database edition (Enterprise), Deployment option (Single-AZ), Pricing strategy (OnDemand), Storage for each RDS Custom instance (General Purpose SSD (gp2)), Storage amount (100 GB), Additional backup storage (50 GB)"
+        },
+        "amazonRDSForSQLServer-557ee25f-83e7-4147-af5b-24b8d3cf74d8": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.m5.large"
+                  },
+                  "Deployment Option": {
+                    "value": "Single-AZ"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  },
+                  "License Model": {
+                    "value": "License included"
+                  },
+                  "Database Edition": {
+                    "value": "Standard"
+                  },
+                  "Unbundled Licensing": {
+                    "value": "FALSE"
+                  }
+                }
+              ]
+            },
+            "storageType": {
+              "value": "General Purpose-GP3"
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonRDSForSQLServer",
+          "region": "us-east-2",
+          "estimateFor": "rdsForOracle",
+          "version": "0.0.137",
+          "description": null,
+          "serviceCost": {
+            "monthly": 654.71
+          },
+          "serviceName": "Amazon RDS for SQL server",
+          "regionName": "US East (Ohio)",
+          "configSummary": ""
+        },
+        "amazonRdsForDb2-067618a9-e6b1-459f-aeb7-8639780c3bec": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.m6i.large"
+                  },
+                  "Deployment Option": {
+                    "value": "Single-AZ"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  },
+                  "License Model": {
+                    "value": "Bring your own license"
+                  },
+                  "Database Edition": {
+                    "value": "Standard"
+                  },
+                  "LeaseContractLength": {
+                    "value": ""
+                  },
+                  "PurchaseOption": {
+                    "value": ""
+                  }
+                }
+              ]
+            },
+            "storageVolume": {
+              "value": "General Purpose-GP3"
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonRdsForDb2",
+          "region": "us-east-2",
+          "estimateFor": "rdsFordb2",
+          "version": "0.0.106",
+          "description": null,
+          "serviceCost": {
+            "monthly": 141.44
+          },
+          "serviceName": "Amazon RDS for Db2",
+          "regionName": "US East (Ohio)",
+          "configSummary": ""
+        },
+        "amazonRdsCustomForSqlServer-9b9561b7-444a-439a-be82-e1fe8a08cff9": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.m5.large"
+                  },
+                  "Database Edition": {
+                    "value": "Standard"
+                  },
+                  "Engine Media Type": {
+                    "value": ""
+                  },
+                  "Deployment Option": {
+                    "value": "Single-AZ"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  }
+                }
+              ]
+            },
+            "storageType": {
+              "value": "General Purpose-GP3"
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonRdsCustomForSqlServer",
+          "region": "us-east-2",
+          "estimateFor": "rdsForCustom",
+          "version": "0.0.35",
+          "description": null,
+          "serviceCost": {
+            "monthly": 838.82
+          },
+          "serviceName": "Amazon RDS Custom for SQL Server",
+          "regionName": "US East (Ohio)",
+          "configSummary": ""
+        },
+        "amazonAuroraMySQLCompatible-da38a8bc-f4f9-4de9-8e9f-bf7e406bedff": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.r6g.large"
+                  },
+                  "Instance Family": {
+                    "value": "Memory optimized"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  }
+                }
+              ]
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonAuroraMySQLCompatible",
+          "region": "us-east-2",
+          "estimateFor": "auroraMySQLCompatible",
+          "version": "0.0.176",
+          "description": null,
+          "serviceCost": {
+            "monthly": 199.8
+          },
+          "serviceName": "Amazon Aurora MySQL-Compatible",
+          "regionName": "US East (Ohio)",
+          "configSummary": ""
+        },
+        "amazonRDSAuroraPostgreSQLCompatibleDB-11208c5d-6cad-4a27-b357-576b05ebbcc2": {
+          "calculationComponents": {
+            "columnFormIPM": {
+              "value": [
+                {
+                  "Number of Nodes": {
+                    "value": "1"
+                  },
+                  "Instance Type": {
+                    "value": "db.r6g.large"
+                  },
+                  "Instance Family": {
+                    "value": "Memory optimized"
+                  },
+                  "TermType": {
+                    "value": "OnDemand"
+                  }
+                }
+              ]
+            },
+            "storageAmount": {
+              "value": 100,
+              "unit": "gb|NA"
+            }
+          },
+          "serviceCode": "amazonRDSAuroraPostgreSQLCompatibleDB",
+          "region": "us-east-2",
+          "estimateFor": "AuroraPostgreSQLCompatibleDB",
+          "version": "0.0.156",
+          "description": null,
+          "serviceCost": {
+            "monthly": 199.8
+          },
+          "serviceName": "Amazon Aurora PostgreSQL-Compatible DB",
+          "regionName": "US East (Ohio)",
+          "configSummary": ""
+        }
+      },
+      "groups": {},
+      "groupSubtotal": {
+        "monthly": 2802.17
+      },
+      "totalCost": {
+        "monthly": 2802.17,
+        "upfront": 0
+      }
+    },
+    "EC2-5814a82b-334f-4ff1-a12a-539e2095d4c8": {
+      "name": "EC2",
+      "services": {
+        "ec2Enhancement-f02739b3-f1db-4a6b-b6d5-4d645ce6702c": {
+          "calculationComponents": {
+            "tenancy": {
+              "value": "shared"
+            },
+            "selectedOS": {
+              "value": "linux"
+            },
+            "workloadSelection": {
+              "value": "consistent"
+            },
+            "storageType": {
+              "value": "Storage General Purpose gp3 GB Mo"
+            },
+            "dataTransferForEC2": {
+              "value": [
+                {
+                  "entryType": "INBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "fromRegion": ""
+                },
+                {
+                  "entryType": "OUTBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "toRegion": ""
+                },
+                {
+                  "entryType": "INTRA_REGION",
+                  "value": "",
+                  "unit": "tb_month"
+                }
+              ]
+            },
+            "workload": {
+              "value": {
+                "workloadType": "consistent",
+                "data": "1"
+              }
+            },
+            "snapshotFrequency": {
+              "value": "0"
+            },
+            "detailedMonitoringCheckbox": {
+              "value": false
+            },
+            "ec2AdvancedPricingMetrics": {
+              "value": 1
+            },
+            "instanceType": {
+              "value": "m5.large"
+            },
+            "pricingStrategy": {
+              "value": {
+                "selectedOption": "on-demand",
+                "term": "1 year"
+              }
+            }
+          },
+          "serviceCode": "ec2Enhancement",
+          "region": "us-east-2",
+          "estimateFor": "template",
+          "version": "0.0.68",
+          "description": null,
+          "serviceCost": {
+            "monthly": 70.08
+          },
+          "serviceName": "Amazon EC2",
+          "regionName": "US East (Ohio)",
+          "configSummary": "on-demand"
+        },
+        "ec2Enhancement-eb780f25-10e6-4afe-b12c-b41c1e11064c": {
+          "calculationComponents": {
+            "tenancy": {
+              "value": "shared"
+            },
+            "selectedOS": {
+              "value": "linux"
+            },
+            "workloadSelection": {
+              "value": "consistent"
+            },
+            "storageType": {
+              "value": "Storage General Purpose gp3 GB Mo"
+            },
+            "dataTransferForEC2": {
+              "value": [
+                {
+                  "entryType": "INBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "fromRegion": ""
+                },
+                {
+                  "entryType": "OUTBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "toRegion": ""
+                },
+                {
+                  "entryType": "INTRA_REGION",
+                  "value": "",
+                  "unit": "tb_month"
+                }
+              ]
+            },
+            "workload": {
+              "value": {
+                "workloadType": "consistent",
+                "data": "1"
+              }
+            },
+            "snapshotFrequency": {
+              "value": "0"
+            },
+            "detailedMonitoringCheckbox": {
+              "value": false
+            },
+            "ec2AdvancedPricingMetrics": {
+              "value": 1
+            },
+            "instanceType": {
+              "value": "m5.large"
+            },
+            "pricingStrategy": {
+              "value": {
+                "selectedOption": "standard",
+                "term": "1 Year",
+                "model": "standard",
+                "upfrontPayment": "None"
+              }
+            }
+          },
+          "serviceCode": "ec2Enhancement",
+          "region": "us-east-2",
+          "estimateFor": "template",
+          "version": "0.0.68",
+          "description": null,
+          "serviceCost": {
+            "monthly": 43.8
+          },
+          "serviceName": "Amazon EC2",
+          "regionName": "US East (Ohio)",
+          "configSummary": "ri-standard"
+        },
+        "ec2Enhancement-0b7b2ed3-9fe8-403b-bc92-b63efcef85c3": {
+          "calculationComponents": {
+            "tenancy": {
+              "value": "shared"
+            },
+            "selectedOS": {
+              "value": "linux"
+            },
+            "workloadSelection": {
+              "value": "consistent"
+            },
+            "storageType": {
+              "value": "Storage General Purpose gp3 GB Mo"
+            },
+            "dataTransferForEC2": {
+              "value": [
+                {
+                  "entryType": "INBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "fromRegion": ""
+                },
+                {
+                  "entryType": "OUTBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "toRegion": ""
+                },
+                {
+                  "entryType": "INTRA_REGION",
+                  "value": "",
+                  "unit": "tb_month"
+                }
+              ]
+            },
+            "workload": {
+              "value": {
+                "workloadType": "consistent",
+                "data": "1"
+              }
+            },
+            "snapshotFrequency": {
+              "value": "0"
+            },
+            "detailedMonitoringCheckbox": {
+              "value": false
+            },
+            "ec2AdvancedPricingMetrics": {
+              "value": 1
+            },
+            "instanceType": {
+              "value": "m5.large"
+            },
+            "pricingStrategy": {
+              "value": {
+                "selectedOption": "convertible",
+                "term": "3 Year",
+                "model": "convertible",
+                "upfrontPayment": "Partial"
+              }
+            }
+          },
+          "serviceCode": "ec2Enhancement",
+          "region": "us-east-2",
+          "estimateFor": "template",
+          "version": "0.0.68",
+          "description": null,
+          "serviceCost": {
+            "monthly": 16.79,
+            "upfront": 592
+          },
+          "serviceName": "Amazon EC2",
+          "regionName": "US East (Ohio)",
+          "configSummary": "ri-convertible"
+        },
+        "ec2Enhancement-cb303478-c1ac-43b1-a035-d198956ab1cb": {
+          "calculationComponents": {
+            "tenancy": {
+              "value": "shared"
+            },
+            "selectedOS": {
+              "value": "linux"
+            },
+            "workloadSelection": {
+              "value": "consistent"
+            },
+            "storageType": {
+              "value": "Storage General Purpose gp3 GB Mo"
+            },
+            "dataTransferForEC2": {
+              "value": [
+                {
+                  "entryType": "INBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "fromRegion": ""
+                },
+                {
+                  "entryType": "OUTBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "toRegion": ""
+                },
+                {
+                  "entryType": "INTRA_REGION",
+                  "value": "",
+                  "unit": "tb_month"
+                }
+              ]
+            },
+            "workload": {
+              "value": {
+                "workloadType": "consistent",
+                "data": "1"
+              }
+            },
+            "snapshotFrequency": {
+              "value": "0"
+            },
+            "detailedMonitoringCheckbox": {
+              "value": false
+            },
+            "ec2AdvancedPricingMetrics": {
+              "value": 1
+            },
+            "instanceType": {
+              "value": "m5.large"
+            },
+            "pricingStrategy": {
+              "value": {
+                "selectedOption": "spot",
+                "spotDiscountPercentage": 70
+              }
+            }
+          },
+          "serviceCode": "ec2Enhancement",
+          "region": "us-east-2",
+          "estimateFor": "template",
+          "version": "0.0.68",
+          "description": null,
+          "serviceCost": {
+            "monthly": 21.02
+          },
+          "serviceName": "Amazon EC2",
+          "regionName": "US East (Ohio)",
+          "configSummary": "spot"
+        },
+        "ec2Enhancement-376aaf0a-f531-4b47-be3a-733f8556b111": {
+          "calculationComponents": {
+            "tenancy": {
+              "value": "shared"
+            },
+            "selectedOS": {
+              "value": "linux"
+            },
+            "workloadSelection": {
+              "value": "consistent"
+            },
+            "storageType": {
+              "value": "Storage General Purpose gp3 GB Mo"
+            },
+            "dataTransferForEC2": {
+              "value": [
+                {
+                  "entryType": "INBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "fromRegion": ""
+                },
+                {
+                  "entryType": "OUTBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "toRegion": ""
+                },
+                {
+                  "entryType": "INTRA_REGION",
+                  "value": "",
+                  "unit": "tb_month"
+                }
+              ]
+            },
+            "workload": {
+              "value": {
+                "workloadType": "consistent",
+                "data": "1"
+              }
+            },
+            "snapshotFrequency": {
+              "value": "0"
+            },
+            "detailedMonitoringCheckbox": {
+              "value": false
+            },
+            "ec2AdvancedPricingMetrics": {
+              "value": 1
+            },
+            "instanceType": {
+              "value": "m5.large"
+            },
+            "pricingStrategy": {
+              "value": {
+                "selectedOption": "compute-savings",
+                "term": "3 Year",
+                "model": "computeSavings",
+                "upfrontPayment": "None"
+              }
+            }
+          },
+          "serviceCode": "ec2Enhancement",
+          "region": "us-east-2",
+          "estimateFor": "template",
+          "version": "0.0.68",
+          "description": null,
+          "serviceCost": {
+            "monthly": 35.77
+          },
+          "serviceName": "Amazon EC2",
+          "regionName": "US East (Ohio)",
+          "configSummary": "compute-savings"
+        },
+        "ec2Enhancement-a96ac7af-a801-4268-a025-ca616e5ab1b5": {
+          "calculationComponents": {
+            "tenancy": {
+              "value": "shared"
+            },
+            "selectedOS": {
+              "value": "linux"
+            },
+            "workloadSelection": {
+              "value": "consistent"
+            },
+            "storageType": {
+              "value": "Storage General Purpose gp3 GB Mo"
+            },
+            "dataTransferForEC2": {
+              "value": [
+                {
+                  "entryType": "INBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "fromRegion": ""
+                },
+                {
+                  "entryType": "OUTBOUND",
+                  "value": "",
+                  "unit": "tb_month",
+                  "toRegion": ""
+                },
+                {
+                  "entryType": "INTRA_REGION",
+                  "value": "",
+                  "unit": "tb_month"
+                }
+              ]
+            },
+            "workload": {
+              "value": {
+                "workloadType": "consistent",
+                "data": "1"
+              }
+            },
+            "snapshotFrequency": {
+              "value": "0"
+            },
+            "detailedMonitoringCheckbox": {
+              "value": false
+            },
+            "ec2AdvancedPricingMetrics": {
+              "value": 1
+            },
+            "instanceType": {
+              "value": "m5.large"
+            },
+            "pricingStrategy": {
+              "value": {
+                "selectedOption": "instance-savings",
+                "term": "3 Year",
+                "model": "instanceSavings",
+                "upfrontPayment": "Full"
+              }
+            }
+          },
+          "serviceCode": "ec2Enhancement",
+          "region": "us-east-2",
+          "estimateFor": "template",
+          "version": "0.0.68",
+          "description": null,
+          "serviceCost": {
+            "monthly": 0,
+            "upfront": 946.08
+          },
+          "serviceName": "Amazon EC2",
+          "regionName": "US East (Ohio)",
+          "configSummary": "instance-savings"
+        }
+      },
+      "groups": {},
+      "groupSubtotal": {
+        "monthly": 187.46,
+        "upfront": 1538.08
+      },
+      "totalCost": {
+        "monthly": 187.46,
+        "upfront": 1538.08
+      }
+    }
+  },
+  "groupSubtotal": {
+    "monthly": 0,
+    "upfront": 0
+  },
+  "totalCost": {
+    "monthly": 16313.62,
+    "upfront": 1538.08
+  },
+  "support": {},
+  "metaData": {
+    "locale": "en_US",
+    "currency": "USD",
+    "createdOn": "2026-11-24T01:45:37.735Z",
+    "source": "calculator-platform"
+  }
+}

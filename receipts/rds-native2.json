@@ -1,0 +1,155 @@
+{
+  "estimate": "rds native2",
+  "specHash": "2816200db05b5d26",
+  "url": "https://calculator.aws/#/estimate?id=056b774a6376f3e7c721255b883589c39f15e505",
+  "savedKey": "056b774a6376f3e7c721255b883589c39f15e505",
+  "publishedAt": "2026-11-24T01:47:01.653Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 520.14,
+    "upfront": 0,
+    "total12m": 6241.68,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonRdsForOracle",
+        "template": "rdsForOracle",
+        "region": "us-east-2",
+        "monthly": 354.24,
+        "upfront": 0,
+        "summary": "Nodes (1), Instance type (db.m5.large), Deployment option (Single-AZ), License (License included), Database edition (Standard Two), Pricing strategy (OnDemand), Storage for each RDS instance (General Purpose SSD (gp3)), Storage amount (100 GB), Would you be enabling Database Insights with the database? (Yes), Additional backup storage (50 GB)"
+      },
+      {
+        "code": "amazonRdsCustomForOracle",
+        "template": "rdsForCustom",
+        "region": "us-east-2",
+        "monthly": 165.9,
+        "upfront": 0,
+        "summary": "Number of RDS Custom for Oracle instances (1), Instance type (db.m5.large), Database edition (Enterprise), Deployment option (Single-AZ), Pricing strategy (OnDemand), Storage for each RDS Custom instance (General Purpose SSD (gp2)), Storage amount (100 GB), Additional backup storage (50 GB)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonRdsForOracle",
+        "monthly": 354.24,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonRdsCustomForOracle",
+        "monthly": 165.9,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 520.14,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=056b774a6376f3e7c721255b883589c39f15e505",
+    "title": "rds native2",
+    "monthly": "520.14 USD",
+    "upfront": "0.00 USD",
+    "annual": "6,241.68 USD",
+    "monthlyValue": 520.14,
+    "upfrontValue": 0,
+    "annualValue": 6241.68,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon RDS for Oracle",
+        "upfront": "0.00 USD",
+        "monthly": "354.24 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Nodes (1), Instance type (db.m5.large), Deployment option (Single-AZ), License (License included), Database edition (Standard Two), Pricing strategy (OnDemand), Storage for each RDS instance (General Purpose SSD (gp3)), Storage amount (100 GB), Would you be enabling Database Insights with the database? (Yes), Additional backup storage (50 GB)",
+        "status": null
+      },
+      {
+        "name": "Amazon RDS Custom for Oracle",
+        "upfront": "0.00 USD",
+        "monthly": "165.90 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of RDS Custom for Oracle instances (1), Instance type (db.m5.large), Database edition (Enterprise), Deployment option (Single-AZ), Pricing strategy (OnDemand), Storage for each RDS Custom instance (General Purpose SSD (gp2)), Storage amount (100 GB), Additional backup storage (50 GB)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T01:47:04.544Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=056b774a6376f3e7c721255b883589c39f15e505",
+    "savedKey": "056b774a6376f3e7c721255b883589c39f15e505",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=056b774a6376f3e7c721255b883589c39f15e505",
+      "title": "rds native2",
+      "monthly": "520.14 USD",
+      "upfront": "0.00 USD",
+      "annual": "6,241.68 USD",
+      "monthlyValue": 520.14,
+      "upfrontValue": 0,
+      "annualValue": 6241.68,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon RDS for Oracle",
+          "upfront": "0.00 USD",
+          "monthly": "354.24 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Nodes (1), Instance type (db.m5.large), Deployment option (Single-AZ), License (License included), Database edition (Standard Two), Pricing strategy (OnDemand), Storage for each RDS instance (General Purpose SSD (gp3)), Storage amount (100 GB), Would you be enabling Database Insights with the database? (Yes), Additional backup storage (50 GB)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon RDS Custom for Oracle",
+          "upfront": "0.00 USD",
+          "monthly": "165.90 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of RDS Custom for Oracle instances (1), Instance type (db.m5.large), Database edition (Enterprise), Deployment option (Single-AZ), Pricing strategy (OnDemand), Storage for each RDS Custom instance (General Purpose SSD (gp2)), Storage amount (100 GB), Additional backup storage (50 GB)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T01:47:31.569Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "rds native2",
+    "monthly": 520.14,
+    "upfront": 0,
+    "annual": 6241.68,
+    "services": [
+      {
+        "name": "Amazon RDS for Oracle",
+        "monthly": 354.24,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Nodes (1), Instance type (db.m5.large), Deployment option (Single-AZ), License (License included), Database edition (Standard Two), Pricing strategy (OnDemand), Storage for each RDS instance (General Purpose SSD (gp3)), Storage amount (100 GB), Would you be enabling Database Insights with the database? (Yes), Additional backup storage (50 GB)"
+      },
+      {
+        "name": "Amazon RDS Custom for Oracle",
+        "monthly": 165.9,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of RDS Custom for Oracle instances (1), Instance type (db.m5.large), Database edition (Enterprise), Deployment option (Single-AZ), Pricing strategy (OnDemand), Storage for each RDS Custom instance (General Purpose SSD (gp2)), Storage amount (100 GB), Additional backup storage (50 GB)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

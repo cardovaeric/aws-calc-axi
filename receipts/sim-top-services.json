@@ -1,0 +1,446 @@
+{
+  "estimate": "axi-sim EKS VPC EBS RDS EC2 full surface v3",
+  "url": "https://calculator.aws/#/estimate?id=bb86ab5ce58ba6a55af7f36c320b33e0fbd798a9",
+  "savedKey": "bb86ab5ce58ba6a55af7f36c320b33e0fbd798a9",
+  "publishedAt": "2026-11-24T01:56:00.000Z",
+  "total": {
+    "monthly": 16313.62,
+    "upfront": 1538.08
+  },
+  "groups": {
+    "EKS": {
+      "monthly": 1711.16,
+      "upfront": 0
+    },
+    "VPC": {
+      "monthly": 2481.08,
+      "upfront": 0
+    },
+    "EBS": {
+      "monthly": 9131.75,
+      "upfront": 0
+    },
+    "RDS": {
+      "monthly": 2802.17,
+      "upfront": 0
+    },
+    "EC2": {
+      "monthly": 187.46,
+      "upfront": 1538.08
+    }
+  },
+  "services": [
+    {
+      "group": "EKS",
+      "code": "awsEks",
+      "name": "Amazon EKS",
+      "label": "Number of EKS Clusters (2), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (5), Number of ACK capabilities (1), Number of ACK resources per ACK capability (10), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (3), Number of hybrid nodes (10 per month), Number of vCPU per hybrid node (8)",
+      "monthly": 1711.16,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "vpnConnectionVpc",
+      "name": "vpnConnectionVpc",
+      "monthly": 270.5,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "networkAccessAnalyzerVpc",
+      "name": "networkAccessAnalyzerVpc",
+      "monthly": 0.04,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "reachabilityAnalyzerVpc",
+      "name": "reachabilityAnalyzerVpc",
+      "monthly": 1,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "trafficMirroringVpc",
+      "name": "trafficMirroringVpc",
+      "monthly": 21.9,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "publicIpv4Address",
+      "name": "publicIpv4Address",
+      "monthly": 10.95,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "ipamVpc",
+      "name": "ipamVpc",
+      "monthly": 19.71,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "dataTransferVpc",
+      "name": "dataTransferVpc",
+      "monthly": 92.16,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "vpcRouteServer",
+      "name": "vpcRouteServer",
+      "monthly": 1095,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "networkAddressTranslationNatGatewayVpc",
+      "name": "networkAddressTranslationNatGatewayVpc",
+      "monthly": 246.06,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "transitGatewayVpc",
+      "name": "transitGatewayVpc",
+      "monthly": 115.96,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "awsPrivateLinkVpc",
+      "name": "awsPrivateLinkVpc",
+      "monthly": 39.44,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "gatewayLoadBalancerVpc",
+      "name": "gatewayLoadBalancerVpc",
+      "monthly": 40.53,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "VPC",
+      "code": "cloudWan",
+      "name": "cloudWan",
+      "monthly": 527.83,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "EBS",
+      "code": "amazonElasticBlockStore",
+      "name": "Amazon Elastic Block Store (EBS)",
+      "label": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (gp3) (6000), General Purpose SSD (gp3) - Throughput (500 MBps), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+      "monthly": 205,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "EBS",
+      "code": "amazonElasticBlockStore",
+      "name": "Amazon Elastic Block Store (EBS)",
+      "label": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io2) (64000), Snapshot Frequency (Weekly), Amount changed per snapshot (5 GB)",
+      "monthly": 7247.75,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "EBS",
+      "code": "amazonElasticBlockStore",
+      "name": "Amazon Elastic Block Store (EBS)",
+      "label": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Monthly), Amount changed per snapshot (10 GB), Number of snapshots to restore (1)",
+      "monthly": 794,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "EBS",
+      "code": "amazonElasticBlockStore",
+      "name": "Amazon Elastic Block Store (EBS)",
+      "label": "Storage Provisioned IOPS GB Mo",
+      "monthly": 580,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "EBS",
+      "code": "amazonElasticBlockStore",
+      "name": "Amazon Elastic Block Store (EBS)",
+      "label": "Storage Throughput Optimized HDD GB Mo",
+      "monthly": 110,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "EBS",
+      "code": "amazonElasticBlockStore",
+      "name": "Amazon Elastic Block Store (EBS)",
+      "label": "Storage Cold HDD GB Mo",
+      "monthly": 80,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "EBS",
+      "code": "amazonElasticBlockStore",
+      "name": "Amazon Elastic Block Store (EBS)",
+      "label": "Storage Magnetic GB Mo",
+      "monthly": 115,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRDSMySQLDB",
+      "name": "Amazon RDS for MySQL",
+      "label": "Nodes (1), Instance type (db.t3.micro), Deployment option (Single-AZ), Pricing strategy (OnDemand), Storage for each RDS instance (General Purpose SSD (gp3)), Storage amount (100 GB), Number of hours running on Amazon RDS Extended Support (100 per month), Additional backup storage (50 GB), Total Size of Backup Processed for Export (GB) (10 per month)",
+      "monthly": 88.91,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRDSPostgreSQLDB",
+      "name": "Amazon RDS for PostgreSQL",
+      "label": "Nodes (1), Instance Type (db.t3.micro), Deployment Option (Single-AZ), Pricing Model (OnDemand), Storage volume (General Purpose SSD (gp2)), Storage amount (100 GB), Number of hours running on Amazon RDS Extended Support (100 per month), Additional backup storage (50 GB), Total Size of Backup Processed for Export (GB) (10 per month)",
+      "monthly": 89.64,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRDSMariaDB",
+      "name": "Amazon RDS for MariaDB",
+      "label": "Nodes (1), Instance type (db.t3.micro), Deployment selection (Single-AZ), Pricing strategy (OnDemand), Storage volume (General Purpose SSD (gp2)), Storage amount (100 GB), Additional backup storage (50 GB), Total Size of Backup Processed for Export (GB) (10 per month)",
+      "monthly": 68.91,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRdsForOracle",
+      "name": "Amazon RDS for Oracle",
+      "label": "Nodes (1), Instance type (db.m5.large), Deployment option (Single-AZ), License (License included), Database edition (Standard Two), Pricing strategy (OnDemand), Storage for each RDS instance (General Purpose SSD (gp3)), Storage amount (100 GB), Would you be enabling Database Insights with the database? (Yes), Additional backup storage (50 GB)",
+      "monthly": 354.24,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRdsCustomForOracle",
+      "name": "Amazon RDS Custom for Oracle",
+      "label": "Number of RDS Custom for Oracle instances (1), Instance type (db.m5.large), Database edition (Enterprise), Deployment option (Single-AZ), Pricing strategy (OnDemand), Storage for each RDS Custom instance (General Purpose SSD (gp2)), Storage amount (100 GB), Additional backup storage (50 GB)",
+      "monthly": 165.9,
+      "upfront": 0,
+      "path": "native"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRDSForSQLServer",
+      "name": "Amazon RDS for SQL server",
+      "label": null,
+      "monthly": 654.71,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRdsForDb2",
+      "name": "Amazon RDS for Db2",
+      "label": null,
+      "monthly": 141.44,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRdsCustomForSqlServer",
+      "name": "Amazon RDS Custom for SQL Server",
+      "label": null,
+      "monthly": 838.82,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonAuroraMySQLCompatible",
+      "name": "Amazon Aurora MySQL-Compatible",
+      "label": null,
+      "monthly": 199.8,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "RDS",
+      "code": "amazonRDSAuroraPostgreSQLCompatibleDB",
+      "name": "Amazon Aurora PostgreSQL-Compatible DB",
+      "label": null,
+      "monthly": 199.8,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "EC2",
+      "code": "ec2Enhancement",
+      "name": "Amazon EC2",
+      "label": "on-demand",
+      "monthly": 70.08,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "EC2",
+      "code": "ec2Enhancement",
+      "name": "Amazon EC2",
+      "label": "ri-standard",
+      "monthly": 43.8,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "EC2",
+      "code": "ec2Enhancement",
+      "name": "Amazon EC2",
+      "label": "ri-convertible",
+      "monthly": 16.79,
+      "upfront": 592,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "EC2",
+      "code": "ec2Enhancement",
+      "name": "Amazon EC2",
+      "label": "spot",
+      "monthly": 21.02,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "EC2",
+      "code": "ec2Enhancement",
+      "name": "Amazon EC2",
+      "label": "compute-savings",
+      "monthly": 35.77,
+      "upfront": 0,
+      "path": "live-editor-capture"
+    },
+    {
+      "group": "EC2",
+      "code": "ec2Enhancement",
+      "name": "Amazon EC2",
+      "label": "instance-savings",
+      "monthly": 0,
+      "upfront": 946.08,
+      "path": "live-editor-capture"
+    }
+  ],
+  "verification": {
+    "storedRender": {
+      "monthly": 16313.62,
+      "upfront": 1538.08,
+      "groups": {
+        "EKS": {
+          "monthly": "1,711.16 USD",
+          "upfront": "0.00 USD"
+        },
+        "VPC": {
+          "monthly": "2,481.08 USD",
+          "upfront": "0.00 USD"
+        },
+        "EBS": {
+          "monthly": "9,131.75 USD",
+          "upfront": "0.00 USD"
+        },
+        "RDS": {
+          "monthly": "2,802.17 USD",
+          "upfront": "0.00 USD"
+        },
+        "EC2": {
+          "monthly": "187.46 USD",
+          "upfront": "1,538.08 USD"
+        }
+      },
+      "verdict": "pass"
+    },
+    "editorRecompute": {
+      "monthly": 16313.62,
+      "upfront": 1538.08,
+      "groups": {
+        "EKS": {
+          "monthly": "1,711.16 USD",
+          "upfront": "0.00 USD"
+        },
+        "VPC": {
+          "monthly": "2,481.08 USD",
+          "upfront": "0.00 USD"
+        },
+        "EBS": {
+          "monthly": "9,131.75 USD",
+          "upfront": "0.00 USD"
+        },
+        "RDS": {
+          "monthly": "2,802.17 USD",
+          "upfront": "0.00 USD"
+        },
+        "EC2": {
+          "monthly": "187.46 USD",
+          "upfront": "1,538.08 USD"
+        }
+      },
+      "verdict": "pass"
+    },
+    "oracleFixtures": [
+      {
+        "name": "RDS Oracle + Custom Oracle native",
+        "url": "https://calculator.aws/#/estimate?id=056b774a6376f3e7c721255b883589c39f15e505",
+        "monthly": 520.14,
+        "oracle": "pass"
+      }
+    ],
+    "diagnosticProbes": [
+      {
+        "name": "RDS SQL Server, Db2, Aurora MySQL, Aurora PostgreSQL",
+        "url": "https://calculator.aws/#/estimate?id=48239098382953d2049eff2bcfe6275de1053067"
+      },
+      {
+        "name": "EC2 on-demand, RI, Spot, Savings Plans",
+        "url": "https://calculator.aws/#/estimate?id=f72e1b5b7a0d9667190000e0d0ff5776bc3a5418"
+      },
+      {
+        "name": "RDS Oracle and Custom Oracle native",
+        "url": "https://calculator.aws/#/estimate?id=056b774a6376f3e7c721255b883589c39f15e505"
+      }
+    ]
+  },
+  "method": [
+    "EKS, VPC, EBS, RDS MySQL/PostgreSQL/MariaDB/Oracle/Custom Oracle are native engine services.",
+    "RDS SQL Server, Db2, Custom SQL Server, Aurora MySQL/PostgreSQL and the EC2 pricing variants use live-editor-captured component payloads and costs because the native engine does not implement those column-form/pricing-strategy paths yet.",
+    "Every service component is stored in the saved estimate; the public page collapses them into five group rows."
+  ],
+  "notes": [
+    "Group totals, the estimate total, and the upfront total match the live editor recomputation exactly.",
+    "EBS includes all 7 volume types: gp2, gp3, io1, io2, st1, sc1, magnetic, plus snapshots, restore, and direct APIs.",
+    "RDS includes MySQL, PostgreSQL, MariaDB, Oracle, Custom Oracle, SQL Server, Db2, Custom SQL Server, Aurora MySQL, Aurora PostgreSQL.",
+    "VPC includes all 13 sub-services: VPN, Network Access Analyzer, Reachability Analyzer, Traffic Mirroring, public IPv4, IPAM, data transfer, Route Server, NAT (zonal and regional), Transit Gateway, PrivateLink, Gateway Load Balancer, Cloud WAN.",
+    "EKS includes standard and extended support, Argo CD/ACK/KRO capabilities, and tiered hybrid nodes.",
+    "EC2 variants: on-demand, 1-year standard RI, 3-year convertible RI (592 upfront), Spot (70% discount), 3-year Compute Savings Plan, and 3-year EC2 Instance Savings Plan (946.08 upfront), with EBS, monitoring, data transfer and additional-cost components from the captured advance-estimate payload.",
+    "Native RDS Oracle + Custom Oracle was separately published with --oracle-editor and passed."
+  ]
+}

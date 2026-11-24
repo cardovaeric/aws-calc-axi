@@ -1,0 +1,336 @@
+name: axi-sim EKS VPC EBS RDS EC2 all components
+currency: USD
+locale: en_US
+groups:
+- name: EKS
+  services:
+  - code: awsEks
+    region: us-east-2
+    set:
+      numberOfEKSClusters: 2
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 5
+      ackCapabilities: 1
+      ackResourcesPerCapability: 10
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 3
+      numberOfHybridNodes:
+        value: 10
+        unit: perMonth
+      numberOfVCPUperNode: 8
+- name: VPC
+  services:
+  - code: amazonVirtualPrivateCloud
+    region: us-east-2
+    subServices:
+    - code: vpnConnectionVpc
+      set:
+        numberOfSiteToSiteVPNConnections: 2
+        averageDurationForEachConnection:
+          value: 12
+          unit: perDay
+        vpnConnection_numberOfClientSubnets: 2
+        vpnConnection_numberOfClientConnections:
+          value: 10
+          unit: perDay
+        vpnConnection_clientAvgDuration:
+          value: 8
+          unit: perDay
+        vpnConnection_numberOfWorkDays: 22
+    - code: networkAccessAnalyzerVpc
+      set:
+        numberOfNetworkAssessment: 2
+        numberOfElasticNetworkInterface: 10
+    - code: reachabilityAnalyzerVpc
+      set:
+        numberOfConnectivityAnalysis: 10
+    - code: trafficMirroringVpc
+      set:
+        numberOfTrafficMirroringSession: 2
+    - code: publicIpv4Address
+      set:
+        numberOfInusepublicipv4address: 2
+        numberOfIdlepublicipv4address: 1
+    - code: ipamVpc
+      set:
+        numberOfActiveIPaddress: 100
+    - code: dataTransferVpc
+      set:
+        dataTransfer:
+          value:
+          - entryType: OUTBOUND
+            value: 1
+            unit: tb_month
+            toRegion: External
+    - code: vpcRouteServer
+      set:
+        Number_of_route_server_end_points: 2
+    - code: networkAddressTranslationNatGatewayVpc
+      set:
+        numberOfGateways: 2
+        dataProcessedPerNATGateway:
+          value: 1
+          unit: tb|month
+        regionalNatGatewayCount: 1
+        regionalNatGatewayAzCount: 2
+        regionalNatGatewayDataProcessed:
+          value: 500
+          unit: gb|month
+    - code: transitGatewayVpc
+      set:
+        numberOfTransitGatewayAttachments: 2
+        dataProcessedPerTransitGatewayAttachment:
+          value: 1
+          unit: tb|month
+        Number_of_multicast_receivers: 1
+        Multicast_data_processed_per_Transit_Gateway_receiver:
+          value: 100
+          unit: gb|month
+    - code: awsPrivateLinkVpc
+      set:
+        numberOfInterfaceVPCEndpointsPerRegion: 2
+        numberOfAvailabilityZonesEndpointsDeployed: 2
+        dataProcessedByEachVPCENIAZ:
+          value: 1
+          unit: tb|month
+    - code: gatewayLoadBalancerVpc
+      set:
+        numberOfGatewayAZs: 2
+        sizeOfProcessedDataPerGLB:
+          value: 1
+          unit: tb|month
+        averageNumberOfNewGLBConnections:
+          value: 10
+          unit: perSecond
+        averageGLBConnectionDuration:
+          value: 10
+          unit: sec
+        numberOfGatewayLoadBalancerEndpoints: 2
+    - code: cloudWan
+      set:
+        numberOfAttachments: 2
+        numberOfPeeringConnections: 1
+        dataProcessed:
+          value: 1
+          unit: tb|month
+- name: EBS
+  services:
+  - code: amazonElasticBlockStore
+    region: us-east-2
+    set:
+      numberOfInstances: 2
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage General Purpose gp3 GB Mo
+      storageAmount:
+        value: 500
+        unit: gb|NA
+      gp3Iops: 6000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      snapshotFrequency: '30'
+      snapshotAmount:
+        value: 10
+        unit: gb|NA
+  - code: amazonElasticBlockStore
+    region: us-east-2
+    set:
+      numberOfInstances: 2
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage Provisioned IOPS io2 GB month
+      storageAmount:
+        value: 500
+        unit: gb|NA
+      iops2: 64000
+      snapshotFrequency: '3'
+      snapshotAmount:
+        value: 5
+        unit: gb|NA
+  - code: amazonElasticBlockStore
+    region: us-east-2
+    set:
+      numberOfInstances: 2
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage General Purpose GB Mo
+      storageAmount:
+        value: 500
+        unit: gb|NA
+      snapshotFrequency: '1'
+      snapshotAmount:
+        value: 10
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10000
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10000
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10000
+        unit: perMonth
+- name: RDS
+  services:
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    set:
+      columnFormIPM:
+      - Number of Nodes: 1
+        Instance Type: db.t3.micro
+        Deployment Option: Single-AZ
+        TermType: OnDemand
+        LeaseContractLength: ''
+        PurchaseOption: ''
+      createRDSProxy: '1'
+      storageType: General Purpose-GP3
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: '1'
+      DatabaseInsightsSelected: '1'
+      retentionPeriod: '3'
+      addRDSExtendedSupport: '1'
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 100
+        unit: perMonth
+      additionalBackupStorage:
+        value: 50
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-2
+    set:
+      columnFormIPM:
+      - Number of Nodes: 1
+        Instance Type: db.t3.micro
+        Deployment Option: Single-AZ
+        TermType: OnDemand
+        LeaseContractLength: ''
+        PurchaseOption: ''
+      createRDSProxy: '1'
+      storageType: General Purpose-GP3
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: '1'
+      DatabaseInsightsSelected: '1'
+      retentionPeriod: '3'
+      addRDSExtendedSupport: '1'
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 100
+        unit: perMonth
+      additionalBackupStorage:
+        value: 50
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    set:
+      columnFormIPM:
+      - Number of Nodes: 1
+        Instance Type: db.t3.micro
+        Deployment Option: Single-AZ
+        TermType: OnDemand
+        LeaseContractLength: ''
+        PurchaseOption: ''
+      createRDSProxy: '1'
+      storageType: General Purpose-GP3
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: '1'
+      DatabaseInsightsSelected: '1'
+      retentionPeriod: '3'
+      addRDSExtendedSupport: '1'
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 100
+        unit: perMonth
+      additionalBackupStorage:
+        value: 50
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRdsForOracle
+    region: us-east-2
+    set:
+      columnFormIPM:
+      - Number of Nodes: 1
+        Instance Type: db.m5.large
+        Deployment Option: Single-AZ
+        TermType: OnDemand
+        License Model: License included
+        Database Edition: Standard Two
+        LeaseContractLength: ''
+        PurchaseOption: ''
+      createRDSProxy: '1'
+      storageType: General Purpose-GP3
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: '1'
+      retentionPeriod: '3'
+      addRDSExtendedSupport: '1'
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 100
+        unit: perMonth
+      additionalBackupStorage:
+        value: 50
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRdsCustomForOracle
+    region: us-east-2
+    set:
+      columnFormIPM:
+      - Number of Nodes: 1
+        Instance Type: db.m5.large
+        Database Edition: Enterprise
+        Deployment Option: Single-AZ
+        TermType: OnDemand
+        LeaseContractLength: ''
+        PurchaseOption: ''
+      storageType: General Purpose SSD
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      provisioningIOPS: 3000
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 50
+        unit: gb|NA

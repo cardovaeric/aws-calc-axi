@@ -67,19 +67,23 @@ Full service coverage assessment and implementation plan: `analysis/COVERAGE_ASS
 | S3 outbound 1 TB to the internet | 92.16 | 92.16 USD | editor recompute pass | pass |
 | DAX 3 x r5.large nodes | 558.45 | 558.45 USD | probe pass | pass |
 | Groups (S3 + Lambda) + Business Support+ | 14.10 (+29.00 support) | 43.10 USD | none | pass |
+| Top-service simulation (EKS+VPC+EBS+RDS+EC2) | 16313.62 (+1538.08 upfront) | 16,313.62 USD (+1,538.08 upfront) | editor recompute pass | pass |
 
 Public links and full receipts: `COVERAGE.md` and `receipts/`.
 
 Receipts: `receipts/p0-s3-standard.json`, `receipts/p1-*.json` (S3, Lambda, CloudWatch, SNS,
 SQS), `receipts/p2-groups-support.json`, `receipts/p3-*.json` (X-Ray, CloudFormation,
 EventBridge, Athena, S3 data transfer, DAX). Each stores the public link, the stored JSON
-comparison, the rendered DOM, the oracle, and the verdict.
+comparison, the rendered DOM, the oracle, and the verdict. The 37-service top-service
+simulation is in `receipts/sim-top-services.json` with the full stored estimate in
+`receipts/sim-top-services-estimate.json` and notes in
+`analysis/SIMULATION_TOP_SERVICES.md`.
 
 ## Test and lint status
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 96 tests, pass
+- `npm test`: 101 tests, pass
 - `npm run e2e`: 19 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
   ledger rows including the editor-recompute oracle)
 - `npm run ledger`: 12 rows, all pass

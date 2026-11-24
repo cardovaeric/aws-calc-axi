@@ -25,3 +25,5 @@ When updating this file, preserve this bar for all agents and keep entries conci
 
 - `PLAN.md` - locked plan, architecture, coverage tiers, and accuracy gates for aws-calc-axi.
 - `analysis/FINDINGS.md` - live calculator.aws API, schema, and estimate contract evidence.
+- `analysis/COVERAGE_ASSESSMENT.md` - coverage for every definition, top-service deep dives, and the implementation plan.
+- `analysis/SIMULATION_TOP_SERVICES.md` - 37-service EKS/VPC/EBS/RDS/EC2 simulation link and live verification.

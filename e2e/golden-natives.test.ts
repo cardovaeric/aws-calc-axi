@@ -43,6 +43,27 @@ const CASES = [
     monthly: 14.85,
     summary: "Total number of queries (100 per day), Amount of data scanned per query (1 GB), Number of DPUs (4)",
   },
+  {
+    spec: "examples/codebuild-column-form.yaml",
+    monthly: 9,
+    summary:
+      "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (10), Search Instance Type (arm1.2xlarge), Operating system (Linux)",
+  },
+  {
+    spec: "examples/elasticache-column-form.yaml",
+    monthly: 454.06,
+    summaryIncludes: "Nodes (2), Instance type (cache.m5.xlarge)",
+  },
+  {
+    spec: "examples/msk-column-form.yaml",
+    monthly: 489.9,
+    summaryIncludes: "Number of Kafka broker nodes (3), Compute Family (m5.large)",
+  },
+  {
+    spec: "examples/keyspaces-column-form.yaml",
+    monthly: 25.69,
+    summaryIncludes: "Pricing strategy (OnDemand)",
+  },
 ] as const;
 
 for (const testCase of CASES) {
@@ -60,3 +81,16 @@ for (const testCase of CASES) {
     }
   });
 }
+
+/**
+ * A live column form holds one row per component; a second configuration is a
+ * second service (receipts/column-form-rows-probe.json). The batch fixture
+ * locks both the repeated-service shape and the multi-service total.
+ */
+test("native golden examples/column-form-rows.yaml (repeated services)", async () => {
+  const spec = await loadSpecFile(join(ROOT, "examples/column-form-rows.yaml"));
+  const { result } = await buildFromSpec(spec);
+  assert.equal(result.serviceTotal.monthly, 957.46);
+  const monthly = result.services.map((entry) => entry.evaluated.serviceCost.monthly);
+  assert.deepEqual(monthly, [9, 4.5, 454.06, 489.9]);
+});

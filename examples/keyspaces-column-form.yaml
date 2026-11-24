@@ -1,0 +1,15 @@
+name: axi-e2e Keyspaces column forms
+currency: USD
+locale: en_US
+services:
+  - code: amazonKeyspaces
+    region: us-east-2
+    template: keyspacesOnDemandCapacityNew
+    set:
+      numberofwritespermonth: { value: 1000000, unit: perMonth }
+      numberofreadspermonth: { value: 1000000, unit: perMonth }
+      storagepermonth: { value: 100, unit: gb|NA }
+      columnFormIPMOndemandWrites:
+        TermType: OnDemand
+      columnFormIPMOndemandReads:
+        TermType: OnDemand

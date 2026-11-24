@@ -1,0 +1,12 @@
+name: axi-e2e CodeBuild column form
+currency: USD
+locale: en_US
+services:
+  - code: awsCodeBuild
+    region: us-east-2
+    set:
+      buildsinaMonth: 10
+      AvgBuildTime: 10
+      columnFormIPM:
+        Compute Type: arm1.2xlarge
+        Operating System: Linux

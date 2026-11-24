@@ -212,6 +212,21 @@ export const LEDGER: LedgerEntry[] = [
     notes: "first columnFormIPM row; PLC_2.0 metadata, aggregations, and index price path",
   },
   {
+    id: "column-form-rows-use2",
+    service: "CodeBuild x2 + ElastiCache + MSK",
+    template: "awsCodeBuild x2 + amazonElastiCache + amazonManagedStreamingForApacheKafkaMsk",
+    region: "us-east-2",
+    fixture:
+      "two CodeBuild services (10 and 5 builds), ElastiCache 2 x cache.m5.xlarge, MSK 3 x m5.large",
+    specPath: "examples/column-form-rows.yaml",
+    receiptPath: "receipts/p2-column-form-rows.json",
+    expectedMonthlyCents: 95746,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "one row per column form; the live 'second row' is a second service (receipts/column-form-rows-probe.json)",
+  },
+  {
     id: "groups-support-business-use2",
     service: "group: Data -> Data Compute (S3 + Lambda)",
     template: "simpleStorageServiceClassesGroup + lambdaWithFreeTier",

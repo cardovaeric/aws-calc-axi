@@ -1,0 +1,11 @@
+name: axi-e2e MSK column form
+currency: USD
+locale: en_US
+services:
+  - code: amazonManagedStreamingForApacheKafkaMsk
+    region: us-east-2
+    template: amazonMSK
+    set:
+      columnFormIPM:
+        Number of Kafka broker nodes: 3
+        Compute Family: m5.large

@@ -1,0 +1,22 @@
+name: axi-e2e ElastiCache column form
+currency: USD
+locale: en_US
+services:
+  - code: amazonElastiCache
+    region: us-east-2
+    set:
+      columnFormIPM_dsp:
+        Cache Engine: Redis
+        TermType: OnDemand
+      columnFormIPM:
+        Number of Nodes: 2
+        Instance Type: cache.m5.xlarge
+        Cache Engine: Redis
+        Instance Family: Standard
+        TermType: OnDemand
+      columnFormIPMDT:
+        Number of Nodes: 0
+        Instance Type: cache.r6gd.12xlarge
+        Cache Engine: Redis
+        Instance Family: Memory optimized
+        TermType: OnDemand

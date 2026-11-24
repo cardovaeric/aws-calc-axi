@@ -318,3 +318,254 @@ test("a bare size override on a monthly input keeps the monthly frequency", () =
   assert.equal(result.value, 250);
   assert.deepEqual(result.saved, { value: 250, unit: "gb|month" });
 });
+
+test("a percentage utilization input converts to hours and saves the entry with its duration", () => {
+  const result = evaluateInput(
+    input({
+      subType: "utilization",
+      label: "Monthly utilization",
+      defaultValue: 100,
+      roundUpToHours: true,
+      validations: { required: true, minValue: 0, maxValue: 730 },
+    }),
+    { ...context, overrides: {} }
+  );
+  assert.equal(result.value, 730);
+  assert.deepEqual(result.saved, { value: "100", unit: "percentagePerMonth" });
+  assert.equal(result.present, true);
+});
+
+test("a utilization input keeps its declared duration and prints the live summary", () => {
+  const result = evaluateInput(
+    input({
+      subType: "utilization",
+      label: "Hours used",
+      defaultValue: 730,
+      defaultDuration: "hoursPerMonth",
+      roundUpToHours: true,
+      decimalPlaces: 4,
+      displayInConfigSummary: true,
+      validations: { required: true, minValue: 0, maxValue: 730 },
+    }),
+    { ...context, overrides: {} }
+  );
+  assert.equal(result.value, 730);
+  assert.deepEqual(result.saved, { value: "730", unit: "hoursPerMonth" });
+  assert.equal(result.configSummary, "Hours used (730 Hours/Month)");
+});
+
+test("utilization overrides convert the entry and keep the saved wire shape", () => {
+  const component = input({
+    subType: "utilization",
+    label: "Length of time cluster is running",
+    defaultValue: 100,
+    defaultDuration: "percentagePerMonth",
+    roundUpToHours: false,
+    decimalPlaces: 4,
+    displayInConfigSummary: true,
+    validations: { required: false },
+  });
+  const below = evaluateInput(component, { ...context, overrides: { field: { value: 33 } } });
+  assert.equal(below.value, 240.9);
+  assert.deepEqual(below.saved, { value: "33", unit: "percentagePerMonth" });
+  assert.equal(
+    below.configSummary,
+    "Length of time cluster is running (33 % Utilization/Month)"
+  );
+
+  const half = evaluateInput(component, { ...context, overrides: { field: { value: 50 } } });
+  assert.equal(half.value, 365);
+
+  const none = evaluateInput(component, { ...context, overrides: { field: { value: 0 } } });
+  assert.equal(none.value, 0);
+  assert.deepEqual(none.saved, { value: "0", unit: "percentagePerMonth" });
+});
+
+test("a utilization override can switch to another live duration", () => {
+  const result = evaluateInput(
+    input({
+      subType: "utilization",
+      label: "Hours used",
+      defaultValue: 730,
+      defaultDuration: "hoursPerMonth",
+      roundUpToHours: true,
+    }),
+    { ...context, overrides: { field: { value: 12, unit: "hoursPerDay" } } }
+  );
+  // 12/24 of a month of hours: 12/24 * 730 = 365.
+  assert.equal(result.value, 365);
+  assert.deepEqual(result.saved, { value: "12", unit: "hoursPerDay" });
+});
+
+test("utilization validations run on the converted hours with the live 0..730 default", () => {
+  const component = input({
+    subType: "utilization",
+    label: "Flow utilization",
+    defaultValue: 730,
+    defaultDuration: "hoursPerMonth",
+    roundUpToHours: true,
+    validations: { required: true },
+  });
+  // A definition without minValue/maxValue still rejects more than a month.
+  assert.throws(
+    () => evaluateInput(component, { ...context, overrides: { field: { value: 800 } } }),
+    /must be between 0 and 730 hours utilized/
+  );
+  const max = evaluateInput(component, { ...context, overrides: { field: { value: 730 } } });
+  assert.equal(max.value, 730);
+
+  // Percentages are validated through their hours: 101% is 737.3 hours.
+  const percentage = input({
+    subType: "utilization",
+    label: "Monthly utilization",
+    defaultValue: 100,
+    roundUpToHours: true,
+    validations: { required: true, minValue: 0, maxValue: 730 },
+  });
+  assert.throws(
+    () => evaluateInput(percentage, { ...context, overrides: { field: { value: 101 } } }),
+    /must be between 0 and 730 hours utilized/
+  );
+});
+
+test("an unknown utilization duration fails closed with the live option ids", () => {
+  assert.throws(
+    () =>
+      evaluateInput(
+        input({ subType: "utilization", defaultValue: 100, defaultDuration: "percentagePerMonth" }),
+        { ...context, overrides: { field: { value: 10, unit: "hoursPerYear" } } }
+      ),
+    /"hoursPerYear" is not one of percentagePerMonth, hoursPerDay, hoursPerWeek, hoursPerMonth, minutesPerDay, minutesPerMonth/
+  );
+});
+
+test("utilization is a supported input subtype, not a fail-closed gap", () => {
+  // Regression guard: this case used to throw UNSUPPORTED_INPUT, which kept
+  // Deadline Cloud, Direct Connect, MediaConnect, and PCS from evaluating.
+  const result = evaluateInput(
+    input({ subType: "utilization", defaultValue: 100, roundUpToHours: true }),
+    { ...context, overrides: {} }
+  );
+  assert.equal(result.value, 730);
+  // Unknown subtypes still fail closed, so the guard above is meaningful.
+  assert.throws(
+    () => evaluateInput(input({ subType: "notARealSubtype" }), { ...context, overrides: {} }),
+    /no handler for input subtype "notARealSubtype"/
+  );
+});
+
+function templateFor(components: {
+  inputs?: Component[];
+  maths?: Component[];
+}): ServiceDefinition {
+  return {
+    version: "0",
+    serviceName: "test",
+    serviceCode: "test",
+    templates: [
+      {
+        id: "t",
+        cards: [
+          {
+            inputSection: { components: components.inputs ?? [] },
+            mathsSection: [{ components: components.maths ?? [] }],
+          },
+        ],
+      },
+    ],
+  } as unknown as ServiceDefinition;
+}
+
+function evaluate(definition: ServiceDefinition, prices = pricing) {
+  return evaluateTemplate({
+    definition,
+    template: definition.templates?.[0] as never,
+    regionCode: "us-east-2",
+    regionName: "US East (Ohio)",
+    prices,
+    overrides: {},
+    ...regionMaps(),
+    columnForms: new Map(),
+  });
+}
+
+test("replace keeps the original string when no replacement matches, like the live engine", () => {
+  const definition = templateFor({
+    inputs: [input({ id: "source", subType: "dropdown", defaultDropDownItem: "none", options: [{ id: "none", label: "None" }] })],
+    maths: [
+      {
+        type: "pricing",
+        subType: "replace",
+        id: "replaced",
+        originalId: "source",
+        replacements: [{ originalString: "JPEG-XS", replaceString: "CDI" }],
+      } as unknown as Component,
+    ],
+  });
+  // The definition's dropdown default ("none") is not in the replacement list.
+  assert.equal(evaluate(definition).values.get("replaced"), "none");
+});
+
+test("replace substitutes every occurrence of the original string", () => {
+  const definition = templateFor({
+    inputs: [input({ id: "source", subType: "dropdown", defaultDropDownItem: "a-b-a", options: [{ id: "a-b-a", label: "A B A" }] })],
+    maths: [
+      {
+        type: "pricing",
+        subType: "replace",
+        id: "replaced",
+        originalId: "source",
+        replacements: [{ originalString: "a-b", replaceString: "z" }],
+      } as unknown as Component,
+    ],
+  });
+  assert.equal(evaluate(definition).values.get("replaced"), "z-a");
+});
+
+test("pricingComboV2 bills a derived meter that the region lacks as zero, like the live engine", () => {
+  const prices = resolverFor({
+    "mediaconnect": { regions: { "US East (Ohio)": {} } },
+  });
+  const definition = templateFor({
+    maths: [
+      {
+        type: "pricing",
+        subType: "concatenate",
+        id: "meter",
+        operands: [{ constant: "DataProcessedReserved" }, { constant: "Mbps1Yr" }],
+      } as unknown as Component,
+      {
+        type: "pricing",
+        subType: "pricingComboV2",
+        id: "price",
+        mappingDefinitionName: "mediaconnect",
+        refers: [{ variableId: "meter" }],
+      } as unknown as Component,
+    ],
+  });
+  assert.equal(evaluate(definition, prices).values.get("price"), 0);
+});
+
+test("pricingComboV2 still fails closed when the region never loaded", () => {
+  const prices = resolverFor({
+    "mediaconnect": { regions: { "US West (Oregon)": { Meter: { price: "1" } } } },
+  });
+  const definition = templateFor({
+    maths: [
+      {
+        type: "pricing",
+        subType: "concatenate",
+        id: "meter",
+        operands: [{ constant: "Meter" }],
+      } as unknown as Component,
+      {
+        type: "pricing",
+        subType: "pricingComboV2",
+        id: "price",
+        mappingDefinitionName: "mediaconnect",
+        refers: [{ variableId: "meter" }],
+      } as unknown as Component,
+    ],
+  });
+  assert.throws(() => evaluate(definition, prices), /no price for metered unit "Meter"/);
+});

@@ -132,6 +132,11 @@ const DISPLAY_ONLY_SUBTYPES = new Set([
   "conversionDisplay",
 ]);
 
+/** Escape a literal string for `new RegExp`, like the live bundle's helper. */
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function setHidden(runtime: Runtime, component: Component): void {
   runtime.values.set(component.id, 0);
 }
@@ -241,18 +246,24 @@ function evaluatePricingComponent(
     case "replace": {
       const originalId = String(component["originalId"] ?? "");
       const originalValue = originalId ? runtime.values.get(originalId) : undefined;
-      const replacements = (component["replacements"] as Array<Record<string, unknown>> | undefined) ?? [];
-      const match = replacements.find(
-        (entry) => String(entry["originalString"]) === String(originalValue)
-      );
-      if (!match) {
+      if (originalValue === undefined || originalValue === null) {
         throw new EngineError(
-          `replace "${component.id}" has no mapping for ${originalId}=${String(originalValue)}`,
-          "BAD_DEFINITION",
-          { componentId: component.id, originalId, originalValue }
+          `replace "${component.id}" needs component "${originalId}"`,
+          "MISSING_INPUT",
+          { componentId: component.id, referencedId: originalId }
         );
       }
-      runtime.values.set(component.id, String(match["replaceString"] ?? ""));
+      // The live engine applies every replacement as a global regex
+      // substitution and keeps the original string when nothing matches.
+      const replacements =
+        (component["replacements"] as Array<Record<string, unknown>> | undefined) ?? [];
+      const replaced = replacements.reduce((value, entry) => {
+        const original = String(entry["originalString"] ?? "");
+        const replacement = String(entry["replaceString"] ?? "");
+        if (original === "") return value;
+        return value.replace(new RegExp(escapeRegExp(original), "g"), replacement);
+      }, String(originalValue));
+      runtime.values.set(component.id, replaced);
       return;
     }
     case "concatenate": {
@@ -294,7 +305,15 @@ function evaluatePricingComponent(
       const key = first && typeof first["key"] === "string" ? first["key"] : "price";
       const record = pricingContext.prices.record(mapping, label);
       if (!record) {
-        throw new MissingPriceError(label, pricingContext.regionName, mapping);
+        // The live engine reads a composed meter name out of the regional map
+        // and falls back to 0 when it is absent (the "None" reservation option
+        // in MediaConnect, for example). A mapping that never loaded its
+        // region is a data gap, not a live zero, so that still fails closed.
+        if (pricingContext.prices.meters(mapping) === undefined) {
+          throw new MissingPriceError(label, pricingContext.regionName, mapping);
+        }
+        runtime.values.set(component.id, 0);
+        return;
       }
       const raw = (record as unknown as Record<string, unknown>)[key];
       const value = Number(raw);

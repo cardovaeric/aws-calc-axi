@@ -6,6 +6,12 @@ import {
   convertThroughput,
   convertDuration,
   roundConverted,
+  DEFAULT_UTILIZATION_DECIMALS,
+  DEFAULT_UTILIZATION_DURATION,
+  DEFAULT_UTILIZATION_VALUE,
+  HOURS_IN_MONTH,
+  UTILIZATION_DURATIONS,
+  utilizationHours,
 } from "./units.ts";
 import {
   evaluateTransferRows,
@@ -95,6 +101,22 @@ function validationProblem(component: Component, numeric: number): string | unde
 
 function required(component: Component): boolean {
   return validationsOf(component)["required"] === true;
+}
+
+/**
+ * The live utilization form always validates the converted hours, with a
+ * default range of 0..730 regardless of whether the definition declares one.
+ * It also forces `allowDecimals: true`, so only the range is checked.
+ */
+function utilizationProblem(hours: number, component: Component): string | undefined {
+  const validations = validationsOf(component);
+  const minValue = typeof validations["minValue"] === "number" ? validations["minValue"] : 0;
+  const maxValue =
+    typeof validations["maxValue"] === "number" ? validations["maxValue"] : HOURS_IN_MONTH;
+  if (hours < minValue || hours > maxValue) {
+    return `must be between ${minValue} and ${maxValue} hours utilized`;
+  }
+  return undefined;
 }
 
 interface InputValidationContext {
@@ -385,6 +407,71 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
         ...(present ? { saved: { value: raw as string | number, unit: selectedId } } : {}),
         ...(displayInSummary && present
           ? { configSummary: `${label} (${String(raw)} ${optionLabelText})` }
+          : {}),
+      };
+    }
+
+    case "utilization": {
+      // The live form offers a fixed list of durations (not a definition
+      // field) and saves the entered amount plus the duration id. The engine
+      // value is the converted hours a month the maths section consumes.
+      const declaredDuration = component["defaultDuration"];
+      const durationId =
+        override.unit ??
+        (typeof declaredDuration === "string" && declaredDuration !== ""
+          ? declaredDuration
+          : DEFAULT_UTILIZATION_DURATION);
+      if (!UTILIZATION_DURATIONS[durationId]) {
+        throw new InputValidationError({
+          serviceCode: context.serviceCode,
+          componentId: component.id,
+          label,
+          problem:
+            `unit "${durationId}" is not one of ` + Object.keys(UTILIZATION_DURATIONS).join(", "),
+          value: durationId,
+        });
+      }
+      const duration = UTILIZATION_DURATIONS[durationId]!;
+      const raw = override.value ?? component["defaultValue"] ?? DEFAULT_UTILIZATION_VALUE;
+      const fromOverride = override.value !== undefined || override.unit !== undefined;
+      const entered = fromOverride
+        ? requireNumeric(component, raw, context)
+        : numericValue(component, raw, context);
+      const present = raw !== undefined && raw !== null && raw !== "";
+      const decimalPlaces =
+        typeof component["decimalPlaces"] === "number"
+          ? component["decimalPlaces"]
+          : DEFAULT_UTILIZATION_DECIMALS;
+      const hours = utilizationHours(
+        entered,
+        durationId,
+        component["roundUpToHours"] === true,
+        decimalPlaces
+      );
+      // Range validations run on the converted hours, not the entry.
+      if (fromOverride && present) {
+        const problem = utilizationProblem(hours, component);
+        if (problem) {
+          throw new InputValidationError({
+            serviceCode: context.serviceCode,
+            componentId: component.id,
+            label,
+            problem,
+            value: raw,
+          });
+        }
+      }
+      return {
+        value: hours,
+        present,
+        // The live form saves the text the user typed plus the duration id. The
+        // value stays a string because the calculator's rehydrator treats a
+        // numeric 0 as an empty field (lodash `isEmpty(0)`) and drops the unit.
+        ...(present
+          ? { saved: { value: typeof raw === "string" ? raw.trim() : String(entered), unit: durationId } }
+          : {}),
+        ...(displayInSummary && present
+          ? { configSummary: `${label} (${formatNumber(entered)} ${duration.label})` }
           : {}),
       };
     }

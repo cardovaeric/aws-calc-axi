@@ -1,0 +1,50 @@
+name: axi-conformance amazonRDSForSQLServer-013
+currency: USD
+locale: en_US
+services:
+  - code: amazonRDSForSQLServer
+    region: us-east-2
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "24"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-2
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: tb|NA

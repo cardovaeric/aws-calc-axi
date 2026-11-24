@@ -1,0 +1,34 @@
+name: axi-conformance reachabilityAnalyzerVpc-001
+currency: USD
+locale: en_US
+services:
+  - code: reachabilityAnalyzerVpc
+    region: us-east-1
+    template: template_ReachabilityAnalyzer
+    set:
+      numberOfConnectivityAnalysis: 1
+  - code: reachabilityAnalyzerVpc
+    region: us-east-1
+    template: template_ReachabilityAnalyzer
+    set:
+      numberOfConnectivityAnalysis: 500000.5
+  - code: reachabilityAnalyzerVpc
+    region: us-east-1
+    template: template_ReachabilityAnalyzer
+    set:
+      numberOfConnectivityAnalysis: 10000
+  - code: reachabilityAnalyzerVpc
+    region: us-east-2
+    template: template_ReachabilityAnalyzer
+    set:
+      numberOfConnectivityAnalysis: 1
+  - code: reachabilityAnalyzerVpc
+    region: us-east-2
+    template: template_ReachabilityAnalyzer
+    set:
+      numberOfConnectivityAnalysis: 500000.5
+  - code: reachabilityAnalyzerVpc
+    region: us-east-2
+    template: template_ReachabilityAnalyzer
+    set:
+      numberOfConnectivityAnalysis: 10000

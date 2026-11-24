@@ -1,0 +1,224 @@
+name: axi-conformance eC2Next-006
+currency: USD
+locale: en_US
+services:
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: rhel-ha
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: rhel-web
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: rhel-std
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: rhel-enterprise
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: rhel-ha-std
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: rhel-ha-enterprise
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage Provisioned IOPS GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage Provisioned IOPS io2 GB month
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage Throughput Optimized HDD GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA

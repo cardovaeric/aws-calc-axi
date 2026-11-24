@@ -1,0 +1,230 @@
+name: axi-conformance eC2Next-014
+currency: USD
+locale: en_US
+services:
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: tb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 1024
+        unit: mb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 1
+        unit: tb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      iops2TieredPricing: 0
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      iops2TieredPricing: 32000
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      iops2TieredPricing: 32001
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      iops2TieredPricing: 64000
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      iops2TieredPricing: 64001
+  - code: eC2Next
+    region: us-east-1
+    template: advanceEstimate
+    set:
+      selectedOS: linux
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      storageAmountIo2:
+        value: 30
+        unit: gb|NA
+      snapshotFrequency: "59.83"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      iops2TieredPricing: 128003

@@ -1,0 +1,34 @@
+name: axi-conformance trafficMirroringVpc-001
+currency: USD
+locale: en_US
+services:
+  - code: trafficMirroringVpc
+    region: us-east-1
+    template: template_TrafficMirror
+    set:
+      numberOfTrafficMirroringSession: 1
+  - code: trafficMirroringVpc
+    region: us-east-1
+    template: template_TrafficMirror
+    set:
+      numberOfTrafficMirroringSession: 500000.5
+  - code: trafficMirroringVpc
+    region: us-east-1
+    template: template_TrafficMirror
+    set:
+      numberOfTrafficMirroringSession: 10000
+  - code: trafficMirroringVpc
+    region: us-east-2
+    template: template_TrafficMirror
+    set:
+      numberOfTrafficMirroringSession: 1
+  - code: trafficMirroringVpc
+    region: us-east-2
+    template: template_TrafficMirror
+    set:
+      numberOfTrafficMirroringSession: 500000.5
+  - code: trafficMirroringVpc
+    region: us-east-2
+    template: template_TrafficMirror
+    set:
+      numberOfTrafficMirroringSession: 10000

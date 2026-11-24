@@ -1,0 +1,64 @@
+name: axi-conformance networkAccessAnalyzerVpc-001
+currency: USD
+locale: en_US
+services:
+  - code: networkAccessAnalyzerVpc
+    region: us-east-1
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 1
+      numberOfElasticNetworkInterface: 1
+  - code: networkAccessAnalyzerVpc
+    region: us-east-1
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 500000.5
+      numberOfElasticNetworkInterface: 1
+  - code: networkAccessAnalyzerVpc
+    region: us-east-1
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 10000
+      numberOfElasticNetworkInterface: 1
+  - code: networkAccessAnalyzerVpc
+    region: us-east-1
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 1
+      numberOfElasticNetworkInterface: 500000.5
+  - code: networkAccessAnalyzerVpc
+    region: us-east-1
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 1
+      numberOfElasticNetworkInterface: 10000
+  - code: networkAccessAnalyzerVpc
+    region: us-east-2
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 1
+      numberOfElasticNetworkInterface: 1
+  - code: networkAccessAnalyzerVpc
+    region: us-east-2
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 500000.5
+      numberOfElasticNetworkInterface: 1
+  - code: networkAccessAnalyzerVpc
+    region: us-east-2
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 10000
+      numberOfElasticNetworkInterface: 1
+  - code: networkAccessAnalyzerVpc
+    region: us-east-2
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 1
+      numberOfElasticNetworkInterface: 500000.5
+  - code: networkAccessAnalyzerVpc
+    region: us-east-2
+    template: template_NetworkAccessAnalyzer
+    set:
+      numberOfNetworkAssessment: 1
+      numberOfElasticNetworkInterface: 10000

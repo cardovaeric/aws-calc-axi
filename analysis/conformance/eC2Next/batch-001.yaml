@@ -1,0 +1,164 @@
+name: axi-conformance eC2Next-001
+currency: USD
+locale: en_US
+services:
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: linux
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: windows
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: windows-std
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: windows-web
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: windows-enterprise
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: rhel
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: suse
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: linux-std
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: linux-web
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA
+  - code: eC2Next
+    region: us-east-1
+    template: quickEstimate
+    set:
+      selectedOS: linux-enterprise
+      quantity: 1
+      storageType: Storage General Purpose GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      storageAmount:
+        value: 30
+        unit: gb|NA

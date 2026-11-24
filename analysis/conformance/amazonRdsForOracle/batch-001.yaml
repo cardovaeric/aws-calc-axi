@@ -1,0 +1,194 @@
+name: axi-conformance amazonRdsForOracle-001
+currency: USD
+locale: en_US
+services:
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: General Purpose-GP3
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: Provisioned IOPS
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: Provisioned IOPS-IO2
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: Magnetic
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "0"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: General Purpose-GP3
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "0"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: Provisioned IOPS
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "0"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: Provisioned IOPS-IO2
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "0"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForOracle
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      storageType: Magnetic
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      DatabaseInsightsSelected: "0"
+      retentionPeriod: "0"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA

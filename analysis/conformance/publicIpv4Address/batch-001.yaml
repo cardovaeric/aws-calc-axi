@@ -1,0 +1,64 @@
+name: axi-conformance publicIpv4Address-001
+currency: USD
+locale: en_US
+services:
+  - code: publicIpv4Address
+    region: us-east-1
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 1
+      numberOfIdlepublicipv4address: 1
+  - code: publicIpv4Address
+    region: us-east-1
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 0
+      numberOfIdlepublicipv4address: 1
+  - code: publicIpv4Address
+    region: us-east-1
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 500000
+      numberOfIdlepublicipv4address: 1
+  - code: publicIpv4Address
+    region: us-east-1
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 10000
+      numberOfIdlepublicipv4address: 1
+  - code: publicIpv4Address
+    region: us-east-1
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 1
+      numberOfIdlepublicipv4address: 0
+  - code: publicIpv4Address
+    region: us-east-1
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 1
+      numberOfIdlepublicipv4address: 500000
+  - code: publicIpv4Address
+    region: us-east-1
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 1
+      numberOfIdlepublicipv4address: 10000
+  - code: publicIpv4Address
+    region: us-east-2
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 1
+      numberOfIdlepublicipv4address: 1
+  - code: publicIpv4Address
+    region: us-east-2
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 0
+      numberOfIdlepublicipv4address: 1
+  - code: publicIpv4Address
+    region: us-east-2
+    template: ipv4publicaddress
+    set:
+      numberOfInusepublicipv4address: 500000
+      numberOfIdlepublicipv4address: 1

@@ -1,0 +1,327 @@
+{
+  "estimate": "axi-conformance networkAddressTranslationNatGatewayVpc-003",
+  "specHash": "d0c62ad40395f3b8",
+  "url": "https://calculator.aws/#/estimate?id=2fe4e53482ff62f14355ff712f2b590a26ff070d",
+  "savedKey": "2fe4e53482ff62f14355ff712f2b590a26ff070d",
+  "publishedAt": "2026-11-24T10:42:18.655Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 249994.69,
+    "upfront": 0,
+    "total12m": 2999936.28,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 9891.89,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (100), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 197.34,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (1)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 1018.59,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (6)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 1675.59,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (10)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 756.04,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 236455.24,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 9891.89,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 197.34,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 1018.59,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 1675.59,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 756.04,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 236455.24,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 249994.69,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=2fe4e53482ff62f14355ff712f2b590a26ff070d",
+    "title": "axi-conformance networkAddressTranslationNatGatewayVpc-003",
+    "monthly": "249,994.69 USD",
+    "upfront": "0.00 USD",
+    "annual": "2,999,936.28 USD",
+    "monthlyValue": 249994.69,
+    "upfrontValue": 0,
+    "annualValue": 2999936.28,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": null,
+    "readOnlyNotice": false,
+    "services": [
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "9,891.89 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (100), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": "-"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "197.34 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (1)",
+        "status": "-"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "1,018.59 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (6)",
+        "status": "-"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "1,675.59 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (10)",
+        "status": "-"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "756.04 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": "-"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "236,455.24 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": "-"
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:42:46.112Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=2fe4e53482ff62f14355ff712f2b590a26ff070d",
+    "savedKey": "2fe4e53482ff62f14355ff712f2b590a26ff070d",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=2fe4e53482ff62f14355ff712f2b590a26ff070d",
+      "title": "BINUS eDesk Azure to AWS - target run-rate",
+      "monthly": "1,475.16 USD",
+      "upfront": "0.00 USD",
+      "annual": "17,701.92 USD",
+      "monthlyValue": 1475.16,
+      "upfrontValue": 0,
+      "annualValue": 17701.92,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": "last updated on November 24, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "PROD",
+          "upfront": "0.00 USD",
+          "monthly": "1,002.37 USD",
+          "description": "Services (11), Groups (0)",
+          "region": "-",
+          "configSummary": "-",
+          "status": null
+        },
+        {
+          "name": "Non-Prod",
+          "upfront": "0.00 USD",
+          "monthly": "472.79 USD",
+          "description": "Services (10), Groups (0)",
+          "region": "-",
+          "configSummary": "-",
+          "status": null
+        }
+      ],
+      "groups": [
+        {
+          "name": "BINUS eDesk Azure to AWS - target run-rate",
+          "root": true,
+          "parent": false
+        },
+        {
+          "name": "PROD",
+          "root": false,
+          "parent": true
+        },
+        {
+          "name": "Non-Prod",
+          "root": false,
+          "parent": true
+        }
+      ],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:43:15.383Z"
+    },
+    "mismatches": [
+      {
+        "field": "title",
+        "expected": "axi-conformance networkAddressTranslationNatGatewayVpc-003",
+        "actual": "BINUS eDesk Azure to AWS - target run-rate"
+      },
+      {
+        "field": "monthly",
+        "expected": "249994.69",
+        "actual": "1475.16"
+      },
+      {
+        "field": "annual",
+        "expected": "2999936.28",
+        "actual": "17701.92"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance networkAddressTranslationNatGatewayVpc-003",
+    "monthly": 249994.69,
+    "upfront": 0,
+    "annual": 2999936.28,
+    "services": [
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 9891.89,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (100), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 197.34,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (1)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 1018.59,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (6)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 1675.59,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (10)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 756.04,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 236455.24,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

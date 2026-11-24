@@ -1,0 +1,234 @@
+name: axi-conformance amazonRDSForSQLServer-005
+currency: USD
+locale: en_US
+services:
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "5"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "6"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "7"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "8"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "9"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "10"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "11"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "12"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "13"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRDSForSQLServer
+    region: us-east-1
+    template: rdsForOracle
+    set:
+      optimize: "0"
+      vcpuThread: 0
+      vcpuCores: 0
+      createRDSProxy: "1"
+      storageType: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "14"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA

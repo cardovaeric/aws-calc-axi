@@ -1,5 +1,12 @@
 import { EngineError, InputValidationError, MissingInputError } from "./errors.ts";
-import { convertSize, convertTime, convertFrequency, convertRateTime, convertThroughput } from "./units.ts";
+import {
+  convertSize,
+  convertFrequency,
+  convertRateTime,
+  convertThroughput,
+  convertDuration,
+  roundConverted,
+} from "./units.ts";
 import {
   evaluateTransferRows,
   normalizeRows,
@@ -138,6 +145,26 @@ function assertValid(
       componentId: component.id,
       label: String(component["label"] ?? component.id),
       problem,
+      value: raw,
+    });
+  }
+}
+
+/** Live inputs check `allowDecimals` on the typed amount, not on the converted value. */
+function assertDecimals(
+  component: Component,
+  numeric: number,
+  raw: unknown,
+  context: InputValidationContext
+): void {
+  if (raw === undefined || raw === null || raw === "") return;
+  const validations = validationsOf(component);
+  if (validations["allowDecimals"] === false && !Number.isInteger(numeric)) {
+    throw new InputValidationError({
+      serviceCode: context.serviceCode,
+      componentId: component.id,
+      label: String(component["label"] ?? component.id),
+      problem: "decimals are not allowed",
       value: raw,
     });
   }
@@ -416,9 +443,10 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
         : String(component["outputFrequency"] ?? "perMonth");
       const raw = override.value ?? component["defaultValue"];
       const fromOverride = override.value !== undefined || override.unit !== undefined;
-      const numeric = fromOverride
-        ? requireNumeric(component, raw, context)
-        : numericValue(component, raw, context);
+      // Live validates the typed amount for decimals only; min/max apply to the
+      // converted value below.
+      const numeric = numericValue(component, raw, context);
+      assertDecimals(component, numeric, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
       const defaultFrequency = component["defaultFrequency"];
       const selectedId = override.unit ?? (defaultFrequency === undefined ? "" : String(defaultFrequency));
@@ -430,9 +458,17 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
           { componentId: component.id }
         );
       }
-      const converted = convertFrequency(numeric, selectedId, outputFrequency);
-      // Frequency validations apply to the entered amount, not the converted rate.
-      assertValid(component, numeric, raw, context, fromOverride);
+      // Live `performFrequencyCalculation`: the same-unit case keeps the raw
+      // value, otherwise the converted rate is toFixed to `decimalPlaces`
+      // (default two) before it reaches the maths.
+      const decimals =
+        typeof component["decimalPlaces"] === "number" ? Number(component["decimalPlaces"]) : 2;
+      const converted =
+        selectedId === outputFrequency
+          ? numeric
+          : roundConverted(convertFrequency(numeric, selectedId, outputFrequency), decimals);
+      // Live validates the converted value against min/max.
+      assertValid(component, converted, raw, context, fromOverride);
       return {
         value: converted,
         present,
@@ -448,15 +484,23 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
       const outputUnit = String(component["outputDurationUnit"] ?? "sec");
       const raw = override.value ?? component["defaultValue"];
       const fromOverride = override.value !== undefined || override.unit !== undefined;
-      const numeric = fromOverride
-        ? requireNumeric(component, raw, context)
-        : numericValue(component, raw, context);
+      const numeric = numericValue(component, raw, context);
+      assertDecimals(component, numeric, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
       const selectedId = override.unit ?? String(component["defaultDuration"] ?? outputUnit);
       const option = options.find((entry) => entry.id === selectedId);
-      const converted = convertTime(numeric, selectedId, outputUnit);
-      // Duration validations apply to the entered amount, not the converted value.
-      assertValid(component, numeric, raw, context, fromOverride);
+      // Live `calculateDuration`: exact seconds-per-unit ratio, ROUND_UP at
+      // `outputDecimalPlaces` (default two). The same unit keeps the raw value.
+      const decimals =
+        component["outputDecimalPlaces"] === undefined
+          ? 2
+          : Number(component["outputDecimalPlaces"]);
+      const converted =
+        selectedId === outputUnit
+          ? numeric
+          : convertDuration(numeric, selectedId, outputUnit, decimals);
+      // Live validates the converted value against min/max.
+      assertValid(component, converted, raw, context, fromOverride);
       return {
         value: converted,
         present,

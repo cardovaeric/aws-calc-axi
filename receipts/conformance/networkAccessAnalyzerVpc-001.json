@@ -1,0 +1,449 @@
+{
+  "estimate": "axi-conformance networkAccessAnalyzerVpc-001",
+  "specHash": "1facd56fe46ad1d0",
+  "url": "https://calculator.aws/#/estimate?id=ead3f1aaab3558b33d6d9b1c23382ed1a871749d",
+  "savedKey": "ead3f1aaab3558b33d6d9b1c23382ed1a871749d",
+  "publishedAt": "2026-11-24T10:36:19.845Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 12000,
+    "upfront": 0,
+    "total12m": 144000,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-1",
+        "monthly": 0,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-1",
+        "monthly": 1000,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (500000.5), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-1",
+        "monthly": 2000,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (1000000), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-1",
+        "monthly": 1000,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (500000.5)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-1",
+        "monthly": 2000,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1000000)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-2",
+        "monthly": 0,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-2",
+        "monthly": 1000,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (500000.5), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-2",
+        "monthly": 2000,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (1000000), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-2",
+        "monthly": 1000,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (500000.5)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-2",
+        "monthly": 2000,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1000000)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 0,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 1000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 2000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 1000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 2000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 0,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 1000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 2000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 1000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 2000,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 12000,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=ead3f1aaab3558b33d6d9b1c23382ed1a871749d",
+    "title": "axi-conformance networkAccessAnalyzerVpc-001",
+    "monthly": "12,000.00 USD",
+    "upfront": "0.00 USD",
+    "annual": "144,000.00 USD",
+    "monthlyValue": 12000,
+    "upfrontValue": 0,
+    "annualValue": 144000,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "0.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "1,000.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (500000.5), Number of ENIs (elastic network interfaces) (1)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "2,000.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (1000000), Number of ENIs (elastic network interfaces) (1)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "1,000.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (500000.5)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "2,000.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1000000)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "0.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "1,000.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (500000.5), Number of ENIs (elastic network interfaces) (1)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "2,000.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (1000000), Number of ENIs (elastic network interfaces) (1)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "1,000.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (500000.5)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "2,000.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1000000)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:36:22.208Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=ead3f1aaab3558b33d6d9b1c23382ed1a871749d",
+    "savedKey": "ead3f1aaab3558b33d6d9b1c23382ed1a871749d",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=ead3f1aaab3558b33d6d9b1c23382ed1a871749d",
+      "title": "axi-conformance networkAccessAnalyzerVpc-001",
+      "monthly": "12,000.00 USD",
+      "upfront": "0.00 USD",
+      "annual": "144,000.00 USD",
+      "monthlyValue": 12000,
+      "upfrontValue": 0,
+      "annualValue": 144000,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "0.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "1,000.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of network assessments per month (500000.5), Number of ENIs (elastic network interfaces) (1)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "2,000.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of network assessments per month (1000000), Number of ENIs (elastic network interfaces) (1)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "1,000.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (500000.5)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "2,000.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1000000)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "0.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "1,000.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of network assessments per month (500000.5), Number of ENIs (elastic network interfaces) (1)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "2,000.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of network assessments per month (1000000), Number of ENIs (elastic network interfaces) (1)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "1,000.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (500000.5)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "2,000.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1000000)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:36:48.855Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance networkAccessAnalyzerVpc-001",
+    "monthly": 12000,
+    "upfront": 0,
+    "annual": 144000,
+    "services": [
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 0,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 1000,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (500000.5), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 2000,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (1000000), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 1000,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (500000.5)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 2000,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1000000)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 1000,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (500000.5), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 2000,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (1000000), Number of ENIs (elastic network interfaces) (1)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 1000,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (500000.5)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 2000,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (1), Number of ENIs (elastic network interfaces) (1000000)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

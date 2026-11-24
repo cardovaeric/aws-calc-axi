@@ -1,0 +1,465 @@
+{
+  "estimate": "axi-conformance vpnConnectionVpc-002",
+  "specHash": "16e805a5692ee062",
+  "url": "https://calculator.aws/#/estimate?id=ce708317ca124b87641988768c6195900a88fa26",
+  "savedKey": "ce708317ca124b87641988768c6195900a88fa26",
+  "publishedAt": "2026-11-24T10:35:20.558Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 54751899.53,
+    "upfront": 0,
+    "total12m": 657022794.36,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-1",
+        "monthly": 113.12,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-1",
+        "monthly": 239.5,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (26)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-1",
+        "monthly": 259.5,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (30)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-2",
+        "monthly": 219.5,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-2",
+        "monthly": 183,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (0), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-2",
+        "monthly": 18250183,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (500000), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-2",
+        "monthly": 36500183,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (1000000), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-2",
+        "monthly": 188.21,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-2",
+        "monthly": 184.2,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-2",
+        "monthly": 146.5,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (0), Working days per month (22)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 113.12,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 239.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 259.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 219.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 183,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 18250183,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 36500183,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 188.21,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 184.2,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 146.5,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 54751899.53,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=ce708317ca124b87641988768c6195900a88fa26",
+    "title": "axi-conformance vpnConnectionVpc-002",
+    "monthly": "54,751,899.53 USD",
+    "upfront": "0.00 USD",
+    "annual": "657,022,794.36 USD",
+    "monthlyValue": 54751899.53,
+    "upfrontValue": 0,
+    "annualValue": 657022794.36,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "113.12 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "239.50 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (26)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "259.50 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (30)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "219.50 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "183.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (0), Number of subnet associations (1), Working days per month (22)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "18,250,183.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (500000), Number of subnet associations (1), Working days per month (22)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "36,500,183.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1000000), Number of subnet associations (1), Working days per month (22)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "188.21 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "184.20 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)",
+        "status": null
+      },
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "146.50 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (0), Working days per month (22)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:35:22.906Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=ce708317ca124b87641988768c6195900a88fa26",
+    "savedKey": "ce708317ca124b87641988768c6195900a88fa26",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=ce708317ca124b87641988768c6195900a88fa26",
+      "title": "axi-conformance vpnConnectionVpc-002",
+      "monthly": "54,751,899.54 USD",
+      "upfront": "0.00 USD",
+      "annual": "657,022,794.48 USD",
+      "monthlyValue": 54751899.54,
+      "upfrontValue": 0,
+      "annualValue": 657022794.48,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "113.13 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)",
+          "status": "Cost updated"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "239.50 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (26)",
+          "status": "-"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "259.50 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (30)",
+          "status": "-"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "219.50 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)",
+          "status": "-"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "183.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of subnet associations (1), Working days per month (22)",
+          "status": "-"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "18,250,183.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Site-to-Site VPN Connections (500000), Number of subnet associations (1), Working days per month (22)",
+          "status": "-"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "36,500,183.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Site-to-Site VPN Connections (1000000), Number of subnet associations (1), Working days per month (22)",
+          "status": "-"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "188.21 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)",
+          "status": "-"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "184.20 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)",
+          "status": "-"
+        },
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "146.50 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Site-to-Site VPN Connections (1), Working days per month (22)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:35:49.431Z"
+    },
+    "mismatches": [
+      {
+        "field": "monthly",
+        "expected": "54751899.53",
+        "actual": "54751899.54"
+      },
+      {
+        "field": "annual",
+        "expected": "657022794.36",
+        "actual": "657022794.48"
+      },
+      {
+        "field": "service:VPN Connection:monthly",
+        "expected": "113.12",
+        "actual": "113.13"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance vpnConnectionVpc-002",
+    "monthly": 54751899.53,
+    "upfront": 0,
+    "annual": 657022794.36,
+    "services": [
+      {
+        "name": "VPN Connection",
+        "monthly": 113.12,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 239.5,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (26)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 259.5,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (30)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 219.5,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 183,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (0), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 18250183,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (500000), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 36500183,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1000000), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 188.21,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 184.2,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (1), Working days per month (22)"
+      },
+      {
+        "name": "VPN Connection",
+        "monthly": 146.5,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (1), Number of subnet associations (0), Working days per month (22)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

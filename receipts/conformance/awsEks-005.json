@@ -1,0 +1,626 @@
+{
+  "estimate": "axi-conformance awsEks-005",
+  "specHash": "ddd953e52b3ebefd",
+  "url": "https://calculator.aws/#/estimate?id=ef04d68d609c47ffef6b40907b9efef4bceedf74",
+  "savedKey": "ef04d68d609c47ffef6b40907b9efef4bceedf74",
+  "publishedAt": "2026-11-24T10:23:48.811Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 38294344725.33,
+    "upfront": 0,
+    "total12m": 459532136703.96,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 10610550459.2,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (500000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 21221100459.2,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1000000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 459.2,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (0), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 496400479.43,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (500000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 992800479.43,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1000000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 477.12,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (0), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 1652355477.12,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (500000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 3304710477.12,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1000000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 477.12,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (0), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 16425480.39,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (500000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsEks",
+        "monthly": 21221100459.2,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 459.2,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 496400479.43,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 992800479.43,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 477.12,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 1652355477.12,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 3304710477.12,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 477.12,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 16425480.39,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 32850480.39,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 27716644746.52,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=ef04d68d609c47ffef6b40907b9efef4bceedf74",
+    "title": "axi-conformance awsEks-005",
+    "monthly": "27,716,644,746.52 USD",
+    "upfront": "0.00 USD",
+    "annual": "332,599,736,958.24 USD",
+    "monthlyValue": 27716644746.52,
+    "upfrontValue": 0,
+    "annualValue": 332599736958.24,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "21,221,100,459.20 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1000000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "459.20 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (0), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "496,400,479.43 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (500000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "992,800,479.43 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1000000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "477.12 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (0), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "1,652,355,477.12 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (500000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "3,304,710,477.12 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1000000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "477.12 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (0), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "16,425,480.39 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (500000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "32,850,480.39 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1000000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:40:23.669Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=ef04d68d609c47ffef6b40907b9efef4bceedf74",
+    "savedKey": "ef04d68d609c47ffef6b40907b9efef4bceedf74",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=ef04d68d609c47ffef6b40907b9efef4bceedf74",
+      "title": "axi-conformance networkAddressTranslationNatGatewayVpc-001",
+      "monthly": "493,350,018,876.85 USD",
+      "upfront": "0.00 USD",
+      "annual": "5,920,200,226,522.20 USD",
+      "monthlyValue": 493350018876.85,
+      "upfrontValue": 0,
+      "annualValue": 5920200226522.2,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "525.84 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "492.95 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "164,450,000,492.95 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (5000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "328,900,000,492.95 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (10000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "571.88 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "131.48 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "5,060.98 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (51), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "9,891.89 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (100), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "197.34 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (1)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "1,018.59 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (6)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:41:18.386Z"
+    },
+    "mismatches": [
+      {
+        "field": "title",
+        "expected": "axi-conformance awsEks-005",
+        "actual": "axi-conformance networkAddressTranslationNatGatewayVpc-001"
+      },
+      {
+        "field": "monthly",
+        "expected": "38294344725.33",
+        "actual": "493350018876.85"
+      },
+      {
+        "field": "annual",
+        "expected": "459532136703.96",
+        "actual": "5920200226522.20"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon EKS",
+        "expected": "present",
+        "actual": "missing"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance awsEks-005",
+    "monthly": 38294344725.33,
+    "upfront": 0,
+    "annual": 459532136703.96,
+    "services": [
+      {
+        "name": "Amazon EKS",
+        "monthly": 10610550459.2,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (500000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 21221100459.2,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1000000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 459.2,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (0), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 496400479.43,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (500000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 992800479.43,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1000000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 477.12,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (0), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 1652355477.12,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (500000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 3304710477.12,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1000000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 477.12,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (0), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 16425480.39,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (500000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [
+    {
+      "field": "monthly",
+      "expected": "38294344725.33",
+      "actual": "27716644746.52"
+    },
+    {
+      "field": "annual",
+      "expected": "459532136703.96",
+      "actual": "332599736958.24"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "10610550459.20",
+      "actual": "21221100459.20"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (500000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1000000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "21221100459.20",
+      "actual": "459.20"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1000000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (0), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "459.20",
+      "actual": "496400479.43"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (0), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (500000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "496400479.43",
+      "actual": "992800479.43"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (500000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1000000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "992800479.43",
+      "actual": "477.12"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1000000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (0), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "477.12",
+      "actual": "1652355477.12"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (0), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (500000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "1652355477.12",
+      "actual": "3304710477.12"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (500000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1000000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "3304710477.12",
+      "actual": "477.12"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1000000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (0), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "477.12",
+      "actual": "16425480.39"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (0), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (500000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    },
+    {
+      "field": "service:Amazon EKS:monthly",
+      "expected": "16425480.39",
+      "actual": "32850480.39"
+    },
+    {
+      "field": "service:Amazon EKS:configSummary",
+      "expected": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (500000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+      "actual": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1000000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)"
+    }
+  ],
+  "verdict": "fail"
+}

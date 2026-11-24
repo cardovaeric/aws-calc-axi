@@ -1,0 +1,82 @@
+name: axi-conformance networkAddressTranslationNatGatewayVpc-003
+currency: USD
+locale: en_US
+services:
+  - code: networkAddressTranslationNatGatewayVpc
+    region: us-east-2
+    template: networkAddressTranslationGateway
+    set:
+      numberOfGateways: 1
+      dataProcessedPerNATGateway:
+        value: 1
+        unit: gb|month
+      regionalNatGatewayCount: 100
+      regionalNatGatewayAzCount: 3
+      regionalNatGatewayDataProcessed:
+        value: 1
+        unit: gb|month
+  - code: networkAddressTranslationNatGatewayVpc
+    region: us-east-2
+    template: networkAddressTranslationGateway
+    set:
+      numberOfGateways: 1
+      dataProcessedPerNATGateway:
+        value: 1
+        unit: gb|month
+      regionalNatGatewayCount: 5
+      regionalNatGatewayAzCount: 1
+      regionalNatGatewayDataProcessed:
+        value: 1
+        unit: gb|month
+  - code: networkAddressTranslationNatGatewayVpc
+    region: us-east-2
+    template: networkAddressTranslationGateway
+    set:
+      numberOfGateways: 1
+      dataProcessedPerNATGateway:
+        value: 1
+        unit: gb|month
+      regionalNatGatewayCount: 5
+      regionalNatGatewayAzCount: 6
+      regionalNatGatewayDataProcessed:
+        value: 1
+        unit: gb|month
+  - code: networkAddressTranslationNatGatewayVpc
+    region: us-east-2
+    template: networkAddressTranslationGateway
+    set:
+      numberOfGateways: 1
+      dataProcessedPerNATGateway:
+        value: 1
+        unit: gb|month
+      regionalNatGatewayCount: 5
+      regionalNatGatewayAzCount: 10
+      regionalNatGatewayDataProcessed:
+        value: 1
+        unit: gb|month
+  - code: networkAddressTranslationNatGatewayVpc
+    region: us-east-2
+    template: networkAddressTranslationGateway
+    set:
+      numberOfGateways: 1
+      dataProcessedPerNATGateway:
+        value: 1
+        unit: gb|month
+      regionalNatGatewayCount: 5
+      regionalNatGatewayAzCount: 3
+      regionalNatGatewayDataProcessed:
+        value: 1
+        unit: tb|month
+  - code: networkAddressTranslationNatGatewayVpc
+    region: us-east-2
+    template: networkAddressTranslationGateway
+    set:
+      numberOfGateways: 1
+      dataProcessedPerNATGateway:
+        value: 1
+        unit: gb|month
+      regionalNatGatewayCount: 5
+      regionalNatGatewayAzCount: 3
+      regionalNatGatewayDataProcessed:
+        value: 1
+        unit: pb|month

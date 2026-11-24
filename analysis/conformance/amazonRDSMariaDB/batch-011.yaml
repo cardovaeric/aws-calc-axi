@@ -1,0 +1,244 @@
+name: axi-conformance amazonRDSMariaDB-011
+currency: USD
+locale: en_US
+services:
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "13"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "14"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "15"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "16"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "17"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "18"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "19"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "20"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "21"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMariaDB
+    region: us-east-2
+    template: rdsForMariaDB
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisionedIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "22"
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth

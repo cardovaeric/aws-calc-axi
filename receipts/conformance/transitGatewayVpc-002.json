@@ -1,0 +1,386 @@
+{
+  "estimate": "axi-conformance transitGatewayVpc-002",
+  "specHash": "05db9042b88e7d83",
+  "url": "https://calculator.aws/#/estimate?id=7eeae51e970afcd5d738c96cc433b7b3c2086ff6",
+  "savedKey": "7eeae51e970afcd5d738c96cc433b7b3c2086ff6",
+  "publishedAt": "2026-11-24T10:44:11.163Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 548100000223.62,
+    "upfront": 0,
+    "total12m": 6577200002683.44,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 0.02,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (0), Number of Multicast Receivers (1)"
+      },
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 182600000000.02,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (5000000000), Number of Multicast Receivers (1)"
+      },
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 365200000000.02,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (10000000000), Number of Multicast Receivers (1)"
+      },
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 57,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (1)"
+      },
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 36.52,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (0)"
+      },
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 100000036.52,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (5000000000)"
+      },
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 200000036.52,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (10000000000)"
+      },
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 57,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (1)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 0.02,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 182600000000.02,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 365200000000.02,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 57,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 36.52,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 100000036.52,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 200000036.52,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 57,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 548100000223.62,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=7eeae51e970afcd5d738c96cc433b7b3c2086ff6",
+    "title": "axi-conformance transitGatewayVpc-002",
+    "monthly": "548,100,000,223.62 USD",
+    "upfront": "0.00 USD",
+    "annual": "6,577,200,002,683.44 USD",
+    "monthlyValue": 548100000223.62,
+    "upfrontValue": 0,
+    "annualValue": 6577200002683.44,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": null,
+    "readOnlyNotice": false,
+    "services": [
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "0.02 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Multicast Receivers (1)",
+        "status": "-"
+      },
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "182,600,000,000.02 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (5000000000), Number of Multicast Receivers (1)",
+        "status": "-"
+      },
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "365,200,000,000.02 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (10000000000), Number of Multicast Receivers (1)",
+        "status": "-"
+      },
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "57.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (1)",
+        "status": "-"
+      },
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "36.52 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1)",
+        "status": "-"
+      },
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "100,000,036.52 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (5000000000)",
+        "status": "-"
+      },
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "200,000,036.52 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (10000000000)",
+        "status": "-"
+      },
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "57.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (1)",
+        "status": "-"
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:44:38.886Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=7eeae51e970afcd5d738c96cc433b7b3c2086ff6",
+    "savedKey": "7eeae51e970afcd5d738c96cc433b7b3c2086ff6",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=7eeae51e970afcd5d738c96cc433b7b3c2086ff6",
+      "title": "axi-conformance transitGatewayVpc-002",
+      "monthly": "548,100,000,223.62 USD",
+      "upfront": "0.00 USD",
+      "annual": "6,577,200,002,683.44 USD",
+      "monthlyValue": 548100000223.62,
+      "upfrontValue": 0,
+      "annualValue": 6577200002683.44,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "0.02 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Multicast Receivers (1)",
+          "status": "-"
+        },
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "182,600,000,000.02 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Transit Gateway attachments (5000000000), Number of Multicast Receivers (1)",
+          "status": "-"
+        },
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "365,200,000,000.02 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Transit Gateway attachments (10000000000), Number of Multicast Receivers (1)",
+          "status": "-"
+        },
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "57.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (1)",
+          "status": "-"
+        },
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "36.52 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Transit Gateway attachments (1)",
+          "status": "-"
+        },
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "100,000,036.52 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (5000000000)",
+          "status": "-"
+        },
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "200,000,036.52 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (10000000000)",
+          "status": "-"
+        },
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "57.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (1)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:45:05.779Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance transitGatewayVpc-002",
+    "monthly": 548100000223.62,
+    "upfront": 0,
+    "annual": 6577200002683.44,
+    "services": [
+      {
+        "name": "Transit Gateway",
+        "monthly": 0.02,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (0), Number of Multicast Receivers (1)"
+      },
+      {
+        "name": "Transit Gateway",
+        "monthly": 182600000000.02,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (5000000000), Number of Multicast Receivers (1)"
+      },
+      {
+        "name": "Transit Gateway",
+        "monthly": 365200000000.02,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (10000000000), Number of Multicast Receivers (1)"
+      },
+      {
+        "name": "Transit Gateway",
+        "monthly": 57,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (1)"
+      },
+      {
+        "name": "Transit Gateway",
+        "monthly": 36.52,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (0)"
+      },
+      {
+        "name": "Transit Gateway",
+        "monthly": 100000036.52,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (5000000000)"
+      },
+      {
+        "name": "Transit Gateway",
+        "monthly": 200000036.52,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (10000000000)"
+      },
+      {
+        "name": "Transit Gateway",
+        "monthly": 57,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (1)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [
+    {
+      "field": "service:Transit Gateway:configSummary",
+      "expected": "Number of Transit Gateway attachments (0), Number of Multicast Receivers (1)",
+      "actual": "Number of Multicast Receivers (1)"
+    },
+    {
+      "field": "service:Transit Gateway:configSummary",
+      "expected": "Number of Transit Gateway attachments (1), Number of Multicast Receivers (0)",
+      "actual": "Number of Transit Gateway attachments (1)"
+    }
+  ],
+  "verdict": "fail"
+}

@@ -1,0 +1,379 @@
+{
+  "estimate": "axi-conformance vpcRouteServer-001",
+  "specHash": "128f3c52763ecd15",
+  "url": "https://calculator.aws/#/estimate?id=e450c4a975c386b196270dfe2b47465a19ae1d82",
+  "savedKey": "e450c4a975c386b196270dfe2b47465a19ae1d82",
+  "publishedAt": "2026-11-24T10:40:18.431Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 1642501642.5,
+    "upfront": 0,
+    "total12m": 19710019710,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "vpcRouteServer",
+        "template": "template_VPC_Route_Server",
+        "region": "us-east-1",
+        "monthly": 547.5,
+        "upfront": 0,
+        "summary": "Number of Route Server endpoints (1)"
+      },
+      {
+        "code": "vpcRouteServer",
+        "template": "template_VPC_Route_Server",
+        "region": "us-east-1",
+        "monthly": 273750273.75,
+        "upfront": 0,
+        "summary": "Number of Route Server endpoints (500000.5)"
+      },
+      {
+        "code": "vpcRouteServer",
+        "template": "template_VPC_Route_Server",
+        "region": "us-east-1",
+        "monthly": 547500000,
+        "upfront": 0,
+        "summary": "Number of Route Server endpoints (1000000)"
+      },
+      {
+        "code": "vpcRouteServer",
+        "template": "template_VPC_Route_Server",
+        "region": "us-east-2",
+        "monthly": 547.5,
+        "upfront": 0,
+        "summary": "Number of Route Server endpoints (1)"
+      },
+      {
+        "code": "vpcRouteServer",
+        "template": "template_VPC_Route_Server",
+        "region": "us-east-2",
+        "monthly": 273750273.75,
+        "upfront": 0,
+        "summary": "Number of Route Server endpoints (500000.5)"
+      },
+      {
+        "code": "vpcRouteServer",
+        "template": "template_VPC_Route_Server",
+        "region": "us-east-2",
+        "monthly": 547500000,
+        "upfront": 0,
+        "summary": "Number of Route Server endpoints (1000000)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "vpcRouteServer",
+        "monthly": 547.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpcRouteServer",
+        "monthly": 273750273.75,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpcRouteServer",
+        "monthly": 547500000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpcRouteServer",
+        "monthly": 547.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpcRouteServer",
+        "monthly": 273750273.75,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "vpcRouteServer",
+        "monthly": 547500000,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 1642501642.5,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=e450c4a975c386b196270dfe2b47465a19ae1d82",
+    "title": "axi-conformance awsEks-004",
+    "monthly": "667,610,846,429.66 USD",
+    "upfront": "0.00 USD",
+    "annual": "8,011,330,157,155.92 USD",
+    "monthlyValue": 667610846429.66,
+    "upfrontValue": 0,
+    "annualValue": 8011330157155.92,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "112,296.37 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (20 per month), Number of vCPU per hybrid node (790)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "181,500.37 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (50 per month), Number of vCPU per hybrid node (632)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "480.42 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "36,500,000,480.42 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (500000001), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "73,000,000,407.42 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1000000000), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "115.42 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (0), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "182,500,000,115.42 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (500000000), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "365,000,000,115.42 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1000000000), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "459.20 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (0), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "10,610,550,459.20 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (500000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:40:21.699Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=e450c4a975c386b196270dfe2b47465a19ae1d82",
+    "savedKey": "e450c4a975c386b196270dfe2b47465a19ae1d82",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=e450c4a975c386b196270dfe2b47465a19ae1d82",
+      "title": null,
+      "monthly": null,
+      "upfront": null,
+      "annual": null,
+      "monthlyValue": null,
+      "upfrontValue": null,
+      "annualValue": null,
+      "estimateDate": null,
+      "banner": "last updated on November 24, 2026",
+      "readOnlyNotice": true,
+      "services": [],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:40:23.507Z"
+    },
+    "mismatches": [
+      {
+        "field": "title",
+        "expected": "axi-conformance vpcRouteServer-001",
+        "actual": "missing"
+      },
+      {
+        "field": "monthly",
+        "expected": "1642501642.50",
+        "actual": "missing"
+      },
+      {
+        "field": "upfront",
+        "expected": "0.00",
+        "actual": "missing"
+      },
+      {
+        "field": "annual",
+        "expected": "19710019710.00",
+        "actual": "missing"
+      },
+      {
+        "field": "service:VPC Route Server",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:VPC Route Server",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:VPC Route Server",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:VPC Route Server",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:VPC Route Server",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:VPC Route Server",
+        "expected": "present",
+        "actual": "missing"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance vpcRouteServer-001",
+    "monthly": 1642501642.5,
+    "upfront": 0,
+    "annual": 19710019710,
+    "services": [
+      {
+        "name": "VPC Route Server",
+        "monthly": 547.5,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Route Server endpoints (1)"
+      },
+      {
+        "name": "VPC Route Server",
+        "monthly": 273750273.75,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Route Server endpoints (500000.5)"
+      },
+      {
+        "name": "VPC Route Server",
+        "monthly": 547500000,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of Route Server endpoints (1000000)"
+      },
+      {
+        "name": "VPC Route Server",
+        "monthly": 547.5,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Route Server endpoints (1)"
+      },
+      {
+        "name": "VPC Route Server",
+        "monthly": 273750273.75,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Route Server endpoints (500000.5)"
+      },
+      {
+        "name": "VPC Route Server",
+        "monthly": 547500000,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Route Server endpoints (1000000)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [
+    {
+      "field": "title",
+      "expected": "axi-conformance vpcRouteServer-001",
+      "actual": "axi-conformance awsEks-004"
+    },
+    {
+      "field": "monthly",
+      "expected": "1642501642.50",
+      "actual": "667610846429.66"
+    },
+    {
+      "field": "annual",
+      "expected": "19710019710.00",
+      "actual": "8011330157155.92"
+    },
+    {
+      "field": "service:VPC Route Server",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:VPC Route Server",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:VPC Route Server",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:VPC Route Server",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:VPC Route Server",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:VPC Route Server",
+      "expected": "present",
+      "actual": "missing"
+    }
+  ],
+  "verdict": "fail"
+}

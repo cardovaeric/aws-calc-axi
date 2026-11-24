@@ -1,0 +1,60 @@
+name: axi-conformance windowsWorkloads-002
+currency: USD
+locale: en_US
+services:
+  - code: windowsWorkloads
+    region: us-east-2
+    template: sharedTenancy
+    set:
+      cpuInput: 1
+      memoryInput: 16
+      machineSpecificationQuantity: 1
+  - code: windowsWorkloads
+    region: us-east-2
+    template: sharedTenancy
+    set:
+      cpuInput: 5001
+      memoryInput: 16
+      machineSpecificationQuantity: 1
+  - code: windowsWorkloads
+    region: us-east-2
+    template: sharedTenancy
+    set:
+      cpuInput: 10000
+      memoryInput: 16
+      machineSpecificationQuantity: 1
+  - code: windowsWorkloads
+    region: us-east-2
+    template: sharedTenancy
+    set:
+      cpuInput: 4
+      memoryInput: 0.1
+      machineSpecificationQuantity: 1
+  - code: windowsWorkloads
+    region: us-east-2
+    template: sharedTenancy
+    set:
+      cpuInput: 4
+      memoryInput: 5000.05
+      machineSpecificationQuantity: 1
+  - code: windowsWorkloads
+    region: us-east-2
+    template: sharedTenancy
+    set:
+      cpuInput: 4
+      memoryInput: 10000
+      machineSpecificationQuantity: 1
+  - code: windowsWorkloads
+    region: us-east-2
+    template: sharedTenancy
+    set:
+      cpuInput: 4
+      memoryInput: 16
+      machineSpecificationQuantity: 5000000000001
+  - code: windowsWorkloads
+    region: us-east-2
+    template: sharedTenancy
+    set:
+      cpuInput: 4
+      memoryInput: 16
+      machineSpecificationQuantity: 10000

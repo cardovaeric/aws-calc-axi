@@ -1,0 +1,100 @@
+name: axi-conformance transitGatewayVpc-002
+currency: USD
+locale: en_US
+services:
+  - code: transitGatewayVpc
+    region: us-east-2
+    template: transitGateway
+    set:
+      numberOfTransitGatewayAttachments: 0
+      dataProcessedPerTransitGatewayAttachment:
+        value: 1
+        unit: gb|month
+      Number_of_multicast_receivers: 1
+      Multicast_data_processed_per_Transit_Gateway_receiver:
+        value: 1
+        unit: gb|month
+  - code: transitGatewayVpc
+    region: us-east-2
+    template: transitGateway
+    set:
+      numberOfTransitGatewayAttachments: 5000000000
+      dataProcessedPerTransitGatewayAttachment:
+        value: 1
+        unit: gb|month
+      Number_of_multicast_receivers: 1
+      Multicast_data_processed_per_Transit_Gateway_receiver:
+        value: 1
+        unit: gb|month
+  - code: transitGatewayVpc
+    region: us-east-2
+    template: transitGateway
+    set:
+      numberOfTransitGatewayAttachments: 10000
+      dataProcessedPerTransitGatewayAttachment:
+        value: 1
+        unit: gb|month
+      Number_of_multicast_receivers: 1
+      Multicast_data_processed_per_Transit_Gateway_receiver:
+        value: 1
+        unit: gb|month
+  - code: transitGatewayVpc
+    region: us-east-2
+    template: transitGateway
+    set:
+      numberOfTransitGatewayAttachments: 1
+      dataProcessedPerTransitGatewayAttachment:
+        value: 1
+        unit: tb|month
+      Number_of_multicast_receivers: 1
+      Multicast_data_processed_per_Transit_Gateway_receiver:
+        value: 1
+        unit: gb|month
+  - code: transitGatewayVpc
+    region: us-east-2
+    template: transitGateway
+    set:
+      numberOfTransitGatewayAttachments: 1
+      dataProcessedPerTransitGatewayAttachment:
+        value: 1
+        unit: gb|month
+      Number_of_multicast_receivers: 0
+      Multicast_data_processed_per_Transit_Gateway_receiver:
+        value: 1
+        unit: gb|month
+  - code: transitGatewayVpc
+    region: us-east-2
+    template: transitGateway
+    set:
+      numberOfTransitGatewayAttachments: 1
+      dataProcessedPerTransitGatewayAttachment:
+        value: 1
+        unit: gb|month
+      Number_of_multicast_receivers: 5000000000
+      Multicast_data_processed_per_Transit_Gateway_receiver:
+        value: 1
+        unit: gb|month
+  - code: transitGatewayVpc
+    region: us-east-2
+    template: transitGateway
+    set:
+      numberOfTransitGatewayAttachments: 1
+      dataProcessedPerTransitGatewayAttachment:
+        value: 1
+        unit: gb|month
+      Number_of_multicast_receivers: 10000
+      Multicast_data_processed_per_Transit_Gateway_receiver:
+        value: 1
+        unit: gb|month
+  - code: transitGatewayVpc
+    region: us-east-2
+    template: transitGateway
+    set:
+      numberOfTransitGatewayAttachments: 1
+      dataProcessedPerTransitGatewayAttachment:
+        value: 1
+        unit: gb|month
+      Number_of_multicast_receivers: 1
+      Multicast_data_processed_per_Transit_Gateway_receiver:
+        value: 1
+        unit: tb|month

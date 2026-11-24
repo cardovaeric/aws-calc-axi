@@ -1,0 +1,379 @@
+{
+  "estimate": "axi-conformance ipamVpc-001",
+  "specHash": "aaf782fb38805d19",
+  "url": "https://calculator.aws/#/estimate?id=fdba00f4f314f04fcaf3875833bfb6e6b6039901",
+  "savedKey": "fdba00f4f314f04fcaf3875833bfb6e6b6039901",
+  "publishedAt": "2026-11-24T10:39:17.896Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 591300.6,
+    "upfront": 0,
+    "total12m": 7095607.2,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "ipamVpc",
+        "template": "template_IPAM",
+        "region": "us-east-1",
+        "monthly": 0.2,
+        "upfront": 0,
+        "summary": "Number of active IP addresses (1)"
+      },
+      {
+        "code": "ipamVpc",
+        "template": "template_IPAM",
+        "region": "us-east-1",
+        "monthly": 98550.1,
+        "upfront": 0,
+        "summary": "Number of active IP addresses (500000.5)"
+      },
+      {
+        "code": "ipamVpc",
+        "template": "template_IPAM",
+        "region": "us-east-1",
+        "monthly": 197100,
+        "upfront": 0,
+        "summary": "Number of active IP addresses (1000000)"
+      },
+      {
+        "code": "ipamVpc",
+        "template": "template_IPAM",
+        "region": "us-east-2",
+        "monthly": 0.2,
+        "upfront": 0,
+        "summary": "Number of active IP addresses (1)"
+      },
+      {
+        "code": "ipamVpc",
+        "template": "template_IPAM",
+        "region": "us-east-2",
+        "monthly": 98550.1,
+        "upfront": 0,
+        "summary": "Number of active IP addresses (500000.5)"
+      },
+      {
+        "code": "ipamVpc",
+        "template": "template_IPAM",
+        "region": "us-east-2",
+        "monthly": 197100,
+        "upfront": 0,
+        "summary": "Number of active IP addresses (1000000)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "ipamVpc",
+        "monthly": 0.2,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "ipamVpc",
+        "monthly": 98550.1,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "ipamVpc",
+        "monthly": 197100,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "ipamVpc",
+        "monthly": 0.2,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "ipamVpc",
+        "monthly": 98550.1,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "ipamVpc",
+        "monthly": 197100,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 591300.6,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=fdba00f4f314f04fcaf3875833bfb6e6b6039901",
+    "title": "axi-conformance awsEks-002",
+    "monthly": "9,070,254,805.30 USD",
+    "upfront": "0.00 USD",
+    "annual": "108,843,057,663.60 USD",
+    "monthlyValue": 9070254805.3,
+    "upfrontValue": 0,
+    "annualValue": 108843057663.6,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "547,500,481.88 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (500000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "1,095,000,481.88 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1000000000), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "479.28 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (0), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "1,843,250,479.28 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (500000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "3,686,500,479.28 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1000000000), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "479.28 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (0), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "18,250,482.93 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (500000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "36,500,482.93 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1000000000), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "479.28 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (0), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "1,843,250,479.28 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (500000000), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:39:21.147Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=fdba00f4f314f04fcaf3875833bfb6e6b6039901",
+    "savedKey": "fdba00f4f314f04fcaf3875833bfb6e6b6039901",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=fdba00f4f314f04fcaf3875833bfb6e6b6039901",
+      "title": null,
+      "monthly": null,
+      "upfront": null,
+      "annual": null,
+      "monthlyValue": null,
+      "upfrontValue": null,
+      "annualValue": null,
+      "estimateDate": null,
+      "banner": "last updated on November 24, 2026",
+      "readOnlyNotice": true,
+      "services": [],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:39:22.966Z"
+    },
+    "mismatches": [
+      {
+        "field": "title",
+        "expected": "axi-conformance ipamVpc-001",
+        "actual": "missing"
+      },
+      {
+        "field": "monthly",
+        "expected": "591300.60",
+        "actual": "missing"
+      },
+      {
+        "field": "upfront",
+        "expected": "0.00",
+        "actual": "missing"
+      },
+      {
+        "field": "annual",
+        "expected": "7095607.20",
+        "actual": "missing"
+      },
+      {
+        "field": "service:IPAM",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:IPAM",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:IPAM",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:IPAM",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:IPAM",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:IPAM",
+        "expected": "present",
+        "actual": "missing"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance ipamVpc-001",
+    "monthly": 591300.6,
+    "upfront": 0,
+    "annual": 7095607.2,
+    "services": [
+      {
+        "name": "IPAM",
+        "monthly": 0.2,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of active IP addresses (1)"
+      },
+      {
+        "name": "IPAM",
+        "monthly": 98550.1,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of active IP addresses (500000.5)"
+      },
+      {
+        "name": "IPAM",
+        "monthly": 197100,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of active IP addresses (1000000)"
+      },
+      {
+        "name": "IPAM",
+        "monthly": 0.2,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of active IP addresses (1)"
+      },
+      {
+        "name": "IPAM",
+        "monthly": 98550.1,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of active IP addresses (500000.5)"
+      },
+      {
+        "name": "IPAM",
+        "monthly": 197100,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of active IP addresses (1000000)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [
+    {
+      "field": "title",
+      "expected": "axi-conformance ipamVpc-001",
+      "actual": "axi-conformance awsEks-002"
+    },
+    {
+      "field": "monthly",
+      "expected": "591300.60",
+      "actual": "9070254805.30"
+    },
+    {
+      "field": "annual",
+      "expected": "7095607.20",
+      "actual": "108843057663.60"
+    },
+    {
+      "field": "service:IPAM",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:IPAM",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:IPAM",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:IPAM",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:IPAM",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:IPAM",
+      "expected": "present",
+      "actual": "missing"
+    }
+  ],
+  "verdict": "fail"
+}

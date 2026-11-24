@@ -1,0 +1,530 @@
+{
+  "estimate": "axi-conformance amazonElasticBlockStore-001",
+  "specHash": "3bed05b5f064460c",
+  "url": "https://calculator.aws/#/estimate?id=e7e3fd624c636204d44a7bafb31dff389dba0ab5",
+  "savedKey": "e7e3fd624c636204d44a7bafb31dff389dba0ab5",
+  "publishedAt": "2026-11-24T10:25:19.438Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 13480880831.12,
+    "upfront": 0,
+    "total12m": 161770569973.44,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 556.59,
+        "upfront": 0,
+        "summary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 4493625552.09,
+        "upfront": 0,
+        "summary": "Number of volumes (500000000.5), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 8987250547.6,
+        "upfront": 0,
+        "summary": "Number of volumes (1000000000), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 547.6,
+        "upfront": 0,
+        "summary": "Number of volumes (1), Average duration of volume (1 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 555.99,
+        "upfront": 0,
+        "summary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (gp3) (3000), General Purpose SSD (gp3) - Throughput (125 MBps), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 654.84,
+        "upfront": 0,
+        "summary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 752.34,
+        "upfront": 0,
+        "summary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io2) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 554.94,
+        "upfront": 0,
+        "summary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 554.04,
+        "upfront": 0,
+        "summary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-1",
+        "monthly": 555.09,
+        "upfront": 0,
+        "summary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 556.59,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 4493625552.09,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 8987250547.6,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 555.99,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 654.84,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 752.34,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 554.94,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 554.04,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 555.09,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 550.6,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 13480880834.12,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=e7e3fd624c636204d44a7bafb31dff389dba0ab5",
+    "title": "axi-conformance amazonElasticBlockStore-001",
+    "monthly": "13,480,880,834.12 USD",
+    "upfront": "0.00 USD",
+    "annual": "161,770,570,009.44 USD",
+    "monthlyValue": 13480880834.12,
+    "upfrontValue": 0,
+    "annualValue": 161770570009.44,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "556.59 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "4,493,625,552.09 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (500000000.5), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "8,987,250,547.60 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1000000000), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "555.99 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (gp3) (3000), General Purpose SSD (gp3) - Throughput (125 MBps), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "654.84 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "752.34 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io2) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "554.94 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "554.04 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "555.09 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "550.60 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (No snapshot storage), Number of snapshots to restore (1)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:42:18.781Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=e7e3fd624c636204d44a7bafb31dff389dba0ab5",
+    "savedKey": "e7e3fd624c636204d44a7bafb31dff389dba0ab5",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=e7e3fd624c636204d44a7bafb31dff389dba0ab5",
+      "title": "BINUS eDesk Azure to AWS - target run-rate",
+      "monthly": "1,475.16 USD",
+      "upfront": "0.00 USD",
+      "annual": "17,701.92 USD",
+      "monthlyValue": 1475.16,
+      "upfrontValue": 0,
+      "annualValue": 17701.92,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": "last updated on November 24, 2026",
+      "readOnlyNotice": true,
+      "services": [
+        {
+          "name": "PROD",
+          "upfront": "0.00 USD",
+          "monthly": "1,002.37 USD",
+          "description": "Services (11), Groups (0)",
+          "region": "-",
+          "configSummary": "-",
+          "status": null
+        },
+        {
+          "name": "Non-Prod",
+          "upfront": "0.00 USD",
+          "monthly": "472.79 USD",
+          "description": "Services (10), Groups (0)",
+          "region": "-",
+          "configSummary": "-",
+          "status": null
+        }
+      ],
+      "groups": [
+        {
+          "name": "BINUS eDesk Azure to AWS - target run-rate",
+          "root": true,
+          "parent": false
+        },
+        {
+          "name": "PROD",
+          "root": false,
+          "parent": true
+        },
+        {
+          "name": "Non-Prod",
+          "root": false,
+          "parent": true
+        }
+      ],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:43:15.384Z"
+    },
+    "mismatches": [
+      {
+        "field": "title",
+        "expected": "axi-conformance amazonElasticBlockStore-001",
+        "actual": "BINUS eDesk Azure to AWS - target run-rate"
+      },
+      {
+        "field": "monthly",
+        "expected": "13480880831.12",
+        "actual": "1475.16"
+      },
+      {
+        "field": "annual",
+        "expected": "161770569973.44",
+        "actual": "17701.92"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Amazon Elastic Block Store (EBS)",
+        "expected": "present",
+        "actual": "missing"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance amazonElasticBlockStore-001",
+    "monthly": 13480880831.12,
+    "upfront": 0,
+    "annual": 161770569973.44,
+    "services": [
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 556.59,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 4493625552.09,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (500000000.5), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 8987250547.6,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1000000000), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 547.6,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (1 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 555.99,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (gp3) (3000), General Purpose SSD (gp3) - Throughput (125 MBps), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 654.84,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 752.34,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io2) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 554.94,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 554.04,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 555.09,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [
+    {
+      "field": "monthly",
+      "expected": "13480880831.12",
+      "actual": "13480880834.12"
+    },
+    {
+      "field": "annual",
+      "expected": "161770569973.44",
+      "actual": "161770570009.44"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):monthly",
+      "expected": "547.60",
+      "actual": "555.99"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):configSummary",
+      "expected": "Number of volumes (1), Average duration of volume (1 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+      "actual": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (gp3) (3000), General Purpose SSD (gp3) - Throughput (125 MBps), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):monthly",
+      "expected": "555.99",
+      "actual": "654.84"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):configSummary",
+      "expected": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (gp3) (3000), General Purpose SSD (gp3) - Throughput (125 MBps), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+      "actual": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):monthly",
+      "expected": "654.84",
+      "actual": "752.34"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):configSummary",
+      "expected": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+      "actual": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io2) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):monthly",
+      "expected": "752.34",
+      "actual": "554.94"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):configSummary",
+      "expected": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Provisioning IOPS per volume (io2) (3000), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+      "actual": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):monthly",
+      "expected": "554.94",
+      "actual": "554.04"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):monthly",
+      "expected": "554.04",
+      "actual": "555.09"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):monthly",
+      "expected": "555.09",
+      "actual": "550.60"
+    },
+    {
+      "field": "service:Amazon Elastic Block Store (EBS):configSummary",
+      "expected": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (2x Daily), Amount changed per snapshot (3 GB), Number of snapshots to restore (1)",
+      "actual": "Number of volumes (1), Average duration of volume (730 hours per month), Storage amount per volume (30 GB), Snapshot Frequency (No snapshot storage), Number of snapshots to restore (1)"
+    }
+  ],
+  "verdict": "fail"
+}

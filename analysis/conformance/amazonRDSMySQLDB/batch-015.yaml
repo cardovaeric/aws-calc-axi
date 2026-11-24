@@ -1,0 +1,294 @@
+name: axi-conformance amazonRDSMySQLDB-015
+currency: USD
+locale: en_US
+services:
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "19"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "20"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "21"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "22"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "23"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "24"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      addRDSExtendedSupport: "0"
+      RDSExtendedSupportYear: year3
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 1
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: tb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSMySQLDB
+    region: us-east-2
+    template: mySQLDB
+    set:
+      createRDSProxy: "1"
+      storageType: General Purpose
+      iops: 1
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "0"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 1
+        unit: perMonth

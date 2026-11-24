@@ -1,0 +1,34 @@
+name: axi-conformance vpcRouteServer-001
+currency: USD
+locale: en_US
+services:
+  - code: vpcRouteServer
+    region: us-east-1
+    template: template_VPC_Route_Server
+    set:
+      Number_of_route_server_end_points: 1
+  - code: vpcRouteServer
+    region: us-east-1
+    template: template_VPC_Route_Server
+    set:
+      Number_of_route_server_end_points: 500000.5
+  - code: vpcRouteServer
+    region: us-east-1
+    template: template_VPC_Route_Server
+    set:
+      Number_of_route_server_end_points: 10000
+  - code: vpcRouteServer
+    region: us-east-2
+    template: template_VPC_Route_Server
+    set:
+      Number_of_route_server_end_points: 1
+  - code: vpcRouteServer
+    region: us-east-2
+    template: template_VPC_Route_Server
+    set:
+      Number_of_route_server_end_points: 500000.5
+  - code: vpcRouteServer
+    region: us-east-2
+    template: template_VPC_Route_Server
+    set:
+      Number_of_route_server_end_points: 10000

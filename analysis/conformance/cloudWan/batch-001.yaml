@@ -1,0 +1,94 @@
+name: axi-conformance cloudWan-001
+currency: USD
+locale: en_US
+services:
+  - code: cloudWan
+    region: us-east-1
+    template: cloudwan
+    set:
+      numberOfAttachments: 1
+      numberOfPeeringConnections: 1
+      dataProcessed:
+        value: 1
+        unit: gb|month
+  - code: cloudWan
+    region: us-east-1
+    template: cloudwan
+    set:
+      numberOfAttachments: 0
+      numberOfPeeringConnections: 1
+      dataProcessed:
+        value: 1
+        unit: gb|month
+  - code: cloudWan
+    region: us-east-1
+    template: cloudwan
+    set:
+      numberOfAttachments: 5000000000
+      numberOfPeeringConnections: 1
+      dataProcessed:
+        value: 1
+        unit: gb|month
+  - code: cloudWan
+    region: us-east-1
+    template: cloudwan
+    set:
+      numberOfAttachments: 10000
+      numberOfPeeringConnections: 1
+      dataProcessed:
+        value: 1
+        unit: gb|month
+  - code: cloudWan
+    region: us-east-1
+    template: cloudwan
+    set:
+      numberOfAttachments: 1
+      numberOfPeeringConnections: 0
+      dataProcessed:
+        value: 1
+        unit: gb|month
+  - code: cloudWan
+    region: us-east-1
+    template: cloudwan
+    set:
+      numberOfAttachments: 1
+      numberOfPeeringConnections: 5000000000
+      dataProcessed:
+        value: 1
+        unit: gb|month
+  - code: cloudWan
+    region: us-east-1
+    template: cloudwan
+    set:
+      numberOfAttachments: 1
+      numberOfPeeringConnections: 10000
+      dataProcessed:
+        value: 1
+        unit: gb|month
+  - code: cloudWan
+    region: us-east-1
+    template: cloudwan
+    set:
+      numberOfAttachments: 1
+      numberOfPeeringConnections: 1
+      dataProcessed:
+        value: 1
+        unit: tb|month
+  - code: cloudWan
+    region: us-east-2
+    template: cloudwan
+    set:
+      numberOfAttachments: 1
+      numberOfPeeringConnections: 1
+      dataProcessed:
+        value: 1
+        unit: gb|month
+  - code: cloudWan
+    region: us-east-2
+    template: cloudwan
+    set:
+      numberOfAttachments: 0
+      numberOfPeeringConnections: 1
+      dataProcessed:
+        value: 1
+        unit: gb|month

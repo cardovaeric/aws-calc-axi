@@ -243,6 +243,13 @@ function inventory(definition: ServiceDefinition): {
     if (keyValue && Object.keys(keyValue).some((key) => key.startsWith("/"))) {
       gaps.add("regex-remap");
     }
+    // `remap.keyValue` is a price-token (key) to form-value (value) map in the
+    // live engine, applied forward to aggregation rows and price records and in
+    // reverse to meter lists and the index path. `src/data/column-form.ts`
+    // implements both directions (`remapValue`, `reverseRemapValue`), so a
+    // remap is no longer a blocker on its own. Evidence and the original
+    // inversion: analysis/FINDINGS.md section 14 and
+    // receipts/selector-children-probe.json.
     if (component["exportTagsAsValue"] !== undefined) gaps.add("export-tags");
     const unitModel = asRecord(component["pricingUnitModel"]);
     const pricingTypes = asRecord(unitModel?.["riPricingTypes"]);
@@ -836,8 +843,12 @@ The static class is intentionally conservative. A \`columnFormIPM\` service is
 additional pricing data, regex key remaps, tiered PLC_2.0 price patterns,
 sub-components, or unsupported row types. A plain one-row column form is native,
 and so are dependent selectors, reserved/upfront payment models, and selector
-price patterns (\`analysis/FINDINGS.md\` section 14). Runtime \`needs-input\` is not
-a failure; it means the service needs a fixture with explicit required values.
+price patterns (\`analysis/FINDINGS.md\` section 14). \`remap.keyValue\` is applied
+in both directions now - forward on aggregation rows and price records, reverse
+on meter lists and the index path - so a remap is not itself a gap. It is
+\`blocked\` when the engine cannot reach a price at all. Runtime \`needs-input\` is
+not a
+failure; it means the service needs a fixture with explicit required values.
 
 Selector rules (\`subServiceSelector\` rows, \`kind: selector\`):
 

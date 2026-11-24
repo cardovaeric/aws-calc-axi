@@ -2,6 +2,7 @@
   "kind": "research-probe",
   "subject": "What the coverage tracker's non-clean selector children actually point at",
   "recordedAt": "2026-11-24",
+  "machineChecked": "tests/receipts.test.ts parses every receipts/*.json file",
   "verdict": "The rule is not inventing the gap. Every child it flags for the six P1 selector services is blocked or partial because of a feature the live calculator prices and this engine does not implement: remap.constant, a column-form utilization row, or a dependent-selector value derived from the PLC_2.0 aggregation tree. One tracker artifact is real: Amazon WorkSpaces declares six children, two of them (workSpacesThinClient, workSpacesSecureBrowser) have no manifest entry and answer 403 on their definition URL, and the live calculator never offers them, so the parent counted two phantom children as blocked work.",
   "liveEstimate": {
     "name": "axi-e2e non-clean children probe",
@@ -109,7 +110,7 @@
       {
         "what": "remap.keyValue maps a price token (key) to a UI value (value), not the other way round",
         "code": "index path builder (offset 1466154): m=p.map(e=>{let t=h[e];if(d&&d.keyValue)for(const r in d.keyValue)if(d.keyValue[r]===t){t=r;break}return t})",
-        "meaning": "h is the user value; the key r is used as the selector token for the index path. Definition {"AVC/H.264":"AVC"} plus aggregation Video Codec \"AVC/H.264\" confirms it."
+        "meaning": "h is the user value; the key r is used as the selector token for the index path. Definition {\"AVC/H.264\":\"AVC\"} plus aggregation Video Codec \"AVC/H.264\" confirms it."
       },
       {
         "what": "The label matcher uses the same direction",
@@ -138,8 +139,24 @@
       "owner": "column-form selector worker (src/engine/column-form.ts, src/data/column-form.ts)",
       "component": "elementalMediaConvert outputConfiguration1/columnFormIPM, realTimeDocumentTranslation columnFormIPM",
       "what": "remap.keyValue is inverted and never applied to the aggregation match. src/engine/column-form.ts does remap[primaryValue] ?? primaryValue (UI value -> map value) while the live engine maps UI value -> map key. src/data/column-form.ts matchAggregation ignores remap entirely and requires exact equality with the raw UI value.",
-      "proof": "realTimeDocumentTranslation is scored clean but fails at runtime with MISSING_PRICE: no PLC_2.0 price set matches Basic - Text, HTML. The definition is remap.keyValue {\"Basic\":\"Basic - Text, HTML\"} with rows [{FileType, default Basic}]; the live token for UI value Basic is Basic. analysis/W2_REPEATABLE_ROWS_REPORT.md attributed this service's missing-price to region availability, which is wrong.",
-      "scope": "25 definitions carry a non-identity remap.keyValue. 24 are already non-clean; realTimeDocumentTranslation is the one scored clean."
+      "proof": "realTimeDocumentTranslation fails at runtime with MISSING_PRICE: no PLC_2.0 price set matches Basic - Text, HTML. The definition is remap.keyValue {\"Basic\":\"Basic - Text, HTML\"} with rows [{FileType, default Basic}]; the live token for UI value Basic is Basic. analysis/W2_REPEATABLE_ROWS_REPORT.md attributed this service's missing-price to region availability, which is wrong.",
+      "scope": "25 definitions carry a non-identity remap.keyValue. realTimeDocumentTranslation was the only one scored clean while failing at runtime; the tracker now blocks it. The mirror case, where the default value is a remap value so the live engine substitutes and this one does not, is listed in mirrorCase: all 6 definitions are already blocked and all fail with missing-price.",
+      "mirrorCase": [
+        "amazonFSxForLustre/columnFormIPM Throughput capacity: default 50 MBps/TiB, key 50",
+        "amazonManagedBlockchain/columnFormIPM Framework Type: default Starter, key Hyperledger Fabric - Starter",
+        "amazonAppStream/columnFormIPM Multi Session: default False, key false",
+        "elementalMediaConvert outputConfiguration1/columnFormIPM Video Codec: default AVC, key AVC/H.264",
+        "elementalMediaConvert outputConfiguration2/columnFormIPM Video Codec: default AVC, key AVC/H.264",
+        "amazonWorkSpaces workSpacesCore/columnFormIPM Operating System: default WorkSpaces Core Windows, key Any"
+      ],
+      "trackerCorrection": {
+        "rule": "remap.keyValue-direction: a pricing selector's default value is itself a remap key, so this engine substitutes the map value (a form label) for the token while the live engine keeps the value. The check is static and needs no network.",
+        "rows": [
+          "realTimeDocumentTranslation: clean -> blocked:column-form, hard_blockers remap.keyValue-direction",
+          "amazonTranslate: clean/P2 -> blocked:column-form/P1, selector_blockers remap.keyValue-direction (realTimeDocumentTranslation)"
+        ],
+        "whyItMatters": "A clean label that errors is worse than a blocked one because it is trusted."
+      }
     },
     {
       "owner": "column-form selector worker (src/engine/column-form.ts)",

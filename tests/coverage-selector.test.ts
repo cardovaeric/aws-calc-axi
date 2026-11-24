@@ -273,3 +273,35 @@ test("Amazon Chime SDK names the constant remap rows that block it", async () =>
   assert.equal(row["static_class"], "blocked:column-form");
   assert.equal(row["selector_blockers"], "remap.constant (ptsnAudio, sipTrunking)");
 });
+
+test("a clean row that fails at runtime because of the inverted keyValue remap is blocked, not clean", async () => {
+  const rows = await trackerRows();
+  const row = rows.find((entry) => entry["service_code"] === "realTimeDocumentTranslation");
+  assert.ok(row, "realTimeDocumentTranslation is in the tracker");
+  assert.equal(row["static_class"], "blocked:column-form");
+  assert.equal(row["hard_blockers"], "remap.keyValue-direction");
+  assert.equal(row["next_action"], "Implement column-form remap.keyValue-direction");
+  assert.equal(row["runtime_use1"], "missing-price");
+  assert.equal(row["runtime_use2"], "missing-price");
+});
+
+test("a selector with a blocked child reports it instead of staying clean", async () => {
+  const rows = await trackerRows();
+  const row = rows.find((entry) => entry["service_code"] === "amazonTranslate");
+  assert.ok(row, "amazonTranslate is in the tracker");
+  assert.equal(row["static_class"], "blocked:column-form");
+  assert.equal(row["priority"], "P1");
+  assert.equal(row["selector_blockers"], "remap.keyValue-direction (realTimeDocumentTranslation)");
+});
+
+test("services whose remap keys are regexes are not flagged by the keyValue direction rule", async () => {
+  const rows = await trackerRows();
+  for (const code of ["amazonElastiCache", "amazonKeyspaces", "amazonNeptune", "amazonRDSMySQLDB"]) {
+    const row = rows.find((entry) => entry["service_code"] === code);
+    assert.ok(row, `${code} is in the tracker`);
+    assert.ok(
+      !row["hard_blockers"]!.includes("remap.keyValue-direction"),
+      `${code} keeps its regex-remap gap instead`
+    );
+  }
+});

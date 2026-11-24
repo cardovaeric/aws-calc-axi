@@ -388,14 +388,31 @@ section 15) found the gaps are real, plus one scoring artifact.
   actions. The constant string `Resolve the non-clean children` is removed; the pure rule lives in
   `scripts/coverage-selector.ts` and is covered by `tests/coverage-selector.test.ts`.
 
-Coverage delta: `blocked:subtype` 9 to 10, `blocked:column-form` 17 to 16, `clean` 382 unchanged,
-P1 23 unchanged. No service is called clean because a child was excluded; the two unserved
-children are listed on the Amazon WorkSpaces row.
+Coverage delta from `main`: `blocked:subtype` 9 to 10, `blocked:column-form` 17 to 18, `clean`
+382 to 380, `partial:column-form` 33 unchanged, P1 23 to 24, P2 132 to 131. Three rows changed:
+Amazon Mainframe Modernization (reclassified), `realTimeDocumentTranslation` (below) and Amazon
+Translate, which lists it as a child. No service is called clean because a child was excluded;
+the two unserved children are listed on the Amazon WorkSpaces row.
 
-What the audit also found, and deliberately did not change here: `remap.keyValue` is applied in
-the wrong direction in `src/engine/column-form.ts` (UI value to map value, while the live engine
-maps UI value to the map key, which is the price token), and `matchAggregation` in
-`src/data/column-form.ts` ignores the remap. That file belongs to the column-form selector worker
-this session. Recorded with the exact components in the probe receipt. It explains why
-`realTimeDocumentTranslation` is statically clean but fails at runtime, and it is one of the two
-reasons MediaConvert cannot reach a price row.
+The audit also found that `remap.keyValue` is applied in the wrong direction in
+`src/engine/column-form.ts` (UI value to map value, while the live engine maps UI value to the map
+key, which is the price token), and that `matchAggregation` in `src/data/column-form.ts` ignores
+the remap. Those files belong to the column-form selector worker, so the engine is untouched; the
+tracker records the blocker instead. `remap.keyValue-direction` fires when a pricing selector's
+default value is itself a remap key, the case where this engine substitutes a form label for the
+token and the live engine keeps the value. It moves `realTimeDocumentTranslation` from `clean` to
+`blocked:column-form`, and Amazon Translate, which offers it as a child, from `clean`/P2 to
+`blocked:column-form`/P1 naming that child. A clean label that errors is worse than a blocked one
+because it is trusted.
+
+The mirror state (the default is a remap value, so the live engine substitutes and this one does
+not) is the same inversion from the other side. Six definitions are in it today and all six are
+already blocked and `missing-price` at runtime, so the rule deliberately does not fire twice:
+`amazonFSxForLustre`, `amazonManagedBlockchain`, `amazonAppStream`, `outputConfiguration1`,
+`outputConfiguration2`, `workSpacesCore`. They are listed in the probe receipt so the fix starts
+from all of them.
+
+`amazonGameLiftStreams` is also statically clean and `missing-price` at runtime, from a different
+and unproven cause (no remap; composite primary selector; the price-set label match for the
+default `gen5n_ultra` finds nothing). It is recorded in `analysis/FINDINGS.md` section 14 and left
+unchanged, because guessing a blocker would be worse than naming the open question.

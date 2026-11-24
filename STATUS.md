@@ -86,12 +86,12 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 126 tests, pass
+- `npm test`: 131 tests, pass
 - `npm run e2e`: 28 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
   ledger rows including the editor-recompute oracle)
 - `npm run ledger`: 16 rows, all pass
 - `npm run coverage`: 441-row exhaustive tracker in `analysis/COVERAGE_TABLE.md`
-  (382 clean, 33 partial column-form, 16 blocked column-form, 10 blocked by subtype)
+  (380 clean, 33 partial column-form, 18 blocked column-form, 10 blocked by subtype)
 - Selector rows are scored by the children the live calculator serves and name the blocker and
   the children that carry it (`analysis/FINDINGS.md` section 14, D-027). Two Amazon WorkSpaces
   children are dangling references in the live manifest and have no surface.
@@ -142,8 +142,10 @@ editor at 957.46/month.
   `remap.keyValue` direction below.
 - `remap.keyValue` is applied in the wrong direction in `src/engine/column-form.ts` (UI value to
   map value; the live engine maps UI value to the map key) and `matchAggregation` ignores it.
-  25 definitions carry a non-identity map; `realTimeDocumentTranslation` is scored clean but
-  fails at runtime because of it, and MediaConvert cannot reach a price row.
+  25 definitions carry a non-identity map. `realTimeDocumentTranslation` is no longer scored
+  clean: the tracker blocks it with `remap.keyValue-direction`, which also moves Amazon
+  Translate to P1 because it offers that child. MediaConvert cannot reach a price row for the
+  same reason.
 - Six services reference meters that are absent from their regional price file (Personalize,
   Transcribe, ACM, MediaTailor, Firewall Manager, IoT SiteWise). The engine fails closed
   instead of publishing a zero.

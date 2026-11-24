@@ -765,10 +765,12 @@ scoring them `missing-definition` made the parent count two phantom blockers.
 - Worked example, Amazon WorkSpaces: `selector_children=6`, `selector_nonclean` is the four real
   children, `selector_unserved=workSpacesThinClient;workSpacesSecureBrowser`.
 
-Coverage delta (`npm run coverage -- --evaluate --offline`): `blocked:subtype` 9 to 10 (Amazon
-Mainframe Modernization reclassified), `blocked:column-form` 17 to 16, `clean` 382 unchanged,
-`partial:column-form` 33 unchanged, priorities unchanged. No service became clean by dropping an
-unserved child.
+Coverage delta (`npm run coverage -- --evaluate --offline`, `main` to this branch):
+`blocked:subtype` 9 to 10 (Amazon Mainframe Modernization reclassified), `blocked:column-form` 17
+to 18, `clean` 382 to 380, `partial:column-form` 33 unchanged, P1 23 to 24, P2 132 to 131. Three
+rows changed: Amazon Mainframe Modernization, `realTimeDocumentTranslation` (the second finding
+below) and Amazon Translate, which lists it as a child. No service became clean by dropping an
+unserved child, and the two unserved children are listed on the Amazon WorkSpaces row.
 
 ### Second finding: `remap.keyValue` is applied in the wrong direction
 
@@ -781,6 +783,24 @@ Consequences: MediaConvert cannot reach an aggregation row (`AVC` versus `AVC/H.
 `realTimeDocumentTranslation` is scored `clean` but fails at runtime with
 `no PLC_2.0 price set matches Basic - Text, HTML` against the definition
 `{"Basic":"Basic - Text, HTML"}`. Section 13 and D-024 attributed that service's missing price to
-region availability, which is wrong. 25 definitions carry a non-identity `remap.keyValue` and 24
-of them are already non-clean, so the fix belongs with the column-form worker rather than in the
-tracker.
+region availability, which is wrong.
+
+The tracker now names that cause instead of trusting the clean label. The rule
+(`remap.keyValue-direction` in the `scripts/coverage.ts` inventory) fires when a pricing selector's
+default value is itself a `remap.keyValue` key: this engine then substitutes the map value, a form
+label, for the token, while the live engine keeps the value. It hits one definition,
+`realTimeDocumentTranslation`, which moves to `blocked:column-form` with
+`Implement column-form remap.keyValue-direction`; because Amazon Translate lists it as a child,
+Amazon Translate moves from `clean`/P2 to `blocked:column-form`/P1 and names the child. The mirror
+state (the default is a remap value, so the live engine substitutes and this one does not) is the
+same inversion seen from the other side: 6 definitions are in it today (`amazonFSxForLustre`,
+`amazonManagedBlockchain`, `amazonAppStream`, `outputConfiguration1`, `outputConfiguration2`,
+`workSpacesCore`), all already blocked and all `missing-price` at runtime, so the tracker does not
+need a second signal for them. 25 definitions carry a non-identity `remap.keyValue`; the fix
+belongs with the column-form worker and this receipt is its starting point.
+
+`amazonGameLiftStreams` is a second row that is statically clean and `missing-price` at runtime
+with a different cause: it has no remap at all, its primary selector is composite
+(`{"Stream Class":["VCPU","VRAM","RAM"]}`), and the price-set label match for the default
+`gen5n_ultra` finds nothing. Not proven beyond that and not changed here; it is recorded so the
+clean label is not mistaken for support.

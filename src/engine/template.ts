@@ -12,7 +12,7 @@ import type { CalculationComponents } from "../contract.ts";
 import { toCents } from "../contract.ts";
 import { evaluateDisplayIf, type ExprContext, type Operand } from "./expression.ts";
 import { evaluateInput } from "./inputs.ts";
-import { evaluateMaths, applyMathsDecimals } from "./maths.ts";
+import { evaluateMaths, applyMathsDecimals, resolveOperandValue } from "./maths.ts";
 import {
   magicPrice,
   resolveTiers,
@@ -366,6 +366,38 @@ function evaluateMathsComponent(
   const operands = (component["operands"] as Operand[] | undefined) ?? [];
   if (operands.length === 0) {
     runtime.values.set(component.id, 0);
+    return;
+  }
+
+  if (subType === "snapShotMaths") {
+    // Live formula (analysis/bundle.js `snapShotMaths`): the first snapshot
+    // stores the full volume, every later snapshot stores the changed amount,
+    // and partial-month storage is billed at 50% of a full month.
+    const byName = new Map<string, unknown>();
+    for (const operand of operands) {
+      const name =
+        typeof operand["operand"] === "string" ? operand["operand"] : operand.variableId;
+      if (!name) continue;
+      byName.set(name, resolveOperandValue(operand, (id) => get(id) as never).value);
+    }
+    const storage = Number(byName.get("ebsStorage"));
+    const changed = Number(byName.get("amountSnapShotChanged"));
+    const frequency = Number(byName.get("snapShotFrequency"));
+    const price = Number(byName.get("snapShotPricing"));
+    if (
+      ![storage, changed, frequency, price].every(Number.isFinite) ||
+      storage === 0 ||
+      changed === 0 ||
+      frequency === 0
+    ) {
+      runtime.values.set(component.id, 0);
+      return;
+    }
+    const initial = new Decimal(storage).mul(price);
+    const eachSnapshot = new Decimal(changed).mul(price);
+    const partialMonth = eachSnapshot.div(2);
+    const incremental = partialMonth.mul(frequency);
+    runtime.values.set(component.id, initial.add(incremental).toNumber());
     return;
   }
 

@@ -5,6 +5,7 @@ import {
   convertFrequency,
   convertSize,
   convertTime,
+  convertRateTime,
   normalizeTimeUnit,
 } from "../src/engine/units.ts";
 
@@ -19,6 +20,12 @@ test("time conversions follow the live table", () => {
   assert.equal(convertTime(1, "month", "hour"), 730);
   assert.ok(Math.abs(convertTime(730, "hour", "month") - 1) < 1e-5);
   assert.equal(convertTime(1, "hr", "min"), 60);
+});
+
+test("rate time conversion is the inverse of duration conversion", () => {
+  assert.ok(Math.abs(convertRateTime(1024, "month", "hour") - 1024 / 730) < 1e-12);
+  assert.ok(Math.abs(convertRateTime(1024 / 730, "hour", "month") - 1024) < 0.01);
+  assert.equal(convertRateTime(100, "month", "month"), 100);
 });
 
 test("time unit aliases collapse to table keys", () => {

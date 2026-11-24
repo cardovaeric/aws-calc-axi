@@ -1,5 +1,5 @@
 import { EngineError, InputValidationError, MissingInputError } from "./errors.ts";
-import { convertSize, convertTime, convertFrequency, convertThroughput } from "./units.ts";
+import { convertSize, convertTime, convertFrequency, convertRateTime, convertThroughput } from "./units.ts";
 import {
   evaluateTransferRows,
   normalizeRows,
@@ -314,27 +314,19 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
           value: selectedId,
         });
       }
-      if (
-        frequencyUnit !== "NA" &&
-        (!isOverrideObject(component["outputFrequency"]) ||
-          String((component["outputFrequency"] as Record<string, unknown>)["id"]) !== "NA")
-      ) {
-        const allowed = new Set([
-          ...frequencyOptions.map((option) => option.id),
-          "month",
-          "day",
-          "hour",
-          "min",
-          "sec",
-          "week",
-          "year",
-        ]);
-        if (!allowed.has(frequencyUnit)) {
+      const allowsFrequency = frequencyOptions.length > 0 || outputFrequency !== "NA";
+      if (frequencyUnit !== "NA") {
+        const allowed = new Set(frequencyOptions.map((option) => option.id));
+        if (outputFrequency !== "NA") allowed.add(outputFrequency);
+        if (!allowsFrequency || !allowed.has(frequencyUnit)) {
           throw new InputValidationError({
             serviceCode: context.serviceCode,
             componentId: component.id,
             label,
-            problem: `frequency "${frequencyUnit}" is not supported by this input`,
+            problem:
+              `frequency "${frequencyUnit}" is not supported by this input; ` +
+              `use "${sizeUnit}|NA" or one of ` +
+              [...allowed].map((unit) => `"${sizeUnit}|${unit}"`).join(", "),
             value: selectedId,
           });
         }
@@ -348,7 +340,7 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
 
       let value = convertSize(numeric, sizeUnit, outputSize);
       if (frequencyUnit !== "NA" && outputFrequency !== "NA") {
-        value = convertTime(value, frequencyUnit, outputFrequency);
+        value = convertRateTime(value, frequencyUnit, outputFrequency);
       }
       assertValid(component, value, raw, context, fromOverride);
 

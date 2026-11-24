@@ -222,6 +222,24 @@ export function convertTime(value: number, from: string, to: string): number {
 }
 
 /**
+ * Convert a rate expressed per unit time (for example GB per month) to another
+ * time base. This is the inverse of `convertTime`, which converts a duration.
+ * A 1 TB/month file-size input must become 1.4 GB/hour, not 730 TB/hour.
+ */
+export function convertRateTime(value: number, from: string, to: string): number {
+  const source = normalizeTimeUnit(from);
+  const target = normalizeTimeUnit(to);
+  if (!source || !target || source === target) return value;
+  const table = TIME_CONVERSIONS[target];
+  if (!table) throw new Error(`unknown time unit "${to}"`);
+  const conversion = table[source];
+  if (!conversion) throw new Error(`unknown time conversion ${from} -> ${to}`);
+  return conversion.operation === "multiply"
+    ? value / conversion.rate
+    : value * conversion.rate;
+}
+
+/**
  * Frequency conversion. The live table is indexed `[output][input]`: it returns
  * the multiplier that turns an input rate into the output rate.
  */

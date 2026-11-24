@@ -297,12 +297,31 @@ export function diffRendered(
     mismatches.push(...compareMoney("annual", expectation.annual, rendered.annualValue));
   }
 
+  const remaining = [...rendered.services];
+  const normalize = (value: string): string => value.replace(/\s+/g, " ").trim();
   for (const expected of expectation.services ?? []) {
-    const row = rendered.services.find((candidate) => (candidate.name ?? "").trim() === expected.name);
-    if (!row) {
+    // Duplicate display names are normal (three EBS rows all render as
+    // "Amazon Elastic Block Store (EBS)"). Match the config summary when the
+    // expectation carries one, then fall back to the first unused row.
+    let index = -1;
+    if (expected.configSummary !== undefined) {
+      const wanted = normalize(expected.configSummary);
+      index = remaining.findIndex(
+        (candidate) =>
+          normalize(candidate.name ?? "") === normalize(expected.name) &&
+          normalize(candidate.configSummary ?? "") === wanted
+      );
+    }
+    if (index < 0) {
+      index = remaining.findIndex(
+        (candidate) => normalize(candidate.name ?? "") === normalize(expected.name)
+      );
+    }
+    if (index < 0) {
       mismatches.push({ field: `service:${expected.name}`, expected: "present", actual: "missing" });
       continue;
     }
+    const row = remaining.splice(index, 1)[0]!;
     if (expected.monthly !== undefined) {
       mismatches.push(
         ...compareMoney(`service:${expected.name}:monthly`, expected.monthly, moneyValue(row.monthly))

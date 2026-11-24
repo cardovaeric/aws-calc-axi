@@ -238,6 +238,69 @@ test("a bare size override keeps the component's default frequency", () => {
   assert.equal(result.configSummary, "Storage amount (500 GB)");
 });
 
+test("a frequency override on an NA-frequency fileSize fails closed", () => {
+  assert.throws(
+    () =>
+      evaluateInput(
+        input({
+          subType: "fileSize",
+          dropDownSize: [{ label: "GB", id: "gb" }],
+          defaultOption: { size: "gb", frequency: "NA" },
+          outputSize: "gb",
+          outputFrequency: "NA",
+          defaultValue: 100,
+        }),
+        { ...context, overrides: { field: { value: 500, unit: "gb|month" } } }
+      ),
+    /frequency "month" is not supported/
+  );
+});
+
+test("snapShotMaths matches the live first-snapshot plus half-month changed storage formula", () => {
+  const definition = {
+    serviceCode: "test",
+    serviceName: "Test",
+    templates: [
+      {
+        id: "t",
+        cards: [
+          {
+            title: "snapshots",
+            mathsSection: [
+              {
+                components: [
+                  {
+                    type: "maths",
+                    subType: "snapShotMaths",
+                    id: "snap",
+                    operands: [
+                      { operand: "ebsStorage", constant: 500 },
+                      { operand: "amountSnapShotChanged", constant: 10 },
+                      { operand: "snapShotFrequency", constant: 30 },
+                      { operand: "snapShotPricing", constant: 0.05 },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  } as unknown as ServiceDefinition;
+  const result = evaluateTemplate({
+    definition,
+    template: definition.templates?.[0] as never,
+    regionCode: "us-east-2",
+    regionName: "US East (Ohio)",
+    prices: pricing,
+    overrides: {},
+    ...regionMaps(),
+    columnForms: new Map(),
+  });
+  assert.equal(result.values.get("snap"), 32.5);
+});
+
 test("a bare size override on a monthly input keeps the monthly frequency", () => {
   const result = evaluateInput(
     input({

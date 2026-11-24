@@ -301,8 +301,6 @@ export interface ColumnFormSelectorTree {
   dependents: Record<string, string[]>;
   /** selectorId -> option tree; absent or empty means "not offered". */
   options: Record<string, SelectorOptions>;
-  /** Selectors whose options came from the regional price records. */
-  fromRecords: Set<string>;
 }
 
 function dependentChain(
@@ -366,7 +364,6 @@ export function buildColumnFormSelectorTree(
 
   const options: Record<string, SelectorOptions> = {};
   const roots: Record<string, Record<string, SelectorOptions>> = {};
-  const fromRecords = new Set<string>();
   const missing = new Set<string>();
   for (const selectorId of secondary) {
     roots[selectorId] = {};
@@ -399,7 +396,6 @@ export function buildColumnFormSelectorTree(
 
   const recordEntries = Object.values(records) as Array<Record<string, unknown>>;
   for (const selectorId of missing) {
-    fromRecords.add(selectorId);
     const root: Record<string, SelectorOptions> = {};
     for (const record of recordEntries) {
       const value = record[selectorId];
@@ -413,7 +409,7 @@ export function buildColumnFormSelectorTree(
     options[selectorId] = sortOptions(root);
   }
 
-  return { dependents, options, fromRecords };
+  return { dependents, options };
 }
 
 /**

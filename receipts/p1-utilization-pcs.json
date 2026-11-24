@@ -1,0 +1,190 @@
+{
+  "estimate": "axi-e2e utilization AWS PCS",
+  "specHash": "6abbbed2b507d599",
+  "url": "https://calculator.aws/#/estimate?id=b7b98f1a0722374e75e09dadba67c8f6f997aec4",
+  "savedKey": "b7b98f1a0722374e75e09dadba67c8f6f997aec4",
+  "publishedAt": "2026-11-24T13:29:11.777Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 654.48,
+    "upfront": 0,
+    "total12m": 7853.76,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsPcs",
+        "template": "AWS PCS",
+        "region": "us-east-2",
+        "monthly": 0,
+        "upfront": 0,
+        "summary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (0 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)"
+      },
+      {
+        "code": "awsPcs",
+        "template": "AWS PCS",
+        "region": "us-east-2",
+        "monthly": 218.16,
+        "upfront": 0,
+        "summary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (50 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)"
+      },
+      {
+        "code": "awsPcs",
+        "template": "AWS PCS",
+        "region": "us-east-2",
+        "monthly": 436.32,
+        "upfront": 0,
+        "summary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsPcs",
+        "monthly": 0,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPcs",
+        "monthly": 218.16,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPcs",
+        "monthly": 436.32,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 654.48,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=b7b98f1a0722374e75e09dadba67c8f6f997aec4",
+    "title": "axi-e2e utilization AWS PCS",
+    "monthly": "654.48 USD",
+    "upfront": "0.00 USD",
+    "annual": "7,853.76 USD",
+    "monthlyValue": 654.48,
+    "upfrontValue": 0,
+    "annualValue": 7853.76,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS PCS",
+        "upfront": "0.00 USD",
+        "monthly": "0.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (0 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)",
+        "status": null
+      },
+      {
+        "name": "AWS PCS",
+        "upfront": "0.00 USD",
+        "monthly": "218.16 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (50 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)",
+        "status": null
+      },
+      {
+        "name": "AWS PCS",
+        "upfront": "0.00 USD",
+        "monthly": "436.32 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T13:29:14.525Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=b7b98f1a0722374e75e09dadba67c8f6f997aec4",
+    "savedKey": "b7b98f1a0722374e75e09dadba67c8f6f997aec4",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=b7b98f1a0722374e75e09dadba67c8f6f997aec4",
+      "title": "axi-e2e utilization AWS PCS",
+      "monthly": "654.48 USD",
+      "upfront": "0.00 USD",
+      "annual": "7,853.76 USD",
+      "monthlyValue": 654.48,
+      "upfrontValue": 0,
+      "annualValue": 7853.76,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "AWS PCS",
+          "upfront": "0.00 USD",
+          "monthly": "0.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (0 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)",
+          "status": "-"
+        },
+        {
+          "name": "AWS PCS",
+          "upfront": "0.00 USD",
+          "monthly": "218.16 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (50 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)",
+          "status": "-"
+        },
+        {
+          "name": "AWS PCS",
+          "upfront": "0.00 USD",
+          "monthly": "436.32 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T13:29:40.937Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e utilization AWS PCS",
+    "monthly": 654.48,
+    "upfront": 0,
+    "annual": 7853.76,
+    "services": [
+      {
+        "name": "AWS PCS",
+        "monthly": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (0 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)"
+      },
+      {
+        "name": "AWS PCS",
+        "monthly": 218.16,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (50 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)"
+      },
+      {
+        "name": "AWS PCS",
+        "monthly": 436.32,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of PCS Clusters (1), Slurm Controller Size (Small), Length of time cluster is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month), Length of time each node is running (100 % Utilization/Month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

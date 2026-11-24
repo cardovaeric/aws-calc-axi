@@ -1,0 +1,19 @@
+name: axi-e2e utilization MediaConnect
+currency: USD
+locale: en_US
+services:
+  - code: awsElementalMediaConnect
+    region: us-east-2
+    set:
+      numberOfRunningFlowsNDI: 10
+      flowUtilizationNDI: 0
+  - code: awsElementalMediaConnect
+    region: us-east-2
+    set:
+      numberOfRunningFlowsNDI: 10
+      flowUtilizationNDI: 365
+  - code: awsElementalMediaConnect
+    region: us-east-2
+    set:
+      numberOfRunningFlowsNDI: 10
+      flowUtilizationNDI: 730

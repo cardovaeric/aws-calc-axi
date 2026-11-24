@@ -23,6 +23,8 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 | amazonDynamoDbDaxClusters | dynamoDBDaxNodes | us-east-2 | 3 r5.large DAX nodes, hourly pricing | native | 558.45 | 558.45 USD | pass | pass | https://calculator.aws/#/estimate?id=ee83789565dcdcd9b0c169dcac29e8cf3848575c |
 | CodeBuild x2 + ElastiCache + MSK | awsCodeBuild x2 + amazonElastiCache + amazonManagedStreamingForApacheKafkaMsk | us-east-2 | two CodeBuild services (10 and 5 builds), ElastiCache 2 x cache.m5.xlarge, MSK 3 x m5.large | native | 957.46 | 957.46 USD | pass | pass | https://calculator.aws/#/estimate?id=0a75b381ce55078a95880d40349e5ab6f2a44fed |
 | ElastiCache + OpenSearch + Redshift reserved | amazonElastiCache + amazonElasticsearchService + amazonRedshift | us-east-2 | ElastiCache 2 x cache.m5.xlarge Reserved 1yr All Upfront, OpenSearch 2 x r5.2xlarge.search Reserved 1yr No Upfront, Redshift 2 x ra3.4xlarge Reserved 1yr No Upfront | native | 4080.70 | 4,080.70 USD | pass | pass | https://calculator.aws/#/estimate?id=b03c7fc75c828c53cb388b87aa8dae6f421e2153 |
+| awsPcs | AWS PCS | us-east-2 | length of time cluster is running at 0%, 50%, and 100% | native | 654.48 | 654.48 USD | pass | pass | https://calculator.aws/#/estimate?id=b7b98f1a0722374e75e09dadba67c8f6f997aec4 |
+| awsElementalMediaConnect | elementalMediaConnect | us-east-2 | 10 NDI flows at 0, 365, and 730 hours per month | native | 16425.00 | 16,425.00 USD | pass | pass | https://calculator.aws/#/estimate?id=9569932f90a240ff002a4a0c24f008f3fd1f74da |
 | group: Data -> Data Compute (S3 + Lambda) | simpleStorageServiceClassesGroup + lambdaWithFreeTier | us-east-2 | nested groups with Business Support+ | native | 14.10 | 43.10 USD | none | pass | https://calculator.aws/#/estimate?id=41bc364a547ab7429de00d8d39cb29f70210d12a |
 
 ## Evidence
@@ -48,6 +50,8 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 - dax-nodes-use2: first columnFormIPM row; PLC_2.0 metadata, aggregations, and index price path
 - column-form-rows-use2: one row per column form; the live 'second row' is a second service (receipts/column-form-rows-probe.json)
 - dependent-selectors-use2: dependent Term/Purchase selectors resolved from the price records; 3,482.00 upfront (analysis/FINDINGS.md section 14)
+- utilization-pcs-use2: utilization subtype with percentagePerMonth hours conversion; 3 rows cover min, middle, and max
+- utilization-mediaconnect-use2: utilization subtype with hoursPerMonth; the editor recompute is the oracle because the service also carries dataTransferV2 rows
 - groups-support-business-use2: support is recomputed by the share page; groups render as rows plus a tree
 
 Regenerate with `npm run ledger`. Receipts are in `receipts/`; each one stores the native result,

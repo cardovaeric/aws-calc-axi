@@ -1,0 +1,52 @@
+name: axi-e2e utilization Deadline Cloud
+currency: USD
+locale: en_US
+services:
+  - code: awsDeadlineCloud
+    region: us-east-2
+    set:
+      columnFormIPM2:
+        Instance Type: c5.large
+        Operating System: Linux
+        Number of Nodes: 1
+      columnFormIPM3:
+        Instance Type: c5.large
+        Operating System: Linux
+        Number of Nodes: 1
+      numberOfWorkers3: 1
+      worker_utilization3:
+        value: 730
+        unit: perMonth
+      monthlyUtilization: 0
+  - code: awsDeadlineCloud
+    region: us-east-2
+    set:
+      columnFormIPM2:
+        Instance Type: c5.large
+        Operating System: Linux
+        Number of Nodes: 1
+      columnFormIPM3:
+        Instance Type: c5.large
+        Operating System: Linux
+        Number of Nodes: 1
+      numberOfWorkers3: 1
+      worker_utilization3:
+        value: 730
+        unit: perMonth
+      monthlyUtilization: 50
+  - code: awsDeadlineCloud
+    region: us-east-2
+    set:
+      columnFormIPM2:
+        Instance Type: c5.large
+        Operating System: Linux
+        Number of Nodes: 1
+      columnFormIPM3:
+        Instance Type: c5.large
+        Operating System: Linux
+        Number of Nodes: 1
+      numberOfWorkers3: 1
+      worker_utilization3:
+        value: 730
+        unit: perMonth
+      monthlyUtilization: 100

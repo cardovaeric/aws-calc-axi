@@ -11,33 +11,31 @@ no calculator surface.
 
 | Class | Services |
 | --- | ---: |
-| blocked:column-form | 18 |
-| blocked:subtype | 10 |
-| clean | 397 |
+| blocked:column-form | 21 |
+| blocked:subtype | 3 |
+| clean | 401 |
 | partial:column-form | 16 |
 
 | Priority | Services |
 | --- | ---: |
 | P0 | 31 |
-| P1 | 15 |
-| P2 | 138 |
-| P3 | 257 |
+| P1 | 11 |
+| P2 | 140 |
+| P3 | 259 |
 
 | Plan phase | Services |
 | --- | ---: |
 | Conformance passed - add ledger | 16 |
-| Done - ledger receipt | 15 |
+| Done - ledger receipt | 17 |
 | Phase 1 - promote simulation | 1 |
-| Phase 1 - receipts | 365 |
-| Phase 2 - column-form v2 | 33 |
+| Phase 1 - receipts | 367 |
+| Phase 2 - column-form v2 | 36 |
 | Phase 3 - EC2 module | 4 |
-| Phase 5 - long tail | 7 |
 
 | Blocker | Services |
 | --- | ---: |
 | additional-pricing-data | 16 |
 | remap.constant | 11 |
-| utilization | 8 |
 | utilization-selector | 8 |
 | radioTiles | 3 |
 | ec2PriceDisplay | 2 |
@@ -125,10 +123,10 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | priority | service_code | service_name | visible_use2 | surface_pct | static_class | deep_gaps | runtime_use1 | runtime_use2 | ledger_receipt | conformance_receipt | plan_phase | next_action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | P0 | ec2Enhancement | Amazon EC2 | yes | 85.1% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement maths:ec2PriceDisplay:5;maths:ec2Variable:2;pricing:ec2PriceFetcher:1;input:radioTiles:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategyV2:1;maths:ec2AdvPricingStrategyMath:1;input:ec2AdvPricingMetrics:1 |
-| P0 | eC2Next | Amazon EC2 | no | 79.2% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:utilization:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1 |
+| P0 | eC2Next | Amazon EC2 | no | 80.2% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1 |
 | P0 | windowsWorkloads | Windows Server and SQL Server on Amazon EC2 | yes | 29.2% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement input:workloadsConditionalComponent:5;input:workloadDropdown:3;input:conditionalCheckboxes:2;input:pricingStrategy:2;input:workloadPriceSetFetcher:1;pricing:workloadStoragePricing:1;input:workflowInstruction:1;input:uploadTable:1;input:dedicatedHostsReviewTable:1;input:dedicatedHostsCostTable:1;maths:dedicatedHostsMath:1;input:sqlSummary:1;input:windowsSummary:1;input:inputField:1;input:windowsWorkloadStorage:1;input:radioTiles:1;maths:instanceRecommendation:1;input:workloadsInstanceSearch:1;input:sqlPassiveNode:1;maths:workloadInstanceMath:1;maths:instanceCostSummary:1;maths:workloadStorageMath:1;maths:storageCostSummary:1;maths:instanceCostSummaryTable:1;maths:storageCostSummaryTable:1;maths:sqlLicenseSummary:1 |
 | P0 | amazonElasticBlockStore | Amazon Elastic Block Store (EBS) | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
-| P0 | amazonRdsCustomForSqlServer | Amazon RDS Custom for SQL Server | yes | 100.0% | clean | - | bad-definition | bad-definition | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonRdsCustomForSqlServer | Amazon RDS Custom for SQL Server | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
 | P0 | amazonRdsForOutposts | Amazon RDS on AWS Outposts | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P0 | amazonVirtualPrivateCloud | Amazon Virtual Private Cloud (VPC) | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | awsEks | Amazon EKS | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
@@ -162,14 +160,10 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | P1 | amazonChimeSdk | Amazon Chime SDK | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant (ptsnAudio, sipTrunking) |
 | P1 | amazonEMR | Amazon EMR | yes | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector (amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode) |
+| P1 | amazonMainframeModernization | AWS Mainframe Modernization | yes | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant (mainframeBluAge, mainframeMicroFocus) |
 | P1 | amazonTranslate | Amazon Translate | yes | 100.0% | blocked:column-form | - | ok | ok | no | no | Phase 2 - column-form v2 | Implement column-form remap.keyValue-primary (realTimeDocumentTranslation) |
 | P1 | amazonWorkSpaces | Amazon WorkSpaces | yes | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector (amazonWorkspaces, workSpacesCore, workSpacesInstances) |
 | P1 | aWSDirectoryService | AWS Directory Service | yes | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
-| P1 | amazonMainframeModernization | AWS Mainframe Modernization | yes | 81.5% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:2 (mainframeBluAge); Implement input:utilization:3 (mainframeMicroFocus) |
-| P1 | awsDeadlineCloud | AWS Deadline Cloud | yes | 97.8% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:1 |
-| P1 | awsDirectConnect | AWS Direct Connect | yes | 90.0% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:1 |
-| P1 | awsElementalMediaConnect | AWS Elemental MediaConnect | yes | 93.8% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 5 - long tail | Implement input:utilization:6 |
-| P1 | awsPcs | AWS PCS | yes | 88.9% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 5 - long tail | Implement input:utilization:4 |
 | P1 | amazonDocumentDB | Amazon DocumentDB (with MongoDB compatibility) | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 | P1 | amazonKeyspaces | Amazon Keyspaces | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 | P1 | amazonNeptune | Amazon Neptune | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
@@ -184,7 +178,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P2 | amazonAppFlow | Amazon AppFlow | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonAppStream | Amazon WorkSpaces Applications | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonAugmentedAi | Amazon Augmented AI | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P2 | amazonBedrock | Amazon Bedrock | yes | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
+| P2 | amazonBedrock | Amazon Bedrock | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | amazonBedrockAgentCore | Amazon Bedrock AgentCore | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | amazonBraket | Amazon Braket | no | 100.0% | clean | - | needs-input | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonCertificateManager | AWS Certificate Manager | yes | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -205,7 +199,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P2 | amazonForecast | Amazon Forecast | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFraudDetector | Amazon Fraud Detector | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSx | Amazon FSx for Windows File Server | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P2 | amazonFSxForLustre | Amazon FSx for Lustre | yes | 100.0% | clean | - | bad-definition | bad-definition | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | amazonFSxForLustre | Amazon FSx for Lustre | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSxForNetAppOntap | Amazon FSx for NetApp ONTAP | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSxForOpenZfs | Amazon FSx for OpenZFS | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonGameLift | Amazon GameLift Servers | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -276,7 +270,9 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P2 | awsDataPipeline | AWS Data Pipeline | no | 100.0% | clean | - | ok | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | aWSDataSync | AWS DataSync | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | aWSDataTransfer | AWS Data Transfer | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | awsDeadlineCloud | AWS Deadline Cloud | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsDeepRacer | AWS DeepRacer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P2 | awsDirectConnect | AWS Direct Connect | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsElasticDisasterRecovery | AWS Elastic Disaster Recovery | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | awsElementalMediaLive | AWS Elemental MediaLive | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | awsElementalMediaPackage | AWS Elemental MediaPackage | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -330,14 +326,14 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | amazonWorkspaces | WorkSpaces Personal | no | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
 | P3 | chimeBusinessCallingAnalysis | Amazon Chime Business Calling analysis | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | chimeCostAnalysis | Amazon Chime Meetings App | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
+| P3 | mainframeBluAge | AWS Blu Age automated refactoring | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
+| P3 | mainframeMicroFocus | Micro Focus replatforming | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | proxyPhoneSession | Proxy Phone Session | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | ptsnAudio | PSTN Audio | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | realTimeDocumentTranslation | Real-Time Document Translation | no | 100.0% | blocked:column-form | - | missing-price | missing-price | no | no | Phase 2 - column-form v2 | Implement column-form remap.keyValue-primary |
 | P3 | sipTrunking | SIP Trunking | no | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P3 | workSpacesCore | WorkSpaces Core Bundles | no | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
 | P3 | workSpacesInstances | WorkSpaces Core Managed Instances | no | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector |
-| P3 | mainframeBluAge | AWS Blu Age automated refactoring | no | 81.8% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:2 |
-| P3 | mainframeMicroFocus | Micro Focus replatforming | no | 81.3% | blocked:subtype | - | needs-input | needs-input | no | no | Phase 5 - long tail | Implement input:utilization:3 |
 | P3 | activeCustomBatchTranslation | Active Custom Batch Translation | no | 100.0% | clean | - | ok | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | agentCoreBrowserTools | AgentCore Browser Tools | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | agentCoreCodeInterpreter | AgentCore Code Interpreter | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -346,8 +342,8 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | agentCoreMemory | AgentCore Memory | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | agentCoreObservability | AgentCore Observability | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | agentCoreRuntime | AgentCore Runtime | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | ai21 | AI21 Labs | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | amazon | Amazon | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | ai21 | AI21 Labs | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | amazon | Amazon | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonAthena | Amazon Athena | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonAuroraBackup | Aurora | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonCarrierIp | Amazon Carrier IP | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -390,7 +386,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | amazonStorageGatewayBackup | Storage Gateway | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonTechnic | AWS MDC Rack | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonVMwareBackup | VMware | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | anthropic | Anthropic | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | anthropic | Anthropic | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | applicationLoadBalancer | Application Load Balancer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | appSyncApiCall | AppSync GraphQL API Requests | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | appSyncCaching | AppSync GraphQL Caching | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -405,9 +401,10 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | awsCloudFormation | AWS CloudFormation | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsCodeBuild | AWS CodeBuild | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsCodeCommit | AWS CodeCommit | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | awsDeviceFarm | AWS Device Farm | no | 100.0% | clean | - | bad-definition | bad-definition | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | awsDeviceFarm | AWS Device Farm | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | awsDrsDrill | AWS DRS - Drill/Recovery | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | awsDrsRecoveryReplication | AWS DRS - Replication | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | awsElementalMediaConnect | AWS Elemental MediaConnect | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsEtlJobsAndDevelopmentEndpoints | AWS Glue ETL jobs and interactive sessions | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | awsEtlJobsFlexExecutionOption | AWS Glue ETL jobs with Flex execution option | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | awsGlueCrawlers | AWS Glue Crawlers | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -422,6 +419,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | awsIoTCoreMqtt | MQTT | no | 100.0% | clean | - | ok | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | aWSLambda | AWS Lambda | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsOutposts | AWS Outposts | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | awsPcs | AWS PCS | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsProfessionalServices | AWS Professional Services | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P3 | awsS3DataTransfer | Data Transfer | no | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsSnowmobile | AWS Snowmobile | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -439,12 +437,12 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | chimeVoiceConnectorAnalysis | Chime Voice Connector analysis | no | 100.0% | clean | - | ok | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | classicLoadBalancer | Classic Load Balancer | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | codeGuruReviewer | Amazon CodeGuru Reviewer Test | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | cohere | Cohere | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | cohere | Cohere | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | comprehendCustomClassification | Comprehend Custom Classification | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | comprehendCustomEntities | Comprehend Custom Entities | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | comprehendTopicModeling | Topic Modeling | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | containsPii | Contains PII | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | deepseek | DeepSeek | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | deepseek | DeepSeek | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | docDbBackup | DocumentDB Backup | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | dynamoDbBackup | DynamoDB Backup and restore | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | dynamoDbChangeDateCapture | DynamoDB change data capture | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -466,7 +464,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | keyPhraseExtraction | Keyphrase Extraction | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | languageDetection | Language Detection | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | lightsailBlockStorage | Lightsail Block Storage | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | lightsailCdn | Lightsail CDN | no | 100.0% | clean | - | ok | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | lightsailCdn | Lightsail CDN | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | lightsailContainers | Lightsail Containers | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | lightsailDataTransfer | Lightsail Data Transfer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | lightsailLoadBalancer | Lightsail Load Balancer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -491,7 +489,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | medicalProtectedHealthInformationDataExtractionAndIdentificationPhIdApi | Medical Protected Health Information Data Extraction and Identification (PHId) API | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | medicalRxNormOntologyLinkingApi | Medical RxNORM Ontology Linking API | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | medicalSystematizedNomenclatureOfMedicineClinicalTermsSnomedCtApi | Medical Systematized Nomenclature of Medicine Clinical Terms (SNOMED CT) API | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | meta | Meta | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | meta | Meta | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | mistral | Mistral | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | modularDataCenter | AWS Modular Data Center (MDC) | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | multimodalEmbeddings | Titan Multimodal Embeddings | no | 100.0% | clean | - | ok | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -507,7 +505,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | omicsReady2RunWorkflows | HealthOmics Ready2Run Workflows | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | omicsStorage | HealthOmics Storage | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | omicsWorkflows | HealthOmics Private Workflows | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | openAi | OpenAI | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | openAi | OpenAI | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | outputConfiguration1 | Output Configuration 1 | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | outputConfiguration2 | Output Configuration 2 | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | piiDetection | Detect PII | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -516,7 +514,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | proServeYear3Cost | ProServe Year 3 Price | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | proServeYear4Cost | ProServe Year 4 Price | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | proServeYear5Cost | ProServe Year 5 Price | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | qwen | Qwen | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | qwen | Qwen | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | rdsBackup | RDS Backup | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | redshiftBackup | Redshift Backup | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | rekognitionCustomLabels | Rekognition Custom Labels | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -557,7 +555,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | snowballEdgeStorageOptimized210TbDataTransferOnly | Snowball Edge Storage Optimized 210TB Data Transfer Only | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | snowballEdgeStorageOptimizedDataTransferOnly | Snowball Edge Storage Optimized Data Transfer Only | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | snowballEdgeStorageOptimizedWithEc2ComputeInstances | Snowball Edge Storage Optimized with EC2 Compute Instances | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | stabilityAi | StabilityAI | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | stabilityAi | StabilityAI | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | standardBatchTranslation | Standard Batch Translation | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | standardRealTimeTranslation | Standard Real-Time Translation | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | standardTextToSpeechTts | Standard Text-to-Speech | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -574,11 +572,11 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | vMwareBackup | VMware Backup | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | webApps | Web apps | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | webRtcMedia | WebRTC Media | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | workflow2 | Workload 2 | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | workflow3 | Workload 3 | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | workload1 | Workload 1 | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | workflow2 | Workload 2 | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | workflow3 | Workload 3 | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | workload1 | Workload 1 | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | workSpacesPools | WorkSpaces Pools | no | 100.0% | clean | - | needs-input | unknown-region | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | writer | Writer | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | writer | Writer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonElastiCache | Amazon ElastiCache | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 
 ## Rebuild

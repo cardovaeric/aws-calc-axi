@@ -1,0 +1,190 @@
+{
+  "estimate": "axi-e2e utilization MediaConnect",
+  "specHash": "e1e3b4923aef132a",
+  "url": "https://calculator.aws/#/estimate?id=9569932f90a240ff002a4a0c24f008f3fd1f74da",
+  "savedKey": "9569932f90a240ff002a4a0c24f008f3fd1f74da",
+  "publishedAt": "2026-11-24T13:29:50.262Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 16425,
+    "upfront": 0,
+    "total12m": 197100,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsElementalMediaConnect",
+        "template": "elementalMediaConnect",
+        "region": "us-east-2",
+        "monthly": 0,
+        "upfront": 0,
+        "summary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (0 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      },
+      {
+        "code": "awsElementalMediaConnect",
+        "template": "elementalMediaConnect",
+        "region": "us-east-2",
+        "monthly": 5475,
+        "upfront": 0,
+        "summary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (365 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      },
+      {
+        "code": "awsElementalMediaConnect",
+        "template": "elementalMediaConnect",
+        "region": "us-east-2",
+        "monthly": 10950,
+        "upfront": 0,
+        "summary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (730 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsElementalMediaConnect",
+        "monthly": 0,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsElementalMediaConnect",
+        "monthly": 5475,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsElementalMediaConnect",
+        "monthly": 10950,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 16425,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=9569932f90a240ff002a4a0c24f008f3fd1f74da",
+    "title": "axi-e2e utilization MediaConnect",
+    "monthly": "16,425.00 USD",
+    "upfront": "0.00 USD",
+    "annual": "197,100.00 USD",
+    "monthlyValue": 16425,
+    "upfrontValue": 0,
+    "annualValue": 197100,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS Elemental MediaConnect",
+        "upfront": "0.00 USD",
+        "monthly": "0.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (0 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)",
+        "status": null
+      },
+      {
+        "name": "AWS Elemental MediaConnect",
+        "upfront": "0.00 USD",
+        "monthly": "5,475.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (365 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)",
+        "status": null
+      },
+      {
+        "name": "AWS Elemental MediaConnect",
+        "upfront": "0.00 USD",
+        "monthly": "10,950.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (730 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T13:29:52.597Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=9569932f90a240ff002a4a0c24f008f3fd1f74da",
+    "savedKey": "9569932f90a240ff002a4a0c24f008f3fd1f74da",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=9569932f90a240ff002a4a0c24f008f3fd1f74da",
+      "title": "axi-e2e utilization MediaConnect",
+      "monthly": "16,425.00 USD",
+      "upfront": "0.00 USD",
+      "annual": "197,100.00 USD",
+      "monthlyValue": 16425,
+      "upfrontValue": 0,
+      "annualValue": 197100,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "AWS Elemental MediaConnect",
+          "upfront": "0.00 USD",
+          "monthly": "0.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (0 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month), DT Outbound: Not selected (0 TB per month)",
+          "status": "-"
+        },
+        {
+          "name": "AWS Elemental MediaConnect",
+          "upfront": "0.00 USD",
+          "monthly": "5,475.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (365 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month), DT Outbound: Not selected (0 TB per month)",
+          "status": "-"
+        },
+        {
+          "name": "AWS Elemental MediaConnect",
+          "upfront": "0.00 USD",
+          "monthly": "10,950.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (730 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month), DT Outbound: Not selected (0 TB per month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T13:30:19.016Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e utilization MediaConnect",
+    "monthly": 16425,
+    "upfront": 0,
+    "annual": 197100,
+    "services": [
+      {
+        "name": "AWS Elemental MediaConnect",
+        "monthly": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (0 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      },
+      {
+        "name": "AWS Elemental MediaConnect",
+        "monthly": 5475,
+        "region": "US East (Ohio)",
+        "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (365 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      },
+      {
+        "name": "AWS Elemental MediaConnect",
+        "monthly": 10950,
+        "region": "US East (Ohio)",
+        "configSummary": "Flow utilization (730 Hours/Month), Outbound reserved bandwidth (None), Running flow utilization (730 Hours/Month), Source type (), Video size (1080p (FHD)), Running output utilization (730 Hours/Month), Running output type (None), Flow utilization (730 Hours/Month), Input tier (maximum bitrate) (Up to 100 Mbps), Input utilization (730 Hours/Month), Output tier (maximum bitrate) (Up to 100 Mbps), Output utilization (730 Hours/Month), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

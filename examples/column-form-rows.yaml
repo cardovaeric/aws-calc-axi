@@ -1,0 +1,47 @@
+name: axi-e2e column form row shapes
+currency: USD
+locale: en_US
+services:
+  # The live UI represents a second configuration of the same column form as a
+  # second service, so "several rows" is two services with one row each.
+  - code: awsCodeBuild
+    region: us-east-2
+    set:
+      buildsinaMonth: 10
+      AvgBuildTime: 10
+      columnFormIPM:
+        Compute Type: arm1.2xlarge
+        Operating System: Linux
+  - code: awsCodeBuild
+    region: us-east-2
+    set:
+      buildsinaMonth: 5
+      AvgBuildTime: 10
+      columnFormIPM:
+        Compute Type: arm1.2xlarge
+        Operating System: Linux
+  - code: amazonElastiCache
+    region: us-east-2
+    set:
+      columnFormIPM_dsp:
+        Cache Engine: Redis
+        TermType: OnDemand
+      columnFormIPM:
+        Number of Nodes: 2
+        Instance Type: cache.m5.xlarge
+        Cache Engine: Redis
+        Instance Family: Standard
+        TermType: OnDemand
+      columnFormIPMDT:
+        Number of Nodes: 0
+        Instance Type: cache.r6gd.12xlarge
+        Cache Engine: Redis
+        Instance Family: Memory optimized
+        TermType: OnDemand
+  - code: amazonManagedStreamingForApacheKafkaMsk
+    region: us-east-2
+    template: amazonMSK
+    set:
+      columnFormIPM:
+        Number of Kafka broker nodes: 3
+        Compute Family: m5.large

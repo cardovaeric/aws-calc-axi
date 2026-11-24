@@ -1,0 +1,228 @@
+{
+  "estimate": "axi-e2e column form row shapes",
+  "specHash": "b470328ccebbbca1",
+  "url": "https://calculator.aws/#/estimate?id=0a75b381ce55078a95880d40349e5ab6f2a44fed",
+  "savedKey": "0a75b381ce55078a95880d40349e5ab6f2a44fed",
+  "publishedAt": "2026-11-24T13:31:01.563Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 957.46,
+    "upfront": 0,
+    "total12m": 11489.52,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsCodeBuild",
+        "template": "template_0",
+        "region": "us-east-2",
+        "monthly": 9,
+        "upfront": 0,
+        "summary": "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (10), Search Instance Type (arm1.2xlarge), Operating system (Linux)"
+      },
+      {
+        "code": "awsCodeBuild",
+        "template": "template_0",
+        "region": "us-east-2",
+        "monthly": 4.5,
+        "upfront": 0,
+        "summary": "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (5), Search Instance Type (arm1.2xlarge), Operating system (Linux)"
+      },
+      {
+        "code": "amazonElastiCache",
+        "template": "amazonElastiCache",
+        "region": "us-east-2",
+        "monthly": 454.06,
+        "upfront": 0,
+        "summary": "Engine (Redis OSS), Cache Engine (Redis), Pricing strategy (OnDemand), Nodes (2), Instance type (cache.m5.xlarge), Cache Engine (Redis), Cache Node Type (Standard), Pricing strategy (OnDemand), Nodes (0), Instance type (cache.r6gd.12xlarge), Cache Engine (Redis), Cache Node Type (Memory optimized), Pricing strategy (OnDemand)"
+      },
+      {
+        "code": "amazonManagedStreamingForApacheKafkaMsk",
+        "template": "amazonMSK",
+        "region": "us-east-2",
+        "monthly": 489.9,
+        "upfront": 0,
+        "summary": "Number of Kafka broker nodes (3), Compute Family (m5.large), Storage per Broker (100 GB), Number of authentication schemes configured for private connectivity (0), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsCodeBuild",
+        "monthly": 9,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsCodeBuild",
+        "monthly": 4.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElastiCache",
+        "monthly": 454.06,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonManagedStreamingForApacheKafkaMsk",
+        "monthly": 489.9,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 957.46,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=0a75b381ce55078a95880d40349e5ab6f2a44fed",
+    "title": "axi-e2e column form row shapes",
+    "monthly": "957.46 USD",
+    "upfront": "0.00 USD",
+    "annual": "11,489.52 USD",
+    "monthlyValue": 957.46,
+    "upfrontValue": 0,
+    "annualValue": 11489.52,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS CodeBuild",
+        "upfront": "0.00 USD",
+        "monthly": "9.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (10), Search Instance Type (arm1.2xlarge), Operating system (Linux)",
+        "status": null
+      },
+      {
+        "name": "AWS CodeBuild",
+        "upfront": "0.00 USD",
+        "monthly": "4.50 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (5), Search Instance Type (arm1.2xlarge), Operating system (Linux)",
+        "status": null
+      },
+      {
+        "name": "Amazon ElastiCache",
+        "upfront": "0.00 USD",
+        "monthly": "454.06 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Engine (Redis OSS), Cache Engine (Redis), Pricing strategy (OnDemand), Nodes (2), Instance type (cache.m5.xlarge), Cache Engine (Redis), Cache Node Type (Standard), Pricing strategy (OnDemand), Nodes (0), Instance type (cache.r6gd.12xlarge), Cache Engine (Redis), Cache Node Type (Memory optimized), Pricing strategy (OnDemand)",
+        "status": null
+      },
+      {
+        "name": "Amazon Managed Streaming for Apache Kafka (MSK)",
+        "upfront": "0.00 USD",
+        "monthly": "489.90 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Kafka broker nodes (3), Compute Family (m5.large), Storage per Broker (100 GB), Number of authentication schemes configured for private connectivity (0), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T13:31:04.386Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=0a75b381ce55078a95880d40349e5ab6f2a44fed",
+    "savedKey": "0a75b381ce55078a95880d40349e5ab6f2a44fed",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=0a75b381ce55078a95880d40349e5ab6f2a44fed",
+      "title": "axi-e2e column form row shapes",
+      "monthly": "957.46 USD",
+      "upfront": "0.00 USD",
+      "annual": "11,489.52 USD",
+      "monthlyValue": 957.46,
+      "upfrontValue": 0,
+      "annualValue": 11489.52,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "AWS CodeBuild",
+          "upfront": "0.00 USD",
+          "monthly": "9.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (10), Search Instance Type (arm1.2xlarge), Operating system (Linux), Number of builds in a month (1), Number of instances (1), Number of sandboxes (1), Number of instances (1), Number of instances (1)",
+          "status": "-"
+        },
+        {
+          "name": "AWS CodeBuild",
+          "upfront": "0.00 USD",
+          "monthly": "4.50 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (5), Search Instance Type (arm1.2xlarge), Operating system (Linux), Number of builds in a month (1), Number of instances (1), Number of sandboxes (1), Number of instances (1), Number of instances (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon ElastiCache",
+          "upfront": "0.00 USD",
+          "monthly": "454.06 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Engine (Redis OSS), Cache Engine (Redis), Pricing strategy (OnDemand), Nodes (2), Instance type (cache.m5.xlarge), Cache Engine (Redis), Cache Node Type (Standard), Pricing strategy (OnDemand), Nodes (0), Instance type (cache.r6gd.12xlarge), Cache Engine (Redis), Cache Node Type (Memory optimized), Pricing strategy (OnDemand)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Managed Streaming for Apache Kafka (MSK)",
+          "upfront": "0.00 USD",
+          "monthly": "489.90 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Kafka broker nodes (3), Compute Family (m5.large), Storage per Broker (100 GB), DT Inbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month), DT Outbound: Not selected (0 TB per month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T13:31:31.315Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e column form row shapes",
+    "monthly": 957.46,
+    "upfront": 0,
+    "annual": 11489.52,
+    "services": [
+      {
+        "name": "AWS CodeBuild",
+        "monthly": 9,
+        "region": "US East (Ohio)",
+        "configSummary": "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (10), Search Instance Type (arm1.2xlarge), Operating system (Linux)"
+      },
+      {
+        "name": "AWS CodeBuild",
+        "monthly": 4.5,
+        "region": "US East (Ohio)",
+        "configSummary": "AWS CodeBuild Compute Type (On-Demand EC2), Number of builds in a month (5), Search Instance Type (arm1.2xlarge), Operating system (Linux)"
+      },
+      {
+        "name": "Amazon ElastiCache",
+        "monthly": 454.06,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Engine (Redis OSS), Cache Engine (Redis), Pricing strategy (OnDemand), Nodes (2), Instance type (cache.m5.xlarge), Cache Engine (Redis), Cache Node Type (Standard), Pricing strategy (OnDemand), Nodes (0), Instance type (cache.r6gd.12xlarge), Cache Engine (Redis), Cache Node Type (Memory optimized), Pricing strategy (OnDemand)"
+      },
+      {
+        "name": "Amazon Managed Streaming for Apache Kafka (MSK)",
+        "monthly": 489.9,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Kafka broker nodes (3), Compute Family (m5.large), Storage per Broker (100 GB), Number of authentication schemes configured for private connectivity (0), DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

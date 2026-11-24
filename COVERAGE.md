@@ -21,6 +21,7 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 | amazonAthena | Athena | us-east-2 | 100 queries per day, 1 GB scanned, 4 DPUs | native | 14.85 | 14.85 USD | pass | pass | https://calculator.aws/#/estimate?id=8adc3640728e1d0d4e375e78464521b57b9a8889 |
 | awsS3DataTransfer | awsS3DataTransfer | us-east-2 | 1 TB/month outbound to the internet | native | 92.16 | 92.16 USD | pass | pass | https://calculator.aws/#/estimate?id=2ba8815d844b0c98d3c23d3df0e103b2b38ab662 |
 | amazonDynamoDbDaxClusters | dynamoDBDaxNodes | us-east-2 | 3 r5.large DAX nodes, hourly pricing | native | 558.45 | 558.45 USD | pass | pass | https://calculator.aws/#/estimate?id=ee83789565dcdcd9b0c169dcac29e8cf3848575c |
+| CodeBuild x2 + ElastiCache + MSK | awsCodeBuild x2 + amazonElastiCache + amazonManagedStreamingForApacheKafkaMsk | us-east-2 | two CodeBuild services (10 and 5 builds), ElastiCache 2 x cache.m5.xlarge, MSK 3 x m5.large | native | 957.46 | 957.46 USD | pass | pass | https://calculator.aws/#/estimate?id=0a75b381ce55078a95880d40349e5ab6f2a44fed |
 | group: Data -> Data Compute (S3 + Lambda) | simpleStorageServiceClassesGroup + lambdaWithFreeTier | us-east-2 | nested groups with Business Support+ | native | 14.10 | 43.10 USD | none | pass | https://calculator.aws/#/estimate?id=41bc364a547ab7429de00d8d39cb29f70210d12a |
 
 ## Evidence
@@ -44,6 +45,7 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 - athena-queries-use2: P3 fixture promoted to a render receipt; per-query day-to-month conversion
 - s3-outbound-transfer-1tb-use2: non-empty dataTransferV2; the read-only probe drops these rows, so the editor recompute is the oracle
 - dax-nodes-use2: first columnFormIPM row; PLC_2.0 metadata, aggregations, and index price path
+- column-form-rows-use2: one row per column form; the live 'second row' is a second service (receipts/column-form-rows-probe.json)
 - groups-support-business-use2: support is recomputed by the share page; groups render as rows plus a tree
 
 Regenerate with `npm run ledger`. Receipts are in `receipts/`; each one stores the native result,

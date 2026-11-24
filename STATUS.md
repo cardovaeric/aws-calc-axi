@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-11-23 (session 2)
+Updated: 2026-11-24 (session 3)
 
 Full service coverage assessment and implementation plan: `analysis/COVERAGE_ASSESSMENT.md`
 (2026-11-24). It supersedes the scanner picture below for planning.
@@ -31,8 +31,11 @@ Full service coverage assessment and implementation plan: `analysis/COVERAGE_ASS
   selectors, selector-pattern price extraction (On-Demand, Reserved, `$overridePriceKeyWith`),
   hidden dependent selectors, a 100% utilization row, `disableCalculation` rate components, one
   price set, hourly or monthly model, `calculationId` targets exposed to the maths section, live
-  save format and summary. Database Savings Plans, aggregation remaps, sub-components, and
-  repeatable rows still fail closed.
+  save format and summary, and `displayIf`-gated prefetch (only visible cards fetch PLC_2.0 data).
+  A component holds exactly one row, like the live calculator: its editor recompute reads
+  `value[0]` and a second configuration is a second service (`analysis/FINDINGS.md` section 13).
+  Database Savings Plans, dependent-selector filtering, regex key remaps, sub-components, and
+  reserved/upfront totals still fail closed.
 - `throughput` inputs are native (kbps/mbps/gbps with binary conversion to MBps), which unlocks
   gp3 volume and RDS storage inputs.
 - A real client estimate was built and published for BINUS SCHOOL eDesk:
@@ -83,19 +86,21 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 101 tests, pass
-- `npm run e2e`: 22 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
+- `npm test`: 107 tests, pass
+- `npm run e2e`: 28 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
   ledger rows including the editor-recompute oracle)
-- `npm run ledger`: 15 rows, all pass
+- `npm run ledger`: 16 rows, all pass
 - `npm run coverage`: 441-row exhaustive tracker in `analysis/COVERAGE_TABLE.md`
-  (353 clean, 62 partial column-form, 17 blocked column-form, 9 blocked by subtype)
-- Screenshots of every public link: `receipts/screenshots/` (13 PNGs)
+  (382 clean, 33 partial column-form, 17 blocked column-form, 9 blocked by subtype)
+- Screenshots of every public link: `receipts/screenshots/` (16 PNGs)
 
 ## Coverage ledger summary
 
-15 rows: 11 service fixtures, 1 group/support fixture, and 3 P0 conformance batches (EKS+EBS,
+16 rows: 12 service fixtures, 1 group/support fixture, and 3 P0 conformance batches (EKS+EBS,
 and two VPC batches) proven by editor recompute. All native, all pass. Details in `COVERAGE.md`
-and `analysis/P0_CONFORMANCE.md`.
+and `analysis/P0_CONFORMANCE.md`. The column-form batch
+(`receipts/p2-column-form-rows.json`) proves CodeBuild twice, ElastiCache, and MSK against the
+editor at 957.46/month.
 
 ## Scanner picture (us-east-2)
 
@@ -120,20 +125,24 @@ and `analysis/P0_CONFORMANCE.md`.
 - Fail-closed gaps (adapter tasks, not silent zeros): `utilization` (12 services), bespoke
   EC2/Windows/RDS math (`ec2PriceDisplay`, `ec2Variable`, `snapShotMaths`,
   `workloadInstanceMath`), pricing `sets`-based instance data, and the remaining
-  `columnFormIPM` surface (Database Savings Plans, aggregation remaps, sub-components,
-  repeatable rows) listed in `docs/DECISIONS.md` D-020 and D-021.
+  `columnFormIPM` surface (Database Savings Plans, dependent selectors, regex key remaps,
+  sub-components, reserved/upfront totals) listed in `docs/DECISIONS.md` D-020, D-021, and D-024.
+- `percentInput` saves the fraction where the live calculator saves the entered percent, so a
+  published estimate with a percent input disagrees with the editor recompute by the square of
+  the percent. D-026 has the bundle evidence and the failing Keyspaces 25.69 vs 25.63 oracle.
 - Six services reference meters that are absent from their regional price file (Personalize,
   Transcribe, ACM, MediaTailor, Firewall Manager, IoT SiteWise). The engine fails closed
   instead of publishing a zero.
 
 ## Next three actions
 
-1. Add ledger rows with receipts for RDS for PostgreSQL (488.02) and ElastiCache Valkey (14.02),
-   now that both evaluate natively, then continue `columnFormIPM` service by service.
+1. Fix the `percentInput` save format (`src/engine/inputs.ts`) so percent inputs rehydrate in the
+   editor, then add the Keyspaces receipt that currently fails by 0.06 (`docs/DECISIONS.md` D-026).
 2. Implement `utilization` (12 services) and the EBS `snapShotMaths` adapter, then the EC2
    pricing-`sets` path.
-3. Add the live "first available selector value" fallback for column forms so the 44 needs-input
-   services can evaluate with defaults, and add a data transfer destination-override fixture.
+3. Add the live "first available selector value" fallback for column forms so the needs-input
+   services can evaluate with defaults, then take ElastiCache, Timestream, FSx for Lustre and
+   Redshift past dependent selectors (`docs/DECISIONS.md` D-024).
 
 ## Last commit
 

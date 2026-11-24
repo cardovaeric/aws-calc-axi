@@ -6,8 +6,10 @@ import {
   evaluateColumnForm,
   type ColumnFormComponent,
 } from "../src/engine/column-form.ts";
+import { columnFormVisibility } from "../src/engine/column-form-loader.ts";
 import { matchAggregation } from "../src/data/column-form.ts";
 import type { ColumnFormPricingData } from "../src/data/column-form.ts";
+import type { Template } from "../src/data/definitions.ts";
 
 /** Shape of the DAX on-demand node component and its regional PLC_2.0 index. */
 const DAX: ColumnFormComponent = {
@@ -275,6 +277,128 @@ test("the config summary folds a full pricing strategy block", () => {
     columnFormSummary({ count: "2", model: "Reserved", option: "All Upfront", term: "3 Year" }, rows),
     "Nodes (2), Pricing strategy (Reserved All Upfront 3 Year)"
   );
+});
+
+test("a strategy-only summary has no leading separator", () => {
+  const rows = [
+    { label: "Pricing model", type: "dropDown", selectorId: "model" },
+    { label: "Purchase option", type: "dropDown", selectorId: "option" },
+    { label: "Term", type: "dropDown", selectorId: "term" },
+  ];
+  assert.equal(
+    columnFormSummary({ model: "OnDemand", option: "None", term: "1 Year" }, rows),
+    "Pricing strategy (OnDemand None 1 Year)"
+  );
+});
+
+test("a count export with a suffix drives the row count", () => {
+  // ElastiCache data tiering exports `countDT`; the live engine prefix-matches
+  // the export name (`te` in analysis/bundle.js), so it must drive the count.
+  const component: ColumnFormComponent = {
+    ...DAX,
+    id: "columnFormIPMDT",
+    row: [
+      {
+        label: "Nodes",
+        type: "textInput",
+        selectorId: "Number of Nodes",
+        defaultValue: 0,
+        exportValueAs: "countDT",
+      },
+      DAX.row[1]!,
+    ],
+  };
+  const zero = evaluateColumnForm(component, DAX_DATA, [
+    { "Number of Nodes": 0, "Instance Type": "r5.large" },
+  ]);
+  assert.equal(zero.monthly, 0);
+  const two = evaluateColumnForm(component, DAX_DATA, [
+    { "Number of Nodes": 2, "Instance Type": "r5.large" },
+  ]);
+  assert.equal(two.monthly, 372.3);
+});
+
+test("more than one row fails closed with the live behaviour named", () => {
+  assert.throws(
+    () =>
+      evaluateColumnForm(DAX, DAX_DATA, [
+        { "Number of nodes": 3, "Instance Type": "r5.large" },
+        { "Number of nodes": 1, "Instance Type": "r5.xlarge" },
+      ]),
+    /takes exactly one row; the live calculator prices only the first saved row/
+  );
+});
+
+test("a one-element row array is the same as a bare row map", () => {
+  const wrapped = evaluateColumnForm(DAX, DAX_DATA, [
+    { "Number of nodes": 3, "Instance Type": "r5.large" },
+  ]);
+  const bare = evaluateColumnForm(DAX, DAX_DATA, {
+    "Number of nodes": 3,
+    "Instance Type": "r5.large",
+  });
+  assert.equal(wrapped.monthly, bare.monthly);
+  assert.deepEqual(wrapped.saved, bare.saved);
+});
+
+test("a card hidden by displayIf is not prefetched", () => {
+  const template = {
+    id: "t",
+    cards: [
+      {
+        title: "selector",
+        inputSection: {
+          components: [
+            {
+              id: "computeType",
+              type: "input",
+              subType: "dropdown",
+              options: [
+                { id: "ondemandec2", label: "On-Demand EC2" },
+                { id: "ondemandlambda", label: "On-Demand Lambda" },
+              ],
+              defaultDropDownItem: "ondemandec2",
+            },
+          ],
+        },
+      },
+      {
+        title: "ec2 card",
+        displayIf: { "==": [{ type: "component", id: "computeType" }, "ondemandec2"] },
+        inputSection: { components: [{ id: "ec2Form", type: "input", subType: "columnFormIPM" }] },
+      },
+      {
+        title: "lambda card",
+        displayIf: { "==": [{ type: "component", id: "computeType" }, "ondemandlambda"] },
+        inputSection: { components: [{ id: "lambdaForm", type: "input", subType: "columnFormIPM" }] },
+      },
+    ],
+  } as unknown as Template;
+  const visible = columnFormVisibility(template, {});
+  const ec2Card = template.cards![1]!;
+  const lambdaCard = template.cards![2]!;
+  assert.equal(visible(ec2Card, ec2Card.inputSection!.components![0]!), true);
+  assert.equal(visible(lambdaCard, lambdaCard.inputSection!.components![0]!), false);
+  // A user override flips the gate the way the live form does.
+  const overridden = columnFormVisibility(template, { computeType: "ondemandlambda" });
+  assert.equal(overridden(ec2Card, ec2Card.inputSection!.components![0]!), false);
+  assert.equal(overridden(lambdaCard, lambdaCard.inputSection!.components![0]!), true);
+});
+
+test("a displayIf that needs a computed value stays visible", () => {
+  const template = {
+    id: "t",
+    cards: [
+      {
+        title: "gated",
+        displayIf: { "==": [{ type: "component", id: "mathsResult" }, "yes"] },
+        inputSection: { components: [{ id: "form", type: "input", subType: "columnFormIPM" }] },
+      },
+    ],
+  } as unknown as Template;
+  const card = template.cards![0]!;
+  const visible = columnFormVisibility(template, {});
+  assert.equal(visible(card, card.inputSection!.components![0]!), true);
 });
 
 test("aggregation matching prefers the requested region", () => {

@@ -2,14 +2,19 @@
  * `columnFormIPM` inputs (repeatable instance/storage rows driven by PLC_2.0
  * data).
  *
- * Supported shape: one row set per component, selector rows of type
- * `textInput`, `autoSuggest`, or `dropDown`, an optional non-selector
- * `utilization` row, a single price set, selector price patterns for
- * reserved/upfront records, and `disableCalculation` raw-price mode. Still
- * fail-closed: repeatable rows, dependent-selector filtering,
- * `additionalPricingData` joins (for example Database Savings Plans),
- * `exportTagsAsValue`, constant/regex remaps, sub-components, multiple price
- * sets, and upfront totals.
+ * Supported shape: one row per component, selector rows of type `textInput`,
+ * `autoSuggest`, or `dropDown`, an optional non-selector `utilization` row, a
+ * single price set, selector price patterns for reserved/upfront records, and
+ * `disableCalculation` raw-price mode. Still fail-closed: dependent-selector
+ * filtering, `additionalPricingData` joins (for example Database Savings
+ * Plans), `exportTagsAsValue`, constant/regex remaps, sub-components, multiple
+ * price sets, and upfront totals.
+ *
+ * A component holds exactly one row, which is what the live calculator does:
+ * its save format is an array but both rehydration paths take `value[0]`, and
+ * the live form adds a second configuration as a second service. More than one
+ * row fails closed instead of publishing a number the live editor cannot
+ * reproduce (analysis/FINDINGS.md section 13).
  *
  * Save format matches the live converter: `{value: [{selectorId: {value}}]}`.
  */
@@ -78,10 +83,18 @@ function rowValueMap(raw: unknown): Record<string, unknown> {
   if (raw === undefined || raw === null) return {};
   if (Array.isArray(raw)) {
     if (raw.length !== 1) {
+      // The live column form holds exactly one row. Its save converter writes
+      // an array, and both of its rehydration paths read `value[0]`, keeping
+      // only the first row (analysis/FINDINGS.md section 13). The live UI
+      // represents a second configuration as a second service, not as a
+      // second row, so publishing extra rows would produce a number the live
+      // editor cannot reproduce. Fail closed and say what does work.
       throw new EngineError(
-        "columnFormIPM expects a single row; repeatable rows are not implemented yet",
+        `columnFormIPM takes exactly one row; the live calculator prices ` +
+          `only the first saved row and the live form adds a second ` +
+          `configuration as a separate service. Got ${raw.length} rows.`,
         "UNSUPPORTED_INPUT",
-        { rows: raw.length }
+        { rows: raw.length, evidence: "analysis/FINDINGS.md section 13" }
       );
     }
     return rowValueMap(raw[0]);
@@ -438,7 +451,11 @@ export function evaluateColumnForm(
     };
   }
 
-  const countRow = component.row.find((row) => row.exportValueAs === "count");
+  // The live engine names these export keys with a prefix match (`te`), so
+  // components can export `countDT`, `count_1`, `count_db`, or `count`.
+  const countRow = component.row.find((row) =>
+    (row.exportValueAs ?? "").startsWith("count")
+  );
   const count = countRow ? Number(values[countRow.selectorId]) : 1;
   if (!Number.isFinite(count) || count < 0) {
     throw new EngineError(
@@ -529,7 +546,7 @@ export function columnFormSummary(
     strategy.push(value);
   }
   const text = parts.join(", ");
-  return strategy.length > 0
-    ? `${text}, Pricing strategy (${strategy.join(" ")})`
-    : text;
+  if (strategy.length === 0) return text;
+  const strategyText = `Pricing strategy (${strategy.join(" ")})`;
+  return text === "" ? strategyText : `${text}, ${strategyText}`;
 }

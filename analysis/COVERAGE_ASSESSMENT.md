@@ -17,9 +17,15 @@ and validation were also fixed. The 37-service simulation link is in
 assessment remains the pre-change baseline.
 
 For current implementation tracking use `analysis/COVERAGE_TABLE.md` and
-`analysis/coverage-matrix.csv`. The tracker is stricter than the earlier static counts below:
-it marks every `columnFormIPM` service partial until repeatable rows and advanced pricing land,
-and scores selector groups by their children.
+`analysis/coverage-matrix.csv`, and scores selector groups by their children.
+
+Correction (2026-11-24): the "repeatable rows" premise in this assessment is wrong. The live
+column form holds exactly one row per component; its editor recompute reads `value[0]`, and the
+live UI represents a second configuration as a second service. Evidence, bundle path, and live
+DOM values are in `analysis/FINDINGS.md` section 13, `receipts/column-form-rows-probe.json`, and
+`docs/DECISIONS.md` D-024. The tracker no longer emits a `repeatable-rows` gap and no longer
+treats a column form itself as partial, so the static counts in this document predate that
+correction (current tracker: 382 clean, 33 partial column-form).
 
 ## 1. Verdict
 
@@ -67,9 +73,9 @@ matrix.
 ### Static rules used here
 
 - A component subtype is "handled" only if the current engine has a switch case for it.
-- A `columnFormIPM` service is never marked clean just because its subtypes are handled.
-  The live form is repeatable, so a single-row engine is a functional gap even when pricing
-  works for one row.
+- A `columnFormIPM` service is clean when its subtypes and rows are handled. The live form holds
+  one row per component (see the correction above), so a second configuration is a second
+  service, not a second row.
 - Column-form hard blockers in the current tree: `remap.constant`, `subComponentsList`,
   selector-bearing `utilization` rows, and unknown row types.
 - Column-form soft gaps: `additionalPricingData` (Database Savings Plans and similar joins),
@@ -101,7 +107,7 @@ Standalone definitions:
 | Class | Count | Meaning |
 | --- | ---: | --- |
 | clean | 330 | No missing subtype, no column-form hard feature |
-| partial: column-form | 55 | Usable single-row subset; repeatable rows and advanced pricing missing |
+| partial: column-form | 55 | Usable row subset; dependent selectors, additional pricing data, regex remaps, or upfront totals missing |
 | blocked: column-form | 12 | Hard feature not implemented (`remap.constant`, selector utilization, unknown row) |
 | blocked: subtype | 10 | At least one component type has no handler |
 | no-surface | 1 | Utility strings definition, not a service |

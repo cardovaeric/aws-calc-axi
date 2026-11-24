@@ -1,0 +1,119 @@
+{
+  "kind": "research-probe",
+  "subject": "columnFormIPM row cardinality in the live calculator",
+  "recordedAt": "2026-11-24",
+  "verdict": "The live column form holds exactly one row per component. Its saved value is an array, but both rehydration paths read value[0]; the live form represents a second configuration as a second service. The engine therefore keeps failing closed on more than one row, and the coverage tracker no longer lists repeatable-rows as a blocker.",
+  "bundle": {
+    "file": "analysis/bundle.js",
+    "sha256": "adbd5f41de571332731f4900784216ad1e26b0473d17449e21e271d61f0ada9c",
+    "sameAsLive": "https://calculator.aws/42c3e45d-da28-4f7f-9043-598b787291c1/static/js/bundle.js fetched 2026-11-24 has the same sha256",
+    "module": "712 (columnFormIPM). Exports one symbol: r.d(t,\"b\",()=>ae)",
+    "evidence": [
+      {
+        "what": "The recompute entry point reads only the first row",
+        "code": "ae=async function(e,t,r,n,i){...}const{...}=r,h=n[0],m={};for(const p in h){...}",
+        "meaning": "n is the saved value array (calculationComponents[id].value); h = n[0]; every later use (prices, configSummaryString: ee(h,u), initialState: {value: h}) is built from that single row."
+      },
+      {
+        "what": "The save converter preserves the array shape",
+        "code": "Mn.convertToSaveFormat(e){return{value:(Array.isArray(e)?e:[e]).map(e=>{const t={};for(const r in e.value)t[r]={value:e.value[r].value};return t})}}",
+        "meaning": "The component state is one row, so a native save writes a one-element array."
+      },
+      {
+        "what": "Rehydrating a saved or shared estimate also takes row zero",
+        "code": "ge=(e,t)=>{...if(\"columnFormIPM\"===r){const{value:r}=e||{value:[{}]},{row:i}=t;return{value:[(n=r[0], ...)]}}...}",
+        "meaning": "The reset/convert-from-save path normalises the saved array to a single row before the component mounts."
+      },
+      {
+        "what": "The editor Update path is the save-and-share recompute",
+        "code": "module 2970878 imports a=r(712); in its columnFormIPM branch: const e=(...).value; const t=i.get(k.mappingDefinitionName); ... const t=await Object(a.b)(r,n,k,e,l,m); ... c.calculationComponents[p]=t.state",
+        "meaning": "Object(a.b) is ae. The 'Update estimate' button calls onSaveEstimate, which runs this branch, so the editor recompute and the save-and-share recompute are the same function."
+      },
+      {
+        "what": "The component UI renders one set of controls per declared row",
+        "code": "class J ... createRows(e,t){const r=t||{}; ... i.forEach(...)} render(){const r=Object(h.t)(this.state.rows).map(e=>...)}",
+        "meaning": "this.state.rows is keyed by row.selectorId (the definition's columns), not by instances, and the component has no add/remove control."
+      },
+      {
+        "what": "A repeatable mechanism exists, but only for whole cards",
+        "code": "repeatableCardsFn:e=>{...e.cards.filter(e=>!!e.repeatable)}; g(e,t,r,a)=>{...const{repeatable:s}=e,... l.repeatableInstance={groupId,instanceId,index,sequence,removeLabel} ... component ids become `${id}_${instanceId}`}",
+        "meaning": "Card-level repeatables create separate component ids per instance. They are a different feature and are unused by the data plane."
+      }
+    ]
+  },
+  "dataPlane": {
+    "definitionsChecked": 442,
+    "definitionsDeclaringRepeatable": 0,
+    "driftCheck": "aws-calc-axi update --check --definitions: changed 0",
+    "command": "grep -lE '\"(repeatable|repeatableInstance)\"[[:space:]]*:' analysis/defs/*.json | wc -l  # 0 of 441 captured definition files"
+  },
+  "liveObservations": [
+    {
+      "id": "two-rows-one-component-dax",
+      "service": "amazonDynamoDbDaxClusters",
+      "url": "https://calculator.aws/#/estimate?id=b84b9ef8451febb1c40cde9df5c1f9d7f6624ba3",
+      "storedRows": [
+        { "Number of nodes": "3", "Instance Type": "r5.large" },
+        { "Number of nodes": "1", "Instance Type": "r5.xlarge" }
+      ],
+      "storedRowCount": 2,
+      "individuallyPriced": { "r5.large x3": 558.45, "r5.xlarge x1": 372.3 },
+      "sumIfAllRowsCounted": 930.75,
+      "editorRecompute": { "monthly": "558.45 USD", "configSummary": "DAX nodes (3), DAX instance type (r5.large)" },
+      "conclusion": "The editor keeps both rows in storage, prices row[0] only, and summarises row[0] only."
+    },
+    {
+      "id": "two-rows-one-component-codebuild",
+      "service": "awsCodeBuild",
+      "url": "https://calculator.aws/#/estimate?id=88e2779d8d62f0f451dea941f346290cbf2d6b5a",
+      "storedRows": [
+        { "Compute Type": "arm1.2xlarge", "Operating System": "Linux" },
+        { "Compute Type": "arm1.large", "Operating System": "Linux" }
+      ],
+      "individuallyPriced": { "arm1.2xlarge 10 builds": 9.0, "arm1.large 10 builds": 1.5 },
+      "sumIfAllRowsCounted": 10.5,
+      "editorRecompute": { "monthly": "9.00 USD", "summaryType": "arm1.2xlarge" },
+      "screenshot": "receipts/screenshots/probe-two-rows.png"
+    },
+    {
+      "id": "two-rows-one-component-codebuild-reversed",
+      "service": "awsCodeBuild",
+      "url": "https://calculator.aws/#/estimate?id=611b9a199499d2cd6d855adb79fa5c0a6b3276ea",
+      "storedRows": [
+        { "Compute Type": "arm1.large", "Operating System": "Linux" },
+        { "Compute Type": "arm1.2xlarge", "Operating System": "Linux" }
+      ],
+      "editorRecompute": { "monthly": "1.50 USD", "summaryType": "arm1.large" },
+      "screenshot": "receipts/screenshots/probe-two-rows-reversed.png",
+      "conclusion": "Reversing the rows flips the price from 9.00 to 1.50, so the live behaviour is positional row[0], not a sum and not a max/min."
+    },
+    {
+      "id": "human-made-live-ui-estimate",
+      "how": "Created in the live UI: AWS CodeBuild configured twice with 'Save and view summary', named axi-e2e ui-made rows probe, saved with Share. No hand-crafted payload.",
+      "url": "https://calculator.aws/#/estimate?id=ff02068c681b4f17c791b4ebe813fdacec92e896",
+      "rendered": { "monthly": "13.50 USD", "services": [{ "name": "AWS CodeBuild", "monthly": "9.00 USD" }, { "name": "AWS CodeBuild", "monthly": "4.50 USD" }] },
+      "storedServices": [
+        {
+          "serviceCode": "awsCodeBuild",
+          "serviceId": "awsCodeBuild-e2f76b57-647f-4e00-a55d-f21fa0fc0c40",
+          "componentIds": ["computeType", "buildsinaMonth", "AvgBuildTime", "columnFormIPM"],
+          "columnFormRows": [{ "Compute Type": "arm1.2xlarge", "Operating System": "Linux" }],
+          "serviceCost": { "monthly": 9 }
+        },
+        {
+          "serviceCode": "awsCodeBuild",
+          "serviceId": "awsCodeBuild-1a2b207d-0fed-4ee8-a1d3-2005cf9c6f62",
+          "componentIds": ["computeType", "buildsinaMonth", "AvgBuildTime", "columnFormIPM"],
+          "columnFormRows": [{ "Compute Type": "arm1.2xlarge", "Operating System": "Linux" }],
+          "serviceCost": { "monthly": 4.5 }
+        }
+      ],
+      "conclusion": "A real user's 'second row' is a second service with its own service id; each columnFormIPM keeps its definition id and a one-row array. Repeated component ids such as columnFormIPM_<uuid> do not appear."
+    }
+  ],
+  "engineDecision": {
+    "rule": "columnFormIPM takes exactly one row. More rows fail closed with UNSUPPORTED_INPUT, naming the live behaviour and pointing at this evidence.",
+    "reason": "Publishing several rows would make the stored service cost differ from the live editor recompute, which is the differential oracle. Failing closed keeps every published number reproducible.",
+    "whatUsersDo": "Add the service once per configuration, exactly as the live UI does."
+  }
+}

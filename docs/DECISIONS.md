@@ -248,3 +248,64 @@ The client link is generated through the calculator's own flow: publish the payl
 "Update estimate", then "Share". The shared link stores the recomputed costs and the calculator's
 summaries; the editor's "Cost updated" labels are not part of the read-only page. The final link
 and the live-rate deltas are recorded in `analysis/FINDINGS.md` section 12 and D-022.
+
+## D-024: Column forms hold one row; the tracker stops calling them repeatable (2026-11-24)
+
+The coverage tracker used to add a `repeatable-rows` gap to every `columnFormIPM` definition and
+to classify any definition with a column form as `partial`. That assumption was wrong, and the
+task that asked for "repeatable rows" was built on it. Evidence, recorded in
+`receipts/column-form-rows-probe.json` and `analysis/FINDINGS.md` section 13:
+
+- The live component keeps one row. Its save format is an array, but both rehydration paths read
+  `value[0]` (module 712 `ae`, used by the SaveAndShare path the editor's "Update estimate"
+  button calls, and `ge` for reset/rehydrate), and the component UI has no add/remove row
+  control.
+- Two live probes prove it: a two-row DAX payload recomputes to row 0 (`558.45`, not the
+  `930.75` sum), and a two-row CodeBuild payload recomputes to `9.00`; reversing the rows gives
+  `1.50`. The behaviour is positional.
+- A live-UI-created estimate with two CodeBuild configurations stores them as two services with
+  one row each, not as two rows in one component.
+- No definition declares the bundle's card-level `repeatable` (0 of 441), and the live data
+  plane has no drift (`update --check --definitions`: 0 changed).
+
+Decision: keep failing closed on more than one row, with a message that names the live
+behaviour; drop `repeatable-rows` from the tracker; stop treating a column form as inherently
+partial. The tracker now emits `regex-remap` for `remap.keyValue` keys that start with `/`,
+because the live engine treats them as regular expressions and this engine does a plain lookup.
+
+The honest coverage delta: 29 definitions moved from `partial:column-form` to `clean` (clean
+353 to 382, partial 62 to 33, P1 35 to 24). Two of them (`amazonGameLiftStreams`,
+`realTimeDocumentTranslation`) still fail closed at runtime on their default selector because the
+default's price set is absent in the region; they need a fixture with an available selector, not
+a repeatable-rows fix. Keyspaces, Timestream, FSx for Lustre, Redshift, ElastiCache and the other
+column-form services with real gaps stay partial.
+
+## D-025: Link budget for this session's column-form receipts (2026-11-24)
+
+The P0 conformance run in the main worktree was publishing throughout this session, so the shared
+counter moved from 76 to 90 while this work ran. This session published:
+
+- one two-row DAX research probe (row 0 behaviour), one publish;
+- one two-row CodeBuild research probe and its reversed-order variant, two publishes;
+- one batch editor receipt for CodeBuild x2 + ElastiCache + MSK, one publish (a first attempt
+  also included Keyspaces and failed the editor oracle by 0.06, see D-026; its link is not used
+  by any receipt or ledger row);
+- a live-UI-created estimate saved through the calculator's own Share flow (not this client's
+  publisher, so it is outside the client cap).
+
+Each publish above the default 25 used an explicit `AWSCALC_MAX_PUBLISHES_PER_DAY` value (80-95)
+for that single publish. The default cap is unchanged, and the counter was left at the value the
+main worktree's run reached.
+
+## D-026: `percentInput` saves the entered percent, not the fraction (2026-11-24, open)
+
+The first batch receipt included Keyspaces and the editor oracle failed by exactly `0.06`:
+native `25.69`, editor `25.63`. The editor's config summary showed `LOCAL_ONE reads (0.01)` where
+the native summary shows `(1)`. The bundle's percent input (`Xe.handleInput`) keeps the raw
+percent string in state, saves it with `Je.convertToSaveFormat` (`{value: e.value}`), and divides
+by 100 only for the computed value. This engine saves the fraction, so a rehydrated `1` becomes
+`0.01` and the reads line prices lower. Fix belongs in `src/engine/inputs.ts` (`percentInput`
+saved value and summary), which another worker owns in this session; it was left untouched.
+Until it lands, any published estimate with a percent input will disagree with the editor
+recompute. The batch receipt therefore excludes Keyspaces, which keeps a native golden
+(`examples/keyspaces-column-form.yaml`) and stays partial in the tracker.

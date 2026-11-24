@@ -442,3 +442,50 @@ clicking "Update estimate", then "Share" in the calculator editor):
   `3 x m6i.large = 262.80` (and `2 x m6i.large = 175.20`).
 - The pre-Share payload is reproducible with `binus-edesk-q/make-aws-estimate.ts`
   (link `f957a0d8...`); the shared link above is the authoritative result.
+
+## 13. `columnFormIPM` row cardinality: one row per component (2026-11-24)
+
+The coverage tracker used to assume every column form was "repeatable" and therefore partial.
+The live calculator says otherwise. Evidence is in `receipts/column-form-rows-probe.json`,
+which records the bundle path, the live links, and the DOM values.
+
+- The bundle (`analysis/bundle.js`, sha256 `adbd5f41...`, identical to the live
+  `https://calculator.aws/42c3e45d-da28-4f7f-9043-598b787291c1/static/js/bundle.js`) module
+  `712` exports one function, `ae`, the column form recompute:
+  `const {..}=r, h=n[0], m={}; for (const p in h) {..}`. Everything after it - prices,
+  `configSummaryString: ee(h,u)`, `initialState: {value: h}` - is built from `n[0]`.
+- The save converter writes `{value: [...rows]}` (`Mn.convertToSaveFormat`), but the
+  convert-from-save path (`ge`) and the recompute path (`ae`) both read `value[0]`. The
+  SaveAndShare module (which the "Update estimate" button calls) imports `a=r(712)` and
+  calls `Object(a.b)(...value...)`, so the editor recompute is that same function.
+- The component UI renders one control per row definition (`createRows` keys `state.rows`
+  by `row.selectorId`); it has no add or remove row control.
+- Live check, DAX: a saved payload with two rows (`r5.large x3`, `r5.xlarge x1`) keeps both
+  rows in storage, and the editor recompute shows `558.45 USD` (row 0) with summary
+  `DAX nodes (3), DAX instance type (r5.large)`, not the `930.75` sum.
+- Live check, CodeBuild: two rows (`arm1.2xlarge`, `arm1.large`) recompute to `9.00`; reversing
+  the array recomputes to `1.50`. The behaviour is positional row 0, not a sum or a max.
+- A real user's multi-row configuration: an estimate created through the live UI
+  (`axi-e2e ui-made rows probe`) stores two CodeBuild configurations as two services with
+  distinct `awsCodeBuild-<uuid>` ids, each with its own `columnFormIPM` value of exactly one
+  row. So "several rows" in the live calculator is "several services".
+- The data plane has no repeatable cards: `repeatable`/`repeatableInstance` appear in 0 of the
+  441 captured definition files, and `aws-calc-axi update --check --definitions` reports 0
+  changed definitions against the live site. The bundle's card-level `repeatable`
+  (`repeatableCardsFn`, which clones cards and suffixes component ids with an instance id) is a
+  different, unused feature.
+
+Consequences:
+
+- The engine keeps failing closed on more than one row per `columnFormIPM`, with an error that
+  names this behaviour. Pricing row 0 and silently dropping the rest would publish a number
+  whose stored service cost differs from the editor recompute.
+- Users express a second configuration as a second service, which is what the live UI does.
+- The coverage tracker no longer emits a `repeatable-rows` gap. It also no longer treats a
+  column form itself as partial; only the features that still fail closed do (dependent
+  selectors, additional pricing data, regex key remaps, reserved/upfront payment models,
+  sub-components, unsupported row types).
+- While proving this, two engine gaps surfaced and were fixed: `displayIf` gating for column
+  form prefetch (every CodeBuild compute type card used to demand the selected card's
+  selectors), and count exports with a suffix (`countDT`, `count_1`, ...), which the live
+  engine prefix-matches.

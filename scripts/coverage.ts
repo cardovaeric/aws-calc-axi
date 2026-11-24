@@ -224,9 +224,11 @@ function inventory(definition: ServiceDefinition): {
   }
 
   for (const component of columnForms) {
-    // The engine still supports one row set per component, while the live
-    // column forms are repeatable. Every column form is therefore partial.
-    gaps.add("repeatable-rows");
+    // A component holds exactly one row, which is what the live calculator
+    // does. Its save format is an array, but both rehydration paths read
+    // `value[0]` and the live form adds a second configuration as a second
+    // service, so a column form is not a repeatable-rows gap. Evidence:
+    // analysis/FINDINGS.md section 13 and receipts/column-form-rows-probe.json.
     if (component["additionalPricingData"] !== undefined && component["additionalPricingData"] !== null) {
       gaps.add("additional-pricing-data");
     }
@@ -236,6 +238,12 @@ function inventory(definition: ServiceDefinition): {
     const remap = asRecord(component["remap"]);
     const constant = asRecord(remap?.["constant"]);
     if (constant && Object.keys(constant).length > 0) hard.add("remap.constant");
+    const keyValue = asRecord(remap?.["keyValue"]);
+    // The live engine treats keyValue remap keys as regular expressions. The
+    // engine currently does a plain lookup, so regex keys are a real gap.
+    if (keyValue && Object.keys(keyValue).some((key) => key.startsWith("/"))) {
+      gaps.add("regex-remap");
+    }
     if (component["exportTagsAsValue"] !== undefined) gaps.add("export-tags");
     const unitModel = asRecord(component["pricingUnitModel"]);
     const pricingTypes = asRecord(unitModel?.["riPricingTypes"]);
@@ -270,14 +278,16 @@ function classifyStatic(
   total: number,
   missing: Map<string, number>,
   hard: Set<string>,
-  columnForms: number,
   gaps: Set<string>
 ): StaticClass {
   if (isSelector) return "no-surface";
   if (total === 0) return "no-surface";
   if (missing.size > 0) return "blocked:subtype";
   if (hard.size > 0) return "blocked:column-form";
-  if (columnForms > 0 || gaps.size > 0) return "partial:column-form";
+  // A column form by itself is not a gap: the supported subset (one row,
+  // selector patterns, utilization, disableCalculation) is native. Only the
+  // features the engine still fails closed on keep a service partial.
+  if (gaps.size > 0) return "partial:column-form";
   return "clean";
 }
 
@@ -428,6 +438,10 @@ async function receipts(): Promise<{
     if (!file.endsWith(".json") || file.endsWith("-estimate.json")) continue;
     try {
       const parsed = JSON.parse(await readFile(join("receipts", file), "utf8")) as unknown;
+      // Research probes document a live behaviour; they are not render receipts
+      // and must not mark services as verified.
+      const kind = asRecord(parsed)?.["kind"];
+      if (kind === "research-probe") continue;
       if (file.startsWith("conformance-")) collect(parsed, conformance);
       else collect(parsed, file.startsWith("sim-") ? simulation : ledger);
     } catch {
@@ -521,7 +535,7 @@ for (const [code, definition] of definitions) {
   const gaps = [...inv.gaps].sort().join(";");
   const staticClass = isSelector
     ? selectorClass(children, rowsByCode)
-    : classifyStatic(false, inv.total, inv.missing, inv.hard, inv.columnForms.length, inv.gaps);
+    : classifyStatic(false, inv.total, inv.missing, inv.hard, inv.gaps);
   const ledger = receiptSets.ledger.has(code);
   const sim = receiptSets.simulation.has(code);
   const conform = receiptSets.conformance.has(code);
@@ -758,10 +772,12 @@ Priority rules:
 - **P2** - visible and statically clean, but no receipt yet.
 - **P3** - non-visible, child, or already covered services.
 
-The static class is intentionally conservative. Every \`columnFormIPM\` service is
-\`partial\` until repeatable rows, dependent selectors, additional pricing data,
-and upfront totals are implemented. Runtime \`needs-input\` is not a failure; it
-means the service needs a fixture with explicit required values.
+The static class is intentionally conservative. A \`columnFormIPM\` service is
+\`partial\` only while it uses a feature the engine still fails closed on:
+dependent selectors, additional pricing data, regex key remaps, reserved/upfront
+payment models, sub-components, or unsupported row types. A plain one-row column
+form is native. Runtime \`needs-input\` is not a failure; it means the service
+needs a fixture with explicit required values.
 
 ## P0 - top services
 

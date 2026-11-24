@@ -309,3 +309,53 @@ saved value and summary), which another worker owns in this session; it was left
 Until it lands, any published estimate with a percent input will disagree with the editor
 recompute. The batch receipt therefore excludes Keyspaces, which keeps a native golden
 (`examples/keyspaces-column-form.yaml`) and stays partial in the tracker.
+
+## D-027: Dependent selectors, upfront totals, and the resolved prefetch (2026-11-24)
+
+The live `columnFormIPM` selector state is rebuilt from data, not declared: an option set is the
+aggregation row values for the selected primary value, or the regional price records for a
+selector the mapping does not carry; a row that declares `dependent` is nested under that parent's
+value; and a value the parent no longer offers is replaced by the row's `defaultValue` or the first
+offered value (analysis/FINDINGS.md section 14). This engine now reproduces that, and the changes
+are scoped as follows.
+
+- **Resolution is native.** `src/engine/column-form.ts` builds the option tree, resolves rows in
+  definition order (`resolveColumnFormSelectors`), and drops a selector that has no offered value.
+  Saved rows therefore match what the live form holds: an On-Demand ElastiCache row has no
+  `Term`/`Purchase option`, a Reserved row has both.
+- **A user-supplied value that is not offered fails closed.** Live silently re-selects. Re-sending
+  a value the spec asked for would publish a configuration the user did not ask for, so this
+  engine raises `INVALID_SELECTION` and lists the offered values. Defaults from the definition
+  still follow the live first-offered rule.
+- **Prefetch resolves before it fetches, then settles.** The live form re-fetches on every
+  selector change, so its steady state is a fixed point. Some resolved values are also index-path
+  selectors (ElastiCache prices its path on `Cache Engine` and `TermType`), so
+  `prepareColumnForms` iterates at most four times and then requires an exact aggregation match.
+  `Best Match` components are refused because the live editor refuses them
+  (`Best Match produced invalid options`).
+- **`remap.keyValue` is bidirectional and both directions are now right.** Aggregation rows and
+  price records are mapped forward (`key -> label`) so the option tree and the saved values speak
+  the labels the form shows; price-set tokens and the index path map back (`label -> key`). The
+  old code applied the forward direction to the tokens only, which broke services whose map is
+  `{"Basic": "Basic - Text, HTML"}`.
+- **`Reserved` uses its own model and emits an upfront total.** `monthly = hourly * 730 * count`
+  and `upfront = upfrontPrice * count`, matching live `U`; the previous code hardcoded the
+  `upfront_ipm` target to 0. The existing `Upfront` price displays in ElastiCache, OpenSearch, and
+  Redshift now carry a real number, and the receipt shows it (0.00 monthly + 3,482.00 upfront for
+  the All Upfront row versus 3,331.72 monthly for the No Upfront row).
+- **Tracker rules corrected, nothing else in the tracker changed.** Two static rules in
+  `scripts/coverage.ts` were stale against this engine: the blanket
+  `dependent-selectors` gap (one rule per declaration) and `ri-payment-upfront`, which fired on
+  every selector price pattern even though selector patterns and their upfront component are
+  native. The first is removed, the second is narrowed to tiered PLC_2.0 ladders
+  (`StartingRange`/`EndingRange`, `tiered-plc2-patterns`), and the legend text is updated. The
+  tracker worker's own edits to that file are line-local and this is the whole diff.
+- **Link budget.** One link for this batch, published with
+  `AWSCALC_MAX_PUBLISHES_PER_DAY=92` for that single publish because the shared counter was at 91
+  (the P0 conformance run in the main worktree had been publishing all session, see D-025). The
+  editor oracle reuses the same link, so there is no probe link. The default cap is unchanged.
+
+`regex-remap` is left in the tracker even though the evidence now says it is inert: the live
+`keyValue` remap is a plain object lookup (`d = (e,t) => t.keyValue[e] || e`, offset 1227218), so
+`"/1\\s?yr/"` keys never match a value. Removing that rule changes eight P0 rows and belongs to
+whoever owns the tracker cleanup, not to this feature.

@@ -1,0 +1,354 @@
+name: axi-conformance ec2Enhancement-047
+currency: USD
+locale: en_US
+services:
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "181.5"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Provisioned IOPS io2 GB month
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "181.5"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Throughput Optimized HDD GB Mo
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "181.5"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Cold HDD GB Mo
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "181.5"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Magnetic GB Mo
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "3"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage General Purpose gp3 GB Mo
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "3"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Provisioned IOPS GB Mo
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "3"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Provisioned IOPS io2 GB month
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "3"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Throughput Optimized HDD GB Mo
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "3"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Cold HDD GB Mo
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1
+  - code: ec2Enhancement
+    region: us-east-2
+    template: template
+    set:
+      tenancy: shared
+      selectedOS: linux
+      storageType: Storage General Purpose gp3 GB Mo
+      iops: 1
+      iops2: 1
+      gp3Iops: 1
+      gp3Throughput:
+        value: 1
+        unit: mbps
+      storageAmount:
+        value: 1
+        unit: gb|NA
+      storageAmountIo2:
+        value: 1
+        unit: gb|NA
+      snapshotFrequency: "3"
+      snapshotAmount:
+        value: 1
+        unit: gb|NA
+      storageTypeDH: Storage Magnetic GB Mo
+      iopsDH: 1
+      iops2DH: 1
+      gp3IopsDH: 3000
+      gp3ThroughputDH:
+        value: 125
+        unit: mbps
+      storageAmountDH:
+        value: 1
+        unit: gb|NA
+      detailedMonitoringCheckbox: false
+      aditionalCost: 1

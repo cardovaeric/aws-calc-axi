@@ -1,0 +1,301 @@
+{
+  "estimate": "axi-conformance trafficMirroringVpc-001",
+  "specHash": "6394aa9e21a3ed8e",
+  "url": "https://calculator.aws/#/estimate?id=12a596231472b6e8e2f6ae124ed394137eb633cc",
+  "savedKey": "12a596231472b6e8e2f6ae124ed394137eb633cc",
+  "publishedAt": "2026-11-24T10:37:19.165Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 32850032.84,
+    "upfront": 0,
+    "total12m": 394200394.08,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "trafficMirroringVpc",
+        "template": "template_TrafficMirror",
+        "region": "us-east-1",
+        "monthly": 10.95,
+        "upfront": 0,
+        "summary": "Number of traffic mirroring sessions (1)"
+      },
+      {
+        "code": "trafficMirroringVpc",
+        "template": "template_TrafficMirror",
+        "region": "us-east-1",
+        "monthly": 5475005.47,
+        "upfront": 0,
+        "summary": "Number of traffic mirroring sessions (500000.5)"
+      },
+      {
+        "code": "trafficMirroringVpc",
+        "template": "template_TrafficMirror",
+        "region": "us-east-1",
+        "monthly": 10950000,
+        "upfront": 0,
+        "summary": "Number of traffic mirroring sessions (1000000)"
+      },
+      {
+        "code": "trafficMirroringVpc",
+        "template": "template_TrafficMirror",
+        "region": "us-east-2",
+        "monthly": 10.95,
+        "upfront": 0,
+        "summary": "Number of traffic mirroring sessions (1)"
+      },
+      {
+        "code": "trafficMirroringVpc",
+        "template": "template_TrafficMirror",
+        "region": "us-east-2",
+        "monthly": 5475005.47,
+        "upfront": 0,
+        "summary": "Number of traffic mirroring sessions (500000.5)"
+      },
+      {
+        "code": "trafficMirroringVpc",
+        "template": "template_TrafficMirror",
+        "region": "us-east-2",
+        "monthly": 10950000,
+        "upfront": 0,
+        "summary": "Number of traffic mirroring sessions (1000000)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "trafficMirroringVpc",
+        "monthly": 10.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "trafficMirroringVpc",
+        "monthly": 5475005.47,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "trafficMirroringVpc",
+        "monthly": 10950000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "trafficMirroringVpc",
+        "monthly": 10.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "trafficMirroringVpc",
+        "monthly": 5475005.47,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "trafficMirroringVpc",
+        "monthly": 10950000,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 32850032.84,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=12a596231472b6e8e2f6ae124ed394137eb633cc",
+    "title": "axi-conformance trafficMirroringVpc-001",
+    "monthly": "32,850,032.84 USD",
+    "upfront": "0.00 USD",
+    "annual": "394,200,394.08 USD",
+    "monthlyValue": 32850032.84,
+    "upfrontValue": 0,
+    "annualValue": 394200394.08,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Traffic Mirroring",
+        "upfront": "0.00 USD",
+        "monthly": "10.95 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of traffic mirroring sessions (1)",
+        "status": null
+      },
+      {
+        "name": "Traffic Mirroring",
+        "upfront": "0.00 USD",
+        "monthly": "5,475,005.47 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of traffic mirroring sessions (500000.5)",
+        "status": null
+      },
+      {
+        "name": "Traffic Mirroring",
+        "upfront": "0.00 USD",
+        "monthly": "10,950,000.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of traffic mirroring sessions (1000000)",
+        "status": null
+      },
+      {
+        "name": "Traffic Mirroring",
+        "upfront": "0.00 USD",
+        "monthly": "10.95 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of traffic mirroring sessions (1)",
+        "status": null
+      },
+      {
+        "name": "Traffic Mirroring",
+        "upfront": "0.00 USD",
+        "monthly": "5,475,005.47 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of traffic mirroring sessions (500000.5)",
+        "status": null
+      },
+      {
+        "name": "Traffic Mirroring",
+        "upfront": "0.00 USD",
+        "monthly": "10,950,000.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of traffic mirroring sessions (1000000)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:37:21.531Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=12a596231472b6e8e2f6ae124ed394137eb633cc",
+    "savedKey": "12a596231472b6e8e2f6ae124ed394137eb633cc",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=12a596231472b6e8e2f6ae124ed394137eb633cc",
+      "title": "axi-conformance trafficMirroringVpc-001",
+      "monthly": "32,850,032.84 USD",
+      "upfront": "0.00 USD",
+      "annual": "394,200,394.08 USD",
+      "monthlyValue": 32850032.84,
+      "upfrontValue": 0,
+      "annualValue": 394200394.08,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Traffic Mirroring",
+          "upfront": "0.00 USD",
+          "monthly": "10.95 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of traffic mirroring sessions (1)",
+          "status": "-"
+        },
+        {
+          "name": "Traffic Mirroring",
+          "upfront": "0.00 USD",
+          "monthly": "5,475,005.47 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of traffic mirroring sessions (500000.5)",
+          "status": "-"
+        },
+        {
+          "name": "Traffic Mirroring",
+          "upfront": "0.00 USD",
+          "monthly": "10,950,000.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of traffic mirroring sessions (1000000)",
+          "status": "-"
+        },
+        {
+          "name": "Traffic Mirroring",
+          "upfront": "0.00 USD",
+          "monthly": "10.95 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of traffic mirroring sessions (1)",
+          "status": "-"
+        },
+        {
+          "name": "Traffic Mirroring",
+          "upfront": "0.00 USD",
+          "monthly": "5,475,005.47 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of traffic mirroring sessions (500000.5)",
+          "status": "-"
+        },
+        {
+          "name": "Traffic Mirroring",
+          "upfront": "0.00 USD",
+          "monthly": "10,950,000.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of traffic mirroring sessions (1000000)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:37:48.039Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance trafficMirroringVpc-001",
+    "monthly": 32850032.84,
+    "upfront": 0,
+    "annual": 394200394.08,
+    "services": [
+      {
+        "name": "Traffic Mirroring",
+        "monthly": 10.95,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of traffic mirroring sessions (1)"
+      },
+      {
+        "name": "Traffic Mirroring",
+        "monthly": 5475005.47,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of traffic mirroring sessions (500000.5)"
+      },
+      {
+        "name": "Traffic Mirroring",
+        "monthly": 10950000,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of traffic mirroring sessions (1000000)"
+      },
+      {
+        "name": "Traffic Mirroring",
+        "monthly": 10.95,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of traffic mirroring sessions (1)"
+      },
+      {
+        "name": "Traffic Mirroring",
+        "monthly": 5475005.47,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of traffic mirroring sessions (500000.5)"
+      },
+      {
+        "name": "Traffic Mirroring",
+        "monthly": 10950000,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of traffic mirroring sessions (1000000)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

@@ -1,0 +1,34 @@
+name: axi-conformance ipamVpc-001
+currency: USD
+locale: en_US
+services:
+  - code: ipamVpc
+    region: us-east-1
+    template: template_IPAM
+    set:
+      numberOfActiveIPaddress: 1
+  - code: ipamVpc
+    region: us-east-1
+    template: template_IPAM
+    set:
+      numberOfActiveIPaddress: 500000.5
+  - code: ipamVpc
+    region: us-east-1
+    template: template_IPAM
+    set:
+      numberOfActiveIPaddress: 10000
+  - code: ipamVpc
+    region: us-east-2
+    template: template_IPAM
+    set:
+      numberOfActiveIPaddress: 1
+  - code: ipamVpc
+    region: us-east-2
+    template: template_IPAM
+    set:
+      numberOfActiveIPaddress: 500000.5
+  - code: ipamVpc
+    region: us-east-2
+    template: template_IPAM
+    set:
+      numberOfActiveIPaddress: 10000

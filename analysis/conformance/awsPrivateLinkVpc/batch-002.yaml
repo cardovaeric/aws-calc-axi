@@ -1,0 +1,99 @@
+name: axi-conformance awsPrivateLinkVpc-002
+currency: USD
+locale: en_US
+services:
+  - code: awsPrivateLinkVpc
+    region: us-east-1
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 1
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+      tierPrivateLinkVPCEndpointPrice: 1048576
+  - code: awsPrivateLinkVpc
+    region: us-east-1
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 1
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+      tierPrivateLinkVPCEndpointPrice: 1048577
+  - code: awsPrivateLinkVpc
+    region: us-east-1
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 1
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+      tierPrivateLinkVPCEndpointPrice: 5242880
+  - code: awsPrivateLinkVpc
+    region: us-east-1
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 1
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+      tierPrivateLinkVPCEndpointPrice: 5242881
+  - code: awsPrivateLinkVpc
+    region: us-east-1
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 1
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+      tierPrivateLinkVPCEndpointPrice: 10485763
+  - code: awsPrivateLinkVpc
+    region: us-east-2
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 1
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+  - code: awsPrivateLinkVpc
+    region: us-east-2
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 0
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+  - code: awsPrivateLinkVpc
+    region: us-east-2
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 5000000000
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+  - code: awsPrivateLinkVpc
+    region: us-east-2
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 10000
+      numberOfAvailabilityZonesEndpointsDeployed: 1
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month
+  - code: awsPrivateLinkVpc
+    region: us-east-2
+    template: awsPrivateLink
+    set:
+      numberOfInterfaceVPCEndpointsPerRegion: 1
+      numberOfAvailabilityZonesEndpointsDeployed: 0
+      dataProcessedByEachVPCENIAZ:
+        value: 1
+        unit: gb|month

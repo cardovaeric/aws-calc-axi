@@ -1,0 +1,12 @@
+name: axi-conformance dataTransferVpc-001
+currency: USD
+locale: en_US
+services:
+  - code: dataTransferVpc
+    region: us-east-1
+    template: dataTransfer
+    set: {}
+  - code: dataTransferVpc
+    region: us-east-2
+    template: dataTransfer
+    set: {}

@@ -1,0 +1,449 @@
+{
+  "estimate": "axi-conformance publicIpv4Address-001",
+  "specHash": "29deb95feefd79c5",
+  "url": "https://calculator.aws/#/estimate?id=64d8cbb4eb6849fbfdd4d7ff38f9cb48cc7402a1",
+  "savedKey": "64d8cbb4eb6849fbfdd4d7ff38f9cb48cc7402a1",
+  "publishedAt": "2026-11-24T10:37:48.914Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 12775043.8,
+    "upfront": 0,
+    "total12m": 153300525.6,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-1",
+        "monthly": 7.3,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-1",
+        "monthly": 3.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (0), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-1",
+        "monthly": 1825003.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (500000), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-1",
+        "monthly": 3650003.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1000000), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-1",
+        "monthly": 3.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (0)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-1",
+        "monthly": 1825003.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (500000)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-1",
+        "monthly": 3650003.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1000000)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-2",
+        "monthly": 7.3,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-2",
+        "monthly": 3.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (0), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-2",
+        "monthly": 1825003.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (500000), Number of Idle public IPv4 addresses (1)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 7.3,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 3.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 1825003.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 3650003.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 3.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 1825003.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 3650003.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 7.3,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 3.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 1825003.65,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 12775043.8,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=64d8cbb4eb6849fbfdd4d7ff38f9cb48cc7402a1",
+    "title": "axi-conformance publicIpv4Address-001",
+    "monthly": "12,775,043.80 USD",
+    "upfront": "0.00 USD",
+    "annual": "153,300,525.60 USD",
+    "monthlyValue": 12775043.8,
+    "upfrontValue": 0,
+    "annualValue": 153300525.6,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "7.30 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "3.65 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (0), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "1,825,003.65 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (500000), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "3,650,003.65 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1000000), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "3.65 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (0)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "1,825,003.65 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (500000)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "3,650,003.65 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1000000)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "7.30 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "3.65 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (0), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "1,825,003.65 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (500000), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:37:53.073Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=64d8cbb4eb6849fbfdd4d7ff38f9cb48cc7402a1",
+    "savedKey": "64d8cbb4eb6849fbfdd4d7ff38f9cb48cc7402a1",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=64d8cbb4eb6849fbfdd4d7ff38f9cb48cc7402a1",
+      "title": "axi-conformance publicIpv4Address-001",
+      "monthly": "12,775,043.80 USD",
+      "upfront": "0.00 USD",
+      "annual": "153,300,525.60 USD",
+      "monthlyValue": 12775043.8,
+      "upfrontValue": 0,
+      "annualValue": 153300525.6,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "7.30 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "3.65 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of Idle public IPv4 addresses (1)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "1,825,003.65 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of In-use public IPv4 addresses (500000), Number of Idle public IPv4 addresses (1)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "3,650,003.65 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of In-use public IPv4 addresses (1000000), Number of Idle public IPv4 addresses (1)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "3.65 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of In-use public IPv4 addresses (1)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "1,825,003.65 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (500000)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "3,650,003.65 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1000000)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "7.30 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "3.65 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Idle public IPv4 addresses (1)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "1,825,003.65 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of In-use public IPv4 addresses (500000), Number of Idle public IPv4 addresses (1)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:38:19.699Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance publicIpv4Address-001",
+    "monthly": 12775043.8,
+    "upfront": 0,
+    "annual": 153300525.6,
+    "services": [
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 7.3,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 3.65,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (0), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 1825003.65,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (500000), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 3650003.65,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1000000), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 3.65,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (0)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 1825003.65,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (500000)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 3650003.65,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1000000)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 7.3,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 3.65,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (0), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 1825003.65,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (500000), Number of Idle public IPv4 addresses (1)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

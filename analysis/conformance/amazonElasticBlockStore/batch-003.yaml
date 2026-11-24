@@ -1,0 +1,324 @@
+name: axi-conformance amazonElasticBlockStore-003
+currency: USD
+locale: en_US
+services:
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage General Purpose gp3 GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "30"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage General Purpose gp3 GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "90.25"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage General Purpose gp3 GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "120.67"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage General Purpose gp3 GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "181.5"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage General Purpose gp3 GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "3"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage General Purpose gp3 GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "1"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage Provisioned IOPS GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "0"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage Provisioned IOPS GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "729"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage Provisioned IOPS GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "30"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth
+  - code: amazonElasticBlockStore
+    region: us-east-1
+    template: elasticBlockStore
+    set:
+      numberOfInstances: 1
+      durationOfInstanceRuns:
+        value: 730
+        unit: hours
+      storageType: Storage Provisioned IOPS GB Mo
+      storageAmount:
+        value: 30
+        unit: gb|NA
+      iops: 3000
+      iops2: 3000
+      gp3Iops: 3000
+      gp3Throughput:
+        value: 125
+        unit: mbps
+      snapshotFrequency: "90.25"
+      snapshotAmount:
+        value: 3
+        unit: gb|NA
+      numberOfSnapshotsToRestore: 1
+      numberOfGETAPIRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIListRequests:
+        value: 10
+        unit: perMonth
+      numberOfDirectAPIPUTRequests:
+        value: 10
+        unit: perMonth

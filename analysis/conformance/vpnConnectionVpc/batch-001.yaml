@@ -1,0 +1,164 @@
+name: axi-conformance vpnConnectionVpc-001
+currency: USD
+locale: en_US
+services:
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 1
+      averageDurationForEachConnection:
+        value: 24
+        unit: perDay
+      vpnConnection_numberOfClientSubnets: 1
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 0
+      averageDurationForEachConnection:
+        value: 24
+        unit: perDay
+      vpnConnection_numberOfClientSubnets: 1
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 500000
+      averageDurationForEachConnection:
+        value: 24
+        unit: perDay
+      vpnConnection_numberOfClientSubnets: 1
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 10000
+      averageDurationForEachConnection:
+        value: 24
+        unit: perDay
+      vpnConnection_numberOfClientSubnets: 1
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 1
+      averageDurationForEachConnection:
+        value: 168
+        unit: perWeek
+      vpnConnection_numberOfClientSubnets: 1
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 1
+      averageDurationForEachConnection:
+        value: 1
+        unit: perMonth
+      vpnConnection_numberOfClientSubnets: 1
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 1
+      averageDurationForEachConnection:
+        value: 730
+        unit: perMonth
+      vpnConnection_numberOfClientSubnets: 1
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 1
+      averageDurationForEachConnection:
+        value: 24
+        unit: perDay
+      vpnConnection_numberOfClientSubnets: 0
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 1
+      averageDurationForEachConnection:
+        value: 24
+        unit: perDay
+      vpnConnection_numberOfClientSubnets: 2.5
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22
+  - code: vpnConnectionVpc
+    region: us-east-1
+    template: VPNConnection
+    set:
+      numberOfSiteToSiteVPNConnections: 1
+      averageDurationForEachConnection:
+        value: 24
+        unit: perDay
+      vpnConnection_numberOfClientSubnets: 5
+      vpnConnection_numberOfClientConnections:
+        value: 10
+        unit: perDay
+      vpnConnection_clientAvgDuration:
+        value: 10
+        unit: perDay
+      vpnConnection_numberOfWorkDays: 22

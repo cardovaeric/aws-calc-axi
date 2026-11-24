@@ -4,6 +4,7 @@
  * deliberately copied verbatim, including their rounding, so the engine lands
  * on the same numbers as the web app.
  */
+import { Decimal } from "decimal.js";
 
 export interface Conversion {
   operation: "multiply" | "divide";
@@ -243,6 +244,48 @@ export function convertRateTime(value: number, from: string, to: string): number
  * Frequency conversion. The live table is indexed `[output][input]`: it returns
  * the multiplier that turns an input rate into the output rate.
  */
+/**
+ * Round a converted value the way the live inputs do: `decimalPlaces` from the
+ * definition, defaulting to two, using Decimal `toFixed` (half-up).
+ */
+export function roundConverted(value: number, decimalPlaces: number): number {
+  return Number(new Decimal(value).toFixed(decimalPlaces));
+}
+
+/**
+ * Live duration conversion (`calculateDuration`): exact seconds-per-unit ratios
+ * with ROUND_UP at `decimalPlaces` (default 2). This differs from
+ * `convertTime`, which uses the rounded week/month factors used by file sizes.
+ */
+export const SECONDS_PER_DURATION_UNIT: Record<string, number> = {
+  sec: 1,
+  min: 60,
+  hr: 3600,
+  hour: 3600,
+  hours: 3600,
+  day: 86400,
+  days: 86400,
+  week: 604800,
+  month: 2628000,
+  year: 31536000,
+};
+
+export function convertDuration(
+  value: number,
+  from: string,
+  to: string,
+  decimalPlaces = 2
+): number {
+  const source = SECONDS_PER_DURATION_UNIT[normalizeTimeUnit(from)] ?? SECONDS_PER_DURATION_UNIT[from];
+  const target = SECONDS_PER_DURATION_UNIT[normalizeTimeUnit(to)] ?? SECONDS_PER_DURATION_UNIT[to];
+  if (!source || !target || source === target) return value;
+  return new Decimal(value)
+    .mul(source)
+    .div(target)
+    .toDecimalPlaces(decimalPlaces, Decimal.ROUND_UP)
+    .toNumber();
+}
+
 export function convertFrequency(value: number, from: string, to: string): number {
   if (!from || !to || from === to) return value;
   const conversion = FREQUENCY_CONVERSIONS[to]?.[from];

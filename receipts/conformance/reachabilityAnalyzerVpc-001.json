@@ -1,0 +1,301 @@
+{
+  "estimate": "axi-conformance reachabilityAnalyzerVpc-001",
+  "specHash": "176255ce8b3a2237",
+  "url": "https://calculator.aws/#/estimate?id=34ab50ff7889001974a26f718ff8dc38fc9acde2",
+  "savedKey": "34ab50ff7889001974a26f718ff8dc38fc9acde2",
+  "publishedAt": "2026-11-24T10:36:49.620Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 300000.3,
+    "upfront": 0,
+    "total12m": 3600003.6,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "reachabilityAnalyzerVpc",
+        "template": "template_ReachabilityAnalyzer",
+        "region": "us-east-1",
+        "monthly": 0.1,
+        "upfront": 0,
+        "summary": "Number of connectivity analysis per month (1)"
+      },
+      {
+        "code": "reachabilityAnalyzerVpc",
+        "template": "template_ReachabilityAnalyzer",
+        "region": "us-east-1",
+        "monthly": 50000.05,
+        "upfront": 0,
+        "summary": "Number of connectivity analysis per month (500000.5)"
+      },
+      {
+        "code": "reachabilityAnalyzerVpc",
+        "template": "template_ReachabilityAnalyzer",
+        "region": "us-east-1",
+        "monthly": 100000,
+        "upfront": 0,
+        "summary": "Number of connectivity analysis per month (1000000)"
+      },
+      {
+        "code": "reachabilityAnalyzerVpc",
+        "template": "template_ReachabilityAnalyzer",
+        "region": "us-east-2",
+        "monthly": 0.1,
+        "upfront": 0,
+        "summary": "Number of connectivity analysis per month (1)"
+      },
+      {
+        "code": "reachabilityAnalyzerVpc",
+        "template": "template_ReachabilityAnalyzer",
+        "region": "us-east-2",
+        "monthly": 50000.05,
+        "upfront": 0,
+        "summary": "Number of connectivity analysis per month (500000.5)"
+      },
+      {
+        "code": "reachabilityAnalyzerVpc",
+        "template": "template_ReachabilityAnalyzer",
+        "region": "us-east-2",
+        "monthly": 100000,
+        "upfront": 0,
+        "summary": "Number of connectivity analysis per month (1000000)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "reachabilityAnalyzerVpc",
+        "monthly": 0.1,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "reachabilityAnalyzerVpc",
+        "monthly": 50000.05,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "reachabilityAnalyzerVpc",
+        "monthly": 100000,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "reachabilityAnalyzerVpc",
+        "monthly": 0.1,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "reachabilityAnalyzerVpc",
+        "monthly": 50000.05,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "reachabilityAnalyzerVpc",
+        "monthly": 100000,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 300000.3,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=34ab50ff7889001974a26f718ff8dc38fc9acde2",
+    "title": "axi-conformance reachabilityAnalyzerVpc-001",
+    "monthly": "300,000.30 USD",
+    "upfront": "0.00 USD",
+    "annual": "3,600,003.60 USD",
+    "monthlyValue": 300000.3,
+    "upfrontValue": 0,
+    "annualValue": 3600003.6,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Reachability Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "0.10 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of connectivity analysis per month (1)",
+        "status": null
+      },
+      {
+        "name": "Reachability Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "50,000.05 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of connectivity analysis per month (500000.5)",
+        "status": null
+      },
+      {
+        "name": "Reachability Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "100,000.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of connectivity analysis per month (1000000)",
+        "status": null
+      },
+      {
+        "name": "Reachability Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "0.10 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of connectivity analysis per month (1)",
+        "status": null
+      },
+      {
+        "name": "Reachability Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "50,000.05 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of connectivity analysis per month (500000.5)",
+        "status": null
+      },
+      {
+        "name": "Reachability Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "100,000.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of connectivity analysis per month (1000000)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:36:51.848Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=34ab50ff7889001974a26f718ff8dc38fc9acde2",
+    "savedKey": "34ab50ff7889001974a26f718ff8dc38fc9acde2",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=34ab50ff7889001974a26f718ff8dc38fc9acde2",
+      "title": "axi-conformance reachabilityAnalyzerVpc-001",
+      "monthly": "300,000.30 USD",
+      "upfront": "0.00 USD",
+      "annual": "3,600,003.60 USD",
+      "monthlyValue": 300000.3,
+      "upfrontValue": 0,
+      "annualValue": 3600003.6,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Reachability Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "0.10 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of connectivity analysis per month (1)",
+          "status": "-"
+        },
+        {
+          "name": "Reachability Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "50,000.05 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of connectivity analysis per month (500000.5)",
+          "status": "-"
+        },
+        {
+          "name": "Reachability Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "100,000.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of connectivity analysis per month (1000000)",
+          "status": "-"
+        },
+        {
+          "name": "Reachability Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "0.10 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of connectivity analysis per month (1)",
+          "status": "-"
+        },
+        {
+          "name": "Reachability Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "50,000.05 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of connectivity analysis per month (500000.5)",
+          "status": "-"
+        },
+        {
+          "name": "Reachability Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "100,000.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of connectivity analysis per month (1000000)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:37:18.390Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance reachabilityAnalyzerVpc-001",
+    "monthly": 300000.3,
+    "upfront": 0,
+    "annual": 3600003.6,
+    "services": [
+      {
+        "name": "Reachability Analyzer",
+        "monthly": 0.1,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of connectivity analysis per month (1)"
+      },
+      {
+        "name": "Reachability Analyzer",
+        "monthly": 50000.05,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of connectivity analysis per month (500000.5)"
+      },
+      {
+        "name": "Reachability Analyzer",
+        "monthly": 100000,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of connectivity analysis per month (1000000)"
+      },
+      {
+        "name": "Reachability Analyzer",
+        "monthly": 0.1,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of connectivity analysis per month (1)"
+      },
+      {
+        "name": "Reachability Analyzer",
+        "monthly": 50000.05,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of connectivity analysis per month (500000.5)"
+      },
+      {
+        "name": "Reachability Analyzer",
+        "monthly": 100000,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of connectivity analysis per month (1000000)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

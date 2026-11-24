@@ -1,0 +1,153 @@
+{
+  "estimate": "axi-conformance dataTransferVpc-001",
+  "specHash": "346cf0a5dff81b9a",
+  "url": "https://calculator.aws/#/estimate?id=93d8aa0368ac91fe15d8879f1a52cd5ac84b7593",
+  "savedKey": "93d8aa0368ac91fe15d8879f1a52cd5ac84b7593",
+  "publishedAt": "2026-11-24T10:39:23.824Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 0,
+    "upfront": 0,
+    "total12m": 0,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "dataTransferVpc",
+        "template": "dataTransfer",
+        "region": "us-east-1",
+        "monthly": 0,
+        "upfront": 0,
+        "summary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      },
+      {
+        "code": "dataTransferVpc",
+        "template": "dataTransfer",
+        "region": "us-east-2",
+        "monthly": 0,
+        "upfront": 0,
+        "summary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "dataTransferVpc",
+        "monthly": 0,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "dataTransferVpc",
+        "monthly": 0,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 0,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=93d8aa0368ac91fe15d8879f1a52cd5ac84b7593",
+    "title": "axi-conformance dataTransferVpc-001",
+    "monthly": "0.00 USD",
+    "upfront": "0.00 USD",
+    "annual": "0.00 USD",
+    "monthlyValue": 0,
+    "upfrontValue": 0,
+    "annualValue": 0,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Data Transfer",
+        "upfront": "0.00 USD",
+        "monthly": "0.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)",
+        "status": null
+      },
+      {
+        "name": "Data Transfer",
+        "upfront": "0.00 USD",
+        "monthly": "0.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:39:51.005Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=93d8aa0368ac91fe15d8879f1a52cd5ac84b7593",
+    "savedKey": "93d8aa0368ac91fe15d8879f1a52cd5ac84b7593",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=93d8aa0368ac91fe15d8879f1a52cd5ac84b7593",
+      "title": "axi-conformance dataTransferVpc-001",
+      "monthly": "0.00 USD",
+      "upfront": "0.00 USD",
+      "annual": "0.00 USD",
+      "monthlyValue": 0,
+      "upfrontValue": 0,
+      "annualValue": 0,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Data Transfer",
+          "upfront": "0.00 USD",
+          "monthly": "0.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "DT Inbound: Not selected (0 tb_month), DT Intra-Region: (0 tb_month), DT Outbound: Not selected (0 tb_month)",
+          "status": "-"
+        },
+        {
+          "name": "Data Transfer",
+          "upfront": "0.00 USD",
+          "monthly": "0.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "DT Inbound: Not selected (0 tb_month), DT Intra-Region: (0 tb_month), DT Outbound: Not selected (0 tb_month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:40:17.584Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance dataTransferVpc-001",
+    "monthly": 0,
+    "upfront": 0,
+    "annual": 0,
+    "services": [
+      {
+        "name": "Data Transfer",
+        "monthly": 0,
+        "region": "US East (N. Virginia)",
+        "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      },
+      {
+        "name": "Data Transfer",
+        "monthly": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

@@ -1,0 +1,545 @@
+{
+  "estimate": "axi-conformance networkAddressTranslationNatGatewayVpc-002",
+  "specHash": "33ad853a8a800ddf",
+  "url": "https://calculator.aws/#/estimate?id=b2e0eded0fa8ee943d4005d8f9605a65ab7ed24b",
+  "savedKey": "b2e0eded0fa8ee943d4005d8f9605a65ab7ed24b",
+  "publishedAt": "2026-11-24T10:41:19.254Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 493350246655.9,
+    "upfront": 0,
+    "total12m": 5920202959870.8,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 1675.59,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (10)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 756.04,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 236455.24,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 525.84,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 492.95,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (0), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 164450000492.95,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (5000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 328900000492.95,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (10000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 571.88,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 131.48,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 5060.98,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (51), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 1675.59,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 756.04,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 236455.24,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 525.84,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 492.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 164450000492.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 328900000492.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 571.88,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 131.48,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 5060.98,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 493350246655.9,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=b2e0eded0fa8ee943d4005d8f9605a65ab7ed24b",
+    "title": "axi-conformance awsEks-006",
+    "monthly": "5,006,377,238.34 USD",
+    "upfront": "0.00 USD",
+    "annual": "60,076,526,860.08 USD",
+    "monthlyValue": 5006377238.34,
+    "upfrontValue": 0,
+    "annualValue": 60076526860.08,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "477.12 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (0), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "1,652,355,477.12 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (500000000), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "3,304,710,477.12 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1000000000), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "477.12 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (0), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "16,425,480.39 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (500000000), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "32,850,480.39 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1000000000), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "465.82 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (0)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "7,765.82 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (500)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "14,141.82 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1000)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "11,995.62 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (790)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:41:23.232Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=b2e0eded0fa8ee943d4005d8f9605a65ab7ed24b",
+    "savedKey": "b2e0eded0fa8ee943d4005d8f9605a65ab7ed24b",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=b2e0eded0fa8ee943d4005d8f9605a65ab7ed24b",
+      "title": "axi-conformance awsEks-007",
+      "monthly": "406,178.72 USD",
+      "upfront": "0.00 USD",
+      "annual": "4,874,144.64 USD",
+      "monthlyValue": 406178.72,
+      "upfrontValue": 0,
+      "annualValue": 4874144.64,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "14,141.82 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1000)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "11,995.62 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (790)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "20,063.82 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (2 per month), Number of vCPU per hybrid node (790)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "66,185.82 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (10 per month), Number of vCPU per hybrid node (790)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "112,293.82 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (20 per month), Number of vCPU per hybrid node (790)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "181,497.82 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (50 per month), Number of vCPU per hybrid node (632)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:42:17.832Z"
+    },
+    "mismatches": [
+      {
+        "field": "title",
+        "expected": "axi-conformance networkAddressTranslationNatGatewayVpc-002",
+        "actual": "axi-conformance awsEks-007"
+      },
+      {
+        "field": "monthly",
+        "expected": "493350246655.90",
+        "actual": "406178.72"
+      },
+      {
+        "field": "annual",
+        "expected": "5920202959870.80",
+        "actual": "4874144.64"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Network Address Translation (NAT) Gateway",
+        "expected": "present",
+        "actual": "missing"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance networkAddressTranslationNatGatewayVpc-002",
+    "monthly": 493350246655.9,
+    "upfront": 0,
+    "annual": 5920202959870.8,
+    "services": [
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 1675.59,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (10)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 756.04,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 236455.24,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 525.84,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 492.95,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (0), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 164450000492.95,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (5000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 328900000492.95,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (10000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 571.88,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 131.48,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 5060.98,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (51), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [
+    {
+      "field": "title",
+      "expected": "axi-conformance networkAddressTranslationNatGatewayVpc-002",
+      "actual": "axi-conformance awsEks-006"
+    },
+    {
+      "field": "monthly",
+      "expected": "493350246655.90",
+      "actual": "5006377238.34"
+    },
+    {
+      "field": "annual",
+      "expected": "5920202959870.80",
+      "actual": "60076526860.08"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    },
+    {
+      "field": "service:Network Address Translation (NAT) Gateway",
+      "expected": "present",
+      "actual": "missing"
+    }
+  ],
+  "verdict": "fail"
+}

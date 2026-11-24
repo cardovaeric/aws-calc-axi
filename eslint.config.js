@@ -2,7 +2,17 @@ import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["node_modules/**", "dist/**", "analysis/**", ".lavish/**", "coverage/**"] },
+  {
+    ignores: [
+      "node_modules/**",
+      "dist/**",
+      "analysis/**",
+      ".lavish/**",
+      "coverage/**",
+      // Agent worktrees are separate checkouts nested under the repo root.
+      "w*/**",
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

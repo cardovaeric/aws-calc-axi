@@ -1,0 +1,435 @@
+{
+  "estimate": "axi-conformance awsPrivateLinkVpc-002",
+  "specHash": "25b3786d1684aba0",
+  "url": "https://calculator.aws/#/estimate?id=284ada6f7fa8a8817739c3634d22a973e2cbfd13",
+  "savedKey": "284ada6f7fa8a8817739c3634d22a973e2cbfd13",
+  "publishedAt": "2026-11-24T10:46:02.163Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 109500000043.9,
+    "upfront": 0,
+    "total12m": 1314000000526.8,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-1",
+        "monthly": 7.31,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-1",
+        "monthly": 7.31,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-1",
+        "monthly": 7.31,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-1",
+        "monthly": 7.31,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-1",
+        "monthly": 7.31,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-2",
+        "monthly": 7.31,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-2",
+        "monthly": 0.01,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (0)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-2",
+        "monthly": 36500000000.01,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (5000000000)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-2",
+        "monthly": 73000000000.01,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (10000000000)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-2",
+        "monthly": 0.01,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (1)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 7.31,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 7.31,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 7.31,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 7.31,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 7.31,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 7.31,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 0.01,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 36500000000.01,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 73000000000.01,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 0.01,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 109500000043.9,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=284ada6f7fa8a8817739c3634d22a973e2cbfd13",
+    "title": "axi-conformance awsPrivateLinkVpc-002",
+    "monthly": "109,500,000,043.90 USD",
+    "upfront": "0.00 USD",
+    "annual": "1,314,000,000,526.80 USD",
+    "monthlyValue": 109500000043.9,
+    "upfrontValue": 0,
+    "annualValue": 1314000000526.8,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": null,
+    "readOnlyNotice": false,
+    "services": [
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "7.31 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "7.31 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "7.31 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "7.31 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "7.31 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "7.31 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "0.01 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "-",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "36,500,000,000.01 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (5000000000)",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "73,000,000,000.01 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (10000000000)",
+        "status": "-"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "0.01 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)",
+        "status": "-"
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:46:29.908Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=284ada6f7fa8a8817739c3634d22a973e2cbfd13",
+    "savedKey": "284ada6f7fa8a8817739c3634d22a973e2cbfd13",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=284ada6f7fa8a8817739c3634d22a973e2cbfd13",
+      "title": null,
+      "monthly": null,
+      "upfront": null,
+      "annual": null,
+      "monthlyValue": null,
+      "upfrontValue": null,
+      "annualValue": null,
+      "estimateDate": null,
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:49:23.688Z"
+    },
+    "mismatches": [
+      {
+        "field": "title",
+        "expected": "axi-conformance awsPrivateLinkVpc-002",
+        "actual": "missing"
+      },
+      {
+        "field": "monthly",
+        "expected": "109500000043.90",
+        "actual": "missing"
+      },
+      {
+        "field": "upfront",
+        "expected": "0.00",
+        "actual": "missing"
+      },
+      {
+        "field": "annual",
+        "expected": "1314000000526.80",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:AWS PrivateLink",
+        "expected": "present",
+        "actual": "missing"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance awsPrivateLinkVpc-002",
+    "monthly": 109500000043.9,
+    "upfront": 0,
+    "annual": 1314000000526.8,
+    "services": [
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 7.31,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 7.31,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 7.31,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 7.31,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 7.31,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 7.31,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 0.01,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (0)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 36500000000.01,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (5000000000)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 73000000000.01,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (10000000000)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 0.01,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (1)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [
+    {
+      "field": "service:AWS PrivateLink:configSummary",
+      "expected": "Number of VPC Interface endpoints per AWS region (0)",
+      "actual": "-"
+    }
+  ],
+  "verdict": "fail"
+}

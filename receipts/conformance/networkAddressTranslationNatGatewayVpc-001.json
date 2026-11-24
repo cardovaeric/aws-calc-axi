@@ -1,0 +1,449 @@
+{
+  "estimate": "axi-conformance networkAddressTranslationNatGatewayVpc-001",
+  "specHash": "01ff5b5908e05f81",
+  "url": "https://calculator.aws/#/estimate?id=d14109450bb44cbfcaa8a7f04c7edec8bc2ad3aa",
+  "savedKey": "d14109450bb44cbfcaa8a7f04c7edec8bc2ad3aa",
+  "publishedAt": "2026-11-24T10:40:24.311Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 493350018876.85,
+    "upfront": 0,
+    "total12m": 5920200226522.2,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 525.84,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 492.95,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (0), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 164450000492.95,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (5000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 328900000492.95,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (10000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 571.88,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 131.48,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 5060.98,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (51), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 9891.89,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (100), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 197.34,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (1)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-1",
+        "monthly": 1018.59,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (6)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 525.84,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 492.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 164450000492.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 328900000492.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 571.88,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 131.48,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 5060.98,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 9891.89,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 197.34,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 1018.59,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 493350018876.85,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=d14109450bb44cbfcaa8a7f04c7edec8bc2ad3aa",
+    "title": "axi-conformance networkAddressTranslationNatGatewayVpc-001",
+    "monthly": "493,350,018,876.85 USD",
+    "upfront": "0.00 USD",
+    "annual": "5,920,200,226,522.20 USD",
+    "monthlyValue": 493350018876.85,
+    "upfrontValue": 0,
+    "annualValue": 5920200226522.2,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "525.84 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "492.95 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (0), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "164,450,000,492.95 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (5000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "328,900,000,492.95 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (10000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "571.88 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "131.48 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "5,060.98 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (51), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "9,891.89 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (100), Number of Availability Zones Regional NAT Gateways is active in (3)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "197.34 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (1)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "1,018.59 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (6)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:40:51.870Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=d14109450bb44cbfcaa8a7f04c7edec8bc2ad3aa",
+    "savedKey": "d14109450bb44cbfcaa8a7f04c7edec8bc2ad3aa",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=d14109450bb44cbfcaa8a7f04c7edec8bc2ad3aa",
+      "title": "axi-conformance networkAddressTranslationNatGatewayVpc-001",
+      "monthly": "493,350,018,876.85 USD",
+      "upfront": "0.00 USD",
+      "annual": "5,920,200,226,522.20 USD",
+      "monthlyValue": 493350018876.85,
+      "upfrontValue": 0,
+      "annualValue": 5920200226522.2,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "525.84 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "492.95 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "164,450,000,492.95 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (5000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "328,900,000,492.95 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (10000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "571.88 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "131.48 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "5,060.98 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (51), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "9,891.89 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (100), Number of Availability Zones Regional NAT Gateways is active in (3)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "197.34 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (1)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "1,018.59 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (6)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:41:18.392Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance networkAddressTranslationNatGatewayVpc-001",
+    "monthly": 493350018876.85,
+    "upfront": 0,
+    "annual": 5920200226522.2,
+    "services": [
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 525.84,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 492.95,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (0), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 164450000492.95,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (5000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 328900000492.95,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (10000000000), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 571.88,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 131.48,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 5060.98,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (51), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 9891.89,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (100), Number of Availability Zones Regional NAT Gateways is active in (3)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 197.34,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (1)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 1018.59,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of NAT Gateways (1), Number of Regional NAT Gateways (5), Number of Availability Zones Regional NAT Gateways is active in (6)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

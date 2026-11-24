@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import {
   convertThroughput,
   convertFrequency,
+  convertDuration,
+  roundConverted,
   convertSize,
   convertTime,
   convertRateTime,
@@ -55,4 +57,22 @@ test("throughput conversion uses binary multiples", () => {
   assert.equal(convertThroughput(1, "gbps", "mbps"), 1024);
   assert.equal(convertThroughput(1, "mbps", "kbps"), 1024);
   assert.equal(convertThroughput(1, "gbps", "kbps"), 1048576);
+});
+
+test("frequency conversion rounds like the live input", () => {
+  // 10 hours/week -> hours/day: live rounds to two decimals (1.43), not 1/7.
+  assert.equal(roundConverted(convertFrequency(10, "perWeek", "perDay"), 2), 1.43);
+  assert.equal(roundConverted(convertFrequency(1, "perWeek", "perDay"), 2), 0.14);
+  // The live input honours an explicit decimalPlaces.
+  assert.equal(roundConverted(convertFrequency(1, "perWeek", "perDay"), 4), 0.1429);
+});
+
+test("duration conversion uses exact seconds and rounds up", () => {
+  // Live `calculateDuration` uses secondsPerUnit and ROUND_UP.
+  assert.equal(convertDuration(1, "sec", "min"), 0.02);
+  assert.equal(convertDuration(1, "min", "sec"), 60);
+  assert.equal(convertDuration(24, "day", "hour", 2), 576);
+  assert.equal(convertDuration(1, "hour", "month"), 0.01);
+  // Same unit is a pass-through, like the live input.
+  assert.equal(convertDuration(7, "hour", "hour"), 7);
 });

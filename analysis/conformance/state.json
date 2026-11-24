@@ -1,0 +1,1320 @@
+{
+ "batches": {
+  "awsEks-001": {
+   "hash": "6807f29a265d2cf9",
+   "status": "pass",
+   "url": "https://calculator.aws/#/estimate?id=b2cb46442aced1e513634cf9404c94d6f71df0af",
+   "savedKey": "b2cb46442aced1e513634cf9404c94d6f71df0af",
+   "monthly": 230502113519.74,
+   "upfront": 0,
+   "rows": 10,
+   "mismatches": [],
+   "at": "2026-11-24T11:17:04.474Z"
+  },
+  "awsEks-002": {
+   "hash": "fe3bf60326649b41",
+   "status": "pass",
+   "url": "https://calculator.aws/#/estimate?id=afc84ee1c1023c96ecdc4b5587738c3d59278ed3",
+   "savedKey": "afc84ee1c1023c96ecdc4b5587738c3d59278ed3",
+   "monthly": 4252302985.3,
+   "upfront": 0,
+   "rows": 10,
+   "mismatches": [],
+   "at": "2026-11-24T11:17:37.284Z"
+  },
+  "awsEks-003": {
+   "hash": "42f6cae700f7d55a",
+   "status": "pass",
+   "url": "https://calculator.aws/#/estimate?id=30b9a3062f3d8e975673e2eb6d0e29d683f372ac",
+   "savedKey": "30b9a3062f3d8e975673e2eb6d0e29d683f372ac",
+   "monthly": 18422052.44,
+   "upfront": 0,
+   "rows": 10,
+   "mismatches": [],
+   "at": "2026-11-24T11:18:08.514Z"
+  },
+  "awsEks-004": {
+   "hash": "8ae8a0a01c7d0092",
+   "status": "pass",
+   "url": "https://calculator.aws/#/estimate?id=c29682055b2bffac4952f42edf00baafa4a89d56",
+   "savedKey": "c29682055b2bffac4952f42edf00baafa4a89d56",
+   "monthly": 219004742158.83,
+   "upfront": 0,
+   "rows": 10,
+   "mismatches": [],
+   "at": "2026-11-24T11:18:39.499Z"
+  },
+  "awsEks-005": {
+   "hash": "aa49e774795d8975",
+   "status": "pending",
+   "monthly": 12775989911.43,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.543Z"
+  },
+  "awsEks-006": {
+   "hash": "5ed930fddafe9d2f",
+   "status": "pending",
+   "monthly": 1668903735.21,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.546Z"
+  },
+  "awsEks-007": {
+   "hash": "3192bf543f3ab0e9",
+   "status": "pending",
+   "monthly": 406178.72,
+   "upfront": 0,
+   "rows": 6,
+   "at": "2026-11-24T11:16:22.549Z"
+  },
+  "amazonElasticBlockStore-001": {
+   "hash": "bfbcfb08cdfef444",
+   "status": "pending",
+   "monthly": 4493720703.62,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.571Z"
+  },
+  "amazonElasticBlockStore-002": {
+   "hash": "2f0345c70e335509",
+   "status": "pending",
+   "monthly": 5658.12,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.576Z"
+  },
+  "amazonElasticBlockStore-003": {
+   "hash": "7f4aa6639835d767",
+   "status": "pending",
+   "monthly": 6004.57,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.580Z"
+  },
+  "amazonElasticBlockStore-004": {
+   "hash": "121d41788b213eba",
+   "status": "pending",
+   "monthly": 7196.31,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.584Z"
+  },
+  "amazonElasticBlockStore-005": {
+   "hash": "e8243c0a9c326a4b",
+   "status": "pending",
+   "monthly": 5984.75,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.587Z"
+  },
+  "amazonElasticBlockStore-006": {
+   "hash": "0a5f54e958b1c5ff",
+   "status": "pending",
+   "monthly": 5635.92,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.591Z"
+  },
+  "amazonElasticBlockStore-007": {
+   "hash": "ef19a8c72c32fc08",
+   "status": "pending",
+   "monthly": 5702.34,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.596Z"
+  },
+  "amazonElasticBlockStore-008": {
+   "hash": "17f15852b952aa8f",
+   "status": "pending",
+   "monthly": 7087.08,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.599Z"
+  },
+  "amazonElasticBlockStore-009": {
+   "hash": "75eea8cd8cd66cf0",
+   "status": "pending",
+   "monthly": 279229057.33,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.604Z"
+  },
+  "amazonElasticBlockStore-010": {
+   "hash": "fabe8c34f5e8737c",
+   "status": "pending",
+   "monthly": 4493630621.28,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.609Z"
+  },
+  "amazonElasticBlockStore-011": {
+   "hash": "5a2396a28009cb63",
+   "status": "pending",
+   "monthly": 95752.31,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.613Z"
+  },
+  "amazonElasticBlockStore-012": {
+   "hash": "e7d1154b830a58ad",
+   "status": "pending",
+   "monthly": 5612.77,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.619Z"
+  },
+  "amazonElasticBlockStore-013": {
+   "hash": "c9359b4232588cec",
+   "status": "pending",
+   "monthly": 6215.91,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.623Z"
+  },
+  "amazonElasticBlockStore-014": {
+   "hash": "3666c3ec713922f1",
+   "status": "pending",
+   "monthly": 7368.95,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.627Z"
+  },
+  "amazonElasticBlockStore-015": {
+   "hash": "244a8db5c0402dad",
+   "status": "pending",
+   "monthly": 5641.02,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.631Z"
+  },
+  "amazonElasticBlockStore-016": {
+   "hash": "cb25db7ee1494e22",
+   "status": "pending",
+   "monthly": 5593.87,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.635Z"
+  },
+  "amazonElasticBlockStore-017": {
+   "hash": "1888c28306d00677",
+   "status": "pending",
+   "monthly": 5705.3,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.639Z"
+  },
+  "amazonElasticBlockStore-018": {
+   "hash": "e243eac5aa420774",
+   "status": "pending",
+   "monthly": 273755992.08,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.643Z"
+  },
+  "amazonElasticBlockStore-019": {
+   "hash": "bfb01658dfcf55ad",
+   "status": "pending",
+   "monthly": 5480212.21,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.648Z"
+  },
+  "amazonElasticBlockStore-020": {
+   "hash": "05a5d6237600451f",
+   "status": "pending",
+   "monthly": 3339.54,
+   "upfront": 0,
+   "rows": 6,
+   "at": "2026-11-24T11:16:22.650Z"
+  },
+  "vpnConnectionVpc-001": {
+   "hash": "0051e02ff06e71f5",
+   "status": "pending",
+   "monthly": 18617377.55,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.662Z"
+  },
+  "vpnConnectionVpc-002": {
+   "hash": "19d2e1a61a25dc14",
+   "status": "pending",
+   "monthly": 112210.89,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.665Z"
+  },
+  "vpnConnectionVpc-003": {
+   "hash": "a167a515bf9c9b6e",
+   "status": "pending",
+   "monthly": 18617377.55,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.669Z"
+  },
+  "vpnConnectionVpc-004": {
+   "hash": "238cf3e9a070c809",
+   "status": "pending",
+   "monthly": 112210.89,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.673Z"
+  },
+  "networkAccessAnalyzerVpc-001": {
+   "hash": "061ae0b1a727eac9",
+   "status": "pending",
+   "monthly": 4080,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.677Z"
+  },
+  "reachabilityAnalyzerVpc-001": {
+   "hash": "247dfc267f0c40d2",
+   "status": "pending",
+   "monthly": 102000.3,
+   "upfront": 0,
+   "rows": 6,
+   "at": "2026-11-24T11:16:22.679Z"
+  },
+  "trafficMirroringVpc-001": {
+   "hash": "695f7c6a3d79852e",
+   "status": "pending",
+   "monthly": 11169032.84,
+   "upfront": 0,
+   "rows": 6,
+   "at": "2026-11-24T11:16:22.681Z"
+  },
+  "publicIpv4Address-001": {
+   "hash": "40d301e141350876",
+   "status": "pending",
+   "monthly": 5548043.8,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.684Z"
+  },
+  "publicIpv4Address-002": {
+   "hash": "6cf8a962eee34862",
+   "status": "pending",
+   "monthly": 1898014.6,
+   "upfront": 0,
+   "rows": 4,
+   "at": "2026-11-24T11:16:22.685Z"
+  },
+  "ipamVpc-001": {
+   "hash": "a62d509013aa57a6",
+   "status": "pending",
+   "monthly": 201042.6,
+   "upfront": 0,
+   "rows": 6,
+   "at": "2026-11-24T11:16:22.687Z"
+  },
+  "dataTransferVpc-001": {
+   "hash": "686e6aee8525e6cf",
+   "status": "pending",
+   "monthly": 0,
+   "upfront": 0,
+   "rows": 2,
+   "at": "2026-11-24T11:16:22.754Z"
+  },
+  "vpcRouteServer-001": {
+   "hash": "1e507114060d1ee6",
+   "status": "pending",
+   "monthly": 558451642.5,
+   "upfront": 0,
+   "rows": 6,
+   "at": "2026-11-24T11:16:22.756Z"
+  },
+  "networkAddressTranslationNatGatewayVpc-001": {
+   "hash": "1d6332422fe0e823",
+   "status": "pending",
+   "monthly": 164450347776.85,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.764Z"
+  },
+  "networkAddressTranslationNatGatewayVpc-002": {
+   "hash": "743bb512f36c7268",
+   "status": "pending",
+   "monthly": 164450575555.9,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.767Z"
+  },
+  "networkAddressTranslationNatGatewayVpc-003": {
+   "hash": "fb71145c6aa0c808",
+   "status": "pending",
+   "monthly": 249994.69,
+   "upfront": 0,
+   "rows": 6,
+   "at": "2026-11-24T11:16:22.769Z"
+  },
+  "transitGatewayVpc-001": {
+   "hash": "50a5e3412fae967f",
+   "status": "pending",
+   "monthly": 182700365696.7,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.773Z"
+  },
+  "transitGatewayVpc-002": {
+   "hash": "43a451b1c0e92289",
+   "status": "pending",
+   "monthly": 182700365623.62,
+   "upfront": 0,
+   "rows": 8,
+   "at": "2026-11-24T11:16:22.777Z"
+  },
+  "awsPrivateLinkVpc-001": {
+   "hash": "fef129f290b107a6",
+   "status": "pending",
+   "monthly": 73000156525.28,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.780Z"
+  },
+  "awsPrivateLinkVpc-002": {
+   "hash": "1683c2b99261fc0c",
+   "status": "pending",
+   "monthly": 36500073043.9,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.789Z"
+  },
+  "awsPrivateLinkVpc-003": {
+   "hash": "545df5523bffb2c7",
+   "status": "pending",
+   "monthly": 36500083554.48,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.791Z"
+  },
+  "gatewayLoadBalancerVpc-001": {
+   "hash": "d428a34d34f8dd23",
+   "status": "pending",
+   "monthly": 13784635.09,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.798Z"
+  },
+  "gatewayLoadBalancerVpc-002": {
+   "hash": "21a1761f4a7d12b3",
+   "status": "pending",
+   "monthly": 24807536.55,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.803Z"
+  },
+  "gatewayLoadBalancerVpc-003": {
+   "hash": "5eb03f89b8ab6061",
+   "status": "pending",
+   "monthly": 11023259.74,
+   "upfront": 0,
+   "rows": 8,
+   "at": "2026-11-24T11:16:22.806Z"
+  },
+  "cloudWan-001": {
+   "hash": "eba4b5349236ac68",
+   "status": "pending",
+   "monthly": 474500952462.57,
+   "upfront": 0,
+   "rows": 10,
+   "at": "2026-11-24T11:16:22.812Z"
+  },
+  "cloudWan-002": {
+   "hash": "67b882b7b79040a5",
+   "status": "pending",
+   "monthly": 474500951542.73,
+   "upfront": 0,
+   "rows": 6,
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-001": {
+   "hash": "17af08e5e7eedf86",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-002": {
+   "hash": "5275cbf1ecaef7e3",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-003": {
+   "hash": "42da49947628d887",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-004": {
+   "hash": "058a799123f176cb",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-005": {
+   "hash": "0c0b2132ec71f637",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-006": {
+   "hash": "a75840c9e07039b1",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-007": {
+   "hash": "04197e5c34393c12",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-008": {
+   "hash": "b1e2a794a842954a",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-009": {
+   "hash": "99f1c32ee7aacae9",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-010": {
+   "hash": "1a789af0b3f66cbb",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-011": {
+   "hash": "26aff65e9c8a6929",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-012": {
+   "hash": "8ae031e4f738ae42",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-013": {
+   "hash": "79e14dd15de67d18",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-014": {
+   "hash": "d1fd17fc0a6f3ff2",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-015": {
+   "hash": "5816cf27e43b2eb8",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-016": {
+   "hash": "21a7d72458403051",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-017": {
+   "hash": "feb7bd2e33c63781",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-018": {
+   "hash": "f1665875f6a7ee40",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-019": {
+   "hash": "e324edc749f07ee5",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-020": {
+   "hash": "b5b6316307e0cc6a",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-021": {
+   "hash": "a74c6e9c38f08309",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-022": {
+   "hash": "b5b6ff5059c5f92c",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-023": {
+   "hash": "f0d08d990750b61a",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-024": {
+   "hash": "f31405d27f8719c6",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-025": {
+   "hash": "5f43cb71ec61ae67",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-026": {
+   "hash": "0e2304b5adee20ce",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-027": {
+   "hash": "1f56341359fcd5cc",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-028": {
+   "hash": "4d8e108662a010bc",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-029": {
+   "hash": "4f9c9f3bb1cc5a86",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-030": {
+   "hash": "37638edcd30a392c",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-031": {
+   "hash": "37b18d5a39d8c146",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-032": {
+   "hash": "d620bed722e3e4f3",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-033": {
+   "hash": "14ec11de55da70ff",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-034": {
+   "hash": "51858443a8af80fb",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-035": {
+   "hash": "2f872244b9bad1e9",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-036": {
+   "hash": "624dc59a1f8f8157",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-037": {
+   "hash": "b86b60a8a62b7555",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-038": {
+   "hash": "9887928822450abe",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-039": {
+   "hash": "869a91a0e3b3a307",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-040": {
+   "hash": "0e8a06ea35948b70",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-041": {
+   "hash": "80562bdd6f1980d2",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-042": {
+   "hash": "175f83598cc945d0",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-043": {
+   "hash": "2485558eb7f196d5",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-044": {
+   "hash": "a1a7590db2f1b889",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-045": {
+   "hash": "a8aade46433484bb",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-046": {
+   "hash": "3a532d93e5a3f419",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-047": {
+   "hash": "89c3684f0727ec7c",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-048": {
+   "hash": "7d1ac982d632a4d7",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-049": {
+   "hash": "bad701e16f20acf5",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-050": {
+   "hash": "077cef80b6af49fd",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "ec2Enhancement-051": {
+   "hash": "e15e2fe7b9a8fac3",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-001": {
+   "hash": "e9dce252b134d1de",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-002": {
+   "hash": "b85adaffa96040f8",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-003": {
+   "hash": "f1a66b04c186718e",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-004": {
+   "hash": "ebc920cae914e0a1",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-005": {
+   "hash": "3337cd54e3f2c349",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-006": {
+   "hash": "cda7e5df3fec54a8",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-007": {
+   "hash": "bfc1f3682efa58b4",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-008": {
+   "hash": "bafa19b80b3898e1",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-009": {
+   "hash": "31df2c0314e5034f",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-010": {
+   "hash": "7d54f830ecbd25c7",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-011": {
+   "hash": "0e9dd06359767a1a",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-012": {
+   "hash": "578e15e6e929ae68",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-013": {
+   "hash": "ed275d01aa6a2c27",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-014": {
+   "hash": "984a90a5f52c04ad",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-015": {
+   "hash": "e6b3f950d1f0fa61",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-016": {
+   "hash": "5a68ec6fde33a450",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-017": {
+   "hash": "14f2011ee8f14230",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-018": {
+   "hash": "4b41b63fcda36152",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-019": {
+   "hash": "9529d934d541bc0a",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-020": {
+   "hash": "19b1c424bf1c483a",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-021": {
+   "hash": "56f03c43cde0dbae",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-022": {
+   "hash": "1573b908ffaf3e43",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-023": {
+   "hash": "8e3141c78411863e",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-024": {
+   "hash": "d142da113944e3f3",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-025": {
+   "hash": "7b91e80274390384",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-026": {
+   "hash": "5c1e0badab1a3511",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-027": {
+   "hash": "2834034c8b40caeb",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.821Z"
+  },
+  "eC2Next-028": {
+   "hash": "6a28b81f611ec12c",
+   "status": "native-error",
+   "nativeError": "ec2PriceFetcher not implemented",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "windowsWorkloads-001": {
+   "hash": "8d8cf61115127453",
+   "status": "native-error",
+   "nativeError": "25 bespoke subtypes",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "windowsWorkloads-002": {
+   "hash": "6a9fe45ecef00721",
+   "status": "native-error",
+   "nativeError": "25 bespoke subtypes",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-001": {
+   "hash": "8c7721e188be31e4",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-002": {
+   "hash": "9fd6451393488e49",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-003": {
+   "hash": "22f5864b2889e168",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-004": {
+   "hash": "e18573577340c777",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-005": {
+   "hash": "d9cacb0a7adee232",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-006": {
+   "hash": "101f8ce4cf509d82",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-007": {
+   "hash": "881f612a7226a824",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-008": {
+   "hash": "e03f1e11555e920b",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-009": {
+   "hash": "58a3730a559b5866",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-010": {
+   "hash": "2bd1f8a78210bc23",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-011": {
+   "hash": "0230157d0569b85b",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-012": {
+   "hash": "0098b27d0ceb80d0",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-013": {
+   "hash": "bcd8de5c8620bc91",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-014": {
+   "hash": "997cd78ec45e003a",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMySQLDB-015": {
+   "hash": "a19dd56a0f9fe86b",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-001": {
+   "hash": "c6e72001867c3393",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-002": {
+   "hash": "2d4e42135e12299b",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-003": {
+   "hash": "f8f2b16394a6b6ec",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-004": {
+   "hash": "80df48e39e36576d",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-005": {
+   "hash": "95c9b12bef775ffe",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-006": {
+   "hash": "5f5b0540ff1ee4c8",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-007": {
+   "hash": "81d4871255a91e69",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-008": {
+   "hash": "f30eacd38cebd724",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-009": {
+   "hash": "b859bead98c46173",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-010": {
+   "hash": "df8e73da717c42ed",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-011": {
+   "hash": "6e0ded5b1b3e5fb2",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-012": {
+   "hash": "1ce961c0a8290cbe",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-013": {
+   "hash": "047de404f587927a",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-014": {
+   "hash": "7ef32ed17abebbf4",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSPostgreSQLDB-015": {
+   "hash": "e6cb9080d8eba627",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-001": {
+   "hash": "f1bf166c91bba5c0",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-002": {
+   "hash": "9c033a351886f70d",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-003": {
+   "hash": "dd4a040475b47f02",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-004": {
+   "hash": "1a6951fbd003376c",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-005": {
+   "hash": "d4cf1a180e51ef18",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-006": {
+   "hash": "b62e0f111103fc07",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-007": {
+   "hash": "4003c395666604cb",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-008": {
+   "hash": "8ae9024581607648",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-009": {
+   "hash": "e3c900cdc8076fdb",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-010": {
+   "hash": "fc9cd4a16881c443",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-011": {
+   "hash": "a4032143ddaa5807",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSMariaDB-012": {
+   "hash": "b7bc9af22df0e18f",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-001": {
+   "hash": "bc3307bb76a499b0",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-002": {
+   "hash": "2d86ac2093c3c460",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-003": {
+   "hash": "2daa0454b356f018",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-004": {
+   "hash": "551f5e33d209286c",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-005": {
+   "hash": "2d1c0abf08eb60c9",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-006": {
+   "hash": "b374c2392eee4319",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-007": {
+   "hash": "35acbac355fd3c5e",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-008": {
+   "hash": "a694940e8cd2d87a",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-009": {
+   "hash": "043b57c4996ac8ec",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-010": {
+   "hash": "df0c4996d1689b0e",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-011": {
+   "hash": "c9c07ac7bafc1109",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-012": {
+   "hash": "37c93ac024cfebab",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRDSForSQLServer-013": {
+   "hash": "0e054f6ec9403f0b",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-001": {
+   "hash": "1eadca82c57c6777",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-002": {
+   "hash": "3c321b51951cef9f",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-003": {
+   "hash": "a237d158eae7ecd8",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-004": {
+   "hash": "1a167fb93d3ca14f",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-005": {
+   "hash": "b21c114915560405",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-006": {
+   "hash": "0b3b68e6004cd1e2",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-007": {
+   "hash": "859131467334c277",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-008": {
+   "hash": "ae0ad84095ddd901",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForOracle-009": {
+   "hash": "a6b033b8860b673d",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForDb2-001": {
+   "hash": "c354486615b5744e",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForDb2-002": {
+   "hash": "883cd2be6b25ea1b",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  },
+  "amazonRdsForDb2-003": {
+   "hash": "dde48e2eb54b0773",
+   "status": "native-error",
+   "nativeError": "column-form v2",
+   "at": "2026-11-24T11:16:22.822Z"
+  }
+ }
+}

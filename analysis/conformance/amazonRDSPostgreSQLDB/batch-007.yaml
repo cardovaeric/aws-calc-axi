@@ -1,0 +1,294 @@
+name: axi-conformance amazonRDSPostgreSQLDB-007
+currency: USD
+locale: en_US
+services:
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "14"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "15"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "16"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "17"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "18"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "19"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "20"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "21"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "22"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth
+  - code: amazonRDSPostgreSQLDB
+    region: us-east-1
+    template: rdsForPostgreSQL
+    set:
+      createRDSProxy: "1"
+      storageVolume: General Purpose
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 100
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      dedicatedLogVolume: "0"
+      DatabaseInsightsSelected: "1"
+      retentionPeriod: "23"
+      addRDSExtendedSupport: "1"
+      RDSExtendedSupportYear: year12
+      numberOfHoursOnES:
+        value: 10
+        unit: perMonth
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+      snapshotExport:
+        value: 10
+        unit: perMonth

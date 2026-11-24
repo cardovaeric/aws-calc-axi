@@ -1,0 +1,124 @@
+name: axi-conformance gatewayLoadBalancerVpc-003
+currency: USD
+locale: en_US
+services:
+  - code: gatewayLoadBalancerVpc
+    region: us-east-2
+    template: template_5
+    set:
+      numberOfGatewayAZs: 1
+      sizeOfProcessedDataPerGLB:
+        value: 1
+        unit: gb|hour
+      averageNumberOfNewGLBConnections:
+        value: 10000
+        unit: perSecond
+      averageGLBConnectionDuration:
+        value: 30
+        unit: sec
+      numberOfGatewayLoadBalancerEndpoints: 1
+  - code: gatewayLoadBalancerVpc
+    region: us-east-2
+    template: template_5
+    set:
+      numberOfGatewayAZs: 1
+      sizeOfProcessedDataPerGLB:
+        value: 1
+        unit: gb|hour
+      averageNumberOfNewGLBConnections:
+        value: 60
+        unit: perMinute
+      averageGLBConnectionDuration:
+        value: 30
+        unit: sec
+      numberOfGatewayLoadBalancerEndpoints: 1
+  - code: gatewayLoadBalancerVpc
+    region: us-east-2
+    template: template_5
+    set:
+      numberOfGatewayAZs: 1
+      sizeOfProcessedDataPerGLB:
+        value: 1
+        unit: gb|hour
+      averageNumberOfNewGLBConnections:
+        value: 600000
+        unit: perMinute
+      averageGLBConnectionDuration:
+        value: 30
+        unit: sec
+      numberOfGatewayLoadBalancerEndpoints: 1
+  - code: gatewayLoadBalancerVpc
+    region: us-east-2
+    template: template_5
+    set:
+      numberOfGatewayAZs: 1
+      sizeOfProcessedDataPerGLB:
+        value: 1
+        unit: gb|hour
+      averageNumberOfNewGLBConnections:
+        value: 10
+        unit: perSecond
+      averageGLBConnectionDuration:
+        value: 1
+        unit: sec
+      numberOfGatewayLoadBalancerEndpoints: 1
+  - code: gatewayLoadBalancerVpc
+    region: us-east-2
+    template: template_5
+    set:
+      numberOfGatewayAZs: 1
+      sizeOfProcessedDataPerGLB:
+        value: 1
+        unit: gb|hour
+      averageNumberOfNewGLBConnections:
+        value: 10
+        unit: perSecond
+      averageGLBConnectionDuration:
+        value: 10000
+        unit: sec
+      numberOfGatewayLoadBalancerEndpoints: 1
+  - code: gatewayLoadBalancerVpc
+    region: us-east-2
+    template: template_5
+    set:
+      numberOfGatewayAZs: 1
+      sizeOfProcessedDataPerGLB:
+        value: 1
+        unit: gb|hour
+      averageNumberOfNewGLBConnections:
+        value: 10
+        unit: perSecond
+      averageGLBConnectionDuration:
+        value: 167
+        unit: min
+      numberOfGatewayLoadBalancerEndpoints: 1
+  - code: gatewayLoadBalancerVpc
+    region: us-east-2
+    template: template_5
+    set:
+      numberOfGatewayAZs: 1
+      sizeOfProcessedDataPerGLB:
+        value: 1
+        unit: gb|hour
+      averageNumberOfNewGLBConnections:
+        value: 10
+        unit: perSecond
+      averageGLBConnectionDuration:
+        value: 30
+        unit: sec
+      numberOfGatewayLoadBalancerEndpoints: 1500000.5
+  - code: gatewayLoadBalancerVpc
+    region: us-east-2
+    template: template_5
+    set:
+      numberOfGatewayAZs: 1
+      sizeOfProcessedDataPerGLB:
+        value: 1
+        unit: gb|hour
+      averageNumberOfNewGLBConnections:
+        value: 10
+        unit: perSecond
+      averageGLBConnectionDuration:
+        value: 30
+        unit: sec
+      numberOfGatewayLoadBalancerEndpoints: 10000

@@ -1,0 +1,174 @@
+name: axi-conformance amazonRdsForDb2-002
+currency: USD
+locale: en_US
+services:
+  - code: amazonRdsForDb2
+    region: us-east-1
+    template: rdsFordb2
+    set:
+      storageVolume: General Purpose-GP3
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 20
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: tb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: General Purpose-GP3
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 20
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: Provisioned IOPS
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 20
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: Provisioned IOPS-IO2
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 20
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: General Purpose-GP3
+      provisioningIOPS: 128500
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 20
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: General Purpose-GP3
+      provisioningIOPS: 10000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 20
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: General Purpose-GP3
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 128500
+      storageAmount:
+        value: 20
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: General Purpose-GP3
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 10000
+      storageAmount:
+        value: 20
+        unit: gb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: General Purpose-GP3
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 20480
+        unit: mb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA
+  - code: amazonRdsForDb2
+    region: us-east-2
+    template: rdsFordb2
+    set:
+      storageVolume: General Purpose-GP3
+      provisioningIOPS: 1000
+      provisionedIOPSIO2: 1000
+      storageAmount:
+        value: 1
+        unit: tb|NA
+      gp3Iops: 12000
+      gp3Throughput:
+        value: 500
+        unit: mbps
+      additionalBackupStorage:
+        value: 1
+        unit: gb|NA

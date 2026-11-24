@@ -1,0 +1,317 @@
+{
+  "estimate": "axi-conformance publicIpv4Address-002",
+  "specHash": "138746dbd03eeb6d",
+  "url": "https://calculator.aws/#/estimate?id=1a66838a8735bb109df48eccb5ce08a1ebcf1bde",
+  "savedKey": "1a66838a8735bb109df48eccb5ce08a1ebcf1bde",
+  "publishedAt": "2026-11-24T10:38:20.511Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 9125014.6,
+    "upfront": 0,
+    "total12m": 109500175.2,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-2",
+        "monthly": 3650003.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1000000), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-2",
+        "monthly": 3.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (0)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-2",
+        "monthly": 1825003.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (500000)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-2",
+        "monthly": 3650003.65,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1000000)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 3650003.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 3.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 1825003.65,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 3650003.65,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 9125014.6,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=1a66838a8735bb109df48eccb5ce08a1ebcf1bde",
+    "title": "axi-conformance publicIpv4Address-002",
+    "monthly": "9,125,014.60 USD",
+    "upfront": "0.00 USD",
+    "annual": "109,500,175.20 USD",
+    "monthlyValue": 9125014.6,
+    "upfrontValue": 0,
+    "annualValue": 109500175.2,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "3,650,003.65 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1000000), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "3.65 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (0)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "1,825,003.65 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (500000)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "3,650,003.65 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1000000)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:38:23.007Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=1a66838a8735bb109df48eccb5ce08a1ebcf1bde",
+    "savedKey": "1a66838a8735bb109df48eccb5ce08a1ebcf1bde",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=1a66838a8735bb109df48eccb5ce08a1ebcf1bde",
+      "title": "axi-conformance awsEks-001",
+      "monthly": "691,492,503,569.74 USD",
+      "upfront": "0.00 USD",
+      "annual": "8,297,910,042,836.88 USD",
+      "monthlyValue": 691492503569.74,
+      "upfrontValue": 0,
+      "annualValue": 8297910042836.88,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "482.97 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "36,500,000,482.97 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (500000001), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "73,000,000,409.97 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1000000000), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "117.97 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "182,500,000,117.97 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (500000000), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "365,000,000,117.97 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1000000000), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "459.98 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "11,497,500,459.98 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (500000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "22,995,000,459.98 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1000000000), Number of Argo CD Applications per Argo CD capability (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "459.98 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of EKS Clusters (1), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of ACK capabilities (1), Number of ACK resources per ACK capability (1), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (1), Number of hybrid nodes (1 per month), Number of vCPU per hybrid node (1)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:39:17.088Z"
+    },
+    "mismatches": [
+      {
+        "field": "title",
+        "expected": "axi-conformance publicIpv4Address-002",
+        "actual": "axi-conformance awsEks-001"
+      },
+      {
+        "field": "monthly",
+        "expected": "9125014.60",
+        "actual": "691492503569.74"
+      },
+      {
+        "field": "annual",
+        "expected": "109500175.20",
+        "actual": "8297910042836.88"
+      },
+      {
+        "field": "service:Public IPv4 Address",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Public IPv4 Address",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Public IPv4 Address",
+        "expected": "present",
+        "actual": "missing"
+      },
+      {
+        "field": "service:Public IPv4 Address",
+        "expected": "present",
+        "actual": "missing"
+      }
+    ],
+    "verdict": "fail"
+  },
+  "expectation": {
+    "title": "axi-conformance publicIpv4Address-002",
+    "monthly": 9125014.6,
+    "upfront": 0,
+    "annual": 109500175.2,
+    "services": [
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 3650003.65,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1000000), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 3.65,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (0)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 1825003.65,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (500000)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 3650003.65,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (1), Number of Idle public IPv4 addresses (1000000)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

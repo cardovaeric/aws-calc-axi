@@ -1,0 +1,164 @@
+name: axi-conformance awsEks-005
+currency: USD
+locale: en_US
+services:
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 500000000
+      argoCDApplicationsPerCapability: 1
+      ackCapabilities: 1
+      ackResourcesPerCapability: 1
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 10000
+      argoCDApplicationsPerCapability: 1
+      ackCapabilities: 1
+      ackResourcesPerCapability: 1
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 0
+      ackCapabilities: 1
+      ackResourcesPerCapability: 1
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 500000000
+      ackCapabilities: 1
+      ackResourcesPerCapability: 1
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 10000
+      ackCapabilities: 1
+      ackResourcesPerCapability: 1
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 1
+      ackCapabilities: 0
+      ackResourcesPerCapability: 1
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 1
+      ackCapabilities: 500000000
+      ackResourcesPerCapability: 1
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 1
+      ackCapabilities: 10000
+      ackResourcesPerCapability: 1
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 1
+      ackCapabilities: 1
+      ackResourcesPerCapability: 0
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1
+  - code: awsEks
+    region: us-east-2
+    template: Amazon EKS
+    set:
+      numberOfEKSClusters: 1
+      numberOfEKSClusters_es: 1
+      argoCDCapabilities: 1
+      argoCDApplicationsPerCapability: 1
+      ackCapabilities: 1
+      ackResourcesPerCapability: 500000000
+      kroCapabilities: 1
+      kroRGDInstancesPerCapability: 1
+      numberOfHybridNodes:
+        value: 1
+        unit: perMonth
+      numberOfVCPUperNode: 1

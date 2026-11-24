@@ -50,6 +50,8 @@ npm run typecheck
 npm run lint
 npm test
 npm run e2e          # live DOM checks; needs network and agent-browser
+npm run coverage     # exhaustive static table in analysis/COVERAGE_TABLE.md
+npm run coverage -- --evaluate --offline  # add us-east-1/us-east-2 runtime status
 ```
 
 ## Usage

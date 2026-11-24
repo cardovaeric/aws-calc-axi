@@ -87,6 +87,8 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 - `npm run e2e`: 19 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
   ledger rows including the editor-recompute oracle)
 - `npm run ledger`: 12 rows, all pass
+- `npm run coverage`: 441-row exhaustive tracker in `analysis/COVERAGE_TABLE.md`
+  (353 clean, 62 partial column-form, 17 blocked column-form, 9 blocked by subtype)
 - Screenshots of every public link: `receipts/screenshots/` (12 PNGs)
 
 ## Coverage ledger summary

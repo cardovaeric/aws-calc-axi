@@ -1,443 +1,442 @@
-service_code,name,sub_type,visible_use1,visible_use2,kind,static_class,definition_class,components_supported,components_total,column_forms,missing_subtypes,hard_blockers,partial_gaps,selector_children,selector_nonclean_children,runtime_use2,runtime_use1,runtime_message_use1
-aWSDataSync,AWS DataSync,,yes,yes,service,clean,clean,13,13,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""sizeOfDataCopied"" (Total data copied by AWS DataSync per month) has no value in aWSDataSync/dataSync. Set it with --set sizeOfDataCopied=<value>"
-aWSDataTransfer,AWS Data Transfer,,yes,yes,service,clean,clean,5,5,0,,,,0,,ok,ok,
-aWSDirectoryService,AWS Directory Service,,yes,yes,service,blocked:column-form,blocked:column-form,16,16,4,,remap.constant,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_MicrosoftAD"" needs a value for ""Directory Type""; set columnFormIPM_MicrosoftAD with {""Directory Type"": <value>}"
-aWSLambda,AWS Lambda,,yes,yes,service,clean,clean,187,187,0,,,,0,,ok,ok,
-aWSPricingCalculatorStrings,AWS Pricing Calculator Strings,,no,no,service,no-surface,no-surface,0,0,0,,,,0,,fail:UNKNOWN_TEMPLATE,fail:UNKNOWN_TEMPLATE,"service ""aWSPricingCalculatorStrings"" has no template """""
-aWSStorageGateway,AWS Storage Gateway,,yes,yes,service,clean,clean,68,68,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""sizeOfDataToFileGateway"" (Data written to Amazon file storage by your gateway) has no value in aWSStorageGateway/fileGateway. Set it with --set sizeOfDataToFileGateway=<value>"
-aWSTransferForSFTP,AWS Transfer Family,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,5,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""msgSentUnder"" (Number of AS2 messages sent per month) has no value in as2/awsTransferForAS2. Set it with --set msgSentUnder=<value>"
-activeCustomBatchTranslation,Active Custom Batch Translation,subService,no,no,service,clean,clean,4,4,0,,,,0,,fail:ERROR,ok,
-agentCoreBrowserTools,AgentCore Browser Tools,subService,no,no,service,clean,clean,18,18,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_agentsessions_per_month"" (Number of agent sessions per month) has no value in agentCoreBrowserTools/template_0. Set it with --set Number_of_agentsessions_per_month=<value>"
-agentCoreCodeInterpreter,AgentCore Code Interpreter,subService,no,no,service,clean,clean,18,18,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_agentsessions_per_month"" (Number of agent sessions per month) has no value in agentCoreCodeInterpreter/template_0. Set it with --set Number_of_agentsessions_per_month=<value>"
-agentCoreGateway,AgentCore Gateway,subService,no,no,service,clean,clean,15,15,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_agentsessions_per_month"" (Number of agent sessions per month) has no value in agentCoreGateway/template_0. Set it with --set Number_of_agentsessions_per_month=<value>"
-agentCoreIdentity,AgentCore Identity,subService,no,no,service,clean,clean,13,13,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_agentsessions_per_month"" (Number of agent sessions per month) has no value in agentCoreIdentity/template_0. Set it with --set Number_of_agentsessions_per_month=<value>"
-agentCoreMemory,AgentCore Memory,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_agentsessions_per_month"" (Number of agent sessions per month) has no value in agentCoreMemory/template_0. Set it with --set Number_of_agentsessions_per_month=<value>"
-agentCoreObservability,AgentCore Observability,subService,no,no,service,clean,clean,10,10,0,,,,0,,ok,ok,
-agentCoreRuntime,AgentCore Runtime,subService,no,no,service,clean,clean,16,16,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_agentsessions_per_month"" (Number of agent sessions per month) has no value in agentCoreRuntime/template_0. Set it with --set Number_of_agentsessions_per_month=<value>"
-ai21,AI21 Labs,subService,no,no,service,clean,clean,26,26,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""igJjIVFaUoBY6jj90bhd_eIO5FaqDhRmnsO7UbeWTSY"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-amazon,Amazon,subService,no,no,service,clean,clean,390,390,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""4y-w5fTx11DVp8p2s6tnrEVfDq3G0fh5CDmmyV4CLLc"" in US East (N. Virginia) (mapping definition ""bedrockfoundationmodels"")"
-amazonApiGateway,Amazon API Gateway,,yes,yes,service,clean,clean,46,46,0,,,,0,,ok,ok,
-amazonAppFlow,Amazon AppFlow,,yes,yes,service,clean,clean,16,16,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfFlow"" (Number of flows) has no value in amazonAppFlow/Appflow. Set it with --set numberOfFlow=<value>"
-amazonAppStream,Amazon WorkSpaces Applications,,yes,yes,service,partial:column-form,partial:column-form,167,167,2,,,dependent;single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Instance Type"":""stream.compute.2xlarge"",""Operating System"":""Windows"",""Multi Session"":""False""}"
-amazonAthena,Amazon Athena,,yes,yes,service,clean,clean,27,27,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfDPUs"" (Number of DPUs) has no value in amazonAthena/Athena. Set it with --set numberOfDPUs=<value>"
-amazonAugmentedAi,Amazon Augmented AI,,yes,yes,service,clean,clean,15,15,0,,,,0,,ok,ok,
-amazonAuroraBackup,Aurora,subService,no,no,service,clean,clean,24,24,0,,,,0,,ok,ok,
-amazonAuroraMySQLCompatible,Amazon Aurora MySQL-Compatible,,yes,yes,service,partial:column-form,partial:column-form,228,228,4,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:AMBIGUOUS_SELECTION,fail:AMBIGUOUS_SELECTION,"PLC_2.0 selector match is ambiguous for {""Instance Type"":""db.r6g.large""} (3 rows); add a secondary selector"
-amazonBedrock,Amazon Bedrock,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,13,,fail:ERROR,fail:ERROR,"no price for metered unit ""igJjIVFaUoBY6jj90bhd_eIO5FaqDhRmnsO7UbeWTSY"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-amazonBedrockAgentCore,Amazon Bedrock AgentCore,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,7,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_agentsessions_per_month"" (Number of agent sessions per month) has no value in agentCoreRuntime/template_0. Set it with --set Number_of_agentsessions_per_month=<value>"
-amazonBraket,Amazon Braket,,yes,no,service,clean,clean,99,99,0,,,,0,,fail:ERROR,fail:MISSING_INPUT,"required input ""ionqforteReservationHours"" (Forte Reservation hours) has no value in amazonBraket/amazonBraket. Set it with --set ionqforteReservationHours=<value>"
-amazonCarrierIp,Amazon Carrier IP,,no,no,service,clean,clean,20,20,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfEC2Instances"" (Number of EC2 instances) has no value in amazonCarrierIp/carrierIP. Set it with --set numberOfEC2Instances=<value>"
-amazonCertificateManager,AWS Certificate Manager,,yes,yes,service,clean,clean,19,19,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""-VSpzeYEDVnZJ0IBtNwVbYpzI_hGoxzDKc9lw6-R994"" in US East (N. Virginia) (mapping definition ""acm"")"
-amazonChime,Amazon Chime,subServiceSelector,no,no,selector,blocked,no-surface,0,0,0,,,,2,chimeCostAnalysis;chimeBusinessCallingAnalysis,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_inbound_TollFree"" needs a value for ""Calling Type""; set columnFormIPM_inbound_TollFree with {""Calling Type"": <value>}"
-amazonChimeSdk,Amazon Chime SDK,subServiceSelector,yes,no,selector,blocked,no-surface,0,0,0,,,,5,ptsnAudio;sipTrunking,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""attendees"" (Number of attendees) has no value in webRtcMedia/template_webRTCmedia. Set it with --set attendees=<value>"
-amazonChimeTCO,Amazon Chime cost comparison tool,TCOCalculator,no,no,service,clean,clean,76,76,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""_generated_0"" (Number of users) has no value in amazonChimeTCO/template_0. Set it with --set _generated_0=<value>"
-amazonCloudFront,Amazon CloudFront,,yes,yes,service,clean,clean,198,198,0,,,,0,,ok,ok,
-amazonCloudWatch,Amazon CloudWatch,,yes,yes,service,clean,clean,191,191,0,,,,0,,ok,ok,
-amazonCodeGuru,Amazon CodeGuru Reviewer,,yes,yes,service,clean,clean,19,19,0,,,,0,,ok,ok,
-amazonCodeWhisperer,Amazon Q Developer,,yes,no,service,clean,clean,5,5,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_users_per_month"" (Number of users per month) has no value in amazonCodeWhisperer/template_0. Set it with --set Number_of_users_per_month=<value>"
-amazonCognito,Amazon Cognito,,yes,yes,service,clean,clean,353,353,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""cognito_NumberOfMAUs"" (Number of monthly active users (MAU)) has no value in amazonCognito/Cognito. Set it with --set cognito_NumberOfMAUs=<value>"
-amazonComprehend,Amazon Comprehend,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,12,,ok,ok,
-amazonComprehendMedical,Amazon Comprehend Medical,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,5,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_text_(utf-8)_documents"" (Number of text (utf-8) documents (NERe)) has no value in medicalNamedEntityAndRelationshipExtractionNeReApi/template_0. Set it with --set Number_of_text_(utf-8)_document"
-amazonDetective,Amazon Detective,,yes,yes,service,clean,clean,6,6,0,,,,0,,ok,ok,
-amazonDevOpsGuru,Amazon DevOps Guru,,no,no,service,clean,clean,1,1,0,,,,0,,ok,ok,
-amazonDocumentDB,Amazon DocumentDB (with MongoDB compatibility),,yes,yes,service,partial:column-form,partial:column-form,79,79,2,,,additionalPricingData;dependent;single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,no PLC_2.0 price set matches db.t3.medium in the selected region
-amazonDocumentDbBackup,DocumentDB,subService,no,no,service,clean,clean,24,24,0,,,,0,,ok,ok,
-amazonDynamoDb,Amazon DynamoDB,subServiceSelector,yes,yes,selector,partial,no-surface,0,0,0,,,,8,amazonDynamoDbDaxClusters,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""provisionedDataStorageSize"" (Data storage size) has no value in amazonDynamoDbProvisionedThroughputCapacity/dynamoDBProvisioned. Set it with --set provisionedDataStorageSize=<value>"
-amazonDynamoDbBackup,DynamoDB,subService,no,no,service,clean,clean,66,66,0,,,,0,,ok,ok,
-amazonDynamoDbDaxClusters,DynamoDB Accelerator (DAX) clusters,subService,no,no,service,partial:column-form,partial:column-form,2,2,1,,,single-row,0,,ok,ok,
-amazonDynamoDbProvisionedThroughputCapacity,DynamoDB provisioned capacity,subService,no,no,service,clean,clean,118,118,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""provisionedDataStorageSize"" (Data storage size) has no value in amazonDynamoDbProvisionedThroughputCapacity/dynamoDBProvisioned. Set it with --set provisionedDataStorageSize=<value>"
-amazonDynamoDbStreams,DynamoDB Streams,subService,no,no,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""streamReadRequests"" (Number of DynamoDB Streams GetRecord API requests) has no value in amazonDynamoDbStreams/dynamoDBOnDemandStreams. Set it with --set streamReadRequests=<value>"
-amazonEFS,Amazon Elastic File System (EFS),,yes,yes,service,clean,clean,113,113,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""standardStorageSize"" (Desired Storage Capacity) has no value in amazonEFS/elasticFileSystem. Set it with --set standardStorageSize=<value>"
-amazonEMR,Amazon EMR,subServiceSelector,yes,yes,selector,blocked,no-surface,0,0,0,,,,5,amazonEmrMasterNode;amazonEmrCoreNode;amazonEmrTaskNode,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""masterNode_generated_0"" needs a value for ""Instance Type""; set masterNode_generated_0 with {""Instance Type"": <value>}"
-amazonEbsBackup,EBS,subService,no,no,service,clean,clean,35,35,0,,,,0,,ok,ok,
-amazonEc2DedicatedHosts,Amazon EC2 Dedicated Hosts,,no,no,service,partial:column-form,partial:column-form,30,30,1,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonEfsBackup,EFS Backup,subService,no,no,service,clean,clean,91,91,0,,,,0,,ok,ok,
-amazonElastiCache,Amazon ElastiCache,,yes,yes,service,partial:column-form,partial:column-form,50,50,3,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_dsp"" needs a value for ""Cache Engine""; set columnFormIPM_dsp with {""Cache Engine"": <value>}"
-amazonElasticBlockStore,Amazon Elastic Block Store (EBS),,yes,yes,service,clean,clean,68,68,0,,,,0,,ok,ok,
-amazonElasticContainerRegistry,Amazon Elastic Container Registry,,yes,yes,service,clean,clean,16,16,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""amountofdatastored"" (Amount of data stored) has no value in amazonElasticContainerRegistry/template_0. Set it with --set amountofdatastored=<value>"
-amazonElasticGraphics,Amazon Elastic Graphics,,yes,yes,service,partial:column-form,partial:column-form,2,2,1,,,single-row,0,,ok,ok,
-amazonElasticIP,Amazon Elastic IP,,no,no,service,clean,clean,20,20,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfEC2Instances"" (Number of EC2 instances) has no value in amazonElasticIP/elasticIP. Set it with --set numberOfEC2Instances=<value>"
-amazonElasticTranscoder,Amazon Elastic Transcoder,,yes,no,service,clean,clean,21,21,0,,,,0,,fail:ERROR,ok,
-amazonElasticVMwareService,Amazon Elastic VMware Service,,yes,yes,service,partial:column-form,partial:column-form,3,3,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonElasticsearchService,Amazon OpenSearch Service,,yes,yes,service,partial:column-form,partial:column-form,87,87,3,,,dependent;riPricingTypes[];single-row,0,,fail:AMBIGUOUS_SELECTION,fail:AMBIGUOUS_SELECTION,"PLC_2.0 selector match is ambiguous for {""Instance Type"":""r5.2xlarge.search""} (2 rows); add a secondary selector"
-amazonEmrCoreNode,Amazon EMR core node on EC2,subService,no,no,service,blocked:column-form,blocked:column-form,3,3,1,,utilization-selector,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""coreNode_generated_0"" needs a value for ""Instance Type""; set coreNode_generated_0 with {""Instance Type"": <value>}"
-amazonEmrMasterNode,Amazon EMR master node on EC2,subService,no,no,service,blocked:column-form,blocked:column-form,3,3,1,,utilization-selector,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""masterNode_generated_0"" needs a value for ""Instance Type""; set masterNode_generated_0 with {""Instance Type"": <value>}"
-amazonEmrOnEks,Amazon EMR on EKS,subService,no,no,service,clean,clean,10,10,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfvCPU"" (Number of vCPU per hour) has no value in amazonEmrOnEks/template_0. Set it with --set numberOfvCPU=<value>"
-amazonEmrServerless,Amazon EMR Serverless,subService,no,no,service,clean,clean,30,30,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""totalvCPUHours"" (Number of vCPUs per job run) has no value in amazonEmrServerless/template_0. Set it with --set totalvCPUHours=<value>"
-amazonEmrTaskNode,Amazon EMR task node on EC2,subService,no,no,service,blocked:column-form,blocked:column-form,3,3,1,,utilization-selector,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""taskNode_generated_0"" needs a value for ""Instance Type""; set taskNode_generated_0 with {""Instance Type"": <value>}"
-amazonEventBridge,Amazon EventBridge,,yes,yes,service,clean,clean,91,91,0,,,,0,,ok,ok,
-amazonFSx,Amazon FSx for Windows File Server,,yes,yes,service,clean,clean,72,72,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""storageCapacity"" (Desired storage capacity) has no value in amazonFSx/singleAZDeployment. Set it with --set storageCapacity=<value>"
-amazonFSxForLustre,Amazon FSx for Lustre,,yes,yes,service,partial:column-form,partial:column-form,106,106,1,,,dependent;single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Storage type"":""SSD"",""Throughput capacity"":""50 MBps/TiB""}"
-amazonFSxForNetAppOntap,Amazon FSx for NetApp ONTAP,,yes,yes,service,clean,clean,233,233,0,,,,0,,ok,ok,
-amazonFSxForOpenZfs,Amazon FSx for OpenZFS,,yes,yes,service,clean,clean,164,164,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""desired_storage_capacity"" (Desired storage capacity) has no value in amazonFSxForOpenZfs/SingleAZ2. Set it with --set desired_storage_capacity=<value>"
-amazonFSxLustreBackup,FSx Lustre,subService,no,no,service,clean,clean,35,35,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""Per GB-Mo Persistent Lustre Storage with Throughput Capacity"" in US East (N. Virginia) (mapping definition ""fsx"")"
-amazonFSxNetAppOntapBackup,FSx NetApp ONTAP,subService,no,no,service,clean,clean,35,35,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""Storage ONTAP"" in US East (N. Virginia) (mapping definition ""fsx"")"
-amazonFSxOpenZfsBackup,FSx OpenZFS,subService,no,no,service,clean,clean,35,35,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""Storage OpenZFS"" in US East (N. Virginia) (mapping definition ""fsx"")"
-amazonFSxWindowsBackup,FSx Windows,subService,no,no,service,clean,clean,35,35,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""Backup storage Windows"" in US East (N. Virginia) (mapping definition ""fsx"")"
-amazonFileCache,Amazon File Cache,,yes,yes,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""storageCapacity"" (Storage capacity) has no value in amazonFileCache/template. Set it with --set storageCapacity=<value>"
-amazonForecast,Amazon Forecast,,yes,yes,service,clean,clean,22,22,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""frequencyOfForecasting"" (Forecasting frequency) has no value in amazonForecast/template_0. Set it with --set frequencyOfForecasting=<value>"
-amazonFraudDetector,Amazon Fraud Detector,,yes,yes,service,clean,clean,31,31,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""dataProcessed"" (Event data processed and stored) has no value in amazonFraudDetector/Frauddetector. Set it with --set dataProcessed=<value>"
-amazonGameLift,Amazon GameLift Servers,,yes,yes,service,partial:column-form,partial:column-form,29,29,1,,,dependent;single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,no PLC_2.0 price set matches c6a.large / Linux in the selected region
-amazonGameLiftStreams,Amazon GameLift Streams,,yes,yes,service,partial:column-form,partial:column-form,11,11,1,,,single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,no PLC_2.0 price set matches gen5n_ultra in the selected region
-amazonGuardDuty,Amazon GuardDuty,,yes,yes,service,clean,clean,83,83,0,,,,0,,ok,ok,
-amazonHealthImaging,AWS HealthImaging,,yes,no,service,clean,clean,34,34,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Storage_per_Month"" (Storage per Month) has no value in amazonHealthImaging/amazonMedicalImaging. Set it with --set Storage_per_Month=<value>"
-amazonHealthlake,Amazon Healthlake,,yes,yes,service,clean,clean,40,40,0,,,,0,,ok,ok,
-amazonIVS,Amazon Interactive Video Service (IVS),,no,no,service,clean,clean,333,333,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""z49djwMWl0D-35lsOAPeAx9f0tpfKX-yCQyBaqdtlJw"" in US East (N. Virginia) (mapping definition ""ivs"")"
-amazonIVSChat,Amazon IVS Chat,,yes,no,service,clean,clean,9,9,0,,,,0,,fail:ERROR,ok,
-amazonInspector,Amazon Inspector,,yes,yes,service,clean,clean,39,39,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""NumberOfEC2Instance"" (Average* No. of EC2 instances scanned per month) has no value in amazonInspector/Inspectorv2. Set it with --set NumberOfEC2Instance=<value>"
-amazonKendra,Amazon Kendra,,yes,yes,service,clean,clean,61,61,0,,,,0,,ok,ok,
-amazonKeyspaces,Amazon Keyspaces,,yes,yes,service,partial:column-form,partial:column-form,183,183,4,,,additionalPricingData;dependent;single-row,0,,ok,ok,
-amazonKinesisDataAnalytics,Amazon Managed Service for Apache Flink,,yes,yes,service,clean,clean,36,36,0,,,,0,,ok,ok,
-amazonKinesisDataStreams,Amazon Kinesis Data Streams,,yes,yes,service,clean,clean,125,125,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfRecordsOnDemand"" (Number of records) has no value in amazonKinesisDataStreams/amazonKinesisDataStreamsOnDemand. Set it with --set numberOfRecordsOnDemand=<value>"
-amazonKinesisFirehose,Amazon Data firehose,,yes,yes,service,clean,clean,82,82,0,,,,0,,ok,ok,
-amazonKinesisVideoStreams,Amazon Kinesis Video Streams,,yes,yes,service,clean,clean,87,87,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfDevices"" (Number of devices) has no value in amazonKinesisVideoStreams/kinesisVideoStreams. Set it with --set numberOfDevices=<value>"
-amazonLex,Amazon Lex,,yes,no,service,clean,clean,24,24,0,,,,0,,fail:ERROR,ok,
-amazonLightsail,Amazon Lightsail,subServiceSelector,yes,yes,selector,partial,no-surface,0,0,0,,,,8,lightsailVirtualServers;lightsailManagedDatabases;lightsailContainers;lightsailObjectStorage,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""operation""; set columnFormIPM with {""operation"": <value>}"
-amazonLookoutForEquipment,Amazon Lookout for Equipment,,yes,no,service,clean,clean,17,17,0,,,,0,,fail:ERROR,ok,
-amazonLookoutForMetrics,Amazon Lookout for Metrics,,yes,yes,service,clean,clean,9,9,0,,,,0,,ok,ok,
-amazonLookoutForVision,Amazon Lookout for Vision,,yes,yes,service,clean,clean,23,23,0,,,,0,,ok,ok,
-amazonMQ,Amazon MQ,,yes,yes,service,clean,clean,64,64,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfBrokers"" (Number of Brokers running) has no value in amazonMQ/singleInstanceBroker. Set it with --set numberOfBrokers=<value>"
-amazonMacie,Amazon Macie,,yes,yes,service,clean,clean,37,37,0,,,,0,,ok,ok,
-amazonMainframeModernization,AWS Mainframe Modernization,subServiceSelector,yes,yes,selector,blocked,no-surface,0,0,0,,,,2,mainframeBluAge;mainframeMicroFocus,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_bluAgeProd"" needs a value for ""Product Name""; set columnFormIPM_bluAgeProd with {""Product Name"": <value>}"
-amazonManagedBlockchain,Amazon Managed Blockchain,,yes,no,service,partial:column-form,partial:column-form,31,31,2,,,dependent;single-row,0,,fail:UNKNOWN_REGION,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Instance Type"":""bc.t3.small"",""Framework Type"":""Starter""}"
-amazonManagedGrafana,Amazon Managed Grafana,,yes,yes,service,clean,clean,14,14,0,,,,0,,ok,ok,
-amazonManagedServiceForPrometheus,Amazon Managed Service for Prometheus,,yes,yes,service,clean,clean,80,80,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberof_collectors"" (Number of collectors) has no value in amazonManagedServiceForPrometheus/prometheusSimple. Set it with --set numberof_collectors=<value>"
-amazonManagedStreamingForApacheKafkaMsk,Amazon Managed Streaming for Apache Kafka (MSK),,yes,yes,service,partial:column-form,partial:column-form,58,58,1,,,single-row,0,,ok,ok,
-amazonManagedWorkflowsForApacheAirflow,Amazon Managed Workflows for Apache Airflow,,yes,yes,service,clean,clean,48,48,0,,,,0,,ok,ok,
-amazonMemoryDbForRedis,Amazon MemoryDB,,yes,yes,service,partial:column-form,partial:column-form,17,17,2,,,dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonNeptune,Amazon Neptune,,yes,yes,service,partial:column-form,partial:column-form,143,143,5,,,additionalPricingData;dependent;single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonNeptuneBackup,Neptune,subService,no,no,service,clean,clean,24,24,0,,,,0,,ok,ok,
-amazonNetworkFirewall,AWS Network Firewall,,yes,yes,service,clean,clean,23,23,0,,,,0,,ok,ok,
-amazonOmics,AWS HealthOmics,subServiceSelector,yes,yes,selector,partial,no-surface,0,0,0,,,,4,omicsWorkflows;omicsReady2RunWorkflows,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Resource Type""; set columnFormIPM with {""Resource Type"": <value>}"
-amazonPersonalize,Amazon Personalize,,yes,yes,service,clean,clean,69,69,0,,,,0,,fail:ERROR,ok,
-amazonPinpoint,Amazon Pinpoint,,yes,yes,service,clean,clean,33,33,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberInAppMessageRequests"" (Number of in-app message requests) has no value in amazonPinpoint/pinpoint. Set it with --set numberInAppMessageRequests=<value>"
-amazonPolly,Amazon Polly,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,4,,fail:ERROR,ok,
-amazonQBusiness,Amazon Q Business,,yes,no,service,clean,clean,20,20,0,,,,0,,fail:ERROR,ok,
-amazonQuantumLedgerDatabaseQldb,Amazon Quantum Ledger Database (QLDB),,yes,yes,service,clean,clean,15,15,0,,,,0,,ok,ok,
-amazonQuickSight,Amazon QuickSight,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,2,,fail:ERROR,ok,
-amazonQuickSightAnomalyDetection,Amazon QuickSight Alerts & Anomaly Detection,subService,no,no,service,clean,clean,7,7,0,,,,0,,ok,ok,
-amazonQuickSightReadersAuthorsSpice,"Amazon QuickSight Readers, Authors, SPICE",subService,no,no,service,clean,clean,179,179,0,,,,0,,fail:ERROR,ok,
-amazonRDSAuroraPostgreSQLCompatibleDB,Amazon Aurora PostgreSQL-Compatible DB,,yes,yes,service,partial:column-form,partial:column-form,201,201,4,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:AMBIGUOUS_SELECTION,fail:AMBIGUOUS_SELECTION,"PLC_2.0 selector match is ambiguous for {""Instance Type"":""db.r6g.large""} (3 rows); add a secondary selector"
-amazonRDSForSQLServer,Amazon RDS for SQL server,,yes,yes,service,partial:column-form,partial:column-form,114,114,1,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonRDSMariaDB,Amazon RDS for MariaDB,,yes,yes,service,partial:column-form,partial:column-form,81,81,1,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonRDSMySQLDB,Amazon RDS for MySQL,,yes,yes,service,partial:column-form,partial:column-form,99,99,1,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonRDSPostgreSQLDB,Amazon RDS for PostgreSQL,,yes,yes,service,partial:column-form,partial:column-form,100,100,1,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonRdsBackup,RDS,subService,no,no,service,clean,clean,35,35,0,,,,0,,ok,ok,
-amazonRdsCustomForOracle,Amazon RDS Custom for Oracle,,yes,yes,service,partial:column-form,partial:column-form,42,42,1,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:AMBIGUOUS_SELECTION,fail:AMBIGUOUS_SELECTION,"PLC_2.0 selector match is ambiguous for {""Instance Type"":""db.r5.xlarge""} (2 rows); add a secondary selector"
-amazonRdsCustomForSqlServer,Amazon RDS Custom for SQL Server,,yes,yes,service,partial:column-form,partial:column-form,48,48,1,,,dependent;riPricingTypes[];single-row,0,,fail:AMBIGUOUS_SELECTION,fail:AMBIGUOUS_SELECTION,"PLC_2.0 selector match is ambiguous for {""Instance Type"":""db.r5.xlarge"",""Database Edition"":""Enterprise""} (3 rows); add a secondary selector"
-amazonRdsForDb2,Amazon RDS for Db2,,yes,yes,service,partial:column-form,partial:column-form,41,41,1,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonRdsForOracle,Amazon RDS for Oracle,,yes,yes,service,partial:column-form,partial:column-form,59,59,1,,,additionalPricingData;dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonRdsForOutposts,Amazon RDS on AWS Outposts,,yes,yes,service,partial:column-form,partial:column-form,7,7,1,,,dependent;single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonRedshift,Amazon Redshift,,yes,yes,service,partial:column-form,partial:column-form,46,46,1,,,dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-amazonRekognition,Amazon Rekognition,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,5,,ok,ok,
-amazonRoute53,Amazon Route 53,,yes,yes,service,clean,clean,118,118,0,,,,0,,ok,ok,
-amazonS3,Amazon S3,,no,no,service,clean,clean,7,7,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3Services_generated_0"" (S3 Standard Storage) has no value in amazonS3/template_0. Set it with --set s3Services_generated_0=<value>"
-amazonS3Backup,S3,subService,no,no,service,clean,clean,35,35,0,,,,0,,ok,ok,
-amazonS3Glacier,S3 Glacier Flexible Retrieval,TCOCalculator,no,no,service,clean,clean,52,52,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3GlacierStorage"" (S3 Glacier Flexible Retrieval storage) has no value in amazonS3Glacier/S3Glacier. Set it with --set s3GlacierStorage=<value>"
-amazonS3GlacierDeepArhive,S3 Glacier Deep Archive,subService,no,no,service,clean,clean,42,42,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3GlacierDeepArchiveStorageSize"" (S3 Glacier Deep Archive storage) has no value in amazonS3GlacierDeepArhive/s3GlacierDeepArhive. Set it with --set s3GlacierDeepArchiveStorageSize=<value>"
-amazonS3IntelligentTiering,S3 Intelligent - Tiering,subService,no,no,service,clean,clean,80,80,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3IntStorage"" (S3 INT storage) has no value in amazonS3IntelligentTiering/s3IntelligentTiering. Set it with --set s3IntStorage=<value>"
-amazonS3Standard,S3 Standard,subService,no,no,service,clean,clean,25,25,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3StandardStorageSize"" (S3 Standard storage) has no value in amazonS3Standard/s3Standard. Set it with --set s3StandardStorageSize=<value>"
-amazonS3StandardInfrequentAccess,S3 Standard - Infrequent Access,subService,no,no,service,clean,clean,31,31,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3IaStorageSize"" (S3 Standard-IA storage) has no value in amazonS3StandardInfrequentAccess/s3StandardInfrequentAccess. Set it with --set s3IaStorageSize=<value>"
-amazonS3StorageManagement,S3 Management and Insights,subService,no,no,service,clean,clean,78,78,0,,,,0,,ok,ok,
-amazonSageMaker,Amazon SageMaker,subServiceSelector,yes,yes,selector,partial,no-surface,0,0,0,,,,15,sageMakerStudioNotebooks;sageMakerCodeEditor;sageMakerRStudioOnSageMaker;sageMakerOnDemandNotebookInstances;sageMakerProcessing;sageMakerDataWrangler;sageMakerTraining;sageMakerRealTimeInference;sageMakerAsynchronousInference;sageMakerBatchTransform,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-amazonSageMakerEdgeManager,SageMaker Edge Manager,subService,no,no,service,clean,clean,9,9,0,,,,0,,ok,ok,
-amazonSageMakerGroundTruth,Amazon SageMaker Ground Truth,,yes,yes,service,clean,clean,38,38,0,,,,0,,ok,ok,
-amazonSecurityLake,Amazon Security Lake,,yes,yes,service,clean,clean,15,15,0,,,,0,,ok,ok,
-amazonSimpleEmailService,Amazon Simple Email Service (SES),,yes,yes,service,clean,clean,365,365,0,,,,0,,ok,ok,
-amazonSimpleNotificationService,Amazon Simple Notification Service (SNS),subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,2,,ok,ok,
-amazonSimpleQueueService,Amazon Simple Queue Service (SQS),,yes,yes,service,clean,clean,21,21,0,,,,0,,ok,ok,
-amazonSimpleStorageServiceGroup,Amazon Simple Storage Service (S3),subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,16,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3StandardStorageSize"" (S3 Standard storage) has no value in amazonS3Standard/s3Standard. Set it with --set s3StandardStorageSize=<value>"
-amazonSimpleWorkflowService,Amazon Simple Workflow Service (SWF),,yes,yes,service,clean,clean,16,16,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""workflowExecutions"" (Workflow Executions) has no value in amazonSimpleWorkflowService/simpleWorkflow. Set it with --set workflowExecutions=<value>"
-amazonStorageGatewayBackup,Storage Gateway,subService,no,no,service,clean,clean,35,35,0,,,,0,,ok,ok,
-amazonTechnic,AWS MDC Rack,,no,no,service,clean,clean,21,21,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""Compute 1 Year T1"" in US East (N. Virginia) (mapping definition ""mdc"")"
-amazonTextract,Amazon Textract,,yes,yes,service,clean,clean,123,123,0,,,,0,,ok,ok,
-amazonTimestream,Amazon Timestream,,yes,yes,service,partial:column-form,partial:column-form,23,23,2,,,additionalPricingData;dependent;single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Product Family""; set columnFormIPM with {""Product Family"": <value>}"
-amazonTranscribe,Amazon Transcribe,,yes,yes,service,clean,clean,108,108,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""lE9QExfQWkbR0y6d3XfUZHCpKW1voj3UKj6FgOmHV0c"" in US East (N. Virginia) (mapping definition ""transcribe"")"
-amazonTranscribeMedical,Amazon Transcribe Medical,,yes,yes,service,clean,clean,5,5,0,,,,0,,ok,ok,
-amazonTranslate,Amazon Translate,subServiceSelector,yes,yes,selector,partial,no-surface,0,0,0,,,,4,realTimeDocumentTranslation,ok,ok,
-amazonVMwareBackup,VMware,subService,no,no,service,clean,clean,77,77,0,,,,0,,ok,ok,
-amazonVerifiedPermissions,Amazon Verified Permissions,,yes,yes,service,clean,clean,15,15,0,,,,0,,ok,ok,
-amazonVirtualPrivateCloud,Amazon Virtual Private Cloud (VPC),subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,13,,ok,ok,
-amazonWorkSpaces,Amazon WorkSpaces,subServiceSelector,yes,yes,missing-definition,missing-definition,missing-definition,,,,,,,0,,,,
-amazonWorkdocs,Amazon WorkDocs,,yes,no,service,clean,clean,25,25,0,,,,0,,fail:ERROR,ok,
-amazonWorkmail,Amazon WorkMail,,yes,no,service,clean,clean,6,6,0,,,,0,,fail:ERROR,ok,
-amazonWorkspaces,WorkSpaces Personal,subService,no,no,service,blocked:column-form,blocked:column-form,60,60,1,,utilization-selector,dependent;riPricingTypes[];single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Bundle Description"":""Standard (2 vCPU, 4GB RAM)"",""rootVolume"":""80 GB"",""userVolume"":""10 GB"",""Operating System"":""Windows"",""License"":""Included"",""Running Mode"":""[object Object]"",""Product Family"
-anthropic,Anthropic,subService,no,no,service,clean,clean,284,284,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""_r8V-SFggVQuxv1P-SqJsHy8RfumOshpIFF_L6qPq6o"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-appSyncApiCall,AppSync GraphQL API Requests,subService,no,no,service,clean,clean,5,5,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""noOfSearches"" (Number of API Requests) has no value in appSyncApiCall/apiquerydatamodification. Set it with --set noOfSearches=<value>"
-appSyncCaching,AppSync GraphQL Caching,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-appSyncEventApi,AppSync Events,subService,no,no,service,clean,clean,30,30,0,,,,0,,ok,ok,
-appSyncRealTime,AppSync GraphQL Real-Time,subService,no,no,service,clean,clean,13,13,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""realTimeActiveUsers"" (Number Of Subscribed Clients) has no value in appSyncRealTime/apiquerydatamodification. Set it with --set realTimeActiveUsers=<value>"
-applicationLoadBalancer,Application Load Balancer,subService,no,no,service,clean,clean,31,31,0,,,,0,,ok,ok,
-appsyncDataTransfer,Appsync Data Transfer,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-as2,AS2,subService,no,no,service,clean,clean,14,14,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""msgSentUnder"" (Number of AS2 messages sent per month) has no value in as2/awsTransferForAS2. Set it with --set msgSentUnder=<value>"
-auroraBackup,Aurora Backup,subService,no,no,service,clean,clean,51,51,0,,,,0,,ok,ok,
-auroraDsqlBackup,Aurora DSQL Backup,subService,no,no,service,clean,clean,79,79,0,,,,0,,ok,ok,
-awsAmplify,AWS Amplify,,yes,yes,service,clean,clean,24,24,0,,,,0,,ok,ok,
-awsAppConfig,AWS AppConfig,subService,no,no,service,clean,clean,34,34,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""sysManagerAppConfig_numberOfTargets"" (Targets) has no value in awsAppConfig/smAppConfig. Set it with --set sysManagerAppConfig_numberOfTargets=<value>"
-awsAppFabric,AWS AppFabric,,yes,no,service,clean,clean,12,12,0,,,,0,,fail:ERROR,ok,
-awsAppRunner,AWS App Runner,,yes,yes,service,clean,clean,63,63,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""requestsPerContainer"" (Concurrency) has no value in awsAppRunner/AppRunner. Set it with --set requestsPerContainer=<value>"
-awsAppSync,AWS AppSync,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,5,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""noOfSearches"" (Number of API Requests) has no value in appSyncApiCall/apiquerydatamodification. Set it with --set noOfSearches=<value>"
-awsApplicationMigrationSvc,AWS Application Migration Service,,yes,yes,service,clean,clean,11,11,0,,,,0,,ok,ok,
-awsAuditManager,AWS Audit Manager,,yes,yes,service,clean,clean,18,18,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfAccounts"" (Number of accounts) has no value in awsAuditManager/template_auditmanager. Set it with --set numberOfAccounts=<value>"
-awsB2BDataInterchange,AWS B2B Data Interchange,,yes,yes,service,clean,clean,14,14,0,,,,0,,ok,ok,
-awsBackup,AWS Backup,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,15,,fail:ERROR,fail:ERROR,request failed: HTTP 403 Forbidden
-awsBillingConductor,AWS Billing Conductor,,yes,no,service,clean,clean,15,15,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_Accounts"" (Number of accounts) has no value in awsBillingConductor/template_0. Set it with --set Number_of_Accounts=<value>"
-awsBudgets,AWS Budgets,,no,no,service,clean,clean,12,12,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""Budget Actions Inf per day"" in US East (N. Virginia) (mapping definition ""budgets"")"
-awsCertificateManager,AWS Private Certificate Authority,,yes,yes,service,clean,clean,35,35,0,,,,0,,ok,ok,
-awsCloudFormation,AWS CloudFormation,,yes,yes,service,clean,clean,20,20,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfOps"" (Total number of operations per extension) has no value in awsCloudFormation/CloudFormation. Set it with --set numberOfOps=<value>"
-awsCloudHsm,AWS CloudHSM,,yes,yes,service,clean,clean,9,9,0,,,,0,,ok,ok,
-awsCloudMap,AWS Cloud Map,,yes,yes,service,clean,clean,32,32,0,,,,0,,ok,ok,
-awsCloudTrail,AWS CloudTrail,,yes,yes,service,clean,clean,76,76,0,,,,0,,ok,ok,
-awsCodeArtifact,AWS CodeArtifact,,yes,yes,service,clean,clean,18,18,0,,,,0,,ok,ok,
-awsCodeBuild,AWS CodeBuild,,yes,yes,service,partial:column-form,partial:column-form,41,41,6,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Compute Type""; set columnFormIPM with {""Compute Type"": <value>}"
-awsCodeCommit,AWS CodeCommit,,no,no,service,clean,clean,6,6,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""AWSCodeCommit StartingRange 0 5"" in US East (N. Virginia) (mapping definition ""codecommit"")"
-awsCodeDeploy,AWS CodeDeploy,,yes,yes,service,clean,clean,7,7,0,,,,0,,ok,ok,
-awsCodePipeline,AWS CodePipeline,,yes,yes,service,clean,clean,12,12,0,,,,0,,ok,ok,
-awsConfig,AWS Config,,yes,yes,service,clean,clean,20,20,0,,,,0,,ok,ok,
-awsCostExplorer,AWS Cost Explorer,,yes,no,service,clean,clean,10,10,0,,,,0,,fail:ERROR,ok,
-awsDataPipeline,AWS Data Pipeline,,yes,no,service,clean,clean,27,27,0,,,,0,,fail:ERROR,ok,
-awsDatabaseMigrationService,AWS Database Migration Service,,yes,yes,service,partial:column-form,partial:column-form,27,27,2,,,additionalPricingData;dependent;single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Type""; set columnFormIPM with {""Instance Type"": <value>}"
-awsDeadlineCloud,AWS Deadline Cloud,,yes,yes,service,blocked:subtype,blocked:subtype,44,45,2,utilization:1,,dependent;single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM2"" needs a value for ""Instance Type""; set columnFormIPM2 with {""Instance Type"": <value>}"
-awsDeepRacer,AWS DeepRacer,,yes,no,service,clean,clean,37,37,0,,,,0,,ok,ok,
-awsDeviceFarm,AWS Device Farm,,no,no,service,clean,clean,23,23,0,,,,0,,fail:BAD_DEFINITION,fail:BAD_DEFINITION,"replace ""DeviceMUs"" has no mapping for osUsageType=nonenone"
-awsDirectConnect,AWS Direct Connect,,yes,yes,service,blocked:subtype,blocked:subtype,9,10,1,utilization:1,,dependent;riPricingTypes[];single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""port:Direct Connect Location""; set columnFormIPM with {""port:Direct Connect Location"": <value>}"
-awsDrsDrill,AWS DRS - Drill/Recovery,subService,no,no,service,clean,clean,8,8,0,,,,0,,ok,ok,
-awsDrsRecoveryReplication,AWS DRS - Replication,subService,no,no,service,clean,clean,82,82,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOnPremiseServerReplicated"" (Number of source servers replicated per month) has no value in awsDrsRecoveryReplication/template1. Set it with --set numberOnPremiseServerReplicated=<value>"
-awsEks,Amazon EKS,,yes,yes,service,clean,clean,44,44,0,,,,0,,ok,ok,
-awsElasticDisasterRecovery,AWS Elastic Disaster Recovery,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,2,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOnPremiseServerReplicated"" (Number of source servers replicated per month) has no value in awsDrsRecoveryReplication/template1. Set it with --set numberOnPremiseServerReplicated=<value>"
-awsElementalMediaConnect,AWS Elemental MediaConnect,,yes,yes,service,blocked:subtype,blocked:subtype,91,97,0,utilization:6,,,0,,fail:UNSUPPORTED_INPUT,fail:UNSUPPORTED_INPUT,"no handler for input subtype ""utilization"" (awsElementalMediaConnect/elementalMediaConnect/flowUtilization)"
-awsElementalMediaLive,AWS Elemental MediaLive,subServiceSelector,yes,yes,selector,partial,no-surface,0,0,0,,,,4,mediaLiveInput1;mediaLiveOutput1;mediaLiveAudioAddOns,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Pipeline"":""Standard"",""Output"":""AVC"",""Video Quality"":""Standard"",""Resolution"":""SD"",""Frame Rate"":""<30fps"",""Bit Rate"":""<10mbps"",""Reserve Type"":""On Demand""}"
-awsElementalMediaPackage,AWS Elemental MediaPackage,,yes,yes,service,clean,clean,42,42,0,,,,0,,ok,ok,
-awsElementalMediaTailor,AWS Elemental Media Tailor,,yes,yes,service,clean,clean,17,17,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""Ad Insertion 0 to 5000000 per month"" in US East (N. Virginia) (mapping definition ""elementalmediatailor"")"
-awsEntityResolution,AWS Entity Resolution,,yes,yes,service,clean,clean,40,40,0,,,,0,,ok,ok,
-awsEtlJobsAndDevelopmentEndpoints,AWS Glue ETL jobs and interactive sessions,subService,no,no,service,clean,clean,28,28,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""durationForInteractiveSession"" (Duration for provisioned interactive sessions) has no value in awsEtlJobsAndDevelopmentEndpoints/template_0. Set it with --set durationForInteractiveSession=<value>"
-awsEtlJobsFlexExecutionOption,AWS Glue ETL jobs with Flex execution option,subService,no,no,service,clean,clean,9,9,0,,,,0,,ok,ok,
-awsFargate,AWS Fargate,,yes,yes,service,clean,clean,43,43,0,,,,0,,ok,ok,
-awsFaultINjectorSimulator,AWS Fault Injection Service (FIS),,yes,yes,service,clean,clean,18,18,0,,,,0,,ok,ok,
-awsFinSpace,Amazon FinSpace Dataset Browser,,yes,yes,service,clean,clean,43,43,0,,,,0,,ok,ok,
-awsFirewallManager,AWS Firewall Manager,,yes,yes,service,clean,clean,88,88,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""DNS Domain Names DNS Firewall per Mo"" in US East (N. Virginia) (mapping definition ""route53regionalchina"")"
-awsGlue,AWS Glue,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,9,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""durationForInteractiveSession"" (Duration for provisioned interactive sessions) has no value in awsEtlJobsAndDevelopmentEndpoints/template_0. Set it with --set durationForInteractiveSession=<value>"
-awsGlueCrawlers,AWS Glue Crawlers,subService,no,no,service,clean,clean,7,7,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""durationForCrawl"" (Duration for each crawler) has no value in awsGlueCrawlers/glueCrawlers. Set it with --set durationForCrawl=<value>"
-awsGlueDataBrewInteractiveSessions,AWS Glue DataBrew interactive sessions,subService,no,no,service,clean,clean,14,14,0,,,,0,,ok,ok,
-awsGlueDataCatalogOptimization,AWS Glue Data Catalog Optimization,subService,no,no,service,clean,clean,7,7,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""durationForWorker"" (Duration for optimization (Compaction, Retention, Orphan File Deletion)) has no value in awsGlueDataCatalogOptimization/glueOptimization. Set it with --set durationForWorker=<value>"
-awsGlueDataCatalogStatistics,AWS Glue Data Catalog Statistics,subService,no,no,service,clean,clean,7,7,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""durationForWorker"" (Duration for statistics collection) has no value in awsGlueDataCatalogStatistics/glueOptimization. Set it with --set durationForWorker=<value>"
-awsGlueDataCatalogStorageRequests,AWS Glue Data Catalog storage requests,subService,no,no,service,clean,clean,10,10,0,,,,0,,ok,ok,
-awsGlueEtlForRayJobsAndInteractiveSessions,AWS Glue ETL for Ray jobs and interactive sessions,subService,no,no,service,clean,clean,12,12,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""durationForRayInteractiveSession"" (Duration for provisioned Ray interactive sessions) has no value in awsGlueEtlForRayJobsAndInteractiveSessions/template_0. Set it with --set durationForRayInteractiveSess"
-awsGlueEtlJobsMemoryOptimizedWorkers,AWS Glue ETL jobs and interactive sessions on memory-optimized workers,subService,no,no,service,clean,clean,15,15,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""durationForMemoryOptimizedInteractiveSession"" (Duration for provisioned interactive sessions on memory-optimized workers) has no value in awsGlueEtlJobsMemoryOptimizedWorkers/template_0. Set it with --set"
-awsIamAccessAnalyzer,AWS IAM Access Analyzer,,yes,yes,service,clean,clean,23,23,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfAccountsToMonitor"" (Number of accounts to monitor) has no value in awsIamAccessAnalyzer/iamaccessanalyzer. Set it with --set numberOfAccountsToMonitor=<value>"
-awsIoTAnalytics,AWS IoT Analytics,,yes,yes,service,clean,clean,32,32,0,,,,0,,ok,ok,
-awsIoTCore,AWS IoT Core,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,3,,fail:ERROR,ok,
-awsIoTCoreHttp,HTTP,subService,no,no,service,clean,clean,88,88,0,,,,0,,fail:ERROR,ok,
-awsIoTCoreLoRaWan,LoRaWAN,subService,no,no,service,clean,clean,45,45,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""LoRaWAN Messages Up to 1B"" in US East (N. Virginia) (mapping definition ""iot"")"
-awsIoTCoreMqtt,MQTT,subService,no,no,service,clean,clean,105,105,0,,,,0,,fail:ERROR,ok,
-awsIoTDeviceDefender,AWS IoT Device Defender,,yes,yes,service,clean,clean,34,34,0,,,,0,,ok,ok,
-awsIoTDeviceManagement,AWS IoT Device Management,,yes,yes,service,clean,clean,30,30,0,,,,0,,ok,ok,
-awsIoTEvents,AWS IoT Events,,yes,yes,service,clean,clean,16,16,0,,,,0,,ok,ok,
-awsIoTFleetWise,AWS IoT FleetWise,,yes,no,service,clean,clean,13,13,0,,,,0,,fail:ERROR,ok,
-awsIoTGreengrass,AWS IoT Greengrass,,yes,yes,service,clean,clean,22,22,0,,,,0,,ok,ok,
-awsIoTSiteWise,AWS IoT SiteWise,,yes,yes,service,clean,clean,104,104,0,,,,0,,fail:ERROR,ok,
-awsIoTThingsGraph,AWS IoT Things Graph,,yes,no,service,clean,clean,18,18,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfFlows"" (Number of flows) has no value in awsIoTThingsGraph/awsIoTThingsGraph. Set it with --set numberOfFlows=<value>"
-awsKeyManagementService,AWS Key Management Service,,yes,yes,service,clean,clean,20,20,0,,,,0,,ok,ok,
-awsLakeFormation,AWS Lake Formation,,yes,yes,service,clean,clean,32,32,0,,,,0,,ok,ok,
-awsOutposts,AWS Outposts,,no,no,service,clean,clean,1,1,0,,,,0,,ok,ok,
-awsPaymentCryptography,AWS Payment Cryptography,,yes,yes,service,clean,clean,9,9,0,,,,0,,ok,ok,
-awsPcs,AWS PCS,,yes,yes,service,blocked:subtype,blocked:subtype,32,36,0,utilization:4,,,0,,fail:UNSUPPORTED_INPUT,fail:UNSUPPORTED_INPUT,"no handler for input subtype ""utilization"" (awsPcs/AWS PCS/monthlyUtilization)"
-awsPrivateLinkVpc,AWS PrivateLink,subService,no,no,service,clean,clean,12,12,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfInterfaceVPCEndpointsPerRegion"" (Number of VPC Interface endpoints per AWS region) has no value in awsPrivateLinkVpc/awsPrivateLink. Set it with --set numberOfInterfaceVPCEndpointsPerRegion=<value"
-awsProfessionalServices,AWS Professional Services,subServiceSelector,no,no,selector,clean,no-surface,0,0,0,,,,5,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""proServeY1_numberOfUnits"" (ProServe units) has no value in proServeYear1Cost/proServeYear1. Set it with --set proServeY1_numberOfUnits=<value>"
-awsResilienceHub,AWS Resilience Hub,,yes,yes,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_applications_assessed_for_resilience"" (Number of applications assessed for resilience) has no value in awsResilienceHub/template_0. Set it with --set Number_of_applications_assessed_for_resilien"
-awsS3DataTransfer,Data Transfer,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-awsSecretsManager,AWS Secrets Manager,,yes,yes,service,clean,clean,12,12,0,,,,0,,ok,ok,
-awsSecurityHub,AWS Security Hub,,yes,yes,service,clean,clean,25,25,0,,,,0,,ok,ok,
-awsServiceCatalog,AWS Service Catalog,,yes,yes,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_API_calls_per_month"" (Number of API calls) has no value in awsServiceCatalog/template_0. Set it with --set Number_of_API_calls_per_month=<value>"
-awsShield,AWS Shield,,yes,yes,service,clean,clean,22,22,0,,,,0,,ok,ok,
-awsSnowball,AWS Snowball,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,2,,fail:MISSING_INPUT,fail:MISSING_INPUT,"concatenate ""termDimSelection"" needs component ""dimensionMeasures"""
-awsSnowmobile,AWS Snowmobile,,no,no,service,clean,clean,1,1,0,,,,0,,ok,ok,
-awsStepFunctions,AWS Step Functions,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,2,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfExecutions"" (Workflow requests) has no value in stepFunctionStandard/template_0. Set it with --set numberOfExecutions=<value>"
-awsSystemsManager,AWS Systems Manager,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,8,,ok,ok,
-awsSystemsManagerAutomation,Automation,subService,no,no,service,clean,clean,24,24,0,,,,0,,ok,ok,
-awsSystemsManagerDistributor,Distributor,subService,no,no,service,clean,clean,15,15,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""sysManagerDist_numberOfNonAWSPackages"" (Non-AWS/third-party software packages stored) has no value in awsSystemsManagerDistributor/smDistributor. Set it with --set sysManagerDist_numberOfNonAWSPackages=<v"
-awsSystemsManagerIncidentManager,Incident Manager,subService,no,no,service,clean,clean,8,8,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfResponsePlans"" (Response plans) has no value in awsSystemsManagerIncidentManager/smIncidentManager. Set it with --set numberOfResponsePlans=<value>"
-awsSystemsManagerOnPremisesInstanceManagement,On-Premises Instance Management,subService,no,no,service,clean,clean,14,14,0,,,,0,,ok,ok,
-awsSystemsManagerOpsCenter,OpsCenter,subService,no,no,service,clean,clean,10,10,0,,,,0,,ok,ok,
-awsSystemsManagerParameterStore,Parameter Store,subService,no,no,service,clean,clean,33,33,0,,,,0,,ok,ok,
-awsTelcoNetworkBuilder,AWS Telco Network Builder,,yes,no,service,clean,clean,11,11,0,,,,0,,ok,ok,
-awsWebApplicationFirewall,AWS Web Application Firewall (WAF),,yes,yes,service,clean,clean,17,17,0,,,,0,,ok,ok,
-awsWickr,AWS Wickr,,yes,no,service,clean,clean,26,26,0,,,,0,,ok,fail:MISSING_INPUT,"required input ""Number_of_users"" (Number of standard users) has no value in awsWickr/Simple. Set it with --set Number_of_users=<value>"
-awsXRay,AWS X-Ray,,yes,yes,service,clean,clean,26,26,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_requests"" (Number of requests per month) has no value in awsXRay/template_0. Set it with --set Number_of_requests=<value>"
-backupDynamoDb,DynamoDB Backup,subService,no,no,service,clean,clean,79,79,0,,,,0,,ok,ok,
-chimeBusinessCallingAnalysis,Amazon Chime Business Calling analysis,subService,no,no,service,blocked:column-form,blocked:column-form,15,15,2,,remap.constant,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_Outbound"" needs a value for ""Country""; set columnFormIPM_Outbound with {""Country"": <value>}"
-chimeCostAnalysis,Amazon Chime Meetings App,subService,no,no,service,blocked:column-form,blocked:column-form,36,36,2,,remap.constant,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_inbound_TollFree"" needs a value for ""Calling Type""; set columnFormIPM_inbound_TollFree with {""Calling Type"": <value>}"
-chimeSdk,Chime SDK,subService,no,no,service,clean,clean,81,81,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""attendees"" (Number of attendees) has no value in chimeSdk/Template4. Set it with --set attendees=<value>"
-chimeSdkCallAnalyticsAndRecording,Call Analytics and Recording,subService,no,no,service,clean,clean,14,14,0,,,,0,,ok,ok,
-chimeSdkMessaging,Messaging,subService,no,no,service,clean,clean,34,34,0,,,,0,,fail:ERROR,ok,
-chimeVoiceConnectorAnalysis,Chime Voice Connector analysis,subService,no,no,service,clean,clean,17,17,0,,,,0,,fail:ERROR,ok,
-classicLoadBalancer,Classic Load Balancer,subService,no,no,service,clean,clean,10,10,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""sizeOfDataProcessedPerCLB"" (Processed bytes per CLB) has no value in classicLoadBalancer/template_0. Set it with --set sizeOfDataProcessedPerCLB=<value>"
-cloudWan,Cloud WAN,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfAttachments"" (Number of Attachments) has no value in cloudWan/cloudwan. Set it with --set numberOfAttachments=<value>"
-codeGuruReviewer,Amazon CodeGuru Reviewer Test,,no,no,service,clean,clean,15,15,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""NoOfDev"" (Number of developers in your team or organization) has no value in codeGuruReviewer/template_0. Set it with --set NoOfDev=<value>"
-cohere,Cohere,subService,no,no,service,clean,clean,56,56,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""YG-Vy1w36DvcycIbslB4_zrAqchhzMyQfKsrOeeHlos"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-comprehendCustomClassification,Comprehend Custom Classification,subService,no,no,service,clean,clean,44,44,0,,,,0,,ok,ok,
-comprehendCustomEntities,Comprehend Custom Entities,subService,no,no,service,clean,clean,44,44,0,,,,0,,ok,ok,
-comprehendTopicModeling,Topic Modeling,subService,no,no,service,clean,clean,12,12,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""documentSize"" (Documents size per job) has no value in comprehendTopicModeling/template_0. Set it with --set documentSize=<value>"
-containsPii,Contains PII,subService,no,no,service,clean,clean,11,11,0,,,,0,,ok,ok,
-dataTransferVpc,Data Transfer,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-deepseek,DeepSeek,subService,no,no,service,clean,clean,200,200,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""8GcgizyE0bV0D21n9V1ffbgAemf5yroW-5ICq-cadvs"" in US East (N. Virginia) (mapping definition ""bedrockfoundationmodels"")"
-docDbBackup,DocumentDB Backup,subService,no,no,service,clean,clean,38,38,0,,,,0,,ok,ok,
-dynamoDbBackup,DynamoDB Backup and restore,subService,no,no,service,clean,clean,12,12,0,,,,0,,ok,ok,
-dynamoDbChangeDateCapture,DynamoDB change data capture,subService,no,no,service,clean,clean,10,10,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""KDS_writesCaptured"" (Number of writes captured) has no value in dynamoDbChangeDateCapture/dynamoDBChangeDataCapture. Set it with --set KDS_writesCaptured=<value>"
-dynamoDbDataExportToAmazonS3,DynamoDB Data export to Amazon S3,subService,no,no,service,clean,clean,9,9,0,,,,0,,ok,ok,
-dynamoDbDataImportFromAmazonS3,DynamoDB Data Import from Amazon S3,subService,no,no,service,clean,clean,6,6,0,,,,0,,ok,ok,
-dynamoDbOnDemand,DynamoDB on-demand capacity,subService,no,no,service,clean,clean,45,45,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""dataStorageSize"" (Data storage size) has no value in dynamoDbOnDemand/dynamoDBOnDemand. Set it with --set dataStorageSize=<value>"
-eC2Next,Amazon EC2,,yes,yes,service,blocked:subtype,blocked:subtype,83,106,0,ec2AdvPricingStrategy:1;ec2AdvPricingStrategyMath:1;ec2InstanceSearch:1;ec2PriceDisplay:5;ec2PriceFetcher:2;ec2Variable:1;instanceFinder:1;priceSelector:5;pricingStrategy:1;radioTiles:2;snapShotMaths:1;utilization:1;workload:1,,,0,,fail:UNSUPPORTED_COMPONENT,fail:UNSUPPORTED_COMPONENT,"unsupported pricing subtype ""ec2PriceFetcher"" (eC2Next//quickEstimate_generated_0); refusing to guess a value"
-ebsBackup,EBS Backup,subService,no,no,service,clean,clean,63,63,0,,,,0,,ok,ok,
-ec2Enhancement,Amazon EC2,,yes,yes,service,blocked:subtype,blocked:subtype,79,94,0,ec2AdvPricingMetrics:1;ec2AdvPricingStrategyMath:1;ec2AdvPricingStrategyV2:1;ec2InstanceSearch:1;ec2PriceDisplay:5;ec2PriceFetcher:1;ec2Variable:2;radioTiles:1;snapShotMaths:1;workload:1,,,0,,fail:UNSUPPORTED_COMPONENT,fail:UNSUPPORTED_COMPONENT,"unsupported pricing subtype ""ec2PriceFetcher"" (ec2Enhancement//advancedEstimate_generated_25); refusing to guess a value"
-elasticLoadBalancing,Elastic Load Balancing,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,4,,ok,ok,
-elementalMediaConvert,AWS Elemental MediaConvert,subServiceSelector,yes,yes,selector,partial,no-surface,0,0,0,,,,2,outputConfiguration1;outputConfiguration2,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Tier"":""Basic"",""Video Codec"":""AVC""}"
-entityRecognition,Entity Recognition,subService,no,no,service,clean,clean,22,22,0,,,,0,,ok,ok,
-eventDetectionPerEventType,Event Detection,subService,no,no,service,clean,clean,13,13,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""documents_event"" (Number of documents) has no value in eventDetectionPerEventType/template_0. Set it with --set documents_event=<value>"
-express,Titan Express,subService,no,no,service,clean,clean,37,37,0,,,,0,,fail:ERROR,ok,
-fifoTopics,FIFO Topics,subService,no,no,service,clean,clean,33,33,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfRequests"" (Requests) has no value in fifoTopics/sns_t2. Set it with --set numberOfRequests=<value>"
-fsxBackup,FSX Backup,subService,no,no,service,clean,clean,50,50,0,,,,0,,ok,ok,
-ftp,FTP,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""sizeOfDataUpload"" (Data uploaded per month over FTP) has no value in ftp/awsTransferForFTP. Set it with --set sizeOfDataUpload=<value>"
-ftps,FTPS,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""sizeOfDataUpload"" (Data uploaded per month over FTPS) has no value in ftps/awsTransferForFTPS. Set it with --set sizeOfDataUpload=<value>"
-gatewayLoadBalancer,Gateway Load Balancer,subService,no,no,service,clean,clean,27,27,0,,,,0,,ok,ok,
-gatewayLoadBalancerVpc,Gateway Load Balancer,subService,no,no,service,clean,clean,27,27,0,,,,0,,ok,ok,
-generativeTextToSpeech,Generative Text-to-Speech,subService,no,no,service,clean,clean,7,7,0,,,,0,,fail:ERROR,ok,
-imageGenerator,Titan Image Generator,subService,no,no,service,clean,clean,66,66,0,,,,0,,fail:ERROR,fail:MISSING_INPUT,"required input ""noOfimages_training"" (Number of images in your training data corpus) has no value in imageGenerator/template_bedrock. Set it with --set noOfimages_training=<value>"
-ipamVpc,IPAM,subService,no,no,service,clean,clean,4,4,0,,,,0,,ok,ok,
-justInTimeNodeAccess,Just-in-time node access,subService,no,no,service,clean,clean,6,6,0,,,,0,,ok,ok,
-keyPhraseExtraction,Keyphrase Extraction,subService,no,no,service,clean,clean,26,26,0,,,,0,,ok,ok,
-languageDetection,Language Detection,subService,no,no,service,clean,clean,22,22,0,,,,0,,ok,ok,
-lightsailBlockStorage,Lightsail Block Storage,subService,no,no,service,clean,clean,11,11,0,,,,0,,ok,ok,
-lightsailCdn,Lightsail CDN,subService,no,no,service,clean,clean,7,7,0,,,,0,,fail:ERROR,ok,
-lightsailContainers,Lightsail Containers,subService,no,no,service,partial:column-form,partial:column-form,10,10,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Power""; set columnFormIPM with {""Power"": <value>}"
-lightsailDataTransfer,Lightsail Data Transfer,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-lightsailLoadBalancer,Lightsail Load Balancer,subService,no,no,service,clean,clean,6,6,0,,,,0,,ok,ok,
-lightsailManagedDatabases,Lightsail Managed Databases,subService,no,no,service,partial:column-form,partial:column-form,3,3,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_2"" needs a value for ""Storage""; set columnFormIPM_2 with {""Storage"": <value>}"
-lightsailObjectStorage,Lightsail Object Storage,subService,no,no,service,partial:column-form,partial:column-form,12,12,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""operation""; set columnFormIPM with {""operation"": <value>}"
-lightsailVirtualServers,Lightsail Virtual Servers,subService,no,no,service,partial:column-form,partial:column-form,3,3,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""operation""; set columnFormIPM with {""operation"": <value>}"
-lite,Titan Lite,subService,no,no,service,clean,clean,37,37,0,,,,0,,fail:ERROR,ok,
-locationService,Amazon Location Service,subServiceSelector,yes,yes,selector,clean,no-surface,0,0,0,,,,6,,ok,ok,
-locationServiceGeofencing,Geofences,subService,no,no,service,clean,clean,21,21,0,,,,0,,ok,ok,
-locationServiceMaps,Maps,subService,no,no,service,clean,clean,15,15,0,,,,0,,ok,ok,
-locationServicePlaces,Places,subService,no,no,service,clean,clean,67,67,0,,,,0,,ok,ok,
-locationServiceRouting,Routes,subService,no,no,service,clean,clean,51,51,0,,,,0,,ok,ok,
-locationServiceServiceResources,Service Resources,subService,no,no,service,clean,clean,7,7,0,,,,0,,ok,ok,
-locationServiceTracking,Trackers,subService,no,no,service,clean,clean,17,17,0,,,,0,,ok,ok,
-longFormTextToSpeech,Long-form Text-to-Speech,subService,no,no,service,clean,clean,7,7,0,,,,0,,fail:ERROR,ok,
-lumaAi,LumaAI,subService,no,no,service,clean,clean,16,16,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""requestsPerBatch"" (Requests per batch) has no value in lumaAi/Luma AI. Set it with --set requestsPerBatch=<value>"
-mainframeBluAge,AWS Blu Age automated refactoring,subService,no,no,service,blocked:subtype,blocked:subtype,9,11,2,utilization:2,remap.constant,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_bluAgeProd"" needs a value for ""Product Name""; set columnFormIPM_bluAgeProd with {""Product Name"": <value>}"
-mainframeMicroFocus,Micro Focus replatforming,subService,no,no,service,blocked:subtype,blocked:subtype,13,16,3,utilization:3,remap.constant,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_microProd"" needs a value for ""Product Name""; set columnFormIPM_microProd with {""Product Name"": <value>}"
-mediaLiveAnywhereChannel,MediaLive Anywhere Channel,subService,no,no,service,clean,clean,49,49,0,,,,0,,ok,ok,
-mediaLiveAudioAddOns,MediaLive Add Ons,subService,no,no,service,partial:column-form,partial:column-form,36,36,4,,,dependent;single-row,0,,ok,ok,
-mediaLiveInput1,MediaLive Inputs,subService,no,no,service,partial:column-form,partial:column-form,34,34,2,,,dependent;single-row,0,,ok,ok,
-mediaLiveOutput1,MediaLive Outputs,subService,no,no,service,partial:column-form,partial:column-form,54,54,6,,,dependent;single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Pipeline"":""Standard"",""Output"":""AVC"",""Video Quality"":""Standard"",""Resolution"":""SD"",""Frame Rate"":""<30fps"",""Bit Rate"":""<10mbps"",""Reserve Type"":""On Demand""}"
-medicalIcd10CmOntologyLinkingApi,Medical ICD-10-CM Ontology Linking API,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_text_(utf-8)_documents"" (Number of text (utf-8) documents (ICD-10-CM)) has no value in medicalIcd10CmOntologyLinkingApi/template_0. Set it with --set Number_of_text_(utf-8)_documents=<value>"
-medicalNamedEntityAndRelationshipExtractionNeReApi,Medical Named Entity and Relationship Extraction (NERe) API,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_text_(utf-8)_documents"" (Number of text (utf-8) documents (NERe)) has no value in medicalNamedEntityAndRelationshipExtractionNeReApi/template_0. Set it with --set Number_of_text_(utf-8)_document"
-medicalProtectedHealthInformationDataExtractionAndIdentificationPhIdApi,Medical Protected Health Information Data Extraction and Identification (PHId) API,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_text_(utf-8)_documents"" (Number of text (utf-8) documents (PHId)) has no value in medicalProtectedHealthInformationDataExtractionAndIdentificationPhIdApi/template_0. Set it with --set Number_of_"
-medicalRxNormOntologyLinkingApi,Medical RxNORM Ontology Linking API,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_text_(utf-8)_documents"" (Number of text (utf-8) documents (RxNORM)) has no value in medicalRxNormOntologyLinkingApi/template_0. Set it with --set Number_of_text_(utf-8)_documents=<value>"
-medicalSystematizedNomenclatureOfMedicineClinicalTermsSnomedCtApi,Medical Systematized Nomenclature of Medicine Clinical Terms (SNOMED CT) API,subService,no,no,service,clean,clean,19,19,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_text_(utf-8)_documents"" (Number of text (utf-8) documents (SNOMED CT)) has no value in medicalSystematizedNomenclatureOfMedicineClinicalTermsSnomedCtApi/template_0. Set it with --set Number_of_t"
-meta,Meta,subService,no,no,service,clean,clean,126,126,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""miHw6fPO_-8SGD337KGr2CY2Ia2PiKhgKTd-W4GNEjA"" in US East (N. Virginia) (mapping definition ""bedrockfoundationmodels"")"
-migrationHubRefactorSpaces,AWS Migration Hub Refactor Spaces,,yes,yes,service,clean,clean,85,85,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfEnvironments"" (Number of Environments) has no value in migrationHubRefactorSpaces/migrationhub. Set it with --set numberOfEnvironments=<value>"
-mistral,Mistral,subService,no,no,service,clean,clean,35,35,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""avgRequestsPerMin"" (Average requests per minute) has no value in mistral/mistral. Set it with --set avgRequestsPerMin=<value>"
-modularDataCenter,AWS Modular Data Center (MDC),,no,no,service,clean,clean,1,1,0,,,,0,,ok,ok,
-multimodalEmbeddings,Titan Multimodal Embeddings,subService,no,no,service,clean,clean,35,35,0,,,,0,,fail:ERROR,ok,
-neptuneBackup,Neptune Backup,subService,no,no,service,clean,clean,38,38,0,,,,0,,ok,ok,
-networkAccessAnalyzerVpc,Network Access Analyzer,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-networkAddressTranslationNatGatewayVpc,Network Address Translation (NAT) Gateway,subService,no,no,service,clean,clean,23,23,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfGateways"" (Number of NAT Gateways) has no value in networkAddressTranslationNatGatewayVpc/networkAddressTranslationGateway. Set it with --set numberOfGateways=<value>"
-networkLoadBalancer,Network Load Balancer,subService,no,no,service,clean,clean,53,53,0,,,,0,,ok,ok,
-neuralTextToSpeech,Neural Text-to-Speech,subService,no,no,service,clean,clean,7,7,0,,,,0,,fail:ERROR,ok,
-novaCanvas,Nova Canvas,subService,no,no,service,clean,clean,14,14,0,,,,0,,fail:ERROR,ok,
-novaLite,Nova Lite,subService,no,no,service,clean,clean,37,37,0,,,,0,,fail:ERROR,ok,
-novaMicro,Nova Micro,subService,no,no,service,clean,clean,37,37,0,,,,0,,fail:ERROR,ok,
-novaPro,Nova Pro,subService,no,no,service,clean,clean,37,37,0,,,,0,,fail:ERROR,ok,
-novaReel,Nova Reel,subService,no,no,service,clean,clean,5,5,0,,,,0,,fail:ERROR,ok,
-omicsAnalytics,HealthOmics Analytics,subService,no,no,service,clean,clean,9,9,0,,,,0,,fail:ERROR,ok,
-omicsReady2RunWorkflows,HealthOmics Ready2Run Workflows,subService,no,no,service,partial:column-form,partial:column-form,4,4,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Ready2Run Workflow Name""; set columnFormIPM with {""Ready2Run Workflow Name"": <value>}"
-omicsStorage,HealthOmics Storage,subService,no,no,service,clean,clean,17,17,0,,,,0,,ok,ok,
-omicsWorkflows,HealthOmics Private Workflows,subService,no,no,service,partial:column-form,partial:column-form,14,14,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Resource Type""; set columnFormIPM with {""Resource Type"": <value>}"
-openAi,OpenAI,subService,no,no,service,clean,clean,339,339,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""z8DEbC3zPhQ62J8EfqqqdtPsxhkTfhNhuAFkRex_jdk"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-outputConfiguration1,Output Configuration 1,subService,no,no,service,partial:column-form,partial:column-form,46,46,1,,,dependent;single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Tier"":""Basic"",""Video Codec"":""AVC""}"
-outputConfiguration2,Output Configuration 2,subService,no,no,service,partial:column-form,partial:column-form,46,46,1,,,dependent;single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Tier"":""Basic"",""Video Codec"":""AVC""}"
-piiDetection,Detect PII,subService,no,no,service,clean,clean,22,22,0,,,,0,,ok,ok,
-proServeYear1Cost,ProServe Year 1 Price,subService,no,no,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""proServeY1_numberOfUnits"" (ProServe units) has no value in proServeYear1Cost/proServeYear1. Set it with --set proServeY1_numberOfUnits=<value>"
-proServeYear2Cost,ProServe Year 2 Price,subService,no,no,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""proServeY2_numberOfUnits"" (ProServe units) has no value in proServeYear2Cost/proServeYear2. Set it with --set proServeY2_numberOfUnits=<value>"
-proServeYear3Cost,ProServe Year 3 Price,subService,no,no,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""proServeY3_numberOfUnits"" (ProServe units) has no value in proServeYear3Cost/proServeYear3. Set it with --set proServeY3_numberOfUnits=<value>"
-proServeYear4Cost,ProServe Year 4 Price,subService,no,no,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""proServeY4_numberOfUnits"" (ProServe units) has no value in proServeYear4Cost/proServeYear4. Set it with --set proServeY4_numberOfUnits=<value>"
-proServeYear5Cost,ProServe Year 5 Price,subService,no,no,service,clean,clean,6,6,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""proServeY5_numberOfUnits"" (ProServe units) has no value in proServeYear5Cost/proServeYear5. Set it with --set proServeY5_numberOfUnits=<value>"
-proxyPhoneSession,Proxy Phone Session,subService,no,no,service,blocked:column-form,blocked:column-form,15,15,2,,remap.constant,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_Outbound"" needs a value for ""CallType""; set columnFormIPM_Outbound with {""CallType"": <value>}"
-ptsnAudio,PSTN Audio,subService,no,no,service,blocked:column-form,blocked:column-form,70,70,5,,remap.constant,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_did"" needs a value for ""NumberType""; set columnFormIPM_did with {""NumberType"": <value>}"
-publicIpv4Address,Public IPv4 Address,subService,no,no,service,clean,clean,9,9,0,,,,0,,ok,ok,
-qwen,Qwen,subService,no,no,service,clean,clean,258,258,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""IjoMXLR2uIzuelhW3xpZKPPneJ9Zfn6m2ve7bb0lINE"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-rdsBackup,RDS Backup,subService,no,no,service,clean,clean,53,53,0,,,,0,,ok,ok,
-reachabilityAnalyzerVpc,Reachability Analyzer,subService,no,no,service,clean,clean,4,4,0,,,,0,,ok,ok,
-realTimeDocumentTranslation,Real-Time Document Translation,subService,no,no,service,partial:column-form,partial:column-form,7,7,1,,,single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price set matches Basic - Text, HTML in the selected region"
-redshiftBackup,Redshift Backup,subService,no,no,service,clean,clean,39,39,0,,,,0,,ok,ok,
-rekognitionCustomLabels,Rekognition Custom Labels,subService,no,no,service,clean,clean,30,30,0,,,,0,,ok,ok,
-rekognitionFaceLiveness,Rekognition Face Liveness,subService,no,no,service,clean,clean,5,5,0,,,,0,,fail:ERROR,ok,
-rekognitionImage,Rekognition Image,subService,no,no,service,clean,clean,48,48,0,,,,0,,ok,ok,
-rekognitionStreamingVideoEvents,Rekognition Streaming Video Events,subService,no,no,service,clean,clean,11,11,0,,,,0,,fail:ERROR,ok,
-rekognitionVideo,Rekognition Stored Video,subService,no,no,service,clean,clean,25,25,0,,,,0,,ok,ok,
-s3AccessGrants,S3 Access Grants,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-s3Annotations,S3 Annotations,subService,no,no,service,clean,clean,35,35,0,,,,0,,ok,ok,
-s3Backup,S3 Backup,subService,no,no,service,clean,clean,54,54,0,,,,0,,ok,ok,
-s3ExpressOneZone,S3 Express One Zone,subService,no,no,service,clean,clean,22,22,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3expressonezoneSize"" (S3 Express One Zone storage) has no value in s3ExpressOneZone/s3expressonezone. Set it with --set s3expressonezoneSize=<value>"
-s3Files,S3 Files,subService,no,no,service,clean,clean,21,21,0,,,,0,,ok,ok,
-s3GlacierInstantRetrieval,S3 Glacier Instant Retrieval,subService,no,no,service,clean,clean,30,30,0,,,,0,,ok,ok,
-s3ObjectLambda,S3 Object Lambda,subService,no,no,service,clean,clean,22,22,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""GET_requests_from_S3_Object_Lambda"" (GET requests from S3) has no value in s3ObjectLambda/template_0. Set it with --set GET_requests_from_S3_Object_Lambda=<value>"
-s3OneZoneInfrequentAccess,S3 One Zone - Infrequent Access,subService,no,no,service,clean,clean,31,31,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3OneZoneIAStorageSize"" (S3 One Zone-IA storage) has no value in s3OneZoneInfrequentAccess/s3OneZoneInfrequentAccess. Set it with --set s3OneZoneIAStorageSize=<value>"
-s3Tables,S3 Tables,subService,no,no,service,clean,clean,70,70,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""s3TablesStdStorage"" (S3 Tables standard storage) has no value in s3Tables/s3Tables. Set it with --set s3TablesStdStorage=<value>"
-s3Vector,S3 Vectors,subService,no,no,service,clean,clean,59,59,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""number_of_vectors"" (Number of vectors per index) has no value in s3Vector/template_0. Set it with --set number_of_vectors=<value>"
-sageMakerAsynchronousInference,SageMaker Asynchronous Inference,subService,no,no,service,partial:column-form,partial:column-form,27,27,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sageMakerAutopilot,SageMaker Autopilot,subService,no,no,service,clean,clean,7,7,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_Autopilot_Jobs_per_month"" (Number of Autopilot Jobs per month) has no value in sageMakerAutopilot/sagemakerAutopilot. Set it with --set Number_of_Autopilot_Jobs_per_month=<value>"
-sageMakerBatchTransform,SageMaker Batch Transform,subService,no,no,service,partial:column-form,partial:column-form,7,7,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sageMakerCodeEditor,SageMaker Code Editor,subService,no,no,service,partial:column-form,partial:column-form,9,9,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sageMakerDataWrangler,SageMaker Data Wrangler,subService,no,no,service,partial:column-form,partial:column-form,20,20,2,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sageMakerFeatureStore,SageMaker Feature Store,subService,no,no,service,clean,clean,60,60,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""SM_storageAmount"" (Data storage size) has no value in sageMakerFeatureStore/sagemakerFeature. Set it with --set SM_storageAmount=<value>"
-sageMakerMLflow,SageMaker MLflow,subService,no,no,service,clean,clean,21,21,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""smallTrackingServers"" (Small tracking servers) has no value in sageMakerMLflow/sageMakerMLflow. Set it with --set smallTrackingServers=<value>"
-sageMakerOnDemandNotebookInstances,SageMaker On-Demand Notebook Instances,subService,no,no,service,partial:column-form,partial:column-form,23,23,2,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sageMakerProcessing,SageMaker Processing,subService,no,no,service,partial:column-form,partial:column-form,13,13,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sageMakerRStudioOnSageMaker,RStudio on SageMaker,subService,no,no,service,partial:column-form,partial:column-form,12,12,2,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_RSession"" needs a value for ""Instance Name""; set columnFormIPM_RSession with {""Instance Name"": <value>}"
-sageMakerRealTimeInference,SageMaker Real-Time Inference,subService,no,no,service,partial:column-form,partial:column-form,43,43,3,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sageMakerServerlessInference,SageMaker Serverless Inference,subService,no,no,service,clean,clean,38,38,0,,,,0,,ok,ok,
-sageMakerStudioNotebooks,SageMaker Studio Notebooks,subService,no,no,service,partial:column-form,partial:column-form,9,9,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sageMakerTraining,SageMaker Training,subService,no,no,service,partial:column-form,partial:column-form,13,13,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""Instance Name""; set columnFormIPM with {""Instance Name"": <value>}"
-sagemakerGeospatialCapabilities,Sagemaker Geospatial ML,,no,no,service,clean,clean,28,28,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""Number_of_users"" (Number of users) has no value in sagemakerGeospatialCapabilities/template_0. Set it with --set Number_of_users=<value>"
-sapHanaBackup,SAP HANA Backup,subService,no,no,service,clean,clean,85,85,0,,,,0,,ok,ok,
-sentimentAnalysis,Sentiment Analysis,subService,no,no,service,clean,clean,22,22,0,,,,0,,ok,ok,
-sftp,SFTP,subService,no,no,service,clean,clean,28,28,0,,,,0,,ok,ok,
-simSpaceWeaver,AWS SimSpace Weaver,,yes,yes,service,partial:column-form,partial:column-form,2,2,1,,,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM"" needs a value for ""SimInstanceType""; set columnFormIPM with {""SimInstanceType"": <value>}"
-sipTrunking,SIP Trunking,subService,no,no,service,blocked:column-form,blocked:column-form,18,18,1,,remap.constant,single-row,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"columnFormIPM ""columnFormIPM_Outbound"" needs a value for ""CallType""; set columnFormIPM_Outbound with {""CallType"": <value>}"
-snowballEdgeComputeOptimizedGpuWithEc2ComputeInstances,Snowball Edge Compute Optimized GPU with EC2 Compute Instances,subService,no,no,service,clean,clean,47,47,0,,,,0,,ok,ok,
-snowballEdgeComputeOptimizedWithEc2ComputeInstances,Snowball Edge Compute Optimized with EC2 Compute Instances,subService,no,no,service,clean,clean,68,68,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"concatenate ""termDimSelection"" needs component ""dimensionMeasures"""
-snowballEdgeStorageOptimized210TbDataTransferOnly,Snowball Edge Storage Optimized 210TB Data Transfer Only,subService,no,no,service,clean,clean,29,29,0,,,,0,,ok,ok,
-snowballEdgeStorageOptimizedDataTransferOnly,Snowball Edge Storage Optimized Data Transfer Only,subService,no,no,service,clean,clean,19,19,0,,,,0,,ok,ok,
-snowballEdgeStorageOptimizedWithEc2ComputeInstances,Snowball Edge Storage Optimized with EC2 Compute Instances,subService,no,no,service,clean,clean,27,27,0,,,,0,,ok,ok,
-stabilityAi,StabilityAI,subService,no,no,service,clean,clean,16,16,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""FTu04He5_b2UoGiT0TW-LiNs8rMBgugi2h7tfj3BNFg"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-standardBatchTranslation,Standard Batch Translation,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-standardRealTimeTranslation,Standard Real-Time Translation,subService,no,no,service,clean,clean,5,5,0,,,,0,,ok,ok,
-standardTextToSpeechTts,Standard Text-to-Speech,subService,no,no,service,clean,clean,7,7,0,,,,0,,ok,ok,
-standardTopics,Standard topics,subService,no,no,service,clean,clean,70,70,0,,,,0,,ok,ok,
-stepFunctionExpress,Step Functions - Express Workflows,subService,no,no,service,clean,clean,21,21,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""MonthlyWorkflowReqs"" (Workflow requests) has no value in stepFunctionExpress/template_0. Set it with --set MonthlyWorkflowReqs=<value>"
-stepFunctionStandard,Step Functions - Standard Workflows,subService,no,no,service,clean,clean,10,10,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfExecutions"" (Workflow requests) has no value in stepFunctionStandard/template_0. Set it with --set numberOfExecutions=<value>"
-storageGatewayBackup,Storage Gateway Backup,subService,no,no,service,clean,clean,50,50,0,,,,0,,ok,ok,
-syntaxAnalysis,Syntax Analysis,subService,no,no,service,clean,clean,22,22,0,,,,0,,ok,ok,
-targetedSentiment,Targeted Sentiment,subService,no,no,service,clean,clean,10,10,0,,,,0,,ok,ok,
-textEmbeddings,Titan Text Embeddings,subService,no,no,service,clean,clean,6,6,0,,,,0,,fail:ERROR,ok,
-timestreamBackup,Timestream Backup,subService,no,no,service,clean,clean,91,91,0,,,,0,,ok,ok,
-titanTextEmbeddingsV2,Titan Text Embeddings V2,subService,no,no,service,clean,clean,6,6,0,,,,0,,ok,ok,
-trafficMirroringVpc,Traffic Mirroring,subService,no,no,service,clean,clean,4,4,0,,,,0,,ok,ok,
-transitGatewayVpc,Transit Gateway,subService,no,no,service,clean,clean,16,16,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""numberOfTransitGatewayAttachments"" (Number of Transit Gateway attachments) has no value in transitGatewayVpc/transitGateway. Set it with --set numberOfTransitGatewayAttachments=<value>"
-twelveLabs,TwelveLabs,subService,no,no,service,clean,clean,1,1,0,,,,0,,ok,ok,
-vMwareBackup,VMware Backup,subService,no,no,service,clean,clean,92,92,0,,,,0,,ok,ok,
-vpcRouteServer,VPC Route Server,subService,no,no,service,clean,clean,4,4,0,,,,0,,ok,ok,
-vpnConnectionVpc,VPN Connection,subService,no,no,service,clean,clean,19,19,0,,,,0,,ok,ok,
-webApps,Web apps,subService,no,no,service,clean,clean,6,6,0,,,,0,,ok,ok,
-webRtcMedia,WebRTC Media,subService,no,no,service,clean,clean,53,53,0,,,,0,,fail:MISSING_INPUT,fail:MISSING_INPUT,"required input ""attendees"" (Number of attendees) has no value in webRtcMedia/template_webRTCmedia. Set it with --set attendees=<value>"
-windowsWorkloads,Windows Server and SQL Server on Amazon EC2,,yes,yes,service,blocked:subtype,blocked:subtype,14,48,0,conditionalCheckboxes:2;dedicatedHostsCostTable:1;dedicatedHostsMath:1;dedicatedHostsReviewTable:1;inputField:1;instanceCostSummary:1;instanceCostSummaryTable:1;instanceRecommendation:1;pricingStrategy:2;radioTiles:1;sqlLicenseSummary:1;sqlPassiveNode:1;sqlSummary:1;storageCostSummary:1;storageCostSummaryTable:1;uploadTable:1;windowsSummary:1;windowsWorkloadStorage:1;workflowInstruction:1;workloadDropdown:3;workloadInstanceMath:1;workloadPriceSetFetcher:1;workloadStorageMath:1;workloadStoragePricing:1;workloadsConditionalComponent:5;workloadsInstanceSearch:1,,,0,,fail:UNSUPPORTED_INPUT,fail:UNSUPPORTED_INPUT,"no handler for input subtype ""conditionalCheckboxes"" (windowsWorkloads/sharedTenancy/windowsLicenseCheckboxes)"
-workSpacesCore,WorkSpaces Core Bundles,subService,no,no,service,blocked:column-form,blocked:column-form,47,47,1,,utilization-selector,dependent;riPricingTypes[];single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""Bundle Description"":""Standard (2 vCPU, 4GB RAM)"",""rootVolume"":""80 GB"",""userVolume"":""10 GB"",""Operating System"":""WorkSpaces Core Windows"",""License"":""Included"",""Running Mode"":""[object Object]"""
-workSpacesInstances,WorkSpaces Core Managed Instances,subService,no,no,service,blocked:column-form,blocked:column-form,11,11,1,,utilization-selector,dependent;riPricingTypes[];single-row,0,,fail:MISSING_PRICE,fail:MISSING_PRICE,"no PLC_2.0 price row matches {""EC2PlatformType"":""Windows"",""Tenancy"":""Shared"",""BillingOption"":""[object Object]""}"
-workSpacesPools,WorkSpaces Pools,subService,no,no,service,partial:column-form,partial:column-form,75,75,1,,,dependent;single-row,0,,fail:UNKNOWN_REGION,fail:MISSING_INPUT,"required input ""Pools_numberOfUsers"" (Number of users per month) has no value in workSpacesPools/WorkSpacesPools. Set it with --set Pools_numberOfUsers=<value>"
-workflow2,Workload 2,subService,no,no,service,clean,clean,162,162,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""igJjIVFaUoBY6jj90bhd_eIO5FaqDhRmnsO7UbeWTSY"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-workflow3,Workload 3,subService,no,no,service,clean,clean,162,162,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""igJjIVFaUoBY6jj90bhd_eIO5FaqDhRmnsO7UbeWTSY"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-workload1,Workload 1,subService,no,no,service,clean,clean,162,162,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""igJjIVFaUoBY6jj90bhd_eIO5FaqDhRmnsO7UbeWTSY"" in US East (N. Virginia) (mapping definition ""bedrock"")"
-writer,Writer,subService,no,no,service,clean,clean,26,26,0,,,,0,,fail:ERROR,fail:ERROR,"no price for metered unit ""hzRMEReNQ8Kt-cBL2Re29kKToo5L0fpusKzqPiOeANM"" in US East (N. Virginia) (mapping definition ""bedrock"")"
+priority,plan_phase,service_code,service_name,kind,visible_use1,visible_use2,templates,cards,components_supported,components_total,surface_pct,static_class,missing_subtypes,column_forms,hard_blockers,deep_gaps,selector_children,selector_nonclean,runtime_use1,runtime_use2,ledger_receipt,simulation_receipt,next_action
+P0,Phase 3 - EC2 module,ec2Enhancement,Amazon EC2,service,yes,yes,1,6,80,94,85.1%,blocked:subtype,maths:ec2PriceDisplay:5;maths:ec2Variable:2;pricing:ec2PriceFetcher:1;input:radioTiles:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategyV2:1;maths:ec2AdvPricingStrategyMath:1;input:ec2AdvPricingMetrics:1,0,,,0,,unsupported,unsupported,no,yes,Implement maths:ec2PriceDisplay:5;maths:ec2Variable:2;pricing:ec2PriceFetcher:1;input:radioTiles:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategyV2:1;maths:ec2AdvPricingStrategyMath:1;input:ec2AdvPricingMetrics:1
+P0,Phase 3 - EC2 module,eC2Next,Amazon EC2,service,no,no,2,9,84,106,79.2%,blocked:subtype,input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:utilization:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1,0,,,0,,unsupported,unsupported,no,no,Implement input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:utilization:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1
+P0,Phase 3 - EC2 module,windowsWorkloads,Windows Server and SQL Server on Amazon EC2,service,yes,yes,1,11,14,48,29.2%,blocked:subtype,input:workloadsConditionalComponent:5;input:workloadDropdown:3;input:conditionalCheckboxes:2;input:pricingStrategy:2;input:workloadPriceSetFetcher:1;pricing:workloadStoragePricing:1;input:workflowInstruction:1;input:uploadTable:1;input:dedicatedHostsReviewTable:1;input:dedicatedHostsCostTable:1;maths:dedicatedHostsMath:1;input:sqlSummary:1;input:windowsSummary:1;input:inputField:1;input:windowsWorkloadStorage:1;input:radioTiles:1;maths:instanceRecommendation:1;input:workloadsInstanceSearch:1;input:sqlPassiveNode:1;maths:workloadInstanceMath:1;maths:instanceCostSummary:1;maths:workloadStorageMath:1;maths:storageCostSummary:1;maths:instanceCostSummaryTable:1;maths:storageCostSummaryTable:1;maths:sqlLicenseSummary:1,0,,,0,,unsupported,unsupported,no,no,Implement input:workloadsConditionalComponent:5;input:workloadDropdown:3;input:conditionalCheckboxes:2;input:pricingStrategy:2;input:workloadPriceSetFetcher:1;pricing:workloadStoragePricing:1;input:workflowInstruction:1;input:uploadTable:1;input:dedicatedHostsReviewTable:1;input:dedicatedHostsCostTable:1;maths:dedicatedHostsMath:1;input:sqlSummary:1;input:windowsSummary:1;input:inputField:1;input:windowsWorkloadStorage:1;input:radioTiles:1;maths:instanceRecommendation:1;input:workloadsInstanceSearch:1;input:sqlPassiveNode:1;maths:workloadInstanceMath:1;maths:instanceCostSummary:1;maths:workloadStorageMath:1;maths:storageCostSummary:1;maths:instanceCostSummaryTable:1;maths:storageCostSummaryTable:1;maths:sqlLicenseSummary:1
+P0,Phase 1 - promote simulation,amazonElasticBlockStore,Amazon Elastic Block Store (EBS),service,yes,yes,1,3,68,68,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,amazonVirtualPrivateCloud,Amazon Virtual Private Cloud (VPC),selector,yes,yes,13,18,151,151,100.0%,clean,,0,,,13,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,awsEks,Amazon EKS,service,yes,yes,1,4,44,44,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,awsPrivateLinkVpc,AWS PrivateLink,service,no,no,1,1,12,12,100.0%,clean,,0,,,0,,needs-input,needs-input,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,cloudWan,Cloud WAN,service,no,no,1,1,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,dataTransferVpc,Data Transfer,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,gatewayLoadBalancerVpc,Gateway Load Balancer,service,no,no,1,3,27,27,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,ipamVpc,IPAM,service,no,no,1,1,4,4,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,networkAccessAnalyzerVpc,Network Access Analyzer,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,networkAddressTranslationNatGatewayVpc,Network Address Translation (NAT) Gateway,service,no,no,1,2,23,23,100.0%,clean,,0,,,0,,needs-input,needs-input,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,publicIpv4Address,Public IPv4 Address,service,no,no,1,1,9,9,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,reachabilityAnalyzerVpc,Reachability Analyzer,service,no,no,1,1,4,4,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,trafficMirroringVpc,Traffic Mirroring,service,no,no,1,1,4,4,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,transitGatewayVpc,Transit Gateway,service,no,no,1,2,16,16,100.0%,clean,,0,,,0,,needs-input,needs-input,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,vpcRouteServer,VPC Route Server,service,no,no,1,1,4,4,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,vpnConnectionVpc,VPN Connection,service,no,no,1,2,19,19,100.0%,clean,,0,,,0,,ok,ok,no,yes,Promote the simulation to a ledger receipt
+P0,Phase 2 - column-form v2,amazonAuroraMySQLCompatible,Amazon Aurora MySQL-Compatible,service,yes,yes,3,30,228,228,100.0%,partial:column-form,,4,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,ambiguous,ambiguous,no,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 3 - EC2 module,amazonEc2DedicatedHosts,Amazon EC2 Dedicated Hosts,service,no,no,1,2,30,30,100.0%,partial:column-form,,1,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,no,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRDSAuroraPostgreSQLCompatibleDB,Amazon Aurora PostgreSQL-Compatible DB,service,yes,yes,3,27,201,201,100.0%,partial:column-form,,4,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,ambiguous,ambiguous,no,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRdsCustomForOracle,Amazon RDS Custom for Oracle,service,yes,yes,1,3,41,41,100.0%,partial:column-form,,1,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,ambiguous,ambiguous,yes,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRdsCustomForSqlServer,Amazon RDS Custom for SQL Server,service,yes,yes,1,3,47,47,100.0%,partial:column-form,,1,,dependent-selectors;repeatable-rows;ri-payment-upfront,0,,ambiguous,ambiguous,no,yes,Column-form v2: dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRdsForDb2,Amazon RDS for Db2,service,yes,yes,1,3,39,39,100.0%,partial:column-form,,1,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRdsForOracle,Amazon RDS for Oracle,service,yes,yes,1,5,58,58,100.0%,partial:column-form,,1,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,yes,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRdsForOutposts,Amazon RDS on AWS Outposts,service,yes,yes,1,2,7,7,100.0%,partial:column-form,,1,,dependent-selectors;repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P0,Phase 2 - column-form v2,amazonRDSForSQLServer,Amazon RDS for SQL server,service,yes,yes,1,6,114,114,100.0%,partial:column-form,,1,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRDSMariaDB,Amazon RDS for MariaDB,service,yes,yes,1,8,80,80,100.0%,partial:column-form,,1,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRDSMySQLDB,Amazon RDS for MySQL,service,yes,yes,1,9,98,98,100.0%,partial:column-form,,1,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P0,Phase 2 - column-form v2,amazonRDSPostgreSQLDB,Amazon RDS for PostgreSQL,service,yes,yes,1,9,99,99,100.0%,partial:column-form,,1,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,yes,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P1,Phase 2 - column-form v2,amazonChimeSdk,Amazon Chime SDK,selector,yes,no,5,12,188,188,100.0%,blocked:column-form,,0,,,5,ptsnAudio;sipTrunking,needs-input,needs-input,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,amazonEMR,Amazon EMR,selector,yes,yes,5,6,46,46,100.0%,blocked:column-form,,0,,,5,amazonEmrMasterNode;amazonEmrCoreNode;amazonEmrTaskNode,needs-input,needs-input,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,amazonMainframeModernization,AWS Mainframe Modernization,selector,yes,yes,2,7,22,27,81.5%,blocked:column-form,,0,,,2,mainframeBluAge;mainframeMicroFocus,needs-input,needs-input,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,amazonWorkSpaces,Amazon WorkSpaces,selector,yes,yes,6,8,193,193,100.0%,blocked:column-form,,0,,,6,amazonWorkspaces;workSpacesCore;workSpacesInstances;workSpacesPools;workSpacesThinClient;workSpacesSecureBrowser,missing-price,missing-price,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,aWSDirectoryService,AWS Directory Service,service,yes,yes,3,3,16,16,100.0%,blocked:column-form,,4,remap.constant,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form remap.constant
+P1,Phase 5 - long tail,awsDeadlineCloud,AWS Deadline Cloud,service,yes,yes,1,6,44,45,97.8%,blocked:subtype,input:utilization:1,2,,dependent-selectors;repeatable-rows,0,,needs-input,needs-input,no,no,Implement input:utilization:1
+P1,Phase 5 - long tail,awsDirectConnect,AWS Direct Connect,service,yes,yes,1,2,9,10,90.0%,blocked:subtype,input:utilization:1,1,,dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,no,Implement input:utilization:1
+P1,Phase 5 - long tail,awsElementalMediaConnect,AWS Elemental MediaConnect,service,yes,yes,1,6,91,97,93.8%,blocked:subtype,input:utilization:6,0,,,0,,unsupported,unsupported,no,no,Implement input:utilization:6
+P1,Phase 5 - long tail,awsPcs,AWS PCS,service,yes,yes,1,3,32,36,88.9%,blocked:subtype,input:utilization:4,0,,,0,,unsupported,unsupported,no,no,Implement input:utilization:4
+P1,Phase 2 - column-form v2,amazonAppStream,Amazon WorkSpaces Applications,service,yes,yes,1,2,167,167,100.0%,partial:column-form,,2,,dependent-selectors;repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,amazonDocumentDB,Amazon DocumentDB (with MongoDB compatibility),service,yes,yes,2,13,79,79,100.0%,partial:column-form,,2,,additional-pricing-data;dependent-selectors;repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,amazonDynamoDb,Amazon DynamoDB,selector,yes,yes,8,14,208,208,100.0%,partial:column-form,,0,,,8,amazonDynamoDbDaxClusters,needs-input,needs-input,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,amazonElastiCache,Amazon ElastiCache,service,yes,yes,1,4,50,50,100.0%,partial:column-form,,3,,additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,no,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows;ri-payment-upfront
+P1,Phase 2 - column-form v2,amazonElasticGraphics,Amazon Elastic Graphics,service,yes,yes,1,1,2,2,100.0%,partial:column-form,,1,,repeatable-rows,0,,ok,ok,no,no,Column-form v2: repeatable-rows
+P1,Phase 2 - column-form v2,amazonElasticsearchService,Amazon OpenSearch Service,service,yes,yes,3,7,87,87,100.0%,partial:column-form,,3,,dependent-selectors;repeatable-rows;ri-payment-upfront,0,,ambiguous,ambiguous,no,no,Column-form v2: dependent-selectors;repeatable-rows;ri-payment-upfront
+P1,Phase 2 - column-form v2,amazonElasticVMwareService,Amazon Elastic VMware Service,service,yes,yes,1,1,3,3,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P1,Phase 2 - column-form v2,amazonFSxForLustre,Amazon FSx for Lustre,service,yes,yes,3,4,106,106,100.0%,partial:column-form,,1,,dependent-selectors;repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,amazonGameLift,Amazon GameLift Servers,service,yes,yes,1,2,29,29,100.0%,partial:column-form,,1,,dependent-selectors;repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,amazonGameLiftStreams,Amazon GameLift Streams,service,yes,yes,1,1,11,11,100.0%,partial:column-form,,1,,repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: repeatable-rows
+P1,Phase 2 - column-form v2,amazonKeyspaces,Amazon Keyspaces,service,yes,yes,5,23,183,183,100.0%,partial:column-form,,4,,additional-pricing-data;dependent-selectors;repeatable-rows,0,,ok,ok,no,no,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,amazonLightsail,Amazon Lightsail,selector,yes,yes,8,9,57,57,100.0%,partial:column-form,,0,,,8,lightsailVirtualServers;lightsailManagedDatabases;lightsailContainers;lightsailObjectStorage,needs-input,needs-input,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,amazonManagedBlockchain,Amazon Managed Blockchain,service,yes,no,2,4,31,31,100.0%,partial:column-form,,2,,dependent-selectors;repeatable-rows,0,,missing-price,unknown-region,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,amazonManagedStreamingForApacheKafkaMsk,Amazon Managed Streaming for Apache Kafka (MSK),service,yes,yes,3,7,58,58,100.0%,partial:column-form,,1,,repeatable-rows,0,,ok,ok,no,no,Column-form v2: repeatable-rows
+P1,Phase 2 - column-form v2,amazonMemoryDbForRedis,Amazon MemoryDB,service,yes,yes,1,4,17,17,100.0%,partial:column-form,,2,,dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,no,Column-form v2: dependent-selectors;repeatable-rows;ri-payment-upfront
+P1,Phase 2 - column-form v2,amazonNeptune,Amazon Neptune,service,yes,yes,3,16,143,143,100.0%,partial:column-form,,5,,additional-pricing-data;dependent-selectors;repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,amazonOmics,AWS HealthOmics,selector,yes,yes,4,4,44,44,100.0%,partial:column-form,,0,,,4,omicsWorkflows;omicsReady2RunWorkflows,needs-input,needs-input,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,amazonRedshift,Amazon Redshift,service,yes,yes,2,9,46,46,100.0%,partial:column-form,,1,,dependent-selectors;repeatable-rows;ri-payment-upfront,0,,needs-input,needs-input,no,no,Column-form v2: dependent-selectors;repeatable-rows;ri-payment-upfront
+P1,Phase 2 - column-form v2,amazonSageMaker,Amazon SageMaker,selector,yes,yes,15,39,311,311,100.0%,partial:column-form,,0,,,15,sageMakerStudioNotebooks;sageMakerCodeEditor;sageMakerRStudioOnSageMaker;sageMakerOnDemandNotebookInstances;sageMakerProcessing;sageMakerDataWrangler;sageMakerTraining;sageMakerRealTimeInference;sageMakerAsynchronousInference;sageMakerBatchTransform,needs-input,needs-input,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,amazonTimestream,Amazon Timestream,service,yes,yes,1,2,23,23,100.0%,partial:column-form,,2,,additional-pricing-data;dependent-selectors;repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,amazonTranslate,Amazon Translate,selector,yes,yes,4,4,21,21,100.0%,partial:column-form,,0,,,4,realTimeDocumentTranslation,ok,ok,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,awsCodeBuild,AWS CodeBuild,service,yes,yes,1,7,41,41,100.0%,partial:column-form,,6,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P1,Phase 2 - column-form v2,awsDatabaseMigrationService,AWS Database Migration Service,service,yes,yes,2,4,27,27,100.0%,partial:column-form,,2,,additional-pricing-data;dependent-selectors;repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: additional-pricing-data;dependent-selectors;repeatable-rows
+P1,Phase 2 - column-form v2,awsElementalMediaLive,AWS Elemental MediaLive,selector,yes,yes,4,18,173,173,100.0%,partial:column-form,,0,,,4,mediaLiveInput1;mediaLiveOutput1;mediaLiveAudioAddOns,missing-price,missing-price,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,elementalMediaConvert,AWS Elemental MediaConvert,selector,yes,yes,2,2,92,92,100.0%,partial:column-form,,0,,,2,outputConfiguration1;outputConfiguration2,missing-price,missing-price,no,no,Resolve the non-clean children
+P1,Phase 2 - column-form v2,simSpaceWeaver,AWS SimSpace Weaver,service,yes,yes,1,1,2,2,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P2,Phase 1 - receipts,amazonApiGateway,Amazon API Gateway,service,yes,yes,1,3,46,46,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonAppFlow,Amazon AppFlow,service,yes,yes,1,2,16,16,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonAugmentedAi,Amazon Augmented AI,service,yes,yes,1,1,15,15,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonBedrock,Amazon Bedrock,selector,yes,yes,13,176,1773,1773,100.0%,clean,,0,,,13,,error,error,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonBedrockAgentCore,Amazon Bedrock AgentCore,selector,yes,yes,7,7,109,109,100.0%,clean,,0,,,7,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonBraket,Amazon Braket,service,yes,no,1,5,99,99,100.0%,clean,,0,,,0,,needs-input,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonCertificateManager,AWS Certificate Manager,service,yes,yes,1,2,19,19,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonCloudFront,Amazon CloudFront,service,yes,yes,2,13,198,198,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonCodeGuru,Amazon CodeGuru Reviewer,service,yes,yes,1,2,19,19,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonCodeWhisperer,Amazon Q Developer,service,yes,no,1,1,5,5,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonCognito,Amazon Cognito,service,yes,yes,3,12,352,352,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonComprehend,Amazon Comprehend,selector,yes,yes,12,14,270,270,100.0%,clean,,0,,,12,,ok,ok,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonComprehendMedical,Amazon Comprehend Medical,selector,yes,yes,5,15,95,95,100.0%,clean,,0,,,5,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonDetective,Amazon Detective,service,yes,yes,1,1,6,6,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonEFS,Amazon Elastic File System (EFS),service,yes,yes,2,5,113,113,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonElasticContainerRegistry,Amazon Elastic Container Registry,service,yes,yes,1,3,16,16,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonElasticTranscoder,Amazon Elastic Transcoder,service,yes,no,1,2,21,21,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonFileCache,Amazon File Cache,service,yes,yes,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonForecast,Amazon Forecast,service,yes,yes,1,1,22,22,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonFraudDetector,Amazon Fraud Detector,service,yes,yes,1,4,31,31,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonFSx,Amazon FSx for Windows File Server,service,yes,yes,2,2,72,72,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonFSxForNetAppOntap,Amazon FSx for NetApp ONTAP,service,yes,yes,1,13,233,233,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonFSxForOpenZfs,Amazon FSx for OpenZFS,service,yes,yes,4,12,164,164,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonGuardDuty,Amazon GuardDuty,service,yes,yes,1,1,83,83,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonHealthImaging,AWS HealthImaging,service,yes,no,1,2,34,34,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonHealthlake,Amazon Healthlake,service,yes,yes,1,5,40,40,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonInspector,Amazon Inspector,service,yes,yes,1,5,39,39,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonIVSChat,Amazon IVS Chat,service,yes,no,1,1,9,9,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonKendra,Amazon Kendra,service,yes,yes,1,4,61,61,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonKinesisDataAnalytics,Amazon Managed Service for Apache Flink,service,yes,yes,1,2,36,36,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonKinesisDataStreams,Amazon Kinesis Data Streams,service,yes,yes,3,3,125,125,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonKinesisFirehose,Amazon Data firehose,service,yes,yes,1,5,82,82,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonKinesisVideoStreams,Amazon Kinesis Video Streams,service,yes,yes,1,6,87,87,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonLex,Amazon Lex,service,yes,no,1,3,24,24,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonLookoutForEquipment,Amazon Lookout for Equipment,service,yes,no,1,1,17,17,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonLookoutForMetrics,Amazon Lookout for Metrics,service,yes,yes,1,1,9,9,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonLookoutForVision,Amazon Lookout for Vision,service,yes,yes,1,3,23,23,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonMacie,Amazon Macie,service,yes,yes,1,4,37,37,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonManagedGrafana,Amazon Managed Grafana,service,yes,yes,1,1,14,14,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonManagedServiceForPrometheus,Amazon Managed Service for Prometheus,service,yes,yes,2,7,80,80,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonManagedWorkflowsForApacheAirflow,Amazon Managed Workflows for Apache Airflow,service,yes,yes,1,1,48,48,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonMQ,Amazon MQ,service,yes,yes,2,10,62,62,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonNetworkFirewall,AWS Network Firewall,service,yes,yes,1,3,22,22,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonPersonalize,Amazon Personalize,service,yes,yes,1,3,69,69,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonPinpoint,Amazon Pinpoint,service,yes,yes,1,2,33,33,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonPolly,Amazon Polly,selector,yes,yes,4,4,28,28,100.0%,clean,,0,,,4,,ok,error,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonQBusiness,Amazon Q Business,service,yes,no,1,1,20,20,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonQuantumLedgerDatabaseQldb,Amazon Quantum Ledger Database (QLDB),service,yes,yes,1,1,15,15,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonQuickSight,Amazon QuickSight,selector,yes,yes,2,10,186,186,100.0%,clean,,0,,,2,,ok,error,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonRekognition,Amazon Rekognition,selector,yes,yes,5,7,119,119,100.0%,clean,,0,,,5,,ok,ok,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonRoute53,Amazon Route 53,service,yes,yes,1,7,118,118,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonSageMakerGroundTruth,Amazon SageMaker Ground Truth,service,yes,yes,1,8,38,38,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonSecurityLake,Amazon Security Lake,service,yes,yes,1,1,15,15,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonSimpleEmailService,Amazon Simple Email Service (SES),service,yes,yes,5,16,365,365,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonSimpleNotificationService,Amazon Simple Notification Service (SNS),selector,yes,yes,2,8,103,103,100.0%,clean,,0,,,2,,ok,ok,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonSimpleStorageServiceGroup,Amazon Simple Storage Service (S3),selector,yes,yes,16,26,608,608,100.0%,clean,,0,,,16,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonSimpleWorkflowService,Amazon Simple Workflow Service (SWF),service,yes,yes,1,1,16,16,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonTextract,Amazon Textract,service,yes,yes,1,1,123,123,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonTranscribe,Amazon Transcribe,service,yes,yes,1,6,108,108,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonTranscribeMedical,Amazon Transcribe Medical,service,yes,yes,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonVerifiedPermissions,Amazon Verified Permissions,service,yes,yes,1,1,15,15,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonWorkdocs,Amazon WorkDocs,service,yes,no,2,2,25,25,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,amazonWorkmail,Amazon WorkMail,service,yes,no,1,1,6,6,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsAmplify,AWS Amplify,service,yes,yes,1,1,24,24,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsAppFabric,AWS AppFabric,service,yes,no,1,1,12,12,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsApplicationMigrationSvc,AWS Application Migration Service,service,yes,yes,1,1,11,11,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsAppRunner,AWS App Runner,service,yes,yes,1,3,63,63,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsAppSync,AWS AppSync,selector,yes,yes,5,5,58,58,100.0%,clean,,0,,,5,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,awsAuditManager,AWS Audit Manager,service,yes,yes,1,1,18,18,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsB2BDataInterchange,AWS B2B Data Interchange,service,yes,yes,1,1,14,14,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsBackup,AWS Backup,selector,yes,yes,15,15,953,953,100.0%,clean,,0,,,15,,error,error,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,awsBillingConductor,AWS Billing Conductor,service,yes,no,1,1,15,15,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsCertificateManager,AWS Private Certificate Authority,service,yes,yes,1,3,35,35,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsCloudHsm,AWS CloudHSM,service,yes,yes,1,1,9,9,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsCloudMap,AWS Cloud Map,service,yes,yes,1,3,32,32,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsCloudTrail,AWS CloudTrail,service,yes,yes,1,5,76,76,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsCodeArtifact,AWS CodeArtifact,service,yes,yes,1,3,18,18,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsCodeDeploy,AWS CodeDeploy,service,yes,yes,1,1,7,7,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsCodePipeline,AWS CodePipeline,service,yes,yes,1,1,12,12,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsConfig,AWS Config,service,yes,yes,1,4,20,20,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsCostExplorer,AWS Cost Explorer,service,yes,no,1,2,10,10,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsDataPipeline,AWS Data Pipeline,service,yes,no,1,2,27,27,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,aWSDataSync,AWS DataSync,service,yes,yes,1,1,13,13,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,aWSDataTransfer,AWS Data Transfer,service,yes,yes,1,2,5,5,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsDeepRacer,AWS DeepRacer,service,yes,no,1,4,37,37,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsElasticDisasterRecovery,AWS Elastic Disaster Recovery,selector,yes,yes,2,2,90,90,100.0%,clean,,0,,,2,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,awsElementalMediaPackage,AWS Elemental MediaPackage,service,yes,yes,1,3,42,42,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsElementalMediaTailor,AWS Elemental Media Tailor,service,yes,yes,1,3,17,17,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsEntityResolution,AWS Entity Resolution,service,yes,yes,1,7,40,40,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsFargate,AWS Fargate,service,yes,yes,1,1,43,43,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsFaultINjectorSimulator,AWS Fault Injection Service (FIS),service,yes,yes,1,1,18,18,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsFinSpace,Amazon FinSpace Dataset Browser,service,yes,yes,1,3,43,43,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsFirewallManager,AWS Firewall Manager,service,yes,yes,1,1,88,88,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsGlue,AWS Glue,selector,yes,yes,9,13,109,109,100.0%,clean,,0,,,9,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,awsIamAccessAnalyzer,AWS IAM Access Analyzer,service,yes,yes,1,3,22,22,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsIoTAnalytics,AWS IoT Analytics,service,yes,yes,1,3,32,32,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsIoTCore,AWS IoT Core,selector,yes,yes,3,34,238,238,100.0%,clean,,0,,,3,,ok,error,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,awsIoTDeviceDefender,AWS IoT Device Defender,service,yes,yes,1,3,34,34,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsIoTDeviceManagement,AWS IoT Device Management,service,yes,yes,1,6,30,30,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsIoTEvents,AWS IoT Events,service,yes,yes,1,1,16,16,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsIoTFleetWise,AWS IoT FleetWise,service,yes,no,1,2,13,13,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsIoTGreengrass,AWS IoT Greengrass,service,yes,yes,1,1,22,22,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsIoTSiteWise,AWS IoT SiteWise,service,yes,yes,1,10,104,104,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsIoTThingsGraph,AWS IoT Things Graph,service,yes,no,1,2,18,18,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsKeyManagementService,AWS Key Management Service,service,yes,yes,1,1,20,20,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsLakeFormation,AWS Lake Formation,service,yes,yes,1,3,32,32,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsPaymentCryptography,AWS Payment Cryptography,service,yes,yes,1,1,9,9,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsResilienceHub,AWS Resilience Hub,service,yes,yes,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsSecretsManager,AWS Secrets Manager,service,yes,yes,1,2,12,12,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsSecurityHub,AWS Security Hub,service,yes,yes,1,1,25,25,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsServiceCatalog,AWS Service Catalog,service,yes,yes,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsShield,AWS Shield,service,yes,yes,1,1,22,22,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsSnowball,AWS Snowball,selector,yes,yes,2,6,97,97,100.0%,clean,,0,,,2,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,awsStepFunctions,AWS Step Functions,selector,yes,yes,2,2,31,31,100.0%,clean,,0,,,2,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,aWSStorageGateway,AWS Storage Gateway,service,yes,yes,4,8,68,68,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsSystemsManager,AWS Systems Manager,selector,yes,yes,8,11,144,144,100.0%,clean,,0,,,8,,ok,ok,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,awsTelcoNetworkBuilder,AWS Telco Network Builder,service,yes,no,1,2,11,11,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,aWSTransferForSFTP,AWS Transfer Family,selector,yes,yes,5,6,86,86,100.0%,clean,,0,,,5,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,awsWebApplicationFirewall,AWS Web Application Firewall (WAF),service,yes,yes,1,1,17,17,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,awsWickr,AWS Wickr,service,yes,no,2,2,26,26,100.0%,clean,,0,,,0,,needs-input,ok,no,no,Add fixtures and a rendered receipt
+P2,Phase 1 - receipts,elasticLoadBalancing,Elastic Load Balancing,selector,yes,yes,4,10,121,121,100.0%,clean,,0,,,4,,ok,ok,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,locationService,Amazon Location Service,selector,yes,yes,6,8,178,178,100.0%,clean,,0,,,6,,ok,ok,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,migrationHubRefactorSpaces,AWS Migration Hub Refactor Spaces,service,yes,yes,1,4,85,85,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 2 - column-form v2,amazonChime,Amazon Chime,selector,no,no,2,2,51,51,100.0%,blocked:column-form,,0,,,2,chimeCostAnalysis;chimeBusinessCallingAnalysis,needs-input,needs-input,no,no,Resolve the non-clean children
+P3,Phase 2 - column-form v2,amazonEmrCoreNode,Amazon EMR core node on EC2,service,no,no,1,1,2,2,100.0%,blocked:column-form,,1,utilization-selector,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form utilization-selector
+P3,Phase 2 - column-form v2,amazonEmrMasterNode,Amazon EMR master node on EC2,service,no,no,1,1,2,2,100.0%,blocked:column-form,,1,utilization-selector,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form utilization-selector
+P3,Phase 2 - column-form v2,amazonEmrTaskNode,Amazon EMR task node on EC2,service,no,no,1,1,2,2,100.0%,blocked:column-form,,1,utilization-selector,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form utilization-selector
+P3,Phase 2 - column-form v2,amazonWorkspaces,WorkSpaces Personal,service,no,no,1,2,60,60,100.0%,blocked:column-form,,1,utilization-selector,dependent-selectors;repeatable-rows;ri-payment-upfront,0,,missing-price,missing-price,no,no,Implement column-form utilization-selector
+P3,Phase 2 - column-form v2,chimeBusinessCallingAnalysis,Amazon Chime Business Calling analysis,service,no,no,1,1,15,15,100.0%,blocked:column-form,,2,remap.constant,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form remap.constant
+P3,Phase 2 - column-form v2,chimeCostAnalysis,Amazon Chime Meetings App,service,no,no,1,1,36,36,100.0%,blocked:column-form,,2,remap.constant,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form remap.constant
+P3,Phase 2 - column-form v2,proxyPhoneSession,Proxy Phone Session,service,no,no,1,1,15,15,100.0%,blocked:column-form,,2,remap.constant,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form remap.constant
+P3,Phase 2 - column-form v2,ptsnAudio,PSTN Audio,service,no,no,1,4,70,70,100.0%,blocked:column-form,,5,remap.constant,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form remap.constant
+P3,Phase 2 - column-form v2,sipTrunking,SIP Trunking,service,no,no,1,1,18,18,100.0%,blocked:column-form,,1,remap.constant,repeatable-rows,0,,needs-input,needs-input,no,no,Implement column-form remap.constant
+P3,Phase 2 - column-form v2,workSpacesCore,WorkSpaces Core Bundles,service,no,no,1,2,47,47,100.0%,blocked:column-form,,1,utilization-selector,dependent-selectors;repeatable-rows;ri-payment-upfront,0,,missing-price,missing-price,no,no,Implement column-form utilization-selector
+P3,Phase 2 - column-form v2,workSpacesInstances,WorkSpaces Core Managed Instances,service,no,no,1,2,11,11,100.0%,blocked:column-form,,1,utilization-selector,dependent-selectors;repeatable-rows;ri-payment-upfront,0,,missing-price,missing-price,no,no,Implement column-form utilization-selector
+P3,Phase 5 - long tail,mainframeBluAge,AWS Blu Age automated refactoring,service,no,no,1,3,9,11,81.8%,blocked:subtype,input:utilization:2,2,remap.constant,repeatable-rows,0,,needs-input,needs-input,no,no,Implement input:utilization:2
+P3,Phase 5 - long tail,mainframeMicroFocus,Micro Focus replatforming,service,no,no,1,4,13,16,81.3%,blocked:subtype,input:utilization:3,3,remap.constant,repeatable-rows,0,,needs-input,needs-input,no,no,Implement input:utilization:3
+P3,Phase 1 - receipts,activeCustomBatchTranslation,Active Custom Batch Translation,service,no,no,1,1,4,4,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,agentCoreBrowserTools,AgentCore Browser Tools,service,no,no,1,1,18,18,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,agentCoreCodeInterpreter,AgentCore Code Interpreter,service,no,no,1,1,18,18,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,agentCoreGateway,AgentCore Gateway,service,no,no,1,1,15,15,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,agentCoreIdentity,AgentCore Identity,service,no,no,1,1,13,13,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,agentCoreMemory,AgentCore Memory,service,no,no,1,1,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,agentCoreObservability,AgentCore Observability,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,agentCoreRuntime,AgentCore Runtime,service,no,no,1,1,16,16,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,ai21,AI21 Labs,service,no,no,1,5,26,26,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazon,Amazon,service,no,no,1,32,390,390,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,amazonAthena,Amazon Athena,service,yes,yes,1,2,27,27,100.0%,clean,,0,,,0,,needs-input,needs-input,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,amazonAuroraBackup,Aurora,service,no,no,1,1,24,24,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonCarrierIp,Amazon Carrier IP,service,no,no,1,1,20,20,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonChimeTCO,Amazon Chime cost comparison tool,service,no,no,1,3,76,76,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,amazonCloudWatch,Amazon CloudWatch,service,yes,yes,1,16,191,191,100.0%,clean,,0,,,0,,ok,ok,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,amazonDevOpsGuru,Amazon DevOps Guru,service,no,no,1,1,1,1,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonDocumentDbBackup,DocumentDB,service,no,no,1,1,24,24,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonDynamoDbBackup,DynamoDB,service,no,no,1,1,66,66,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonDynamoDbProvisionedThroughputCapacity,DynamoDB provisioned capacity,service,no,no,1,4,118,118,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonDynamoDbStreams,DynamoDB Streams,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonEbsBackup,EBS,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonEfsBackup,EFS Backup,service,no,no,1,1,91,91,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonElasticIP,Amazon Elastic IP,service,no,no,1,1,20,20,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonEmrOnEks,Amazon EMR on EKS,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonEmrServerless,Amazon EMR Serverless,service,no,no,2,2,30,30,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,amazonEventBridge,Amazon EventBridge,service,yes,yes,1,8,91,91,100.0%,clean,,0,,,0,,ok,ok,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,amazonFSxLustreBackup,FSx Lustre,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonFSxNetAppOntapBackup,FSx NetApp ONTAP,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonFSxOpenZfsBackup,FSx OpenZFS,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonFSxWindowsBackup,FSx Windows,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonIVS,Amazon Interactive Video Service (IVS),service,no,no,2,20,333,333,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonNeptuneBackup,Neptune,service,no,no,1,1,24,24,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonQuickSightAnomalyDetection,Amazon QuickSight Alerts & Anomaly Detection,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonQuickSightReadersAuthorsSpice,"Amazon QuickSight Readers, Authors, SPICE",service,no,no,2,9,179,179,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonRdsBackup,RDS,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonS3,Amazon S3,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonS3Backup,S3,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonS3Glacier,S3 Glacier Flexible Retrieval,service,no,no,1,1,52,52,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonS3GlacierDeepArhive,S3 Glacier Deep Archive,service,no,no,1,1,42,42,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonS3IntelligentTiering,S3 Intelligent - Tiering,service,no,no,1,1,80,80,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,amazonS3Standard,S3 Standard,service,no,no,1,1,25,25,100.0%,clean,,0,,,0,,needs-input,needs-input,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,amazonS3StandardInfrequentAccess,S3 Standard - Infrequent Access,service,no,no,1,1,31,31,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonS3StorageManagement,S3 Management and Insights,service,no,no,1,5,78,78,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonSageMakerEdgeManager,SageMaker Edge Manager,service,no,no,1,1,9,9,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,amazonSimpleQueueService,Amazon Simple Queue Service (SQS),service,yes,yes,1,3,21,21,100.0%,clean,,0,,,0,,ok,ok,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,amazonStorageGatewayBackup,Storage Gateway,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonTechnic,AWS MDC Rack,service,no,no,1,1,21,21,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazonVMwareBackup,VMware,service,no,no,1,1,77,77,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,anthropic,Anthropic,service,no,no,1,23,284,284,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,applicationLoadBalancer,Application Load Balancer,service,no,no,2,3,31,31,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,appSyncApiCall,AppSync GraphQL API Requests,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,appSyncCaching,AppSync GraphQL Caching,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,appsyncDataTransfer,Appsync Data Transfer,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,appSyncEventApi,AppSync Events,service,no,no,1,1,30,30,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,appSyncRealTime,AppSync GraphQL Real-Time,service,no,no,1,1,13,13,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,as2,AS2,service,no,no,1,1,14,14,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,auroraBackup,Aurora Backup,service,no,no,1,1,51,51,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,auroraDsqlBackup,Aurora DSQL Backup,service,no,no,1,1,79,79,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsAppConfig,AWS AppConfig,service,no,no,2,2,34,34,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsBudgets,AWS Budgets,service,no,no,1,3,12,12,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,awsCloudFormation,AWS CloudFormation,service,yes,yes,1,2,20,20,100.0%,clean,,0,,,0,,needs-input,needs-input,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,awsCodeCommit,AWS CodeCommit,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsDeviceFarm,AWS Device Farm,service,no,no,1,2,23,23,100.0%,clean,,0,,,0,,bad-definition,bad-definition,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsDrsDrill,AWS DRS - Drill/Recovery,service,no,no,1,1,8,8,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsDrsRecoveryReplication,AWS DRS - Replication,service,no,no,1,1,82,82,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsEtlJobsAndDevelopmentEndpoints,AWS Glue ETL jobs and interactive sessions,service,no,no,1,3,28,28,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsEtlJobsFlexExecutionOption,AWS Glue ETL jobs with Flex execution option,service,no,no,1,1,9,9,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsGlueCrawlers,AWS Glue Crawlers,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsGlueDataBrewInteractiveSessions,AWS Glue DataBrew interactive sessions,service,no,no,1,1,14,14,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsGlueDataCatalogOptimization,AWS Glue Data Catalog Optimization,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsGlueDataCatalogStatistics,AWS Glue Data Catalog Statistics,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsGlueDataCatalogStorageRequests,AWS Glue Data Catalog storage requests,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsGlueEtlForRayJobsAndInteractiveSessions,AWS Glue ETL for Ray jobs and interactive sessions,service,no,no,1,2,12,12,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsGlueEtlJobsMemoryOptimizedWorkers,AWS Glue ETL jobs and interactive sessions on memory-optimized workers,service,no,no,1,2,15,15,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsIoTCoreHttp,HTTP,service,no,no,2,13,88,88,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsIoTCoreLoRaWan,LoRaWAN,service,no,no,1,6,45,45,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsIoTCoreMqtt,MQTT,service,no,no,2,15,105,105,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,aWSLambda,AWS Lambda,service,yes,yes,2,10,187,187,100.0%,clean,,0,,,0,,ok,ok,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,awsOutposts,AWS Outposts,service,no,no,1,1,1,1,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsProfessionalServices,AWS Professional Services,selector,no,no,5,5,30,30,100.0%,clean,,0,,,5,,needs-input,needs-input,no,no,Verify all children with fixtures and a receipt
+P3,Done - ledger receipt,awsS3DataTransfer,Data Transfer,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,awsSnowmobile,AWS Snowmobile,service,no,no,1,1,1,1,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsSystemsManagerAutomation,Automation,service,no,no,1,1,24,24,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsSystemsManagerDistributor,Distributor,service,no,no,1,1,15,15,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsSystemsManagerIncidentManager,Incident Manager,service,no,no,1,1,8,8,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsSystemsManagerOnPremisesInstanceManagement,On-Premises Instance Management,service,no,no,2,2,14,14,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsSystemsManagerOpsCenter,OpsCenter,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,awsSystemsManagerParameterStore,Parameter Store,service,no,no,2,2,33,33,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,awsXRay,AWS X-Ray,service,yes,yes,1,1,26,26,100.0%,clean,,0,,,0,,needs-input,needs-input,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,backupDynamoDb,DynamoDB Backup,service,no,no,1,1,79,79,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,chimeSdk,Chime SDK,service,no,no,1,4,80,80,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,chimeSdkCallAnalyticsAndRecording,Call Analytics and Recording,service,no,no,1,2,14,14,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,chimeSdkMessaging,Messaging,service,no,no,1,1,33,33,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,chimeVoiceConnectorAnalysis,Chime Voice Connector analysis,service,no,no,1,1,17,17,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,classicLoadBalancer,Classic Load Balancer,service,no,no,1,2,10,10,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,codeGuruReviewer,Amazon CodeGuru Reviewer Test,service,no,no,1,1,15,15,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,cohere,Cohere,service,no,no,1,6,56,56,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,comprehendCustomClassification,Comprehend Custom Classification,service,no,no,1,2,44,44,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,comprehendCustomEntities,Comprehend Custom Entities,service,no,no,1,2,44,44,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,comprehendTopicModeling,Topic Modeling,service,no,no,1,1,12,12,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,containsPii,Contains PII,service,no,no,1,1,11,11,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,deepseek,DeepSeek,service,no,no,1,20,200,200,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,docDbBackup,DocumentDB Backup,service,no,no,1,1,38,38,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,dynamoDbBackup,DynamoDB Backup and restore,service,no,no,1,1,12,12,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,dynamoDbChangeDateCapture,DynamoDB change data capture,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,dynamoDbDataExportToAmazonS3,DynamoDB Data export to Amazon S3,service,no,no,1,1,9,9,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,dynamoDbDataImportFromAmazonS3,DynamoDB Data Import from Amazon S3,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,dynamoDbOnDemand,DynamoDB on-demand capacity,service,no,no,1,4,45,45,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,ebsBackup,EBS Backup,service,no,no,1,1,63,63,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,entityRecognition,Entity Recognition,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,eventDetectionPerEventType,Event Detection,service,no,no,1,1,13,13,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,express,Titan Express,service,no,no,1,4,37,37,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,fifoTopics,FIFO Topics,service,no,no,1,2,33,33,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,fsxBackup,FSX Backup,service,no,no,1,1,50,50,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,ftp,FTP,service,no,no,1,1,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,ftps,FTPS,service,no,no,1,1,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,gatewayLoadBalancer,Gateway Load Balancer,service,no,no,1,3,27,27,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,generativeTextToSpeech,Generative Text-to-Speech,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,imageGenerator,Titan Image Generator,service,no,no,1,5,66,66,100.0%,clean,,0,,,0,,needs-input,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,justInTimeNodeAccess,Just-in-time node access,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,keyPhraseExtraction,Keyphrase Extraction,service,no,no,1,1,26,26,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,languageDetection,Language Detection,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,lightsailBlockStorage,Lightsail Block Storage,service,no,no,1,1,11,11,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,lightsailCdn,Lightsail CDN,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,lightsailDataTransfer,Lightsail Data Transfer,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,lightsailLoadBalancer,Lightsail Load Balancer,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,lite,Titan Lite,service,no,no,1,4,37,37,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,locationServiceGeofencing,Geofences,service,no,no,1,1,21,21,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,locationServiceMaps,Maps,service,no,no,1,1,15,15,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,locationServicePlaces,Places,service,no,no,1,1,67,67,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,locationServiceRouting,Routes,service,no,no,1,3,51,51,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,locationServiceServiceResources,Service Resources,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,locationServiceTracking,Trackers,service,no,no,1,1,17,17,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,longFormTextToSpeech,Long-form Text-to-Speech,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,lumaAi,LumaAI,service,no,no,1,4,16,16,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,mediaLiveAnywhereChannel,MediaLive Anywhere Channel,service,no,no,1,6,49,49,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,medicalIcd10CmOntologyLinkingApi,Medical ICD-10-CM Ontology Linking API,service,no,no,1,3,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,medicalNamedEntityAndRelationshipExtractionNeReApi,Medical Named Entity and Relationship Extraction (NERe) API,service,no,no,1,3,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,medicalProtectedHealthInformationDataExtractionAndIdentificationPhIdApi,Medical Protected Health Information Data Extraction and Identification (PHId) API,service,no,no,1,3,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,medicalRxNormOntologyLinkingApi,Medical RxNORM Ontology Linking API,service,no,no,1,3,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,medicalSystematizedNomenclatureOfMedicineClinicalTermsSnomedCtApi,Medical Systematized Nomenclature of Medicine Clinical Terms (SNOMED CT) API,service,no,no,1,3,19,19,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,meta,Meta,service,no,no,1,14,126,126,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,mistral,Mistral,service,no,no,1,5,35,35,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,modularDataCenter,AWS Modular Data Center (MDC),service,no,no,1,1,1,1,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,multimodalEmbeddings,Titan Multimodal Embeddings,service,no,no,1,4,35,35,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,neptuneBackup,Neptune Backup,service,no,no,1,1,38,38,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,networkLoadBalancer,Network Load Balancer,service,no,no,1,2,53,53,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,neuralTextToSpeech,Neural Text-to-Speech,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,novaCanvas,Nova Canvas,service,no,no,1,1,14,14,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,novaLite,Nova Lite,service,no,no,1,4,37,37,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,novaMicro,Nova Micro,service,no,no,1,4,37,37,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,novaPro,Nova Pro,service,no,no,1,4,37,37,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,novaReel,Nova Reel,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,omicsAnalytics,HealthOmics Analytics,service,no,no,1,1,9,9,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,omicsStorage,HealthOmics Storage,service,no,no,1,1,17,17,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,openAi,OpenAI,service,no,no,1,31,339,339,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,piiDetection,Detect PII,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,proServeYear1Cost,ProServe Year 1 Price,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,proServeYear2Cost,ProServe Year 2 Price,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,proServeYear3Cost,ProServe Year 3 Price,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,proServeYear4Cost,ProServe Year 4 Price,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,proServeYear5Cost,ProServe Year 5 Price,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,qwen,Qwen,service,no,no,1,26,258,258,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,rdsBackup,RDS Backup,service,no,no,1,1,53,53,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,redshiftBackup,Redshift Backup,service,no,no,1,1,39,39,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,rekognitionCustomLabels,Rekognition Custom Labels,service,no,no,1,3,30,30,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,rekognitionFaceLiveness,Rekognition Face Liveness,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,rekognitionImage,Rekognition Image,service,no,no,1,1,48,48,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,rekognitionStreamingVideoEvents,Rekognition Streaming Video Events,service,no,no,1,1,11,11,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,rekognitionVideo,Rekognition Stored Video,service,no,no,1,1,25,25,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3AccessGrants,S3 Access Grants,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3Annotations,S3 Annotations,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3Backup,S3 Backup,service,no,no,1,1,54,54,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3ExpressOneZone,S3 Express One Zone,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3Files,S3 Files,service,no,no,1,1,21,21,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3GlacierInstantRetrieval,S3 Glacier Instant Retrieval,service,no,no,1,1,30,30,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3ObjectLambda,S3 Object Lambda,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3OneZoneInfrequentAccess,S3 One Zone - Infrequent Access,service,no,no,1,1,31,31,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3Tables,S3 Tables,service,no,no,1,7,70,70,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,s3Vector,S3 Vectors,service,no,no,1,1,59,59,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,sageMakerAutopilot,SageMaker Autopilot,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,sageMakerFeatureStore,SageMaker Feature Store,service,no,no,1,9,60,60,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,sagemakerGeospatialCapabilities,Sagemaker Geospatial ML,service,no,no,1,4,28,28,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,sageMakerMLflow,SageMaker MLflow,service,no,no,1,2,21,21,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,sageMakerServerlessInference,SageMaker Serverless Inference,service,no,no,1,3,38,38,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,sapHanaBackup,SAP HANA Backup,service,no,no,1,1,85,85,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,sentimentAnalysis,Sentiment Analysis,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,sftp,SFTP,service,no,no,1,2,28,28,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,snowballEdgeComputeOptimizedGpuWithEc2ComputeInstances,Snowball Edge Compute Optimized GPU with EC2 Compute Instances,service,no,no,1,4,47,47,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,snowballEdgeComputeOptimizedWithEc2ComputeInstances,Snowball Edge Compute Optimized with EC2 Compute Instances,service,no,no,1,4,68,68,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,snowballEdgeStorageOptimized210TbDataTransferOnly,Snowball Edge Storage Optimized 210TB Data Transfer Only,service,no,no,1,2,29,29,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,snowballEdgeStorageOptimizedDataTransferOnly,Snowball Edge Storage Optimized Data Transfer Only,service,no,no,1,2,19,19,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,snowballEdgeStorageOptimizedWithEc2ComputeInstances,Snowball Edge Storage Optimized with EC2 Compute Instances,service,no,no,1,4,27,27,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,stabilityAi,StabilityAI,service,no,no,1,4,16,16,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,standardBatchTranslation,Standard Batch Translation,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,standardRealTimeTranslation,Standard Real-Time Translation,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,standardTextToSpeechTts,Standard Text-to-Speech,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,standardTopics,Standard topics,service,no,no,1,6,70,70,100.0%,clean,,0,,,0,,ok,ok,yes,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,stepFunctionExpress,Step Functions - Express Workflows,service,no,no,1,1,21,21,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,stepFunctionStandard,Step Functions - Standard Workflows,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,storageGatewayBackup,Storage Gateway Backup,service,no,no,1,1,50,50,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,syntaxAnalysis,Syntax Analysis,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,targetedSentiment,Targeted Sentiment,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,textEmbeddings,Titan Text Embeddings,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,ok,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,timestreamBackup,Timestream Backup,service,no,no,1,1,91,91,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,titanTextEmbeddingsV2,Titan Text Embeddings V2,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,twelveLabs,TwelveLabs,service,no,no,1,1,1,1,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,vMwareBackup,VMware Backup,service,no,no,1,1,92,92,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,webApps,Web apps,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,ok,ok,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,webRtcMedia,WebRTC Media,service,no,no,1,4,53,53,100.0%,clean,,0,,,0,,needs-input,needs-input,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,workflow2,Workload 2,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,workflow3,Workload 3,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,workload1,Workload 1,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,writer,Writer,service,no,no,1,5,26,26,100.0%,clean,,0,,,0,,error,error,no,no,Add fixtures and a rendered receipt
+P3,Phase 2 - column-form v2,amazonDynamoDbDaxClusters,DynamoDB Accelerator (DAX) clusters,service,no,no,1,1,2,2,100.0%,partial:column-form,,1,,repeatable-rows,0,,ok,ok,yes,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,lightsailContainers,Lightsail Containers,service,no,no,1,1,10,10,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,lightsailManagedDatabases,Lightsail Managed Databases,service,no,no,1,1,3,3,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,lightsailObjectStorage,Lightsail Object Storage,service,no,no,1,2,12,12,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,lightsailVirtualServers,Lightsail Virtual Servers,service,no,no,1,1,3,3,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,mediaLiveAudioAddOns,MediaLive Add Ons,service,no,no,1,4,36,36,100.0%,partial:column-form,,4,,dependent-selectors;repeatable-rows,0,,ok,ok,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P3,Phase 2 - column-form v2,mediaLiveInput1,MediaLive Inputs,service,no,no,1,2,34,34,100.0%,partial:column-form,,2,,dependent-selectors;repeatable-rows,0,,ok,ok,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P3,Phase 2 - column-form v2,mediaLiveOutput1,MediaLive Outputs,service,no,no,1,6,54,54,100.0%,partial:column-form,,6,,dependent-selectors;repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P3,Phase 2 - column-form v2,omicsReady2RunWorkflows,HealthOmics Ready2Run Workflows,service,no,no,1,1,4,4,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,omicsWorkflows,HealthOmics Private Workflows,service,no,no,1,1,14,14,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,outputConfiguration1,Output Configuration 1,service,no,no,1,1,46,46,100.0%,partial:column-form,,1,,dependent-selectors;repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P3,Phase 2 - column-form v2,outputConfiguration2,Output Configuration 2,service,no,no,1,1,46,46,100.0%,partial:column-form,,1,,dependent-selectors;repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: dependent-selectors;repeatable-rows
+P3,Phase 2 - column-form v2,realTimeDocumentTranslation,Real-Time Document Translation,service,no,no,1,1,7,7,100.0%,partial:column-form,,1,,repeatable-rows,0,,missing-price,missing-price,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerAsynchronousInference,SageMaker Asynchronous Inference,service,no,no,1,3,27,27,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerBatchTransform,SageMaker Batch Transform,service,no,no,1,1,7,7,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerCodeEditor,SageMaker Code Editor,service,no,no,1,1,9,9,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerDataWrangler,SageMaker Data Wrangler,service,no,no,1,3,20,20,100.0%,partial:column-form,,2,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerOnDemandNotebookInstances,SageMaker On-Demand Notebook Instances,service,no,no,1,3,23,23,100.0%,partial:column-form,,2,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerProcessing,SageMaker Processing,service,no,no,1,2,13,13,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerRealTimeInference,SageMaker Real-Time Inference,service,no,no,1,5,43,43,100.0%,partial:column-form,,3,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerRStudioOnSageMaker,RStudio on SageMaker,service,no,no,1,2,12,12,100.0%,partial:column-form,,2,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerStudioNotebooks,SageMaker Studio Notebooks,service,no,no,1,1,9,9,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,sageMakerTraining,SageMaker Training,service,no,no,1,2,13,13,100.0%,partial:column-form,,1,,repeatable-rows,0,,needs-input,needs-input,no,no,Column-form v2: repeatable-rows
+P3,Phase 2 - column-form v2,workSpacesPools,WorkSpaces Pools,service,no,no,1,2,75,75,100.0%,partial:column-form,,1,,dependent-selectors;repeatable-rows,0,,needs-input,unknown-region,no,no,Column-form v2: dependent-selectors;repeatable-rows

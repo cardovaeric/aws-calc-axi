@@ -5,14 +5,21 @@ snapshot, and commit `4e28e01` (throughput plus broadened column-form support). 
 includes those changes because they change the answer materially. The previous baseline
 (`d9fa653`) was stricter: it blocked 54 column-form services instead of 12.
 
-Machine-readable matrix: `analysis/coverage-matrix.csv` (442 catalog rows, one per service
-definition plus the missing WorkSpaces selector definition).
+Machine-readable matrix: `analysis/coverage-matrix.csv` (441 service and selector definitions).
+Human-readable exhaustive tracker: `analysis/COVERAGE_TABLE.md`, regenerated with
+`npm run coverage`. The catalog's `aWSPricingCalculatorStrings` static string table is
+excluded because it has no calculator surface.
 
 Post-assessment update (2026-11-24): `snapShotMaths` is now implemented, so EBS evaluates
 natively and its three EBS rows matched the live editor to the cent. File-size rate conversion
 and validation were also fixed. The 37-service simulation link is in
 `analysis/SIMULATION_TOP_SERVICES.md`. EBS moves from blocked to native; the rest of this
 assessment remains the pre-change baseline.
+
+For current implementation tracking use `analysis/COVERAGE_TABLE.md` and
+`analysis/coverage-matrix.csv`. The tracker is stricter than the earlier static counts below:
+it marks every `columnFormIPM` service partial until repeatable rows and advanced pricing land,
+and scores selector groups by their children.
 
 ## 1. Verdict
 
@@ -79,9 +86,9 @@ matrix.
 | --- | ---: |
 | Catalog rows in `analysis/manifest.json` | 442 |
 | Definitions in `analysis/defs` | 441 |
-| Selector groups (`subServiceSelector`) | 33 |
-| Standalone or sub-service definitions | 408 |
-| Definitions missing from the snapshot | 1 (`amazonWorkSpaces`, the WorkSpaces selector) |
+| Selector groups (`subServiceSelector`) | 34 |
+| Standalone or sub-service definitions | 407 |
+| Definitions missing from the snapshot | 0 |
 | Visible in us-east-2 | 160 UI services, 161 definition mappings |
 | Visible in us-east-1 | 181 UI services, 182 definition mappings |
 

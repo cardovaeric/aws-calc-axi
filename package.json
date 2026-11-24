@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "test": "node --test --test-reporter=spec 'tests/**/*.test.ts'",
     "e2e": "node --test --test-concurrency=1 --test-reporter=spec 'e2e/**/*.test.ts'",
-    "ledger": "node --experimental-strip-types scripts/ledger.ts"
+    "ledger": "node --experimental-strip-types scripts/ledger.ts",
+    "coverage": "node --experimental-strip-types scripts/coverage.ts"
   },
   "dependencies": {
     "@toon-format/toon": "^4.4.0",

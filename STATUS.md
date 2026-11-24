@@ -84,17 +84,18 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
 - `npm test`: 101 tests, pass
-- `npm run e2e`: 19 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
+- `npm run e2e`: 22 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
   ledger rows including the editor-recompute oracle)
-- `npm run ledger`: 12 rows, all pass
+- `npm run ledger`: 15 rows, all pass
 - `npm run coverage`: 441-row exhaustive tracker in `analysis/COVERAGE_TABLE.md`
   (353 clean, 62 partial column-form, 17 blocked column-form, 9 blocked by subtype)
-- Screenshots of every public link: `receipts/screenshots/` (12 PNGs)
+- Screenshots of every public link: `receipts/screenshots/` (13 PNGs)
 
 ## Coverage ledger summary
 
-12 rows: 11 service fixtures plus 1 group/support fixture. All native, all pass. Details in
-`COVERAGE.md`.
+15 rows: 11 service fixtures, 1 group/support fixture, and 3 P0 conformance batches (EKS+EBS,
+and two VPC batches) proven by editor recompute. All native, all pass. Details in `COVERAGE.md`
+and `analysis/P0_CONFORMANCE.md`.
 
 ## Scanner picture (us-east-2)
 

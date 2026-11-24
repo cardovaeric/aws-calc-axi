@@ -1,0 +1,149 @@
+name: axi-conformance P0 EKS EBS
+currency: USD
+locale: en_US
+services:
+- code: awsEks
+  region: us-east-2
+  set:
+    numberOfEKSClusters: 1
+- code: awsEks
+  region: us-east-2
+  set:
+    numberOfEKSClusters: 2
+    numberOfEKSClusters_es: 1
+    argoCDCapabilities: 1
+    argoCDApplicationsPerCapability: 5
+    ackCapabilities: 1
+    ackResourcesPerCapability: 10
+    kroCapabilities: 1
+    kroRGDInstancesPerCapability: 3
+    numberOfHybridNodes:
+      value: 10
+      unit: perMonth
+    numberOfVCPUperNode: 8
+- code: awsEks
+  region: us-east-2
+  set:
+    numberOfEKSClusters: 3
+    numberOfEKSClusters_es: 2
+    argoCDCapabilities: 2
+    argoCDApplicationsPerCapability: 10
+    ackCapabilities: 2
+    ackResourcesPerCapability: 20
+    kroCapabilities: 1
+    kroRGDInstancesPerCapability: 5
+    numberOfHybridNodes:
+      value: 100
+      unit: perMonth
+    numberOfVCPUperNode: 16
+- code: amazonElasticBlockStore
+  region: us-east-2
+  set:
+    numberOfInstances: 2
+    durationOfInstanceRuns:
+      value: 730
+      unit: hours
+    storageType: Storage General Purpose GB Mo
+    storageAmount:
+      value: 500
+      unit: gb|NA
+    snapshotFrequency: '30'
+    snapshotAmount:
+      value: 10
+      unit: gb|NA
+- code: amazonElasticBlockStore
+  region: us-east-2
+  set:
+    numberOfInstances: 2
+    durationOfInstanceRuns:
+      value: 730
+      unit: hours
+    storageType: Storage General Purpose gp3 GB Mo
+    storageAmount:
+      value: 500
+      unit: gb|NA
+    snapshotFrequency: '30'
+    snapshotAmount:
+      value: 10
+      unit: gb|NA
+    gp3Iops: 6000
+    gp3Throughput:
+      value: 500
+      unit: mbps
+- code: amazonElasticBlockStore
+  region: us-east-2
+  set:
+    numberOfInstances: 2
+    durationOfInstanceRuns:
+      value: 730
+      unit: hours
+    storageType: Storage Provisioned IOPS GB Mo
+    storageAmount:
+      value: 500
+      unit: gb|NA
+    snapshotFrequency: '3'
+    snapshotAmount:
+      value: 10
+      unit: gb|NA
+    iops: 3000
+- code: amazonElasticBlockStore
+  region: us-east-2
+  set:
+    numberOfInstances: 2
+    durationOfInstanceRuns:
+      value: 730
+      unit: hours
+    storageType: Storage Provisioned IOPS io2 GB month
+    storageAmount:
+      value: 500
+      unit: gb|NA
+    snapshotFrequency: '3'
+    snapshotAmount:
+      value: 10
+      unit: gb|NA
+    iops2: 64000
+- code: amazonElasticBlockStore
+  region: us-east-2
+  set:
+    numberOfInstances: 2
+    durationOfInstanceRuns:
+      value: 730
+      unit: hours
+    storageType: Storage Throughput Optimized HDD GB Mo
+    storageAmount:
+      value: 500
+      unit: gb|NA
+    snapshotFrequency: '30'
+    snapshotAmount:
+      value: 10
+      unit: gb|NA
+- code: amazonElasticBlockStore
+  region: us-east-2
+  set:
+    numberOfInstances: 2
+    durationOfInstanceRuns:
+      value: 730
+      unit: hours
+    storageType: Storage Cold HDD GB Mo
+    storageAmount:
+      value: 500
+      unit: gb|NA
+    snapshotFrequency: '30'
+    snapshotAmount:
+      value: 10
+      unit: gb|NA
+- code: amazonElasticBlockStore
+  region: us-east-2
+  set:
+    numberOfInstances: 2
+    durationOfInstanceRuns:
+      value: 730
+      unit: hours
+    storageType: Storage Magnetic GB Mo
+    storageAmount:
+      value: 500
+      unit: gb|NA
+    snapshotFrequency: '1'
+    snapshotAmount:
+      value: 10
+      unit: gb|NA

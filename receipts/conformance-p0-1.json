@@ -1,0 +1,449 @@
+{
+  "estimate": "axi-conformance P0 EKS EBS",
+  "specHash": "222746eaf0f1e364",
+  "url": "https://calculator.aws/#/estimate?id=da681d431df3701ad0507ffd5fbc6a060a26ea16",
+  "savedKey": "da681d431df3701ad0507ffd5fbc6a060a26ea16",
+  "publishedAt": "2026-11-24T10:09:27.609Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 31024.26,
+    "upfront": 0,
+    "total12m": 372291.12,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 73,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (1), Number of hybrid nodes (1 per month)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 1711.16,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (2), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (5), Number of ACK capabilities (1), Number of ACK resources per ACK capability (10), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (3), Number of hybrid nodes (10 per month), Number of vCPU per hybrid node (8)"
+      },
+      {
+        "code": "awsEks",
+        "template": "Amazon EKS",
+        "region": "us-east-2",
+        "monthly": 20764.6,
+        "upfront": 0,
+        "summary": "Number of EKS Clusters (3), Number of EKS Clusters (2), Number of Argo CD capabilities (2), Number of Argo CD Applications per Argo CD capability (10), Number of ACK capabilities (2), Number of ACK resources per ACK capability (20), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (5), Number of hybrid nodes (100 per month), Number of vCPU per hybrid node (16)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-2",
+        "monthly": 165,
+        "upfront": 0,
+        "summary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-2",
+        "monthly": 205,
+        "upfront": 0,
+        "summary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (gp3) (6000), General Purpose SSD (gp3) - Throughput (500 MBps), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-2",
+        "monthly": 566.5,
+        "upfront": 0,
+        "summary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (Weekly), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-2",
+        "monthly": 7248.5,
+        "upfront": 0,
+        "summary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io2) (64000), Snapshot Frequency (Weekly), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-2",
+        "monthly": 110,
+        "upfront": 0,
+        "summary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-2",
+        "monthly": 80,
+        "upfront": 0,
+        "summary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "code": "amazonElasticBlockStore",
+        "template": "elasticBlockStore",
+        "region": "us-east-2",
+        "monthly": 100.5,
+        "upfront": 0,
+        "summary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Monthly), Amount changed per snapshot (10 GB)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsEks",
+        "monthly": 73,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 1711.16,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsEks",
+        "monthly": 20764.6,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 165,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 205,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 566.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 7248.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 110,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 80,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonElasticBlockStore",
+        "monthly": 100.5,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 31024.26,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=da681d431df3701ad0507ffd5fbc6a060a26ea16",
+    "title": "axi-conformance P0 EKS EBS",
+    "monthly": "31,024.26 USD",
+    "upfront": "0.00 USD",
+    "annual": "372,291.12 USD",
+    "monthlyValue": 31024.26,
+    "upfrontValue": 0,
+    "annualValue": 372291.12,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "73.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of hybrid nodes (1 per month)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "1,711.16 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (2), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (5), Number of ACK capabilities (1), Number of ACK resources per ACK capability (10), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (3), Number of hybrid nodes (10 per month), Number of vCPU per hybrid node (8)",
+        "status": null
+      },
+      {
+        "name": "Amazon EKS",
+        "upfront": "0.00 USD",
+        "monthly": "20,764.60 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (3), Number of EKS Clusters (2), Number of Argo CD capabilities (2), Number of Argo CD Applications per Argo CD capability (10), Number of ACK capabilities (2), Number of ACK resources per ACK capability (20), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (5), Number of hybrid nodes (100 per month), Number of vCPU per hybrid node (16)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "165.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "205.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (gp3) (6000), General Purpose SSD (gp3) - Throughput (500 MBps), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "566.50 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (Weekly), Amount changed per snapshot (10 GB)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "7,248.50 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io2) (64000), Snapshot Frequency (Weekly), Amount changed per snapshot (10 GB)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "110.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "80.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+        "status": null
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "upfront": "0.00 USD",
+        "monthly": "100.50 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Monthly), Amount changed per snapshot (10 GB)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:09:36.127Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=da681d431df3701ad0507ffd5fbc6a060a26ea16",
+    "savedKey": "da681d431df3701ad0507ffd5fbc6a060a26ea16",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=da681d431df3701ad0507ffd5fbc6a060a26ea16",
+      "title": "axi-conformance P0 EKS EBS",
+      "monthly": "31,024.26 USD",
+      "upfront": "0.00 USD",
+      "annual": "372,291.12 USD",
+      "monthlyValue": 31024.26,
+      "upfrontValue": 0,
+      "annualValue": 372291.12,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "73.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (1), Number of hybrid nodes (1 per month)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "1,711.16 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (2), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (5), Number of ACK capabilities (1), Number of ACK resources per ACK capability (10), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (3), Number of hybrid nodes (10 per month), Number of vCPU per hybrid node (8)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EKS",
+          "upfront": "0.00 USD",
+          "monthly": "20,764.60 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of EKS Clusters (3), Number of EKS Clusters (2), Number of Argo CD capabilities (2), Number of Argo CD Applications per Argo CD capability (10), Number of ACK capabilities (2), Number of ACK resources per ACK capability (20), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (5), Number of hybrid nodes (100 per month), Number of vCPU per hybrid node (16)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Elastic Block Store (EBS)",
+          "upfront": "0.00 USD",
+          "monthly": "165.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Elastic Block Store (EBS)",
+          "upfront": "0.00 USD",
+          "monthly": "205.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (gp3) (6000), General Purpose SSD (gp3) - Throughput (500 MBps), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Elastic Block Store (EBS)",
+          "upfront": "0.00 USD",
+          "monthly": "566.50 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (Weekly), Amount changed per snapshot (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Elastic Block Store (EBS)",
+          "upfront": "0.00 USD",
+          "monthly": "7,248.50 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io2) (64000), Snapshot Frequency (Weekly), Amount changed per snapshot (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Elastic Block Store (EBS)",
+          "upfront": "0.00 USD",
+          "monthly": "110.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Elastic Block Store (EBS)",
+          "upfront": "0.00 USD",
+          "monthly": "80.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon Elastic Block Store (EBS)",
+          "upfront": "0.00 USD",
+          "monthly": "100.50 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Monthly), Amount changed per snapshot (10 GB)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:10:02.789Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance P0 EKS EBS",
+    "monthly": 31024.26,
+    "upfront": 0,
+    "annual": 372291.12,
+    "services": [
+      {
+        "name": "Amazon EKS",
+        "monthly": 73,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (1), Number of hybrid nodes (1 per month)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 1711.16,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (2), Number of EKS Clusters (1), Number of Argo CD capabilities (1), Number of Argo CD Applications per Argo CD capability (5), Number of ACK capabilities (1), Number of ACK resources per ACK capability (10), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (3), Number of hybrid nodes (10 per month), Number of vCPU per hybrid node (8)"
+      },
+      {
+        "name": "Amazon EKS",
+        "monthly": 20764.6,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of EKS Clusters (3), Number of EKS Clusters (2), Number of Argo CD capabilities (2), Number of Argo CD Applications per Argo CD capability (10), Number of ACK capabilities (2), Number of ACK resources per ACK capability (20), Number of KRO capabilities (1), Number of KRO RGD instances managed per KRO capability (5), Number of hybrid nodes (100 per month), Number of vCPU per hybrid node (16)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 165,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 205,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (gp3) (6000), General Purpose SSD (gp3) - Throughput (500 MBps), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 566.5,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io1) (3000), Snapshot Frequency (Weekly), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 7248.5,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Provisioning IOPS per volume (io2) (64000), Snapshot Frequency (Weekly), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 110,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 80,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Daily), Amount changed per snapshot (10 GB)"
+      },
+      {
+        "name": "Amazon Elastic Block Store (EBS)",
+        "monthly": 100.5,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of volumes (2), Average duration of volume (730 hours per month), Storage amount per volume (500 GB), Snapshot Frequency (Monthly), Amount changed per snapshot (10 GB)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

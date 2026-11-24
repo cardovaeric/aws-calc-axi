@@ -162,6 +162,7 @@ interface Row {
   runtime_use2: string;
   ledger_receipt: string;
   simulation_receipt: string;
+  conformance_receipt: string;
   next_action: string;
 }
 
@@ -316,9 +317,11 @@ function phaseForRow(
   klass: string,
   ledger: boolean,
   simulated: boolean,
+  conformance: boolean,
   action: string
 ): string {
   if (klass === "clean" && ledger) return "Done - ledger receipt";
+  if (klass === "clean" && conformance) return "Conformance passed - add ledger";
   if (klass === "clean" && simulated) return "Phase 1 - promote simulation";
   return phaseFor(code, klass, action);
 }
@@ -337,6 +340,7 @@ function nextAction(
   gaps: string,
   ledger: boolean,
   simulated: boolean,
+  conformance: boolean,
   selector: boolean
 ): string {
   if (ledger && klass === "clean") {
@@ -345,6 +349,7 @@ function nextAction(
   if (klass === "missing-definition") return "Fetch the missing definition and re-run coverage";
   if (selector) {
     if (klass !== "clean") return "Resolve the non-clean children";
+    if (conformance) return "Add a ledger receipt and keep the conformance batch";
     return simulated
       ? "Promote the simulation to a ledger receipt"
       : "Verify all children with fixtures and a receipt";
@@ -353,6 +358,7 @@ function nextAction(
   if (klass === "blocked:column-form") return `Implement column-form ${hard}`;
   if (klass === "partial:column-form") return `Column-form v2: ${gaps}`;
   if (klass === "no-surface") return "Utility definition; no calculator surface";
+  if (conformance) return "Add a ledger receipt and keep the conformance batch";
   return simulated
     ? "Promote the simulation to a ledger receipt"
     : "Add fixtures and a rendered receipt";
@@ -386,14 +392,19 @@ async function runtimeFor(
   }
 }
 
-async function receipts(): Promise<{ ledger: Set<string>; simulation: Set<string> }> {
+async function receipts(): Promise<{
+  ledger: Set<string>;
+  simulation: Set<string>;
+  conformance: Set<string>;
+}> {
   const ledger = new Set<string>();
   const simulation = new Set<string>();
+  const conformance = new Set<string>();
   let files: string[] = [];
   try {
     files = await readdir("receipts");
   } catch {
-    return { ledger, simulation };
+    return { ledger, simulation, conformance };
   }
   const collect = (value: unknown, target: Set<string>): void => {
     if (Array.isArray(value)) {
@@ -417,12 +428,13 @@ async function receipts(): Promise<{ ledger: Set<string>; simulation: Set<string
     if (!file.endsWith(".json") || file.endsWith("-estimate.json")) continue;
     try {
       const parsed = JSON.parse(await readFile(join("receipts", file), "utf8")) as unknown;
-      collect(parsed, file.startsWith("sim-") ? simulation : ledger);
+      if (file.startsWith("conformance-")) collect(parsed, conformance);
+      else collect(parsed, file.startsWith("sim-") ? simulation : ledger);
     } catch {
       // Old or partial receipts are ignored; the table records what parsed.
     }
   }
-  return { ledger, simulation };
+  return { ledger, simulation, conformance };
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -490,6 +502,7 @@ for (const entry of catalog.awsServices) {
     runtime_use2: "not-run",
     ledger_receipt: "no",
     simulation_receipt: "no",
+    conformance_receipt: "no",
     next_action: "Fetch the missing definition and re-run coverage",
   });
 }
@@ -511,12 +524,13 @@ for (const [code, definition] of definitions) {
     : classifyStatic(false, inv.total, inv.missing, inv.hard, inv.columnForms.length, inv.gaps);
   const ledger = receiptSets.ledger.has(code);
   const sim = receiptSets.simulation.has(code);
-  const verified = ledger || sim;
+  const conform = receiptSets.conformance.has(code);
+  const verified = ledger || sim || conform;
   const visible = visible2.has(code) || visible1.has(code);
-  const action = nextAction(staticClass, missing, hard, gaps, ledger, sim, isSelector);
+  const action = nextAction(staticClass, missing, hard, gaps, ledger, sim, conform, isSelector);
   const row: Row = {
     priority: priorityFor(code, visible, staticClass, verified),
-    plan_phase: phaseForRow(code, staticClass, ledger, sim, action),
+    plan_phase: phaseForRow(code, staticClass, ledger, sim, conform, action),
     service_code: code,
     service_name: text(definition.serviceName).trim() || text(catalog.awsServices.find((x) => x.serviceCode === code)?.name),
     kind: isSelector ? "selector" : "service",
@@ -540,6 +554,7 @@ for (const [code, definition] of definitions) {
     runtime_use2: runtime.get(code)?.["us-east-2"] ?? "not-run",
     ledger_receipt: ledger ? "yes" : "no",
     simulation_receipt: sim ? "yes" : "no",
+    conformance_receipt: conform ? "yes" : "no",
     next_action: action,
   };
   rowsByCode.set(code, row);
@@ -572,6 +587,9 @@ for (const [code, definition] of definitions) {
   if (children.length > 0 && children.every((child) => rowsByCode.get(child)?.simulation_receipt === "yes")) {
     row.simulation_receipt = "yes";
   }
+  if (children.length > 0 && children.every((child) => rowsByCode.get(child)?.conformance_receipt === "yes")) {
+    row.conformance_receipt = "yes";
+  }
   // A selector is only receipt-complete when every child has its own receipt.
   if (!(children.length > 0 && children.every((child) => rowsByCode.get(child)?.ledger_receipt === "yes"))) {
     row.ledger_receipt = "no";
@@ -583,14 +601,23 @@ for (const [code, definition] of definitions) {
     row.deep_gaps,
     row.ledger_receipt === "yes",
     row.simulation_receipt === "yes",
+    row.conformance_receipt === "yes",
     true
   );
-  row.priority = priorityFor(code, row.visible_use2 === "yes" || row.visible_use1 === "yes", row.static_class, row.ledger_receipt === "yes" || row.simulation_receipt === "yes");
+  row.priority = priorityFor(
+    code,
+    row.visible_use2 === "yes" || row.visible_use1 === "yes",
+    row.static_class,
+    row.ledger_receipt === "yes" ||
+      row.simulation_receipt === "yes" ||
+      row.conformance_receipt === "yes"
+  );
   row.plan_phase = phaseForRow(
     code,
     row.static_class,
     row.ledger_receipt === "yes",
     row.simulation_receipt === "yes",
+    row.conformance_receipt === "yes",
     row.next_action
   );
 }
@@ -627,6 +654,7 @@ const columns: Array<keyof Row> = [
   "runtime_use2",
   "ledger_receipt",
   "simulation_receipt",
+  "conformance_receipt",
   "next_action",
 ];
 
@@ -686,6 +714,7 @@ const compact: Array<keyof Row> = [
   "runtime_use1",
   "runtime_use2",
   "ledger_receipt",
+  "conformance_receipt",
   "plan_phase",
   "next_action",
 ];

@@ -1,0 +1,61 @@
+name: axi-conformance P0 VPC 3
+currency: USD
+locale: en_US
+services:
+- code: vpcRouteServer
+  set:
+    Number_of_route_server_end_points: 2
+  region: us-east-2
+- code: networkAddressTranslationNatGatewayVpc
+  set:
+    numberOfGateways: 2
+    dataProcessedPerNATGateway:
+      value: 1
+      unit: tb|month
+    regionalNatGatewayCount: 1
+    regionalNatGatewayAzCount: 2
+    regionalNatGatewayDataProcessed:
+      value: 500
+      unit: gb|month
+  region: us-east-2
+- code: transitGatewayVpc
+  set:
+    numberOfTransitGatewayAttachments: 2
+    dataProcessedPerTransitGatewayAttachment:
+      value: 1
+      unit: tb|month
+    Number_of_multicast_receivers: 1
+    Multicast_data_processed_per_Transit_Gateway_receiver:
+      value: 100
+      unit: gb|month
+  region: us-east-2
+- code: awsPrivateLinkVpc
+  set:
+    numberOfInterfaceVPCEndpointsPerRegion: 2
+    numberOfAvailabilityZonesEndpointsDeployed: 2
+    dataProcessedByEachVPCENIAZ:
+      value: 1
+      unit: tb|month
+  region: us-east-2
+- code: gatewayLoadBalancerVpc
+  set:
+    numberOfGatewayAZs: 2
+    sizeOfProcessedDataPerGLB:
+      value: 1
+      unit: tb|month
+    averageNumberOfNewGLBConnections:
+      value: 10
+      unit: perSecond
+    averageGLBConnectionDuration:
+      value: 10
+      unit: sec
+    numberOfGatewayLoadBalancerEndpoints: 2
+  region: us-east-2
+- code: cloudWan
+  set:
+    numberOfAttachments: 2
+    numberOfPeeringConnections: 1
+    dataProcessed:
+      value: 1
+      unit: tb|month
+  region: us-east-2

@@ -1,0 +1,338 @@
+{
+  "estimate": "axi-conformance P0 VPC 2",
+  "specHash": "9eb195ae85488439",
+  "url": "https://calculator.aws/#/estimate?id=243609a2f92756ab64839b25ad47a455157f7113",
+  "savedKey": "243609a2f92756ab64839b25ad47a455157f7113",
+  "publishedAt": "2026-11-24T10:10:25.169Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 416.26,
+    "upfront": 0,
+    "total12m": 4995.12,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "vpnConnectionVpc",
+        "template": "VPNConnection",
+        "region": "us-east-2",
+        "monthly": 270.5,
+        "upfront": 0,
+        "summary": "Number of Site-to-Site VPN Connections (2), Number of subnet associations (2), Working days per month (22)"
+      },
+      {
+        "code": "networkAccessAnalyzerVpc",
+        "template": "template_NetworkAccessAnalyzer",
+        "region": "us-east-2",
+        "monthly": 0.04,
+        "upfront": 0,
+        "summary": "Number of network assessments per month (2), Number of ENIs (elastic network interfaces) (10)"
+      },
+      {
+        "code": "reachabilityAnalyzerVpc",
+        "template": "template_ReachabilityAnalyzer",
+        "region": "us-east-2",
+        "monthly": 1,
+        "upfront": 0,
+        "summary": "Number of connectivity analysis per month (10)"
+      },
+      {
+        "code": "trafficMirroringVpc",
+        "template": "template_TrafficMirror",
+        "region": "us-east-2",
+        "monthly": 21.9,
+        "upfront": 0,
+        "summary": "Number of traffic mirroring sessions (2)"
+      },
+      {
+        "code": "publicIpv4Address",
+        "template": "ipv4publicaddress",
+        "region": "us-east-2",
+        "monthly": 10.95,
+        "upfront": 0,
+        "summary": "Number of In-use public IPv4 addresses (2), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "code": "ipamVpc",
+        "template": "template_IPAM",
+        "region": "us-east-2",
+        "monthly": 19.71,
+        "upfront": 0,
+        "summary": "Number of active IP addresses (100)"
+      },
+      {
+        "code": "dataTransferVpc",
+        "template": "dataTransfer",
+        "region": "us-east-2",
+        "monthly": 92.16,
+        "upfront": 0,
+        "summary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month), DT Intra-Region: (0 TB per month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "vpnConnectionVpc",
+        "monthly": 270.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAccessAnalyzerVpc",
+        "monthly": 0.04,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "reachabilityAnalyzerVpc",
+        "monthly": 1,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "trafficMirroringVpc",
+        "monthly": 21.9,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "publicIpv4Address",
+        "monthly": 10.95,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "ipamVpc",
+        "monthly": 19.71,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "dataTransferVpc",
+        "monthly": 92.16,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 416.26,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=243609a2f92756ab64839b25ad47a455157f7113",
+    "title": "axi-conformance P0 VPC 2",
+    "monthly": "416.26 USD",
+    "upfront": "0.00 USD",
+    "annual": "4,995.12 USD",
+    "monthlyValue": 416.26,
+    "upfrontValue": 0,
+    "annualValue": 4995.12,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "VPN Connection",
+        "upfront": "0.00 USD",
+        "monthly": "270.50 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (2), Number of subnet associations (2), Working days per month (22)",
+        "status": null
+      },
+      {
+        "name": "Network Access Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "0.04 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (2), Number of ENIs (elastic network interfaces) (10)",
+        "status": null
+      },
+      {
+        "name": "Reachability Analyzer",
+        "upfront": "0.00 USD",
+        "monthly": "1.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of connectivity analysis per month (10)",
+        "status": null
+      },
+      {
+        "name": "Traffic Mirroring",
+        "upfront": "0.00 USD",
+        "monthly": "21.90 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of traffic mirroring sessions (2)",
+        "status": null
+      },
+      {
+        "name": "Public IPv4 Address",
+        "upfront": "0.00 USD",
+        "monthly": "10.95 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (2), Number of Idle public IPv4 addresses (1)",
+        "status": null
+      },
+      {
+        "name": "IPAM",
+        "upfront": "0.00 USD",
+        "monthly": "19.71 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of active IP addresses (100)",
+        "status": null
+      },
+      {
+        "name": "Data Transfer",
+        "upfront": "0.00 USD",
+        "monthly": "92.16 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month), DT Intra-Region: (0 TB per month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:10:28.261Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=243609a2f92756ab64839b25ad47a455157f7113",
+    "savedKey": "243609a2f92756ab64839b25ad47a455157f7113",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=243609a2f92756ab64839b25ad47a455157f7113",
+      "title": "axi-conformance P0 VPC 2",
+      "monthly": "416.26 USD",
+      "upfront": "0.00 USD",
+      "annual": "4,995.12 USD",
+      "monthlyValue": 416.26,
+      "upfrontValue": 0,
+      "annualValue": 4995.12,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "VPN Connection",
+          "upfront": "0.00 USD",
+          "monthly": "270.50 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Site-to-Site VPN Connections (2), Number of subnet associations (2), Working days per month (22)",
+          "status": "-"
+        },
+        {
+          "name": "Network Access Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "0.04 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of network assessments per month (2), Number of ENIs (elastic network interfaces) (10)",
+          "status": "-"
+        },
+        {
+          "name": "Reachability Analyzer",
+          "upfront": "0.00 USD",
+          "monthly": "1.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of connectivity analysis per month (10)",
+          "status": "-"
+        },
+        {
+          "name": "Traffic Mirroring",
+          "upfront": "0.00 USD",
+          "monthly": "21.90 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of traffic mirroring sessions (2)",
+          "status": "-"
+        },
+        {
+          "name": "Public IPv4 Address",
+          "upfront": "0.00 USD",
+          "monthly": "10.95 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of In-use public IPv4 addresses (2), Number of Idle public IPv4 addresses (1)",
+          "status": "-"
+        },
+        {
+          "name": "IPAM",
+          "upfront": "0.00 USD",
+          "monthly": "19.71 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of active IP addresses (100)",
+          "status": "-"
+        },
+        {
+          "name": "Data Transfer",
+          "upfront": "0.00 USD",
+          "monthly": "92.16 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "DT Inbound: Not selected (0 TB per month), DT Intra-Region: (0 TB per month), DT Outbound: Internet (1 TB per month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:10:55.068Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance P0 VPC 2",
+    "monthly": 416.26,
+    "upfront": 0,
+    "annual": 4995.12,
+    "services": [
+      {
+        "name": "VPN Connection",
+        "monthly": 270.5,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Site-to-Site VPN Connections (2), Number of subnet associations (2), Working days per month (22)"
+      },
+      {
+        "name": "Network Access Analyzer",
+        "monthly": 0.04,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of network assessments per month (2), Number of ENIs (elastic network interfaces) (10)"
+      },
+      {
+        "name": "Reachability Analyzer",
+        "monthly": 1,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of connectivity analysis per month (10)"
+      },
+      {
+        "name": "Traffic Mirroring",
+        "monthly": 21.9,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of traffic mirroring sessions (2)"
+      },
+      {
+        "name": "Public IPv4 Address",
+        "monthly": 10.95,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of In-use public IPv4 addresses (2), Number of Idle public IPv4 addresses (1)"
+      },
+      {
+        "name": "IPAM",
+        "monthly": 19.71,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of active IP addresses (100)"
+      },
+      {
+        "name": "Data Transfer",
+        "monthly": 92.16,
+        "region": "US East (Ohio)",
+        "configSummary": "DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1 TB per month), DT Intra-Region: (0 TB per month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

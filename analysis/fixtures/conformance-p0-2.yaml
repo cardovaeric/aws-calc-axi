@@ -1,0 +1,50 @@
+name: axi-conformance P0 VPC 2
+currency: USD
+locale: en_US
+services:
+- code: vpnConnectionVpc
+  set:
+    numberOfSiteToSiteVPNConnections: 2
+    averageDurationForEachConnection:
+      value: 12
+      unit: perDay
+    vpnConnection_numberOfClientSubnets: 2
+    vpnConnection_numberOfClientConnections:
+      value: 10
+      unit: perDay
+    vpnConnection_clientAvgDuration:
+      value: 8
+      unit: perDay
+    vpnConnection_numberOfWorkDays: 22
+  region: us-east-2
+- code: networkAccessAnalyzerVpc
+  set:
+    numberOfNetworkAssessment: 2
+    numberOfElasticNetworkInterface: 10
+  region: us-east-2
+- code: reachabilityAnalyzerVpc
+  set:
+    numberOfConnectivityAnalysis: 10
+  region: us-east-2
+- code: trafficMirroringVpc
+  set:
+    numberOfTrafficMirroringSession: 2
+  region: us-east-2
+- code: publicIpv4Address
+  set:
+    numberOfInusepublicipv4address: 2
+    numberOfIdlepublicipv4address: 1
+  region: us-east-2
+- code: ipamVpc
+  set:
+    numberOfActiveIPaddress: 100
+  region: us-east-2
+- code: dataTransferVpc
+  set:
+    dataTransfer:
+      value:
+      - entryType: OUTBOUND
+        value: 1
+        unit: tb_month
+        toRegion: External
+  region: us-east-2

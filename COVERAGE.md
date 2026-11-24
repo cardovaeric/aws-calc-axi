@@ -7,6 +7,9 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 
 | Service | Template | Region | Fixture | Path | Native | Rendered | Oracle | Status | Link |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| EKS + EBS conformance batch | awsEks + amazonElasticBlockStore | us-east-2 | 3 EKS fixtures and all 7 EBS volume types with snapshots | native | 31024.26 | 31,024.26 USD | pass | pass | https://calculator.aws/#/estimate?id=da681d431df3701ad0507ffd5fbc6a060a26ea16 |
+| VPC conformance batch 1 | vpn, network analyzer, reachability, traffic mirroring, public IPv4, IPAM, data transfer | us-east-2 | 7 VPC sub-services with nonzero values | native | 416.26 | 416.26 USD | pass | pass | https://calculator.aws/#/estimate?id=243609a2f92756ab64839b25ad47a455157f7113 |
+| VPC conformance batch 2 | route server, NAT, transit gateway, PrivateLink, gateway LB, Cloud WAN | us-east-2 | 6 VPC sub-services with nonzero values | native | 2064.82 | 2,064.82 USD | pass | pass | https://calculator.aws/#/estimate?id=0eacc258d28623ebf52606058e9944db30d46028 |
 | amazonS3Standard (via amazonSimpleStorageServiceGroup) | s3Standard | us-east-2 | 100 GB/month Standard storage | native | 2.30 | 2.30 USD | pass | pass | https://calculator.aws/#/estimate?id=3202908b0ea42ffe803a3cb5cfc093e72721e1e2 |
 | aWSLambda | lambdaWithFreeTier | us-east-2 | 10M requests, 200 ms, 512 MB, free tier | native | 11.80 | 11.80 USD | pass | pass | https://calculator.aws/#/estimate?id=3336459db750e935468fe72e4d860bbd5d66264c |
 | amazonCloudWatch | CloudWatch | us-east-2 | 10 metrics, 1M API requests, 5 GB logs, 3 dashboards, 10 alarms | native | 16.52 | 16.52 USD | pass | pass | https://calculator.aws/#/estimate?id=bb5773335aa17b384ef7805a9c9a09c2ca8ade39 |
@@ -27,6 +30,9 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 
 ## Notes
 
+- p0-eks-ebs-conformance-use2: per-row editor recompute; 10 fixtures in one estimate
+- p0-vpc-conformance-1-use2: per-row editor recompute
+- p0-vpc-conformance-2-use2: per-row editor recompute
 - s3-standard-100gb-use2: P0 vertical slice; selector parent emits subServices[]
 - lambda-free-tier-10m-use2: replace + pricingComboV2, frequency and duration inputs, free tier subtraction
 - cloudwatch-usage-use2: region-less pricing meters merged from the pricing file's Any bucket

@@ -1,0 +1,301 @@
+{
+  "estimate": "axi-conformance P0 VPC 3",
+  "specHash": "d7e188d9b441fc43",
+  "url": "https://calculator.aws/#/estimate?id=0eacc258d28623ebf52606058e9944db30d46028",
+  "savedKey": "0eacc258d28623ebf52606058e9944db30d46028",
+  "publishedAt": "2026-11-24T10:11:00.834Z",
+  "expires": "2027-11-24",
+  "native": {
+    "monthly": 2064.82,
+    "upfront": 0,
+    "total12m": 24777.84,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "vpcRouteServer",
+        "template": "template_VPC_Route_Server",
+        "region": "us-east-2",
+        "monthly": 1095,
+        "upfront": 0,
+        "summary": "Number of Route Server endpoints (2)"
+      },
+      {
+        "code": "networkAddressTranslationNatGatewayVpc",
+        "template": "networkAddressTranslationGateway",
+        "region": "us-east-2",
+        "monthly": 246.06,
+        "upfront": 0,
+        "summary": "Number of NAT Gateways (2), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (2)"
+      },
+      {
+        "code": "transitGatewayVpc",
+        "template": "transitGateway",
+        "region": "us-east-2",
+        "monthly": 115.96,
+        "upfront": 0,
+        "summary": "Number of Transit Gateway attachments (2), Number of Multicast Receivers (1)"
+      },
+      {
+        "code": "awsPrivateLinkVpc",
+        "template": "awsPrivateLink",
+        "region": "us-east-2",
+        "monthly": 39.44,
+        "upfront": 0,
+        "summary": "Number of VPC Interface endpoints per AWS region (2)"
+      },
+      {
+        "code": "gatewayLoadBalancerVpc",
+        "template": "template_5",
+        "region": "us-east-2",
+        "monthly": 40.53,
+        "upfront": 0,
+        "summary": "Number of Availability Zones that Gateway Load Balancer is deployed to (2), Total processed bytes (1 TB per month), Average number of new connections/flows (10 per second), Average connection/flow duration (10 seconds), Number of Gateway Load Balancer Endpoints (2)"
+      },
+      {
+        "code": "cloudWan",
+        "template": "cloudwan",
+        "region": "us-east-2",
+        "monthly": 527.83,
+        "upfront": 0,
+        "summary": "Number of Attachments (2), Number of Transit Gateway Peering Connections (1)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "vpcRouteServer",
+        "monthly": 1095,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "networkAddressTranslationNatGatewayVpc",
+        "monthly": 246.06,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "transitGatewayVpc",
+        "monthly": 115.96,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsPrivateLinkVpc",
+        "monthly": 39.44,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "gatewayLoadBalancerVpc",
+        "monthly": 40.53,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "cloudWan",
+        "monthly": 527.83,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 2064.82,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=0eacc258d28623ebf52606058e9944db30d46028",
+    "title": "axi-conformance P0 VPC 3",
+    "monthly": "2,064.82 USD",
+    "upfront": "0.00 USD",
+    "annual": "24,777.84 USD",
+    "monthlyValue": 2064.82,
+    "upfrontValue": 0,
+    "annualValue": 24777.84,
+    "estimateDate": "Estimate date: November 24, 2026",
+    "banner": "last updated on November 24, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "VPC Route Server",
+        "upfront": "0.00 USD",
+        "monthly": "1,095.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Route Server endpoints (2)",
+        "status": null
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "246.06 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (2), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (2)",
+        "status": null
+      },
+      {
+        "name": "Transit Gateway",
+        "upfront": "0.00 USD",
+        "monthly": "115.96 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (2), Number of Multicast Receivers (1)",
+        "status": null
+      },
+      {
+        "name": "AWS PrivateLink",
+        "upfront": "0.00 USD",
+        "monthly": "39.44 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (2)",
+        "status": null
+      },
+      {
+        "name": "Gateway Load Balancer",
+        "upfront": "0.00 USD",
+        "monthly": "40.53 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Availability Zones that Gateway Load Balancer is deployed to (2), Total processed bytes (1 TB per month), Average number of new connections/flows (10 per second), Average connection/flow duration (10 seconds), Number of Gateway Load Balancer Endpoints (2)",
+        "status": null
+      },
+      {
+        "name": "Cloud WAN",
+        "upfront": "0.00 USD",
+        "monthly": "527.83 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Attachments (2), Number of Transit Gateway Peering Connections (1)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-24T10:11:03.551Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=0eacc258d28623ebf52606058e9944db30d46028",
+    "savedKey": "0eacc258d28623ebf52606058e9944db30d46028",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=0eacc258d28623ebf52606058e9944db30d46028",
+      "title": "axi-conformance P0 VPC 3",
+      "monthly": "2,064.82 USD",
+      "upfront": "0.00 USD",
+      "annual": "24,777.84 USD",
+      "monthlyValue": 2064.82,
+      "upfrontValue": 0,
+      "annualValue": 24777.84,
+      "estimateDate": "Estimate date: November 24, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "VPC Route Server",
+          "upfront": "0.00 USD",
+          "monthly": "1,095.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Route Server endpoints (2)",
+          "status": "-"
+        },
+        {
+          "name": "Network Address Translation (NAT) Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "246.06 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of NAT Gateways (2), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (2)",
+          "status": "-"
+        },
+        {
+          "name": "Transit Gateway",
+          "upfront": "0.00 USD",
+          "monthly": "115.96 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Transit Gateway attachments (2), Number of Multicast Receivers (1)",
+          "status": "-"
+        },
+        {
+          "name": "AWS PrivateLink",
+          "upfront": "0.00 USD",
+          "monthly": "39.44 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of VPC Interface endpoints per AWS region (2)",
+          "status": "-"
+        },
+        {
+          "name": "Gateway Load Balancer",
+          "upfront": "0.00 USD",
+          "monthly": "40.53 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Availability Zones that Gateway Load Balancer is deployed to (2), Total processed bytes (1 TB per month), Average number of new connections/flows (10 per second), Average connection/flow duration (10 seconds), Number of Gateway Load Balancer Endpoints (2)",
+          "status": "-"
+        },
+        {
+          "name": "Cloud WAN",
+          "upfront": "0.00 USD",
+          "monthly": "527.83 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of Attachments (2), Number of Transit Gateway Peering Connections (1)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-24T10:11:30.301Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-conformance P0 VPC 3",
+    "monthly": 2064.82,
+    "upfront": 0,
+    "annual": 24777.84,
+    "services": [
+      {
+        "name": "VPC Route Server",
+        "monthly": 1095,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Route Server endpoints (2)"
+      },
+      {
+        "name": "Network Address Translation (NAT) Gateway",
+        "monthly": 246.06,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of NAT Gateways (2), Number of Regional NAT Gateways (1), Number of Availability Zones Regional NAT Gateways is active in (2)"
+      },
+      {
+        "name": "Transit Gateway",
+        "monthly": 115.96,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Transit Gateway attachments (2), Number of Multicast Receivers (1)"
+      },
+      {
+        "name": "AWS PrivateLink",
+        "monthly": 39.44,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of VPC Interface endpoints per AWS region (2)"
+      },
+      {
+        "name": "Gateway Load Balancer",
+        "monthly": 40.53,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Availability Zones that Gateway Load Balancer is deployed to (2), Total processed bytes (1 TB per month), Average number of new connections/flows (10 per second), Average connection/flow duration (10 seconds), Number of Gateway Load Balancer Endpoints (2)"
+      },
+      {
+        "name": "Cloud WAN",
+        "monthly": 527.83,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of Attachments (2), Number of Transit Gateway Peering Connections (1)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

@@ -254,12 +254,18 @@ export function evaluateInput(component: Component, context: InputContext): Inpu
           ? numericValue(component, raw, context)
           : requireNumeric(component, raw, context);
       const present = raw !== undefined && raw !== null && raw !== "";
-      // The live engine keeps the fraction in state and in the summary.
+      // The live engine keeps the fraction as the engine value and in the
+      // summary, but saves the percent the user typed: `Xe.handleInput` holds
+      // the raw string and `Je.convertToSaveFormat` writes `{value: e.value}`,
+      // while the rehydrator divides by 100 on the way back. Saving the
+      // fraction made a rehydrated 100% read as 1% (D-026).
       const fraction = numeric / 100;
       return {
         value: fraction,
         present,
-        ...(present ? { saved: { value: fraction } } : {}),
+        ...(present
+          ? { saved: { value: typeof raw === "string" ? raw.trim() : String(numeric) } }
+          : {}),
         ...(displayInSummary && present
           ? { configSummary: `${label} (${formatNumber(fraction)})` }
           : {}),

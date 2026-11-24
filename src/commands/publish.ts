@@ -68,6 +68,13 @@ Examples:
 export interface PublicationReceipt {
   estimate: string;
   specHash: string;
+  /**
+   * Hash of the exact estimate payload that was published. Link reuse needs
+   * both hashes: a spec-only hash cannot tell that the engine's wire format
+   * changed (for example a component's saved value), so it would silently
+   * re-verify a stale link.
+   */
+  payloadHash?: string;
   url: string;
   savedKey: string;
   publishedAt: string;
@@ -178,6 +185,10 @@ function specHashOf(spec: EstimateSpec): string {
   return createHash("sha256").update(canonical).digest("hex").slice(0, 16);
 }
 
+function payloadHashOf(estimate: Estimate): string {
+  return createHash("sha256").update(JSON.stringify(estimate)).digest("hex").slice(0, 16);
+}
+
 async function previousReceipt(path: string): Promise<PublicationReceipt | undefined> {
   try {
     return JSON.parse(await readFile(path, "utf8")) as PublicationReceipt;
@@ -195,11 +206,15 @@ export async function runPublish(options: PublishOptions): Promise<{
   });
   const result = await buildFromSpec(spec, options.flags);
   const specHash = specHashOf(spec);
+  const payloadHash = payloadHashOf(result.estimate);
   const previous =
     options.receiptPath && !options.forcePublish
       ? await previousReceipt(options.receiptPath)
       : undefined;
-  const reuse = previous && previous.specHash === specHash && previous.url ? previous : undefined;
+  const reuse =
+    previous && previous.specHash === specHash && previous.payloadHash === payloadHash && previous.url
+      ? previous
+      : undefined;
 
   const publication = reuse
     ? {
@@ -281,6 +296,7 @@ export async function runPublish(options: PublishOptions): Promise<{
   const receipt: PublicationReceipt = {
     estimate: spec.name,
     specHash,
+    payloadHash,
     url: publication.url,
     savedKey: publication.savedKey,
     publishedAt: publication.publishedAt,

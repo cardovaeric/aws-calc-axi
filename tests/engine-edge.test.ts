@@ -128,6 +128,42 @@ test("percent inputs keep the fraction in state and summary", () => {
   assert.equal(result.configSummary, "Sampling rate (1)");
 });
 
+test("percent inputs save the entered percent, not the fraction", () => {
+  // The live component keeps the typed percent in `initialState.value`
+  // (`Xe.handleInput` plus `Je.convertToSaveFormat`) and divides by 100 in the
+  // rehydrator. Saving the fraction made a rehydrated 100% read as 1%.
+  const result = evaluateInput(
+    input({ subType: "percentInput", label: "Sampling rate", defaultValue: 100 }),
+    { ...context, overrides: {} }
+  );
+  assert.deepEqual(result.saved, { value: "100" });
+  assert.equal(Number((result.saved as { value: string }).value) / 100, result.value);
+
+  const half = evaluateInput(
+    input({ subType: "percentInput", label: "Sampling rate", defaultValue: 100 }),
+    { ...context, overrides: { field: { value: 50 } } }
+  );
+  assert.equal(half.value, 0.5);
+  assert.deepEqual(half.saved, { value: "50" });
+
+  // A typed string is stored verbatim, like the live input's text.
+  const typed = evaluateInput(
+    input({ subType: "percentInput", label: "Sampling rate", defaultValue: 100 }),
+    { ...context, overrides: { field: "2.5" } }
+  );
+  assert.equal(typed.value, 0.025);
+  assert.deepEqual(typed.saved, { value: "2.5" });
+});
+
+test("a percent input with no value saves nothing", () => {
+  const result = evaluateInput(
+    input({ subType: "percentInput", label: "Sampling rate" }),
+    { ...context, overrides: {} }
+  );
+  assert.equal(result.present, false);
+  assert.equal(result.saved, undefined);
+});
+
 test("throughput inputs convert to the output unit and summarize the entry", () => {
   const result = evaluateInput(
     input({

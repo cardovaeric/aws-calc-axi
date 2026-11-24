@@ -863,3 +863,52 @@ Coverage delta from `main` after the re-test (P1 14, `clean` 399, `partial:colum
 `realTimeDocumentTranslation` and Amazon Translate are blocked by the primary-remap rule, and
 Amazon Mainframe Modernization is `blocked:subtype` because a missing input subtype outranks a
 column-form feature. Nothing became clean.
+## 16. `utilization` inputs (2026-11-24)
+
+Observed in us-east-2 with AWS PCS and AWS Elemental MediaConnect, and in the live
+frontend bundle at `https://calculator.aws/<build>/static/js/bundle.js`.
+
+- The subtype's duration list is not in the definition. It is the bundle's
+  `DEFAULT_UTILIZATION_OPTIONS` (module 160): `percentagePerMonth` (max 100),
+  `hoursPerDay` (24), `hoursPerWeek` (168), `hoursPerMonth` (730),
+  `minutesPerDay` (1440), `minutesPerMonth` (43800). The default duration is
+  `percentagePerMonth`, the default value is 100, and the validation fallback is
+  0..730 (`HOURS_IN_MONTH`).
+- `calculateUtilizationValue(value, option, label, roundUpToHours, decimalPlaces)`:
+  `hours = (value / option.max) * 730`. With `roundUpToHours` the result is
+  `Math.ceil(hours)`; otherwise the float is wrapped in decimal.js and rounded up
+  away from zero to `decimalPlaces` (default 4). So 33% is 241 hours with
+  `roundUpToHours` and 240.9 without.
+- The saved component is `{value: <typed text>, unit: <duration id>}`. The
+  editor's `convertToSaveFormat` for utilization is
+  `{value: e.value, unit: e.selectedId}` and the redux state keeps
+  `initialState.value` as the input's string value.
+- The string matters at zero. The rehydrator (`Ne`) treats a value as empty with
+  lodash `isEmpty`, which is true for the number 0: a stored `{value: 0}` loses
+  its `unit`, the conversion throws, and the live editor drops that component's
+  summary. A stored `{value: "0"}` keeps the unit and the
+  `(0 % Utilization/Month)` summary. Verified by publishing the same PCS rows
+  with numeric and with string values and clicking Update estimate.
+- Validations run on the converted hours, not the entry: PCS declares no
+  min/max and still rejects more than 730 hours; Deadline Cloud and Direct
+  Connect declare 0..730 hours explicitly.
+- Config summary is `<label> (<entry> <duration label>)`, for example
+  `Flow utilization (730 Hours/Month)` and
+  `Length of time cluster is running (100 % Utilization/Month)`, and only when
+  `displayInConfigSummary` is true.
+- Two neighbouring live behaviors surfaced while making MediaConnect evaluate:
+  - `pricingComboV2` reads a composed meter name and falls back to 0 when the
+    region's price map has no such meter. MediaConnect's "None" reserved
+    bandwidth composes `DataProcessedReserved0Mbps1Yr`, which exists in no
+    region; the live editor bills 0.
+  - `replace` applies every replacement as a global regex substitution and
+    keeps the original string when nothing matches (the `sourceType` default
+    "0" has no JPEG replacement).
+
+Reproduce:
+
+```sh
+curl -s --compressed https://calculator.aws/ | grep -o 'src="[^"]*bundle.js"'
+# then, in the bundle: DEFAULT_UTILIZATION_OPTIONS, calculateUtilizationValue,
+# convertToSaveFormat, and the rehydrator's Ne() isEmpty guard
+```

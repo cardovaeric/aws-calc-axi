@@ -453,3 +453,40 @@ without `--evaluate` so `npm run coverage` followed by `npm test` stays green. T
 are reported instead: the primary-selector resolution in `src/engine/column-form.ts`, and
 `fileSize` defaults whose `defaultOption.frequency` is not in `dropDownFrequency`
 (`amazonLookoutForEquipment`, `src/engine/inputs.ts`). No engine file is touched here.
+
+## D-030: Native `utilization` inputs, and two live fallbacks they needed (2026-11-24)
+
+`utilization` is implemented from the live bundle, not memory: the duration table
+(`DEFAULT_UTILIZATION_OPTIONS`), `calculateUtilizationValue`, the
+`{value, unit}` save format, and the 0..730 hour validation fallback. Details and
+reproduction in `analysis/FINDINGS.md` section 16. Unknown duration ids fail
+closed with the live option list.
+
+Three decisions inside that work:
+
+- The saved `value` is the typed text (a string), as the live form's
+  `initialState.value` is. A numeric 0 is treated as empty by the live
+  rehydrator (lodash `isEmpty(0)`), which drops the unit and the summary; a
+  string `"0"` survives. Proven by republishing the AWS PCS receipt after the
+  change: the editor recompute keeps `(0 % Utilization/Month)`.
+- `pricingComboV2` now bills a composed meter that the region's price map lacks
+  as 0, matching the live engine, because MediaConnect's default "None"
+  reservation composes `DataProcessedReserved0Mbps1Yr`, which exists in no
+  region. `singlePricePoint` and `tieredPricing` still fail closed on missing
+  meters, and `pricingComboV2` still fails closed when the mapping has no price
+  map for the region at all, so a data gap is not turned into a zero.
+- `replace` now applies global regex substitutions and keeps the original string
+  when nothing matches, like the live engine. The previous exact-match throw
+  blocked MediaConnect's `sourceType` default "0".
+
+Publish budget: the shared counter was at 82/25 when this work started (the P0
+conformance run in the main worktree). The mandated receipts used four links,
+two for AWS PCS and two for MediaConnect, each publish run with
+`AWSCALC_MAX_PUBLISHES_PER_DAY=88` for that process only. The default cap stays
+25.
+
+Still fail-closed: Deadline Cloud and Direct Connect, on column-form gaps that
+this subtype does not touch. Direct Connect's PLC_2.0 metadata has no
+`regionAttributes.Location`, so `loadColumnFormPricing` rejects every region;
+Deadline Cloud's price-set label uses spaces (`c5 large Linux ...`) while the
+engine substring-matches dotted selector values (`c5.large`).

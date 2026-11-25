@@ -1,9 +1,9 @@
 priority,plan_phase,service_code,service_name,kind,visible_use1,visible_use2,templates,cards,components_supported,components_total,surface_pct,static_class,missing_subtypes,column_forms,hard_blockers,deep_gaps,selector_children,selector_nonclean,selector_unserved,selector_blockers,runtime_use1,runtime_use2,ledger_receipt,simulation_receipt,conformance_receipt,next_action
 P0,Phase 3 - EC2 module,ec2Enhancement,Amazon EC2,service,yes,yes,1,6,80,94,85.1%,blocked:subtype,maths:ec2PriceDisplay:5;maths:ec2Variable:2;pricing:ec2PriceFetcher:1;input:radioTiles:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategyV2:1;maths:ec2AdvPricingStrategyMath:1;input:ec2AdvPricingMetrics:1,0,,,0,,,,unsupported,unsupported,no,yes,no,Implement maths:ec2PriceDisplay:5;maths:ec2Variable:2;pricing:ec2PriceFetcher:1;input:radioTiles:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategyV2:1;maths:ec2AdvPricingStrategyMath:1;input:ec2AdvPricingMetrics:1
-P0,Phase 3 - EC2 module,eC2Next,Amazon EC2,service,no,no,2,9,84,106,79.2%,blocked:subtype,input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:utilization:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1,0,,,0,,,,unsupported,unsupported,no,no,no,Implement input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:utilization:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1
+P0,Phase 3 - EC2 module,eC2Next,Amazon EC2,service,no,no,2,9,85,106,80.2%,blocked:subtype,input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1,0,,,0,,,,unsupported,unsupported,no,no,no,Implement input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1
 P0,Phase 3 - EC2 module,windowsWorkloads,Windows Server and SQL Server on Amazon EC2,service,yes,yes,1,11,14,48,29.2%,blocked:subtype,input:workloadsConditionalComponent:5;input:workloadDropdown:3;input:conditionalCheckboxes:2;input:pricingStrategy:2;input:workloadPriceSetFetcher:1;pricing:workloadStoragePricing:1;input:workflowInstruction:1;input:uploadTable:1;input:dedicatedHostsReviewTable:1;input:dedicatedHostsCostTable:1;maths:dedicatedHostsMath:1;input:sqlSummary:1;input:windowsSummary:1;input:inputField:1;input:windowsWorkloadStorage:1;input:radioTiles:1;maths:instanceRecommendation:1;input:workloadsInstanceSearch:1;input:sqlPassiveNode:1;maths:workloadInstanceMath:1;maths:instanceCostSummary:1;maths:workloadStorageMath:1;maths:storageCostSummary:1;maths:instanceCostSummaryTable:1;maths:storageCostSummaryTable:1;maths:sqlLicenseSummary:1,0,,,0,,,,unsupported,unsupported,no,no,no,Implement input:workloadsConditionalComponent:5;input:workloadDropdown:3;input:conditionalCheckboxes:2;input:pricingStrategy:2;input:workloadPriceSetFetcher:1;pricing:workloadStoragePricing:1;input:workflowInstruction:1;input:uploadTable:1;input:dedicatedHostsReviewTable:1;input:dedicatedHostsCostTable:1;maths:dedicatedHostsMath:1;input:sqlSummary:1;input:windowsSummary:1;input:inputField:1;input:windowsWorkloadStorage:1;input:radioTiles:1;maths:instanceRecommendation:1;input:workloadsInstanceSearch:1;input:sqlPassiveNode:1;maths:workloadInstanceMath:1;maths:instanceCostSummary:1;maths:workloadStorageMath:1;maths:storageCostSummary:1;maths:instanceCostSummaryTable:1;maths:storageCostSummaryTable:1;maths:sqlLicenseSummary:1
 P0,Conformance passed - add ledger,amazonElasticBlockStore,Amazon Elastic Block Store (EBS),service,yes,yes,1,3,68,68,100.0%,clean,,0,,,0,,,,ok,ok,no,yes,yes,Add a ledger receipt and keep the conformance batch
-P0,Phase 1 - promote simulation,amazonRdsCustomForSqlServer,Amazon RDS Custom for SQL Server,service,yes,yes,1,3,47,47,100.0%,clean,,1,,,0,,,,bad-definition,bad-definition,no,yes,no,Promote the simulation to a ledger receipt
+P0,Phase 1 - promote simulation,amazonRdsCustomForSqlServer,Amazon RDS Custom for SQL Server,service,yes,yes,1,3,47,47,100.0%,clean,,1,,,0,,,,ok,ok,no,yes,no,Promote the simulation to a ledger receipt
 P0,Phase 1 - receipts,amazonRdsForOutposts,Amazon RDS on AWS Outposts,service,yes,yes,1,2,7,7,100.0%,clean,,1,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P0,Conformance passed - add ledger,amazonVirtualPrivateCloud,Amazon Virtual Private Cloud (VPC),selector,yes,yes,13,18,151,151,100.0%,clean,,0,,,13,,,,ok,ok,no,yes,yes,Add a ledger receipt and keep the conformance batch
 P0,Conformance passed - add ledger,awsEks,Amazon EKS,service,yes,yes,1,4,44,44,100.0%,clean,,0,,,0,,,,ok,ok,no,yes,yes,Add a ledger receipt and keep the conformance batch
@@ -32,16 +32,11 @@ P0,Phase 2 - column-form v2,amazonRDSMySQLDB,Amazon RDS for MySQL,service,yes,ye
 P0,Phase 2 - column-form v2,amazonRDSPostgreSQLDB,Amazon RDS for PostgreSQL,service,yes,yes,1,9,99,99,100.0%,partial:column-form,,1,,additional-pricing-data,0,,,,needs-input,needs-input,no,yes,no,Column-form v2: additional-pricing-data
 P1,Phase 2 - column-form v2,amazonChimeSdk,Amazon Chime SDK,selector,yes,no,5,12,188,188,100.0%,blocked:column-form,,0,remap.constant,,5,ptsnAudio;sipTrunking,,"remap.constant (ptsnAudio, sipTrunking)",needs-input,needs-input,no,no,no,"Implement column-form remap.constant (ptsnAudio, sipTrunking)"
 P1,Phase 2 - column-form v2,amazonEMR,Amazon EMR,selector,yes,yes,5,6,46,46,100.0%,blocked:column-form,,0,utilization-selector,,5,amazonEmrMasterNode;amazonEmrCoreNode;amazonEmrTaskNode,,"utilization-selector (amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode)",needs-input,needs-input,no,no,no,"Implement column-form utilization-selector (amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode)"
+P1,Phase 2 - column-form v2,amazonMainframeModernization,AWS Mainframe Modernization,selector,yes,yes,2,7,27,27,100.0%,blocked:column-form,,0,remap.constant,,2,mainframeBluAge;mainframeMicroFocus,,"remap.constant (mainframeBluAge, mainframeMicroFocus)",needs-input,needs-input,no,no,no,"Implement column-form remap.constant (mainframeBluAge, mainframeMicroFocus)"
 P1,Phase 2 - column-form v2,amazonTranslate,Amazon Translate,selector,yes,yes,4,4,21,21,100.0%,blocked:column-form,,0,remap.keyValue-primary,,4,realTimeDocumentTranslation,,remap.keyValue-primary (realTimeDocumentTranslation),ok,ok,no,no,no,Implement column-form remap.keyValue-primary (realTimeDocumentTranslation)
 P1,Phase 2 - column-form v2,amazonWorkSpaces,Amazon WorkSpaces,selector,yes,yes,6,8,193,193,100.0%,blocked:column-form,,0,utilization-selector,,6,amazonWorkspaces;workSpacesCore;workSpacesInstances,workSpacesThinClient;workSpacesSecureBrowser,"utilization-selector (amazonWorkspaces, workSpacesCore, workSpacesInstances)",unsupported,unsupported,no,no,no,"Implement column-form utilization-selector (amazonWorkspaces, workSpacesCore, workSpacesInstances)"
 P1,Phase 2 - column-form v2,aWSDirectoryService,AWS Directory Service,service,yes,yes,3,3,16,16,100.0%,blocked:column-form,,4,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement column-form remap.constant
-P1,Phase 5 - long tail,amazonMainframeModernization,AWS Mainframe Modernization,selector,yes,yes,2,7,22,27,81.5%,blocked:subtype,input:utilization:2;input:utilization:3,0,remap.constant,,2,mainframeBluAge;mainframeMicroFocus,,"utilization (mainframeBluAge, mainframeMicroFocus); remap.constant (mainframeBluAge, mainframeMicroFocus)",needs-input,needs-input,no,no,no,Implement input:utilization:2 (mainframeBluAge); Implement input:utilization:3 (mainframeMicroFocus)
-P1,Phase 5 - long tail,awsDeadlineCloud,AWS Deadline Cloud,service,yes,yes,1,6,44,45,97.8%,blocked:subtype,input:utilization:1,2,,,0,,,,needs-input,needs-input,no,no,no,Implement input:utilization:1
-P1,Phase 5 - long tail,awsDirectConnect,AWS Direct Connect,service,yes,yes,1,2,9,10,90.0%,blocked:subtype,input:utilization:1,1,,,0,,,,needs-input,needs-input,no,no,no,Implement input:utilization:1
-P1,Phase 5 - long tail,awsElementalMediaConnect,AWS Elemental MediaConnect,service,yes,yes,1,6,91,97,93.8%,blocked:subtype,input:utilization:6,0,,,0,,,,unsupported,unsupported,no,no,no,Implement input:utilization:6
-P1,Phase 5 - long tail,awsPcs,AWS PCS,service,yes,yes,1,3,32,36,88.9%,blocked:subtype,input:utilization:4,0,,,0,,,,unsupported,unsupported,no,no,no,Implement input:utilization:4
 P1,Phase 2 - column-form v2,amazonDocumentDB,Amazon DocumentDB (with MongoDB compatibility),service,yes,yes,2,13,79,79,100.0%,partial:column-form,,2,,additional-pricing-data,0,,,,ok,ok,no,no,no,Column-form v2: additional-pricing-data
-P1,Phase 2 - column-form v2,amazonKeyspaces,Amazon Keyspaces,service,yes,yes,5,23,183,183,100.0%,partial:column-form,,4,,additional-pricing-data,0,,,,ok,ok,no,no,no,Column-form v2: additional-pricing-data
 P1,Phase 2 - column-form v2,amazonNeptune,Amazon Neptune,service,yes,yes,3,16,143,143,100.0%,partial:column-form,,5,,additional-pricing-data,0,,,,needs-input,needs-input,no,no,no,Column-form v2: additional-pricing-data
 P1,Phase 2 - column-form v2,amazonTimestream,Amazon Timestream,service,yes,yes,1,2,23,23,100.0%,partial:column-form,,2,,additional-pricing-data,0,,,,needs-input,needs-input,no,no,no,Column-form v2: additional-pricing-data
 P1,Phase 2 - column-form v2,awsDatabaseMigrationService,AWS Database Migration Service,service,yes,yes,2,4,27,27,100.0%,partial:column-form,,2,,additional-pricing-data,0,,,,needs-input,needs-input,no,no,no,Column-form v2: additional-pricing-data
@@ -49,7 +44,7 @@ P2,Phase 1 - receipts,amazonApiGateway,Amazon API Gateway,service,yes,yes,1,3,46
 P2,Phase 1 - receipts,amazonAppFlow,Amazon AppFlow,service,yes,yes,1,2,16,16,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P2,Phase 1 - receipts,amazonAppStream,Amazon WorkSpaces Applications,service,yes,yes,1,2,167,167,100.0%,clean,,2,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P2,Phase 1 - receipts,amazonAugmentedAi,Amazon Augmented AI,service,yes,yes,1,1,15,15,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
-P2,Phase 1 - receipts,amazonBedrock,Amazon Bedrock,selector,yes,yes,13,176,1773,1773,100.0%,clean,,0,,,13,,,,missing-price,missing-price,no,no,no,Verify all children with fixtures and a receipt
+P2,Phase 1 - receipts,amazonBedrock,Amazon Bedrock,selector,yes,yes,13,176,1773,1773,100.0%,clean,,0,,,13,,,,ok,ok,no,no,no,Verify all children with fixtures and a receipt
 P2,Phase 1 - receipts,amazonBedrockAgentCore,Amazon Bedrock AgentCore,selector,yes,yes,7,7,109,109,100.0%,clean,,0,,,7,,,,needs-input,needs-input,no,no,no,Verify all children with fixtures and a receipt
 P2,Phase 1 - receipts,amazonBraket,Amazon Braket,service,yes,no,1,5,99,99,100.0%,clean,,0,,,0,,,,needs-input,missing-price,no,no,no,Add fixtures and a rendered receipt
 P2,Phase 1 - receipts,amazonCertificateManager,AWS Certificate Manager,service,yes,yes,1,2,19,19,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
@@ -70,7 +65,6 @@ P2,Phase 1 - receipts,amazonFileCache,Amazon File Cache,service,yes,yes,1,1,6,6,
 P2,Phase 1 - receipts,amazonForecast,Amazon Forecast,service,yes,yes,1,1,22,22,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P2,Phase 1 - receipts,amazonFraudDetector,Amazon Fraud Detector,service,yes,yes,1,4,31,31,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P2,Phase 1 - receipts,amazonFSx,Amazon FSx for Windows File Server,service,yes,yes,2,2,72,72,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
-P2,Phase 1 - receipts,amazonFSxForLustre,Amazon FSx for Lustre,service,yes,yes,3,4,106,106,100.0%,clean,,1,,,0,,,,bad-definition,bad-definition,no,no,no,Add fixtures and a rendered receipt
 P2,Phase 1 - receipts,amazonFSxForNetAppOntap,Amazon FSx for NetApp ONTAP,service,yes,yes,1,13,233,233,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P2,Phase 1 - receipts,amazonFSxForOpenZfs,Amazon FSx for OpenZFS,service,yes,yes,4,12,164,164,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P2,Phase 1 - receipts,amazonGameLift,Amazon GameLift Servers,service,yes,yes,1,2,29,29,100.0%,clean,,1,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
@@ -190,14 +184,14 @@ P3,Phase 2 - column-form v2,amazonEmrTaskNode,Amazon EMR task node on EC2,servic
 P3,Phase 2 - column-form v2,amazonWorkspaces,WorkSpaces Personal,service,no,no,1,2,60,60,100.0%,blocked:column-form,,1,utilization-selector,,0,,,,unsupported,unsupported,no,no,no,Implement column-form utilization-selector
 P3,Phase 2 - column-form v2,chimeBusinessCallingAnalysis,Amazon Chime Business Calling analysis,service,no,no,1,1,15,15,100.0%,blocked:column-form,,2,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement column-form remap.constant
 P3,Phase 2 - column-form v2,chimeCostAnalysis,Amazon Chime Meetings App,service,no,no,1,1,36,36,100.0%,blocked:column-form,,2,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement column-form remap.constant
+P3,Phase 2 - column-form v2,mainframeBluAge,AWS Blu Age automated refactoring,service,no,no,1,3,11,11,100.0%,blocked:column-form,,2,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement column-form remap.constant
+P3,Phase 2 - column-form v2,mainframeMicroFocus,Micro Focus replatforming,service,no,no,1,4,16,16,100.0%,blocked:column-form,,3,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement column-form remap.constant
 P3,Phase 2 - column-form v2,proxyPhoneSession,Proxy Phone Session,service,no,no,1,1,15,15,100.0%,blocked:column-form,,2,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement column-form remap.constant
 P3,Phase 2 - column-form v2,ptsnAudio,PSTN Audio,service,no,no,1,4,70,70,100.0%,blocked:column-form,,5,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement column-form remap.constant
 P3,Phase 2 - column-form v2,realTimeDocumentTranslation,Real-Time Document Translation,service,no,no,1,1,7,7,100.0%,blocked:column-form,,1,remap.keyValue-primary,,0,,,,missing-price,missing-price,no,no,no,Implement column-form remap.keyValue-primary
 P3,Phase 2 - column-form v2,sipTrunking,SIP Trunking,service,no,no,1,1,18,18,100.0%,blocked:column-form,,1,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement column-form remap.constant
 P3,Phase 2 - column-form v2,workSpacesCore,WorkSpaces Core Bundles,service,no,no,1,2,47,47,100.0%,blocked:column-form,,1,utilization-selector,,0,,,,unsupported,unsupported,no,no,no,Implement column-form utilization-selector
 P3,Phase 2 - column-form v2,workSpacesInstances,WorkSpaces Core Managed Instances,service,no,no,1,2,11,11,100.0%,blocked:column-form,,1,utilization-selector,,0,,,,unsupported,unsupported,no,no,no,Implement column-form utilization-selector
-P3,Phase 5 - long tail,mainframeBluAge,AWS Blu Age automated refactoring,service,no,no,1,3,9,11,81.8%,blocked:subtype,input:utilization:2,2,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement input:utilization:2
-P3,Phase 5 - long tail,mainframeMicroFocus,Micro Focus replatforming,service,no,no,1,4,13,16,81.3%,blocked:subtype,input:utilization:3,3,remap.constant,,0,,,,needs-input,needs-input,no,no,no,Implement input:utilization:3
 P3,Phase 1 - receipts,activeCustomBatchTranslation,Active Custom Batch Translation,service,no,no,1,1,4,4,100.0%,clean,,0,,,0,,,,ok,missing-price,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,agentCoreBrowserTools,AgentCore Browser Tools,service,no,no,1,1,18,18,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,agentCoreCodeInterpreter,AgentCore Code Interpreter,service,no,no,1,1,18,18,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
@@ -206,8 +200,8 @@ P3,Phase 1 - receipts,agentCoreIdentity,AgentCore Identity,service,no,no,1,1,13,
 P3,Phase 1 - receipts,agentCoreMemory,AgentCore Memory,service,no,no,1,1,19,19,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,agentCoreObservability,AgentCore Observability,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,agentCoreRuntime,AgentCore Runtime,service,no,no,1,1,16,16,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,ai21,AI21 Labs,service,no,no,1,5,26,26,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,amazon,Amazon,service,no,no,1,32,390,390,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,ai21,AI21 Labs,service,no,no,1,5,26,26,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,amazon,Amazon,service,no,no,1,32,390,390,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Done - ledger receipt,amazonAthena,Amazon Athena,service,yes,yes,1,2,27,27,100.0%,clean,,0,,,0,,,,needs-input,needs-input,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Phase 1 - receipts,amazonAuroraBackup,Aurora,service,no,no,1,1,24,24,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,amazonCarrierIp,Amazon Carrier IP,service,no,no,1,1,20,20,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
@@ -226,6 +220,7 @@ P3,Done - ledger receipt,amazonElasticsearchService,Amazon OpenSearch Service,se
 P3,Phase 1 - receipts,amazonEmrOnEks,Amazon EMR on EKS,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,amazonEmrServerless,Amazon EMR Serverless,service,no,no,2,2,30,30,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Done - ledger receipt,amazonEventBridge,Amazon EventBridge,service,yes,yes,1,8,91,91,100.0%,clean,,0,,,0,,,,ok,ok,yes,no,no,Keep the rendered receipt and add regression coverage
+P3,Done - ledger receipt,amazonFSxForLustre,Amazon FSx for Lustre,service,yes,yes,3,4,106,106,100.0%,clean,,1,,,0,,,,needs-input,needs-input,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Phase 1 - receipts,amazonFSxLustreBackup,FSx Lustre,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,amazonFSxNetAppOntapBackup,FSx NetApp ONTAP,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,amazonFSxOpenZfsBackup,FSx OpenZFS,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
@@ -250,7 +245,7 @@ P3,Done - ledger receipt,amazonSimpleQueueService,Amazon Simple Queue Service (S
 P3,Phase 1 - receipts,amazonStorageGatewayBackup,Storage Gateway,service,no,no,1,1,35,35,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,amazonTechnic,AWS MDC Rack,service,no,no,1,1,21,21,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,amazonVMwareBackup,VMware,service,no,no,1,1,77,77,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,anthropic,Anthropic,service,no,no,1,23,284,284,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,anthropic,Anthropic,service,no,no,1,23,284,284,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,applicationLoadBalancer,Application Load Balancer,service,no,no,2,3,31,31,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,appSyncApiCall,AppSync GraphQL API Requests,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,appSyncCaching,AppSync GraphQL Caching,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
@@ -265,9 +260,12 @@ P3,Phase 1 - receipts,awsBudgets,AWS Budgets,service,no,no,1,3,12,12,100.0%,clea
 P3,Done - ledger receipt,awsCloudFormation,AWS CloudFormation,service,yes,yes,1,2,20,20,100.0%,clean,,0,,,0,,,,needs-input,needs-input,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Done - ledger receipt,awsCodeBuild,AWS CodeBuild,service,yes,yes,1,7,41,41,100.0%,clean,,6,,,0,,,,needs-input,needs-input,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Phase 1 - receipts,awsCodeCommit,AWS CodeCommit,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,awsDeviceFarm,AWS Device Farm,service,no,no,1,2,23,23,100.0%,clean,,0,,,0,,,,bad-definition,bad-definition,no,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,awsDeadlineCloud,AWS Deadline Cloud,service,yes,yes,1,6,45,45,100.0%,clean,,2,,,0,,,,needs-input,needs-input,yes,no,no,Keep the rendered receipt and add regression coverage
+P3,Phase 1 - receipts,awsDeviceFarm,AWS Device Farm,service,no,no,1,2,23,23,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,awsDirectConnect,AWS Direct Connect,service,yes,yes,1,2,10,10,100.0%,clean,,1,,,0,,,,needs-input,needs-input,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Phase 1 - receipts,awsDrsDrill,AWS DRS - Drill/Recovery,service,no,no,1,1,8,8,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,awsDrsRecoveryReplication,AWS DRS - Replication,service,no,no,1,1,82,82,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,awsElementalMediaConnect,AWS Elemental MediaConnect,service,yes,yes,1,6,97,97,100.0%,clean,,0,,,0,,,,needs-input,needs-input,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Phase 1 - receipts,awsEtlJobsAndDevelopmentEndpoints,AWS Glue ETL jobs and interactive sessions,service,no,no,1,3,28,28,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,awsEtlJobsFlexExecutionOption,AWS Glue ETL jobs with Flex execution option,service,no,no,1,1,9,9,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,awsGlueCrawlers,AWS Glue Crawlers,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
@@ -282,6 +280,7 @@ P3,Phase 1 - receipts,awsIoTCoreLoRaWan,LoRaWAN,service,no,no,1,6,45,45,100.0%,c
 P3,Phase 1 - receipts,awsIoTCoreMqtt,MQTT,service,no,no,2,15,105,105,100.0%,clean,,0,,,0,,,,ok,missing-price,no,no,no,Add fixtures and a rendered receipt
 P3,Done - ledger receipt,aWSLambda,AWS Lambda,service,yes,yes,2,10,187,187,100.0%,clean,,0,,,0,,,,ok,ok,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Phase 1 - receipts,awsOutposts,AWS Outposts,service,no,no,1,1,1,1,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
+P3,Done - ledger receipt,awsPcs,AWS PCS,service,yes,yes,1,3,36,36,100.0%,clean,,0,,,0,,,,ok,ok,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Phase 1 - receipts,awsProfessionalServices,AWS Professional Services,selector,no,no,5,5,30,30,100.0%,clean,,0,,,5,,,,needs-input,needs-input,no,no,no,Verify all children with fixtures and a receipt
 P3,Done - ledger receipt,awsS3DataTransfer,Data Transfer,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,,,ok,ok,yes,no,no,Keep the rendered receipt and add regression coverage
 P3,Phase 1 - receipts,awsSnowmobile,AWS Snowmobile,service,no,no,1,1,1,1,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
@@ -299,12 +298,12 @@ P3,Phase 1 - receipts,chimeSdkMessaging,Messaging,service,no,no,1,1,33,33,100.0%
 P3,Phase 1 - receipts,chimeVoiceConnectorAnalysis,Chime Voice Connector analysis,service,no,no,1,1,17,17,100.0%,clean,,0,,,0,,,,ok,missing-price,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,classicLoadBalancer,Classic Load Balancer,service,no,no,1,2,10,10,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,codeGuruReviewer,Amazon CodeGuru Reviewer Test,service,no,no,1,1,15,15,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,cohere,Cohere,service,no,no,1,6,56,56,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,cohere,Cohere,service,no,no,1,6,56,56,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,comprehendCustomClassification,Comprehend Custom Classification,service,no,no,1,2,44,44,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,comprehendCustomEntities,Comprehend Custom Entities,service,no,no,1,2,44,44,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,comprehendTopicModeling,Topic Modeling,service,no,no,1,1,12,12,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,containsPii,Contains PII,service,no,no,1,1,11,11,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,deepseek,DeepSeek,service,no,no,1,20,200,200,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,deepseek,DeepSeek,service,no,no,1,20,200,200,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,docDbBackup,DocumentDB Backup,service,no,no,1,1,38,38,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,dynamoDbBackup,DynamoDB Backup and restore,service,no,no,1,1,12,12,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,dynamoDbChangeDateCapture,DynamoDB change data capture,service,no,no,1,1,10,10,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
@@ -326,7 +325,7 @@ P3,Phase 1 - receipts,justInTimeNodeAccess,Just-in-time node access,service,no,n
 P3,Phase 1 - receipts,keyPhraseExtraction,Keyphrase Extraction,service,no,no,1,1,26,26,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,languageDetection,Language Detection,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,lightsailBlockStorage,Lightsail Block Storage,service,no,no,1,1,11,11,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,lightsailCdn,Lightsail CDN,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,,,ok,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,lightsailCdn,Lightsail CDN,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,lightsailContainers,Lightsail Containers,service,no,no,1,1,10,10,100.0%,clean,,1,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,lightsailDataTransfer,Lightsail Data Transfer,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,lightsailLoadBalancer,Lightsail Load Balancer,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
@@ -351,7 +350,7 @@ P3,Phase 1 - receipts,medicalNamedEntityAndRelationshipExtractionNeReApi,Medical
 P3,Phase 1 - receipts,medicalProtectedHealthInformationDataExtractionAndIdentificationPhIdApi,Medical Protected Health Information Data Extraction and Identification (PHId) API,service,no,no,1,3,19,19,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,medicalRxNormOntologyLinkingApi,Medical RxNORM Ontology Linking API,service,no,no,1,3,19,19,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,medicalSystematizedNomenclatureOfMedicineClinicalTermsSnomedCtApi,Medical Systematized Nomenclature of Medicine Clinical Terms (SNOMED CT) API,service,no,no,1,3,19,19,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,meta,Meta,service,no,no,1,14,126,126,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,meta,Meta,service,no,no,1,14,126,126,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,mistral,Mistral,service,no,no,1,5,35,35,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,modularDataCenter,AWS Modular Data Center (MDC),service,no,no,1,1,1,1,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,multimodalEmbeddings,Titan Multimodal Embeddings,service,no,no,1,4,35,35,100.0%,clean,,0,,,0,,,,ok,missing-price,no,no,no,Add fixtures and a rendered receipt
@@ -367,7 +366,7 @@ P3,Phase 1 - receipts,omicsAnalytics,HealthOmics Analytics,service,no,no,1,1,9,9
 P3,Phase 1 - receipts,omicsReady2RunWorkflows,HealthOmics Ready2Run Workflows,service,no,no,1,1,4,4,100.0%,clean,,1,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,omicsStorage,HealthOmics Storage,service,no,no,1,1,17,17,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,omicsWorkflows,HealthOmics Private Workflows,service,no,no,1,1,14,14,100.0%,clean,,1,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,openAi,OpenAI,service,no,no,1,31,339,339,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,openAi,OpenAI,service,no,no,1,31,339,339,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,outputConfiguration1,Output Configuration 1,service,no,no,1,1,46,46,100.0%,clean,,1,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,outputConfiguration2,Output Configuration 2,service,no,no,1,1,46,46,100.0%,clean,,1,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,piiDetection,Detect PII,service,no,no,1,1,22,22,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
@@ -376,7 +375,7 @@ P3,Phase 1 - receipts,proServeYear2Cost,ProServe Year 2 Price,service,no,no,1,1,
 P3,Phase 1 - receipts,proServeYear3Cost,ProServe Year 3 Price,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,proServeYear4Cost,ProServe Year 4 Price,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,proServeYear5Cost,ProServe Year 5 Price,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,qwen,Qwen,service,no,no,1,26,258,258,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,qwen,Qwen,service,no,no,1,26,258,258,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,rdsBackup,RDS Backup,service,no,no,1,1,53,53,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,redshiftBackup,Redshift Backup,service,no,no,1,1,39,39,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,rekognitionCustomLabels,Rekognition Custom Labels,service,no,no,1,3,30,30,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
@@ -417,7 +416,7 @@ P3,Phase 1 - receipts,snowballEdgeComputeOptimizedWithEc2ComputeInstances,Snowba
 P3,Phase 1 - receipts,snowballEdgeStorageOptimized210TbDataTransferOnly,Snowball Edge Storage Optimized 210TB Data Transfer Only,service,no,no,1,2,29,29,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,snowballEdgeStorageOptimizedDataTransferOnly,Snowball Edge Storage Optimized Data Transfer Only,service,no,no,1,2,19,19,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,snowballEdgeStorageOptimizedWithEc2ComputeInstances,Snowball Edge Storage Optimized with EC2 Compute Instances,service,no,no,1,4,27,27,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,stabilityAi,StabilityAI,service,no,no,1,4,16,16,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,stabilityAi,StabilityAI,service,no,no,1,4,16,16,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,standardBatchTranslation,Standard Batch Translation,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,standardRealTimeTranslation,Standard Real-Time Translation,service,no,no,1,1,5,5,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,standardTextToSpeechTts,Standard Text-to-Speech,service,no,no,1,1,7,7,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
@@ -434,9 +433,10 @@ P3,Phase 1 - receipts,twelveLabs,TwelveLabs,service,no,no,1,1,1,1,100.0%,clean,,
 P3,Phase 1 - receipts,vMwareBackup,VMware Backup,service,no,no,1,1,92,92,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,webApps,Web apps,service,no,no,1,1,6,6,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,webRtcMedia,WebRTC Media,service,no,no,1,4,53,53,100.0%,clean,,0,,,0,,,,needs-input,needs-input,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,workflow2,Workload 2,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,workflow3,Workload 3,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,workload1,Workload 1,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,workflow2,Workload 2,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,workflow3,Workload 3,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,workload1,Workload 1,service,no,no,2,13,162,162,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 1 - receipts,workSpacesPools,WorkSpaces Pools,service,no,no,1,2,75,75,100.0%,clean,,1,,,0,,,,needs-input,unknown-region,no,no,no,Add fixtures and a rendered receipt
-P3,Phase 1 - receipts,writer,Writer,service,no,no,1,5,26,26,100.0%,clean,,0,,,0,,,,missing-price,missing-price,no,no,no,Add fixtures and a rendered receipt
+P3,Phase 1 - receipts,writer,Writer,service,no,no,1,5,26,26,100.0%,clean,,0,,,0,,,,ok,ok,no,no,no,Add fixtures and a rendered receipt
 P3,Phase 2 - column-form v2,amazonElastiCache,Amazon ElastiCache,service,yes,yes,1,4,50,50,100.0%,partial:column-form,,3,,additional-pricing-data,0,,,,needs-input,needs-input,yes,no,no,Column-form v2: additional-pricing-data
+P3,Phase 2 - column-form v2,amazonKeyspaces,Amazon Keyspaces,service,yes,yes,5,23,183,183,100.0%,partial:column-form,,4,,additional-pricing-data,0,,,,ok,ok,yes,no,no,Column-form v2: additional-pricing-data

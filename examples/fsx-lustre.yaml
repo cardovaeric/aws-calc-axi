@@ -1,0 +1,14 @@
+name: axi-e2e FSx for Lustre
+currency: USD
+locale: en_US
+services:
+  - code: amazonFSxForLustre
+    region: us-east-2
+    template: persistent
+    set:
+      columnFormIPM:
+        Storage type: SSD
+        Throughput capacity: 125 MBps/TiB
+      persistent_generated_0: { value: 1200, unit: gb|NA }
+      percentDataCompressionSavings: 50
+      backupStorage: { value: 0, unit: gb|NA }

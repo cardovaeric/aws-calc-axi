@@ -1,0 +1,16 @@
+name: axi-e2e utilization AWS PCS
+currency: USD
+locale: en_US
+services:
+  - code: awsPcs
+    region: us-east-2
+    set:
+      monthlyUtilization: 0
+  - code: awsPcs
+    region: us-east-2
+    set:
+      monthlyUtilization: 50
+  - code: awsPcs
+    region: us-east-2
+    set:
+      monthlyUtilization: 100

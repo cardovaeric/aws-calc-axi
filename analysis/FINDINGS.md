@@ -673,12 +673,11 @@ the key.
 
 ### 14.9 Still blocked, outside this worktree's ownership
 
-- `FSx for Lustre` resolves its dependent selectors correctly and then fails in
-  `src/engine/template.ts`: the `replace` pricing subtype is implemented as an exact-match
-  lookup, while the live one is a global regex replacement of `originalString` inside the value
-  (`.../bundle.js` offset 2844449, `e.replace(new RegExp(escape(r), "g"), n)`). FSx builds
-  `persThrouput = replace(concatenate(ThroughputCapacity, " test"), " test" -> "")`, so it needs
-  the substring behaviour.
+- `FSx for Lustre` resolved here rather than in the w3 worktree: `replace` is now the live global
+  regex replacement (`.../bundle.js` offset 2844449, `e.replace(new RegExp(escape(r), "g"), n)`),
+  and one further gap sat behind it, the live `displayIf` ordering coercion
+  (`analysis/FINDINGS.md` section 16.3). It evaluates at `174.32`
+  (`receipts/p2-fsx-lustre.json`).
 - `utilization` rows that carry a `selectorId`, `remap.constant`, `additionalPricingData` joins,
   `subComponentsList`, `exportTagsAsValue`, multiple price sets, and tiered PLC_2.0 patterns
   (`StartingRange`/`EndingRange`) remain fail-closed.
@@ -863,3 +862,117 @@ Coverage delta from `main` after the re-test (P1 14, `clean` 399, `partial:colum
 `realTimeDocumentTranslation` and Amazon Translate are blocked by the primary-remap rule, and
 Amazon Mainframe Modernization is `blocked:subtype` because a missing input subtype outranks a
 column-form feature. Nothing became clean.
+## 16. `utilization` inputs (2026-11-24)
+
+Observed in us-east-2 with AWS PCS and AWS Elemental MediaConnect, and in the live
+frontend bundle at `https://calculator.aws/<build>/static/js/bundle.js`.
+
+- The subtype's duration list is not in the definition. It is the bundle's
+  `DEFAULT_UTILIZATION_OPTIONS` (module 160): `percentagePerMonth` (max 100),
+  `hoursPerDay` (24), `hoursPerWeek` (168), `hoursPerMonth` (730),
+  `minutesPerDay` (1440), `minutesPerMonth` (43800). The default duration is
+  `percentagePerMonth`, the default value is 100, and the validation fallback is
+  0..730 (`HOURS_IN_MONTH`).
+- `calculateUtilizationValue(value, option, label, roundUpToHours, decimalPlaces)`:
+  `hours = (value / option.max) * 730`. With `roundUpToHours` the result is
+  `Math.ceil(hours)`; otherwise the float is wrapped in decimal.js and rounded up
+  away from zero to `decimalPlaces` (default 4). So 33% is 241 hours with
+  `roundUpToHours` and 240.9 without.
+- The saved component is `{value: <typed text>, unit: <duration id>}`. The
+  editor's `convertToSaveFormat` for utilization is
+  `{value: e.value, unit: e.selectedId}` and the redux state keeps
+  `initialState.value` as the input's string value.
+- The string matters at zero. The rehydrator (`Ne`) treats a value as empty with
+  lodash `isEmpty`, which is true for the number 0: a stored `{value: 0}` loses
+  its `unit`, the conversion throws, and the live editor drops that component's
+  summary. A stored `{value: "0"}` keeps the unit and the
+  `(0 % Utilization/Month)` summary. Verified by publishing the same PCS rows
+  with numeric and with string values and clicking Update estimate.
+- Validations run on the converted hours, not the entry: PCS declares no
+  min/max and still rejects more than 730 hours; Deadline Cloud and Direct
+  Connect declare 0..730 hours explicitly.
+- Config summary is `<label> (<entry> <duration label>)`, for example
+  `Flow utilization (730 Hours/Month)` and
+  `Length of time cluster is running (100 % Utilization/Month)`, and only when
+  `displayInConfigSummary` is true.
+- Two neighbouring live behaviors surfaced while making MediaConnect evaluate:
+  - `pricingComboV2` reads a composed meter name and falls back to 0 when the
+    region's price map has no such meter. MediaConnect's "None" reserved
+    bandwidth composes `DataProcessedReserved0Mbps1Yr`, which exists in no
+    region; the live editor bills 0.
+  - `replace` applies every replacement as a global regex substitution and
+    keeps the original string when nothing matches (the `sourceType` default
+    "0" has no JPEG replacement).
+
+## 16.1 `percentInput` rehydrates through a second division (2026-11-25)
+
+The live percent input keeps the percent the user typed in state and saves it
+verbatim: `Xe.handleInput` holds the raw string, `Je.convertToSaveFormat` writes
+`{value: e.value}`, and the rehydrator divides by 100 on the way back in. This
+engine used to save the fraction, so a rehydrated 100% read as 1%.
+
+Live check, Amazon Keyspaces in us-east-2 with 1M writes, 1M reads, 100 GB, and
+the default percent inputs: the editor recompute of the published estimate
+(`receipts/p1-keyspaces.json`, link `17757fae...`) shows
+`LOCAL_ONE reads (1)` and `25.69 USD`, matching the native result to the cent.
+Saving the fraction produced `LOCAL_ONE reads (0.01)` and `25.63` - the `0.06`
+gap recorded in D-026.
+
+While re-verifying this, the P0 run's typed-amount fix turned out to be
+required as well: live validates `allowDecimals` on the amount the user typed
+and min/max on the converted value, so 1000 operations per day (30416.67 per
+month) is a valid integer entry. `assertDecimals` owns the first check.
+
+## 16.2 Region gating and the index path's location selectors (2026-11-25)
+
+Direct Connect was the one `utilization` service left: it stopped before any
+pricing at `PLC_2.0 price data is not available in US East (N. Virginia)`.
+
+- The live `getData` gate is
+  `Array.isArray(availableLocation) && !availableLocation.includes(location)`
+  (bundle offset 1471833). A price map that declares no
+  `regionAttributes.Location` is therefore not region-scoped. Direct Connect's
+  metadata carries only `regionAttributes["From Location"]` (74 on-prem
+  locations) and one 123,111-row aggregation file for every region, so the old
+  unconditional `includes()` rejected every region.
+- The index path injects the region name for both location selectors right
+  before it is built: `h = {...state, Location: regionName, "From Location":
+  regionName}` (offset 1466476, `u`). Direct Connect declares `From Location` as
+  a primary selector but never puts it in the form, so without the injection the
+  path takes whichever location the aggregation file lists first
+  (`AWS GovCloud (US)`) and the index has no prices for the region.
+- With both, `Direct Connect / US East (N. Virginia) / Dedicated / 10G /
+  Equinix LD4 - LD6` resolves ($2.25/port-hour) and 3 rows at 0, 365, and 730
+  hours recompute to `2463.75` live and natively
+  (`receipts/p2-direct-connect-utilization.json`).
+
+Deadline Cloud needed nothing further: its spaced price-set labels
+(`c5 large Linux Compute Instance 4 GiB 2`) resolve through the dependent
+selector work, and 3 rows at 0%, 50%, and 100% recompute to `409.08` live and
+natively (`receipts/p2-deadline-cloud-utilization.json`).
+
+## 16.3 Two live maths behaviours FSx for Lustre needed (2026-11-25)
+
+- `replace` is a global regex substitution (`e.replace(new RegExp(escape(r),
+  "g"), n)`, offset 2844449), not a whole-value lookup. FSx builds
+  `persThrouput = replace(concatenate(ThroughputCapacity, " test"), " test" ->
+  "")`, so the exact-match version dropped the throughput label entirely.
+- A `displayIf` ordering comparison coerces (`s(e,t)` at offset 817504):
+  `Number(x)`, and a `NaN` side becomes 0; only two non-numeric strings fall
+  back to string comparison. FSx gates
+  `persistant_billed_storage_low` on `persistent_generated_4 <= 2400`, but that
+  subtraction is declared *later* in the same maths section, so live compares 0
+  and takes the 1200 GB round-up branch. This engine returned false for any
+  undefined operand, hid all four rounding branches, and billed 0.00.
+- With both, 1200 GB SSD at 125 MBps/TiB and 50% compression savings is
+  `1200 x (0.145 / 730 rounded to 6dp) x 730 = 174.32`, the live editor's number
+  (`receipts/p2-fsx-lustre.json`). The division is rounded up to 6 decimals and
+  multiplied back, which is why the total is not the plain `174.00`.
+
+Reproduce:
+
+```sh
+curl -s --compressed https://calculator.aws/ | grep -o 'src="[^"]*bundle.js"'
+# then, in the bundle: DEFAULT_UTILIZATION_OPTIONS, calculateUtilizationValue,
+# convertToSaveFormat, and the rehydrator's Ne() isEmpty guard
+```

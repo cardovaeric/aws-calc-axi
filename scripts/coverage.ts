@@ -42,6 +42,7 @@ const SUPPORTED_INPUT = new Set([
   "throughput",
   "frequency",
   "durationInput",
+  "utilization",
   "columnFormIPM",
   "dataTransferV2",
 ]);

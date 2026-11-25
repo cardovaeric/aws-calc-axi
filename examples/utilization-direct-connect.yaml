@@ -1,0 +1,31 @@
+name: axi-e2e utilization Direct Connect
+currency: USD
+locale: en_US
+services:
+  - code: awsDirectConnect
+    region: us-east-1
+    set:
+      columnFormIPM:
+        port:Direct Connect Location: Equinix LD4 - LD6
+        port:Connection Type: Dedicated
+        port:Capacity: 10G
+        Number of Ports: 1
+      utilization: 0
+  - code: awsDirectConnect
+    region: us-east-1
+    set:
+      columnFormIPM:
+        port:Direct Connect Location: Equinix LD4 - LD6
+        port:Connection Type: Dedicated
+        port:Capacity: 10G
+        Number of Ports: 1
+      utilization: 365
+  - code: awsDirectConnect
+    region: us-east-1
+    set:
+      columnFormIPM:
+        port:Direct Connect Location: Equinix LD4 - LD6
+        port:Connection Type: Dedicated
+        port:Capacity: 10G
+        Number of Ports: 1
+      utilization: 730

@@ -268,8 +268,14 @@ export async function loadColumnFormPricing(
       { url: metadataUrl }
     );
   }
+  // The live `getData` gate is `Array.isArray(availableLocation) &&
+  // !availableLocation.includes(location)`. A map that declares no `Location`
+  // attribute is not region-scoped: Direct Connect carries only
+  // `regionAttributes["From Location"]` (the on-prem locations) and prices every
+  // region from one map. Failing closed on the missing attribute rejected every
+  // Direct Connect region; a region the map really does exclude still throws.
   const locations = metadata.regionAttributes?.Location;
-  if (!Array.isArray(locations) || !locations.includes(options.regionName)) {
+  if (Array.isArray(locations) && !locations.includes(options.regionName)) {
     throw new EngineError(
       `PLC_2.0 price data is not available in ${options.regionName} for ` +
         `${metadata.manifest.serviceId}`,
@@ -321,7 +327,18 @@ export async function loadColumnFormPricing(
     );
   }
   const selectors = match.selectors;
-  const pathValues = primarySelectors.map((selector) => selectors[selector]);
+  // Live injects the region name for both location selectors right before it
+  // builds the index path (`{...state, Location: regionName, "From Location":
+  // regionName}`, bundle offset 1466476). Direct Connect declares `From
+  // Location` as a primary selector but never puts it in the form, so without
+  // the injection the path takes whatever location the aggregation file lists
+  // first ("AWS GovCloud (US)") and the index has no prices for the region.
+  const pathSelectors: Record<string, string> = {
+    ...selectors,
+    Location: options.regionName,
+    "From Location": options.regionName,
+  };
+  const pathValues = primarySelectors.map((selector) => pathSelectors[selector]);
   if (pathValues.some((value) => value === undefined)) {
     throw new EngineError(
       `PLC_2.0 aggregation row is missing a primary selector value for ` +

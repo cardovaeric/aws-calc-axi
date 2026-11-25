@@ -253,13 +253,20 @@ test("Amazon EMR names the utilization row on all three node children", async ()
   );
 });
 
-test("AWS Mainframe Modernization reports the missing input subtype it is blocked by", async () => {
+test("AWS Mainframe Modernization drops the missing input subtype and names the remap it is blocked by", async () => {
   const rows = await trackerRows();
   const row = rows.find((entry) => entry["service_code"] === "amazonMainframeModernization");
   assert.ok(row, "amazonMainframeModernization is in the tracker");
-  assert.equal(row["static_class"], "blocked:subtype");
-  assert.equal(row["missing_subtypes"], "input:utilization:2;input:utilization:3");
-  assert.equal(row["plan_phase"], "Phase 5 - long tail");
+  // `utilization` is native now, so the subtype gap is gone and the column-form
+  // remap is what still fails closed (analysis/FINDINGS.md section 16).
+  assert.equal(row["static_class"], "blocked:column-form");
+  assert.equal(row["missing_subtypes"], "");
+  assert.equal(row["hard_blockers"], "remap.constant");
+  assert.equal(
+    row["selector_blockers"],
+    "remap.constant (mainframeBluAge, mainframeMicroFocus)"
+  );
+  assert.equal(row["plan_phase"], "Phase 2 - column-form v2");
 });
 
 test("AWS Elemental MediaLive and MediaConvert are clean now that dependent selectors are native", async () => {

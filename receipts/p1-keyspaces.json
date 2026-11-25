@@ -1,0 +1,117 @@
+{
+  "estimate": "axi-e2e Keyspaces percent input",
+  "specHash": "29aaeb1f94282c25",
+  "payloadHash": "742aa1900f8e0b12",
+  "url": "https://calculator.aws/#/estimate?id=17757fae2a38867cb590bbfb27ca4b3e89eff427",
+  "savedKey": "17757fae2a38867cb590bbfb27ca4b3e89eff427",
+  "publishedAt": "2026-11-25T00:11:55.889Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 25.69,
+    "upfront": 0,
+    "total12m": 308.28,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonKeyspaces",
+        "template": "keyspacesOnDemandCapacityNew",
+        "region": "us-east-2",
+        "monthly": 25.69,
+        "upfront": 0,
+        "summary": "Storage (100 GB), Number of writes (1000000 per month), Pricing strategy (OnDemand), LOCAL_ONE reads (1), LOCAL_QUORUM reads (0), Number of reads (1000000 per month), Pricing strategy (OnDemand), PITR Storage (Disabled)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonKeyspaces",
+        "monthly": 25.69,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 25.69,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=17757fae2a38867cb590bbfb27ca4b3e89eff427",
+    "title": "axi-e2e Keyspaces percent input",
+    "monthly": "25.69 USD",
+    "upfront": "0.00 USD",
+    "annual": "308.28 USD",
+    "monthlyValue": 25.69,
+    "upfrontValue": 0,
+    "annualValue": 308.28,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Keyspaces",
+        "upfront": "0.00 USD",
+        "monthly": "25.69 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Storage (100 GB), Number of writes (1000000 per month), Pricing strategy (OnDemand), LOCAL_ONE reads (1), LOCAL_QUORUM reads (0), Number of reads (1000000 per month), Pricing strategy (OnDemand), PITR Storage (Disabled)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T00:12:01.582Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=17757fae2a38867cb590bbfb27ca4b3e89eff427",
+    "savedKey": "17757fae2a38867cb590bbfb27ca4b3e89eff427",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=17757fae2a38867cb590bbfb27ca4b3e89eff427",
+      "title": "axi-e2e Keyspaces percent input",
+      "monthly": "25.69 USD",
+      "upfront": "0.00 USD",
+      "annual": "308.28 USD",
+      "monthlyValue": 25.69,
+      "upfrontValue": 0,
+      "annualValue": 308.28,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon Keyspaces",
+          "upfront": "0.00 USD",
+          "monthly": "25.69 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Storage (100 GB), Number of writes (1000000 per month), , Pricing strategy (OnDemand), LOCAL_ONE reads (1), LOCAL_QUORUM reads (0), Number of reads (1000000 per month), , Pricing strategy (OnDemand), PITR Storage (Disabled)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T00:12:28.030Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e Keyspaces percent input",
+    "monthly": 25.69,
+    "upfront": 0,
+    "annual": 308.28,
+    "services": [
+      {
+        "name": "Amazon Keyspaces",
+        "monthly": 25.69,
+        "region": "US East (Ohio)",
+        "configSummary": "Storage (100 GB), Number of writes (1000000 per month), Pricing strategy (OnDemand), LOCAL_ONE reads (1), LOCAL_QUORUM reads (0), Number of reads (1000000 per month), Pricing strategy (OnDemand), PITR Storage (Disabled)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

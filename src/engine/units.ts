@@ -1,8 +1,9 @@
 /**
  * Unit conversion tables reproduced from the live calculator bundle
- * (`calculateFileSize`, `performFrequencyCalculation`). The multipliers are
- * deliberately copied verbatim, including their rounding, so the engine lands
- * on the same numbers as the web app.
+ * (`calculateFileSize`, `performFrequencyCalculation`,
+ * `calculateUtilizationValue`). The multipliers are deliberately copied
+ * verbatim, including their rounding, so the engine lands on the same numbers
+ * as the web app.
  */
 import { Decimal } from "decimal.js";
 
@@ -354,4 +355,52 @@ export function convertThroughput(value: number, from: string, to: string): numb
     throw new Error(`no throughput conversion from "${from}" to "${to}"`);
   }
   return factor.operation === "multiply" ? value * factor.rate : value / factor.rate;
+}
+
+/**
+ * Utilization durations from the live bundle's `DEFAULT_UTILIZATION_OPTIONS`
+ * (module 160). `max` is the entry that fills a month; `label` is what the
+ * config summary prints and `outputLabel` is the unit in the live explanation
+ * string ("730 hours in a month").
+ */
+export interface UtilizationDuration {
+  label: string;
+  max: number;
+  outputLabel: string;
+}
+
+export const UTILIZATION_DURATIONS: Record<string, UtilizationDuration> = {
+  percentagePerMonth: { label: "% Utilization/Month", max: 100, outputLabel: "%" },
+  hoursPerDay: { label: "Hours/Day", max: 24, outputLabel: "hours in a day" },
+  hoursPerWeek: { label: "Hours/Week", max: 168, outputLabel: "hours in a week" },
+  hoursPerMonth: { label: "Hours/Month", max: 730, outputLabel: "" },
+  minutesPerDay: { label: "Minutes/Day", max: 1440, outputLabel: "minutes in a day" },
+  minutesPerMonth: { label: "Minutes/Month", max: 43800, outputLabel: "minutes in a month" },
+};
+
+/** `HOURS_IN_MONTH` in the live bundle; also the utilization max default. */
+export const HOURS_IN_MONTH = 730;
+export const DEFAULT_UTILIZATION_DURATION = "percentagePerMonth";
+export const DEFAULT_UTILIZATION_VALUE = 100;
+export const DEFAULT_UTILIZATION_DECIMALS = 4;
+
+/**
+ * `calculateUtilizationValue` from the live bundle: the entry divided by the
+ * duration's `max`, scaled to `HOURS_IN_MONTH`. `roundUpToHours` uses
+ * `Math.ceil` and ignores decimal places; otherwise the live code wraps the
+ * float in decimal.js and rounds it up (away from zero) to `decimalPlaces`.
+ */
+export function utilizationHours(
+  value: number,
+  durationId: string,
+  roundUpToHours: boolean,
+  decimalPlaces: number = DEFAULT_UTILIZATION_DECIMALS
+): number {
+  const duration = UTILIZATION_DURATIONS[durationId];
+  if (!duration) {
+    throw new Error(`unknown utilization duration "${durationId}"`);
+  }
+  const hours = (value / duration.max) * HOURS_IN_MONTH;
+  if (roundUpToHours) return Math.ceil(hours);
+  return new Decimal(hours).toDecimalPlaces(decimalPlaces, Decimal.ROUND_UP).toNumber();
 }

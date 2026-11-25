@@ -9,6 +9,8 @@ import {
   convertTime,
   convertRateTime,
   normalizeTimeUnit,
+  utilizationHours,
+  UTILIZATION_DURATIONS,
 } from "../src/engine/units.ts";
 
 test("file size conversions use binary multiples", () => {
@@ -75,4 +77,44 @@ test("duration conversion uses exact seconds and rounds up", () => {
   assert.equal(convertDuration(1, "hour", "month"), 0.01);
   // Same unit is a pass-through, like the live input.
   assert.equal(convertDuration(7, "hour", "hour"), 7);
+});
+
+test("utilization durations are the live option table", () => {
+  assert.deepEqual(Object.keys(UTILIZATION_DURATIONS), [
+    "percentagePerMonth",
+    "hoursPerDay",
+    "hoursPerWeek",
+    "hoursPerMonth",
+    "minutesPerDay",
+    "minutesPerMonth",
+  ]);
+  assert.deepEqual(UTILIZATION_DURATIONS["percentagePerMonth"], {
+    label: "% Utilization/Month",
+    max: 100,
+    outputLabel: "%",
+  });
+  assert.equal(UTILIZATION_DURATIONS["hoursPerMonth"]?.max, 730);
+  assert.equal(UTILIZATION_DURATIONS["minutesPerMonth"]?.max, 43800);
+});
+
+test("utilization rounds hours up with Math.ceil when roundUpToHours is set", () => {
+  // 33% of 730 hours is 240.9; the live form stores a whole hour.
+  assert.equal(utilizationHours(33, "percentagePerMonth", true), 241);
+  assert.equal(utilizationHours(100, "percentagePerMonth", true), 730);
+  assert.equal(utilizationHours(50, "percentagePerMonth", true), 365);
+  assert.equal(utilizationHours(730, "hoursPerMonth", true), 730);
+  assert.equal(utilizationHours(0, "percentagePerMonth", true), 0);
+});
+
+test("utilization without roundUpToHours rounds the float up to decimalPlaces", () => {
+  // decimal.js ROUND_UP is away from zero, so 243.33333... becomes 243.3334.
+  assert.equal(utilizationHours(33, "percentagePerMonth", false, 4), 240.9);
+  assert.equal(utilizationHours(100 / 3, "percentagePerMonth", false, 4), 243.3334);
+  assert.equal(utilizationHours(1, "minutesPerMonth", false, 4), 0.0167);
+  assert.equal(utilizationHours(1, "minutesPerDay", false, 4), 0.507);
+  assert.equal(utilizationHours(100, "percentagePerMonth", false), 730);
+});
+
+test("utilization rejects duration ids the live form does not offer", () => {
+  assert.throws(() => utilizationHours(1, "hoursPerYear", true), /unknown utilization duration/);
 });

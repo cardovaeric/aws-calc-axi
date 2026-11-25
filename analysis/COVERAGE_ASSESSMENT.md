@@ -19,6 +19,14 @@ assessment remains the pre-change baseline.
 For current implementation tracking use `analysis/COVERAGE_TABLE.md` and
 `analysis/coverage-matrix.csv`, and scores selector groups by their children.
 
+Post-assessment update (2026-11-24, w4): dependent selectors, reserved/upfront payment models,
+selector price patterns and both `remap.keyValue` directions are native now, so every `dependent`
+or `single-row` gap in the tables below is stale. Two rows changed verdict: `amazonGameLiftStreams`
+prices (8,726.40 at 100 users x 2 hours/day, exactly the 1.4544 price record) and
+`realTimeDocumentTranslation` still cannot price its default, now because the primary selector's
+remap token is kept verbatim rather than because of the remap direction. Evidence:
+`analysis/FINDINGS.md` section 15 and `docs/DECISIONS.md` D-029.
+
 Correction (2026-11-24): the "repeatable rows" premise in this assessment is wrong. The live
 column form holds exactly one row per component; its editor recompute reads `value[0]`, and the
 live UI represents a second configuration as a second service. Evidence, bundle path, and live

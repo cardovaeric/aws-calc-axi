@@ -416,3 +416,40 @@ from all of them.
 and unproven cause (no remap; composite primary selector; the price-set label match for the
 default `gen5n_ultra` finds nothing). It is recorded in `analysis/FINDINGS.md` section 14 and left
 unchanged, because guessing a blocker would be worse than naming the open question.
+
+Superseded in part by D-029: the `remap.keyValue-direction` rule, the `regex-remap` cleanup, and
+the `amazonGameLiftStreams` open question are resolved there.
+
+## D-029: The remap rule names the primary selector, not the direction (2026-11-24)
+
+D-028's remap rule was written against the pre-merge engine and its premise did not survive the
+merge: `bf27e34` fixed `remap.keyValue` to the live direction (forward on aggregation rows and
+price records, reverse on meter tokens and the index path), so `remap.keyValue-direction` would
+have flagged services that now work. It is retired, and the tracker carries the real residual
+cause instead.
+
+- **Kept, renamed and narrowed:** `remap.keyValue-primary` (`primaryRemapToken` in
+  `scripts/coverage-column-form.ts`). It fires when the primary selector's declared default is a
+  `remap.keyValue` key that maps to a different label. The form's options are the remapped labels,
+  the live form replaces an unoffered default with the first offered value, and the engine keeps
+  the primary value verbatim, so the default cannot match an aggregation row. One definition
+  (`realTimeDocumentTranslation`) and its parent selector change class. Proof, including a
+  successful run with the label: `analysis/FINDINGS.md` section 15.
+- **Retired:** `regex-remap`, as D-027 asked the tracker owner to do. The live forward remap is a
+  plain object lookup, so a regex-shaped key is an inert literal key on both sides, and the only
+  regex use is the reversed key as a price-set token, which the engine also does. It never
+  classified a row on its own (all 13 definitions carry `additional-pricing-data`), but it did put
+  a fail-closed label on 8 P0 rows that do not fail closed.
+- **Retired open question:** `amazonGameLiftStreams` prices. Its composite primary selector only
+  needed the matched aggregation row to fill the index path, which the merge does. The engine's
+  8,726.40 at 100 users x 2 hours/day is exactly 6,000 hours x the 1.4544 price record, so no
+  blocker is guessed at.
+
+The runtime pass also stopped calling `MissingPriceError` a generic `error` (it is not an
+`EngineError`) and gave an uncached offline fetch its own `not-cached` bucket, so the `error`
+column now means a real defect. The mapping lives in `scripts/coverage-runtime.ts` (`runtimeLabel`,
+unit tested) instead of an inline ternary chain, and the tracker test tolerates a CSV generated
+without `--evaluate` so `npm run coverage` followed by `npm test` stays green. Two defects are left alone because they are not tracker files and
+are reported instead: the primary-selector resolution in `src/engine/column-form.ts`, and
+`fileSize` defaults whose `defaultOption.frequency` is not in `dropDownFrequency`
+(`amazonLookoutForEquipment`, `src/engine/inputs.ts`). No engine file is touched here.

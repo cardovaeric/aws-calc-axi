@@ -483,8 +483,8 @@ Consequences:
 - Users express a second configuration as a second service, which is what the live UI does.
 - The coverage tracker no longer emits a `repeatable-rows` gap. It also no longer treats a
   column form itself as partial; only the features that still fail closed do (dependent
-  selectors, additional pricing data, regex key remaps, reserved/upfront payment models,
-  sub-components, unsupported row types).
+  selectors, additional pricing data, reserved/upfront payment models, sub-components,
+  unsupported row types). `regex-remap` was in that list and is retired; see section 15.
 - While proving this, two engine gaps surfaced and were fixed: `displayIf` gating for column
   form prefetch (every CodeBuild compute type card used to demand the selected card's
   selectors), and count exports with a suffix (`countDT`, `count_1`, ...), which the live
@@ -663,7 +663,8 @@ selectors":
   no/ambiguous price sets.
 - **Not a dependency at all:** `awsDeadlineCloud` and `awsDirectConnect` carry the label but their
   real blocker is `input:utilization`; 24 of the 36 also still need `additional-pricing-data`
-  (Database Savings Plans), `regex-remap`, or `remap.constant`.
+  (Database Savings Plans) or `remap.constant`. The `regex-remap` gap this section counted was
+  retired in section 15: the remap is a plain lookup on both sides.
 
 While proving this, one further engine bug surfaced inside the same mechanism and was fixed:
 `remap.keyValue` was applied in the wrong direction for price-set tokens, so a service such as
@@ -765,42 +766,100 @@ scoring them `missing-definition` made the parent count two phantom blockers.
 - Worked example, Amazon WorkSpaces: `selector_children=6`, `selector_nonclean` is the four real
   children, `selector_unserved=workSpacesThinClient;workSpacesSecureBrowser`.
 
-Coverage delta (`npm run coverage -- --evaluate --offline`, `main` to this branch):
-`blocked:subtype` 9 to 10 (Amazon Mainframe Modernization reclassified), `blocked:column-form` 17
-to 18, `clean` 382 to 380, `partial:column-form` 33 unchanged, P1 23 to 24, P2 132 to 131. Three
-rows changed: Amazon Mainframe Modernization, `realTimeDocumentTranslation` (the second finding
-below) and Amazon Translate, which lists it as a child. No service became clean by dropping an
-unserved child, and the two unserved children are listed on the Amazon WorkSpaces row.
+Coverage delta from `main` at the time of the selector rule (`blocked:subtype` 9, `clean` 399,
+`partial:column-form` 16, `blocked:column-form` 17, P1 14, P2 139): `blocked:subtype` 10 (Amazon
+Mainframe Modernization reclassified), `blocked:column-form` 16 after the two WorkSpaces children
+stopped being scored, `clean` and `partial` unchanged, P1 unchanged. No service became clean by
+dropping an unserved child, and the two unserved children are listed on the Amazon WorkSpaces row.
+The remap re-test below adds a second blocked service and its parent, which is where the final
+numbers in the last subsection come from.
 
-### Second finding: `remap.keyValue` is applied in the wrong direction
+### Second finding: the direction was fixed; the primary selector still keeps its token
 
-`src/engine/column-form.ts` looks up `remap[uiValue]` (UI value to map value). The live engine
-maps the other way: the key is the price token, the value is the UI value
-(`if(d.keyValue[r]===t){t=r;break}`, offsets 1466154 and 1469061). `src/data/column-form.ts`
-`matchAggregation` ignores the remap entirely and requires exact equality with the UI value.
+The first version of this section recorded that `src/engine/column-form.ts` looked up
+`remap[uiValue]` while the live engine maps the other way. That is fixed (w3, `bf27e34`):
+`src/data/column-form.ts` applies `remapValue` **forward** to the aggregation rows and the price
+records and `reverseRemapValue` to the meter tokens and the index path, which is exactly live `b`,
+`o` and `u` (offsets 1227218, 1466571). The coverage rule proposed here then,
+`remap.keyValue-direction`, is **retired**: its premise is gone, and a rule that fires on the
+direction would now be flagging services that work.
 
-Consequences: MediaConvert cannot reach an aggregation row (`AVC` versus `AVC/H.264`), and
-`realTimeDocumentTranslation` is scored `clean` but fails at runtime with
-`no PLC_2.0 price set matches Basic - Text, HTML` against the definition
-`{"Basic":"Basic - Text, HTML"}`. Section 13 and D-024 attributed that service's missing price to
-region availability, which is wrong.
+The symptom it caught was real, so the section was re-tested against the merged engine
+(`80bbda0`, this branch rebased) instead of trusting the earlier note. `realTimeDocumentTranslation`
+still cannot price its own default, and the cause is narrower than the direction:
 
-The tracker now names that cause instead of trusting the clean label. The rule
-(`remap.keyValue-direction` in the `scripts/coverage.ts` inventory) fires when a pricing selector's
-default value is itself a `remap.keyValue` key: this engine then substitutes the map value, a form
-label, for the token, while the live engine keeps the value. It hits one definition,
-`realTimeDocumentTranslation`, which moves to `blocked:column-form` with
-`Implement column-form remap.keyValue-direction`; because Amazon Translate lists it as a child,
-Amazon Translate moves from `clean`/P2 to `blocked:column-form`/P1 and names the child. The mirror
-state (the default is a remap value, so the live engine substitutes and this one does not) is the
-same inversion seen from the other side: 6 definitions are in it today (`amazonFSxForLustre`,
-`amazonManagedBlockchain`, `amazonAppStream`, `outputConfiguration1`, `outputConfiguration2`,
-`workSpacesCore`), all already blocked and all `missing-price` at runtime, so the tracker does not
-need a second signal for them. 25 definitions carry a non-identity `remap.keyValue`; the fix
-belongs with the column-form worker and this receipt is its starting point.
+| Probe (us-east-1, offline cache) | Result |
+| --- | --- |
+| `evaluateService` with defaults | `MISSING_PRICE columnFormIPM selector values {"FileType":"Basic"} do not match a PLC_2.0 aggregation row` |
+| same, `--set columnFormIPM={"FileType":"Basic - Text, HTML"}` + 1M characters | 15.00 USD/month, config summary `Document Type (Basic - Text, HTML)` |
 
-`amazonGameLiftStreams` is a second row that is statically clean and `missing-price` at runtime
-with a different cause: it has no remap at all, its primary selector is composite
-(`{"Stream Class":["VCPU","VRAM","RAM"]}`), and the price-set label match for the default
-`gen5n_ultra` finds nothing. Not proven beyond that and not changed here; it is recorded so the
-clean label is not mistaken for support.
+The evidence lines up with section 14.2 and 14.3:
+
+- The definition's remap is `{"Basic": "Basic - Text, HTML", "Office": "Office - Docx"}` and its
+  single row is `{selectorId: "FileType", defaultValue: "Basic"}` on `primaryKey: "FileType"`.
+- `.../translate-document-calc/metadata.json` declares `primarySelectors`
+  `["Location", "operation", "FileType"]`, and the aggregation rows carry the **price tokens**
+  (`FileType: "Basic"` / `"Office"`), so the form's options are the remapped labels
+  (`Basic - Text, HTML`, `Office - Docx`). Live `getInitialValue` keeps a default only when the
+  option set offers it, otherwise takes the first offered value (section 14.3), so the live form
+  saves the label.
+- `resolveColumnFormSelectors` in `src/engine/column-form.ts` keeps the **primary** selector's
+  value verbatim and only resolves every other row through the narrowed option tree. The raw token
+  `Basic` therefore survives into the value map while every aggregation row has been remapped to
+  the label, and no row can match.
+
+The tracker names that cause with a static, offline rule instead of trusting the clean label:
+`remap.keyValue-primary` (`primaryRemapToken` in `scripts/coverage-column-form.ts`, unit tested).
+It fires when the primary selector's declared default is a `remap.keyValue` key that maps to a
+different label, which is one definition today, `realTimeDocumentTranslation`. It moves to
+`blocked:column-form` with `Implement column-form remap.keyValue-primary`, and Amazon Translate,
+which offers it as a child, moves from `clean`/P2 to `blocked:column-form`/P1 and names the child.
+The mirror state from the first version (the default is already the label, so 14.3 keeps it) is
+**not** a defect now that the direction is right; those six definitions' remaining failures have
+other causes (`amazonFSxForLustre` is the `replace` boundary in 14.9).
+
+`amazonGameLiftStreams`, the open question in the first version, is **closed: it prices**.
+There is no remap; its primary selector is composite (`{"Stream Class": ["VCPU", "VRAM", "RAM"]}`)
+and one supplied value could not fill the index path before the merge. The aggregation row now
+supplies the rest, and the numbers match the price data:
+
+| Evidence | Value |
+| --- | --- |
+| aggregation row (us-east-1) | `Product Family: Compute Instance, Stream Class: gen5n_ultra, Reservation Class: OnDemand, VCPU: 8, VRAM: 24, RAM: 32` |
+| index record at that path | `price: "1.4544000000"` |
+| engine, 100 users x 2 hours/day | 8,726.40 USD/month = 100 x 2 x 30 x 1.4544 |
+
+### Tracker honesty fixes from the re-test
+
+Two reporting defects came out of the same pass:
+
+- `regex-remap` is retired. D-027 already recorded that the live forward remap is a plain object
+  lookup, so `"/1\\s?yr/"` is an inert literal key on both sides, and the only regex use is the
+  reversed key as a price-set token, which `columnFormMeterFragments` and `filterColumnFormMeters`
+  do too (`bundle` offsets 1466571 and 1468802). There was never a fail-closed path behind the
+  label, and it never classified a row on its own: all 13 definitions that carry one also carry
+  `additional-pricing-data`. Tests: `remapValue`/`reverseRemapValue` parity and the reversed
+  regex-shaped token in `tests/column-form.test.ts`.
+- The runtime pass reported `error` for `MissingPriceError`, because that class is not an
+  `EngineError`. `runtimeLabel` in `scripts/coverage-runtime.ts` now maps it to `missing-price`
+  and gives an uncached offline fetch its own `not-cached` bucket (unit tested). That is why 27
+  us-east-1 and 66 us-east-2 rows changed label without changing class, and why the generic
+  `error` bucket is now one row per region (`amazonLookoutForEquipment`, below) plus `awsBackup`
+  (`not-cached`).
+
+Two defects are left alone because they live in other workers' files, not in the tracker:
+
+- `resolveColumnFormSelectors` (above): the primary selector needs the same 14.3 resolution every
+  other row gets. `src/engine/column-form.ts` belongs to the column-form worker.
+- `amazonLookoutForEquipment` is statically clean and throws `VALIDATION_ERROR` at defaults: its
+  `fileSize` component declares `defaultOption: {size: "gb", frequency: "month"}`, but
+  `src/engine/inputs.ts` only accepts a frequency from `dropDownFrequency` or `outputFrequency`
+  (`allowsFrequency = frequencyOptions.length > 0 || outputFrequency !== "NA"`), and this component
+  declares neither. The live form shows "GB per month".
+
+Coverage delta from `main` after the re-test (P1 14, `clean` 399, `partial:column-form` 16,
+`blocked:column-form` 17, `blocked:subtype` 9): `clean` 397, `partial:column-form` 16,
+`blocked:column-form` 18, `blocked:subtype` 10, P1 15, P2 138. Three services changed class:
+`realTimeDocumentTranslation` and Amazon Translate are blocked by the primary-remap rule, and
+Amazon Mainframe Modernization is `blocked:subtype` because a missing input subtype outranks a
+column-form feature. Nothing became clean.

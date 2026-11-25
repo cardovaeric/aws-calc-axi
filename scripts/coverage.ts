@@ -21,12 +21,13 @@ import {
 } from "../src/data/catalog.ts";
 import { loadDefinition, type Card, type Component, type ServiceDefinition } from "../src/data/definitions.ts";
 import { evaluateService } from "../src/engine/service.ts";
-import { EngineError } from "../src/engine/errors.ts";
 import {
   rollupSelector,
   type SelectorChildFacts,
   type StaticClass,
 } from "./coverage-selector.ts";
+import { primaryRemapToken } from "./coverage-column-form.ts";
+import { runtimeLabel } from "./coverage-runtime.ts";
 
 const SUPPORTED_INPUT = new Set([
   "bodyText",
@@ -237,19 +238,19 @@ function inventory(definition: ServiceDefinition): {
     const remap = asRecord(component["remap"]);
     const constant = asRecord(remap?.["constant"]);
     if (constant && Object.keys(constant).length > 0) hard.add("remap.constant");
-    const keyValue = asRecord(remap?.["keyValue"]);
-    // The live engine treats keyValue remap keys as regular expressions. The
-    // engine currently does a plain lookup, so regex keys are a real gap.
-    if (keyValue && Object.keys(keyValue).some((key) => key.startsWith("/"))) {
-      gaps.add("regex-remap");
-    }
     // `remap.keyValue` is a price-token (key) to form-value (value) map in the
     // live engine, applied forward to aggregation rows and price records and in
     // reverse to meter lists and the index path. `src/data/column-form.ts`
     // implements both directions (`remapValue`, `reverseRemapValue`), so a
-    // remap is no longer a blocker on its own. Evidence and the original
-    // inversion: analysis/FINDINGS.md section 14 and
-    // receipts/selector-children-probe.json.
+    // remap direction is not a gap. The live forward remap is a plain object
+    // lookup (`d = (e,t) => t.keyValue[e] || e`), so a regex-shaped key is an
+    // inert literal key there and here, and the reversed key is used as the
+    // price-set token regex, which `columnFormMeterFragments` also does. The
+    // `regex-remap` gap this replaced had no fail-closed path behind it, so it
+    // is retired (docs/DECISIONS.md D-027, D-029). What is left is the primary
+    // selector: its value is never resolved through the remapped tree.
+    // Evidence: analysis/FINDINGS.md sections 14.2, 14.3, 15.
+    if (primaryRemapToken(component)) hard.add("remap.keyValue-primary");
     if (component["exportTagsAsValue"] !== undefined) gaps.add("export-tags");
     const unitModel = asRecord(component["pricingUnitModel"]);
     const pricingTypes = asRecord(unitModel?.["riPricingTypes"]);
@@ -428,22 +429,7 @@ async function runtimeFor(
     await evaluateService({ code, region }, { cache: { offline } });
     return `${region}:ok`;
   } catch (error) {
-    const engineCode = error instanceof EngineError ? error.code : "ERROR";
-    const label =
-      engineCode === "MISSING_INPUT"
-        ? "needs-input"
-        : engineCode === "MISSING_PRICE"
-          ? "missing-price"
-          : engineCode === "AMBIGUOUS_SELECTION"
-            ? "ambiguous"
-            : engineCode === "UNSUPPORTED_COMPONENT" || engineCode === "UNSUPPORTED_INPUT"
-              ? "unsupported"
-              : engineCode === "UNKNOWN_REGION"
-                ? "unknown-region"
-                : engineCode === "BAD_DEFINITION"
-                  ? "bad-definition"
-                  : "error";
-    return `${region}:${label}`;
+    return `${region}:${runtimeLabel(error)}`;
   }
 }
 
@@ -840,15 +826,18 @@ Priority rules:
 
 The static class is intentionally conservative. A \`columnFormIPM\` service is
 \`partial\` only while it uses a feature the engine still fails closed on:
-additional pricing data, regex key remaps, tiered PLC_2.0 price patterns,
-sub-components, or unsupported row types. A plain one-row column form is native,
-and so are dependent selectors, reserved/upfront payment models, and selector
-price patterns (\`analysis/FINDINGS.md\` section 14). \`remap.keyValue\` is applied
-in both directions now - forward on aggregation rows and price records, reverse
-on meter lists and the index path - so a remap is not itself a gap. It is
-\`blocked\` when the engine cannot reach a price at all. Runtime \`needs-input\` is
-not a
-failure; it means the service needs a fixture with explicit required values.
+additional pricing data, tiered PLC_2.0 price patterns, sub-components, or
+unsupported row types. A plain one-row column form is native, and so are
+dependent selectors, reserved/upfront payment models, selector price patterns,
+and a \`remap.keyValue\` in either direction (\`analysis/FINDINGS.md\` section 14).
+One remap case is still blocked: a primary selector whose declared default is a
+\`remap.keyValue\` key. The form's options are the remapped labels and the live
+form replaces an unoffered default with the first offered value, while this
+engine keeps the primary value verbatim, so the default cannot match an
+aggregation row (section 15). It is \`blocked\` when the engine cannot reach a
+price at all. Runtime \`needs-input\` is not a failure; it means the service needs
+a fixture with explicit required values. Runtime \`not-cached\` is a property of
+this offline run, not of the service.
 
 Selector rules (\`subServiceSelector\` rows, \`kind: selector\`):
 

@@ -1,0 +1,191 @@
+{
+  "estimate": "axi-e2e P1 EMR utilization rows",
+  "specHash": "39fd37d6183c87ab",
+  "payloadHash": "1ab8b450bfe60cc5",
+  "url": "https://calculator.aws/#/estimate?id=499d348cd9cf784d0e75f72be5bb8e216a0d8323",
+  "savedKey": "499d348cd9cf784d0e75f72be5bb8e216a0d8323",
+  "publishedAt": "2026-11-25T01:14:18.583Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 113.88,
+    "upfront": 0,
+    "total12m": 1366.56,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonEmrMasterNode",
+        "template": "template_0",
+        "region": "us-east-2",
+        "monthly": 17.52,
+        "upfront": 0,
+        "summary": "Number of master EMR nodes (1), EC2 instance (m5.xlarge), Utilization (50 %Utilized/Month)"
+      },
+      {
+        "code": "amazonEmrCoreNode",
+        "template": "template_0",
+        "region": "us-east-2",
+        "monthly": 70.08,
+        "upfront": 0,
+        "summary": "Number of core EMR nodes (2), EC2 instance (m5.xlarge), Utilization (100 %Utilized/Month)"
+      },
+      {
+        "code": "amazonEmrTaskNode",
+        "template": "template_0",
+        "region": "us-east-2",
+        "monthly": 26.28,
+        "upfront": 0,
+        "summary": "Number of task EMR nodes (3), EC2 instance (m5.xlarge), Utilization (25 %Utilized/Month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonEmrMasterNode",
+        "monthly": 17.52,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonEmrCoreNode",
+        "monthly": 70.08,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonEmrTaskNode",
+        "monthly": 26.28,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 113.88,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=499d348cd9cf784d0e75f72be5bb8e216a0d8323",
+    "title": "axi-e2e P1 EMR utilization rows",
+    "monthly": "113.88 USD",
+    "upfront": "0.00 USD",
+    "annual": "1,366.56 USD",
+    "monthlyValue": 113.88,
+    "upfrontValue": 0,
+    "annualValue": 1366.56,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon EMR master node on EC2",
+        "upfront": "0.00 USD",
+        "monthly": "17.52 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of master EMR nodes (1), EC2 instance (m5.xlarge), Utilization (50 %Utilized/Month)",
+        "status": null
+      },
+      {
+        "name": "Amazon EMR core node on EC2",
+        "upfront": "0.00 USD",
+        "monthly": "70.08 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of core EMR nodes (2), EC2 instance (m5.xlarge), Utilization (100 %Utilized/Month)",
+        "status": null
+      },
+      {
+        "name": "Amazon EMR task node on EC2",
+        "upfront": "0.00 USD",
+        "monthly": "26.28 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of task EMR nodes (3), EC2 instance (m5.xlarge), Utilization (25 %Utilized/Month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:14:22.608Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=499d348cd9cf784d0e75f72be5bb8e216a0d8323",
+    "savedKey": "499d348cd9cf784d0e75f72be5bb8e216a0d8323",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=499d348cd9cf784d0e75f72be5bb8e216a0d8323",
+      "title": "axi-e2e P1 EMR utilization rows",
+      "monthly": "113.88 USD",
+      "upfront": "0.00 USD",
+      "annual": "1,366.56 USD",
+      "monthlyValue": 113.88,
+      "upfrontValue": 0,
+      "annualValue": 1366.56,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon EMR master node on EC2",
+          "upfront": "0.00 USD",
+          "monthly": "17.52 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of master EMR nodes (1), EC2 instance (m5.xlarge), Utilization (50 %Utilized/Month)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EMR core node on EC2",
+          "upfront": "0.00 USD",
+          "monthly": "70.08 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of core EMR nodes (2), EC2 instance (m5.xlarge), Utilization (100 %Utilized/Month)",
+          "status": "-"
+        },
+        {
+          "name": "Amazon EMR task node on EC2",
+          "upfront": "0.00 USD",
+          "monthly": "26.28 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of task EMR nodes (3), EC2 instance (m5.xlarge), Utilization (25 %Utilized/Month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:14:49.066Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e P1 EMR utilization rows",
+    "monthly": 113.88,
+    "upfront": 0,
+    "annual": 1366.56,
+    "services": [
+      {
+        "name": "Amazon EMR master node on EC2",
+        "monthly": 17.52,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of master EMR nodes (1), EC2 instance (m5.xlarge), Utilization (50 %Utilized/Month)"
+      },
+      {
+        "name": "Amazon EMR core node on EC2",
+        "monthly": 70.08,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of core EMR nodes (2), EC2 instance (m5.xlarge), Utilization (100 %Utilized/Month)"
+      },
+      {
+        "name": "Amazon EMR task node on EC2",
+        "monthly": 26.28,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of task EMR nodes (3), EC2 instance (m5.xlarge), Utilization (25 %Utilized/Month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

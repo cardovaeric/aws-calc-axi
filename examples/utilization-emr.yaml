@@ -1,0 +1,41 @@
+# Amazon EMR node children: each column form ends in a `utilization` row that
+# supplies the hours a month the hourly price is multiplied by. The same
+# instance type at 50%, 100%, and 25% makes the multiplication visible.
+# Live editor recompute (us-east-2, m5.xlarge at 0.048/hour):
+#   master 1 node  50% ->  17.52
+#   core   2 nodes 100% ->  70.08
+#   task   3 nodes  25% ->  26.28
+name: axi-e2e P1 EMR utilization rows
+currency: USD
+locale: en_US
+services:
+- code: amazonEmrMasterNode
+  region: us-east-2
+  template: template_0
+  set:
+    masterNode_generated_0:
+      Instance Type: m5.xlarge
+      Number of Nodes: "1"
+      Utilization:
+        unit: "50"
+        selectedId: "%Utilized/Month"
+- code: amazonEmrCoreNode
+  region: us-east-2
+  template: template_0
+  set:
+    coreNode_generated_0:
+      Instance Type: m5.xlarge
+      Number of Nodes: "2"
+      Utilization:
+        unit: "100"
+        selectedId: "%Utilized/Month"
+- code: amazonEmrTaskNode
+  region: us-east-2
+  template: template_0
+  set:
+    taskNode_generated_0:
+      Instance Type: m5.xlarge
+      Number of Nodes: "3"
+      Utilization:
+        unit: "25"
+        selectedId: "%Utilized/Month"

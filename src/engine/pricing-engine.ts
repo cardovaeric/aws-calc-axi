@@ -73,17 +73,25 @@ function meteredUnitFor(component: Component, context: PricingContext): string {
 }
 
 /**
- * Resolve a `singlePricePoint` price. Fails closed when the meter is absent:
- * a missing price must never silently become zero.
+ * Resolve a `singlePricePoint` price.
+ *
+ * Live reads the meter out of the regional map and falls back to 0 when the
+ * map does not carry it (`n = a[o] ? a[o] : 0; if (!n) return {value: 0}`,
+ * `analysis/bundle.js` offset 497900). Workspaces Personal/Core rely on that:
+ * `additionalBundleUnitPrice2` names
+ * `Application Bundle Performance Plus License BYOL Windows Office 2019
+ * AlwaysOn`, a meter no region carries. A mapping that never loaded its region
+ * is a data gap rather than a live zero, so that still fails closed.
  */
 export function singlePricePoint(component: Component, context: PricingContext): number {
   const meter = meteredUnitFor(component, context);
   const magic = magicPrice(meter);
   if (magic !== undefined) return magic;
   const mapping = mappingName(component);
-  if (!context.prices.has(mapping, meter)) {
+  if (context.prices.meters(mapping) === undefined) {
     throw new MissingPriceError(meter, context.regionName, mapping);
   }
+  if (!context.prices.has(mapping, meter)) return 0;
   return context.prices.requirePrice(mapping, meter);
 }
 

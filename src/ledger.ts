@@ -298,6 +298,35 @@ export const LEDGER: LedgerEntry[] = [
       "a price map with no regionAttributes.Location is not region-scoped, and the index path takes the region name for Location and From Location (analysis/FINDINGS.md section 16)",
   },
   {
+    id: "utilization-selector-emr-use2",
+    service: "amazonEmrMasterNode + amazonEmrCoreNode + amazonEmrTaskNode",
+    template: "template_0 (all three node children)",
+    region: "us-east-2",
+    fixture: "m5.xlarge at 50% (1 node), 100% (2 nodes), and 25% (3 nodes)",
+    specPath: "examples/utilization-emr.yaml",
+    receiptPath: "receipts/p1-utilization-emr.json",
+    expectedMonthlyCents: 11388,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "column-form utilization rows supply the hours the hourly model multiplies; each child prices at a different utilization (analysis/FINDINGS.md section 17)",
+  },
+  {
+    id: "utilization-selector-workspaces-use2",
+    service: "amazonWorkspaces (Monthly + Hourly) + workSpacesCore + workSpacesInstances",
+    template: "workspaces + workspacesInstances",
+    region: "us-east-2",
+    fixture:
+      "Personal Monthly (33.00) and Hourly 160h (55.25), Core Monthly (29.00), managed c5.12xlarge Monthly (2,180.33)",
+    specPath: "examples/utilization-workSpaces.yaml",
+    receiptPath: "receipts/p1-utilization-workSpaces.json",
+    expectedMonthlyCents: 229758,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "the Billing option utilization row is also a price selector; remap.keyValue turns the aggregation's AlwaysOn/AutoStop into the row's Monthly/Hourly (analysis/FINDINGS.md section 17)",
+  },
+  {
     id: "fsx-lustre-use2",
     service: "amazonFSxForLustre",
     template: "persistent",

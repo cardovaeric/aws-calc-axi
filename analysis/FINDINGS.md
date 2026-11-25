@@ -678,9 +678,9 @@ the key.
   and one further gap sat behind it, the live `displayIf` ordering coercion
   (`analysis/FINDINGS.md` section 16.3). It evaluates at `174.32`
   (`receipts/p2-fsx-lustre.json`).
-- `utilization` rows that carry a `selectorId`, `remap.constant`, `additionalPricingData` joins,
-  `subComponentsList`, `exportTagsAsValue`, multiple price sets, and tiered PLC_2.0 patterns
-  (`StartingRange`/`EndingRange`) remain fail-closed.
+- `remap.constant`, `additionalPricingData` joins, `subComponentsList`, `exportTagsAsValue`,
+  multiple price sets, and tiered PLC_2.0 patterns (`StartingRange`/`EndingRange`) remain
+  fail-closed. `utilization` rows that carry a `selectorId` are native since section 17.
 
 ## 15. Selector children are real gaps; two WorkSpaces children do not exist (2026-11-24)
 
@@ -708,9 +708,9 @@ does not define is never offered at all.
 | Service | Non-clean children | Cause | Verdict |
 | --- | --- | --- | --- |
 | amazonChimeSdk | ptsnAudio, sipTrunking | `remap.constant` | real gap |
-| amazonEMR | amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode | `utilization` row | real gap |
+| amazonEMR | amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode | `utilization` row | real gap, resolved in section 17 |
 | amazonMainframeModernization | mainframeBluAge, mainframeMicroFocus | `input:utilization` + `remap.constant` | real gap |
-| amazonWorkSpaces | amazonWorkspaces, workSpacesCore, workSpacesInstances, workSpacesPools | utilization row, dependent selectors, upfront totals | real gap, and 2 phantom children |
+| amazonWorkSpaces | amazonWorkspaces, workSpacesCore, workSpacesInstances, workSpacesPools | utilization row, dependent selectors, upfront totals | real gap, and 2 phantom children; utilization row resolved in section 17 |
 | awsElementalMediaLive | mediaLiveInput1, mediaLiveOutput1, mediaLiveAudioAddOns | dependent selectors | real gap |
 | elementalMediaConvert | outputConfiguration1, outputConfiguration2 | dependent selectors (+ remap direction) | real gap |
 
@@ -976,3 +976,134 @@ curl -s --compressed https://calculator.aws/ | grep -o 'src="[^"]*bundle.js"'
 # then, in the bundle: DEFAULT_UTILIZATION_OPTIONS, calculateUtilizationValue,
 # convertToSaveFormat, and the rehydrator's Ne() isEmpty guard
 ```
+
+## 17. Column-form `utilization` rows (2026-11-25)
+
+The P1 `utilization-selector` blocker named eight rows: the three Amazon EMR node
+children, WorkSpaces Personal, WorkSpaces Core Bundles, WorkSpaces Core Managed
+Instances, and the two selector parents. The premise check found a real gap with
+two parts, not a phantom: the row type itself, plus a `singlePricePoint` zero
+that WorkSpaces Personal/Core need before they can price at all. Bundle offsets
+below are into `analysis/bundle.js` (sha256 `adbd5f41...`, the live
+`.../static/js/bundle.js` re-fetched 2026-11-25, same bytes).
+
+### What a column-form utilization row is
+
+A `utilization` row is not a plain selector. Its saved value is an object
+`{unit, selectedId}`, where `unit` is the number the user typed and `selectedId`
+is the duration label the unit dropdown shows:
+
+```json
+"Utilization": { "value": { "unit": "50", "selectedId": "%Utilized/Month" } }
+```
+
+That shape is in a live save (`#/estimate?id=a35e2436...`, master node at 50%),
+not inferred. Three live functions consume it:
+
+- `L` (the row component, offset 2870678): `createOptions` offers the four
+  durations `P` (`%Utilized/Month`, `Hours/Day`, `Hours/Week`, `Hours/Month`) when
+  the row is not a pricing selector, and otherwise the keys of the component
+  tree node the form resolved for it. `D` (offset 2870901) is the unit a duration
+  gets when the form has to reselect it: `%Utilized/Month` 100, `Hours/Day` 24,
+  `Hours/Week` 168, `Hours/Month` 730, `Hourly` 160, `Monthly` 730.
+  `validateChange` validates the typed unit (not the converted hours) as a whole
+  number in `1..max(duration)`.
+- `q.a` (module 311, offset 1271617): `hours = unit / duration.max * 730`, except
+  `Hours/Month` and `Hourly` where hours are the unit itself, and any other
+  `selectedId` (the WorkSpaces `Monthly`) which means a full 730-hour month. It
+  does not round - 25% is 182.5 hours.
+- `K` (offset 2876200) chooses the price model. `G` (Hourly) is
+  `hourly x totalHour x count`; `V` (Monthly) is
+  `(hourly x totalHour x count) + monthly x count`, and skips the hourly term
+  when the hourly price is 0. So the row replaces the hardcoded 730 in both
+  models.
+
+When the row also carries a `selectorId` that the component tree holds, its
+`selectedId` is the value the price set matches. WorkSpaces is exactly that:
+its `Running Mode` row declares `secondaryKey` membership and
+`remap.keyValue {AlwaysOn: "Monthly", AutoStop: "Hourly"}`, so the aggregation
+rows (which carry `AlwaysOn`/`AutoStop`) are remapped forward to the row's
+labels, and the meter fragments are remapped back to the raw aggregation value.
+The saved object and the config summary are built from the value map; live joins
+an object value's members with a space, so EMR prints
+`Utilization (50 %Utilized/Month)` and WorkSpaces prints nothing because the row
+sets `displayInConfigSummary: false`.
+
+### The second real cause: `singlePricePoint` bills 0 for an absent meter
+
+Live `singlePricePoint` (offset 497900) reads the meter from the regional map
+and returns `{value: 0}` when the map does not carry it
+(`n = a[o] ? a[o] : 0; if (!n) return {value: 0}`). WorkSpaces Personal and
+Core both declare `additionalBundleUnitPrice2` on
+`Application Bundle Performance Plus License BYOL Windows Office 2019 AlwaysOn`,
+a meter no region carries, so the live form bills it at 0 and our engine threw
+`no price for metered unit` instead. This engine now returns 0 for an absent
+meter in a region whose map loaded, and still fails closed when the mapping
+never loaded that region (that is a data gap, not a live zero). Evidence:
+`tests/engine-edge.test.ts` keeps the missing-region fail-closed case.
+
+### Verified numbers (us-east-2, live editor recompute)
+
+| Service | Configuration | Live | Native |
+| --- | --- | --- | --- |
+| EMR master node | m5.xlarge, 1 node, 50% | 17.52 | 17.52 |
+| EMR core node | m5.xlarge, 2 nodes, 100% | 70.08 | 70.08 |
+| EMR task node | m5.xlarge, 3 nodes, 25% | 26.28 | 26.28 |
+| WorkSpaces Personal | 1 space, Monthly | 33.00 | 33.00 |
+| WorkSpaces Personal | 1 space, Hourly 160 h | 55.25 | 55.25 |
+| WorkSpaces Core | 1 space, Monthly | 29.00 | 29.00 |
+| WorkSpaces Core Managed Instances | 1 c5.12xlarge, Monthly | 2,180.33 | 2,180.33 |
+
+The EMR calculation string live prints for the master row is
+`1 instance(s) x 0.048 USD hourly x (50 / 100 Utilized/Month) x 730 hours in a
+month = 17.5200`, and WorkSpaces Hourly prints
+`(1 instance(s) x 7.25 USD monthly) + (1 instance(s) x 0.3 USD hourly x 160
+hours in a month) = 55.2500`, which is the hours multiplication in both models.
+Receipts: `receipts/p1-utilization-emr.json` (113.88) and
+`receipts/p1-utilization-workSpaces.json` (2,297.58), both editor recompute with
+zero mismatches, screenshots `receipts/screenshots/utilization-selector-{emr,workspaces}-use2.png`.
+
+### The WorkSpaces phantom check
+
+The premise warning held for the *count*, not for the gaps. `amazonWorkSpaces`
+declares six children; `workSpacesThinClient` and `workSpacesSecureBrowser` are
+still absent from the manifest and 403, so they remain `selector_unserved` and
+cover no surface. The other four children (`amazonWorkspaces`, `workSpacesCore`,
+`workSpacesInstances`, `workSpacesPools`) were genuinely blocked; the three that
+carried `utilization-selector` price now, and `workSpacesPools` was already
+clean. Nothing about the utilization row was inert: at 50% the EMR price halves,
+and the WorkSpaces Hourly option changes the model from flat monthly to
+hours-based.
+
+### Coverage delta
+
+`npm run coverage -- --evaluate --offline` from `45fd950` (clean 401,
+partial:column-form 16, blocked:column-form 21, blocked:subtype 3, P1 10):
+
+- clean 401 -> 409 (+8: three EMR node children, three WorkSpaces children, and
+  the two selector parents)
+- blocked:column-form 21 -> 13 (-8)
+- P1 10 -> 8 (P2 137 -> 139)
+- partial:column-form 16 unchanged, blocked:subtype 3 unchanged
+- the `utilization-selector` rule is gone from `scripts/coverage.ts`, so no row
+  carries a stale label
+
+The `singlePricePoint` zero is wider than WorkSpaces: 27 rows whose runtime used
+to read `missing-price` now read `ok` or `needs-input` (Personalize, Polly,
+QBusiness, QuickSight, IoT SiteWise, the FSx backup rows, the Bedrock/Titan
+rows, and others), because their regional map really does not carry the meter
+and live bills 0. No class or priority moved for those rows - they were already
+`clean` but could not evaluate their default; the `missing-price` label remains
+on 10 us-east-1 and 27 us-east-2 rows whose lookup is still unresolved. The
+runtime column is the honest reflection of that.
+
+### Left alone deliberately
+
+Live's value map is seeded with the rows that declare a truthy `defaultValue`
+first and then appends the rest, so a natively saved WorkSpaces row and its
+config summary list the defaulted rows before `Number of WorkSpaces`. This
+engine keeps definition order, which is what the already-published receipts
+(ElastiCache, OpenSearch, Redshift) store. Matching live's key order is
+cost-neutral and would invalidate those receipts, so it is left for a wave that
+can republish them; the editor oracle ignores summary text, and the numbers are
+identical either way.

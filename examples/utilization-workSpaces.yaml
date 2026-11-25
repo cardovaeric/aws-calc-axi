@@ -1,0 +1,42 @@
+# WorkSpaces Personal/Core use a `utilization` row as the "Billing option":
+# `Monthly` is a flat monthly price, `Hourly` bills the typed hours (160 by
+# default) at the per-hour rate. Live editor recompute (us-east-2):
+#   Personal, 1 space, Monthly  ->     33.00
+#   Personal, 1 space, Hourly   ->     55.25  (7.25 monthly + 0.30 x 160)
+#   Core,     1 space, Monthly  ->     29.00
+#   Managed Instances, 1 c5.12xlarge (default), Monthly -> 2,180.33
+name: axi-e2e P1 WorkSpaces utilization rows
+currency: USD
+locale: en_US
+services:
+- code: amazonWorkspaces
+  region: us-east-2
+  template: workspaces
+  set:
+    columnFormIPM:
+      Operating System: Windows
+      Number of WorkSpaces: "1"
+- code: amazonWorkspaces
+  region: us-east-2
+  template: workspaces
+  set:
+    columnFormIPM:
+      Operating System: Windows
+      Number of WorkSpaces: "1"
+      Running Mode:
+        unit: "160"
+        selectedId: Hourly
+- code: workSpacesCore
+  region: us-east-2
+  template: workspaces
+  set:
+    columnFormIPM:
+      Operating System: WorkSpaces Core Windows
+      Number of WorkSpaces: "1"
+- code: workSpacesInstances
+  region: us-east-2
+  template: workspacesInstances
+  set:
+    columnFormIPM:
+      EC2PlatformType: Windows
+      Number of instances: "1"

@@ -226,31 +226,28 @@ test("an unserved child is recorded but never scored as non-clean", async () => 
   }
 });
 
-test("Amazon WorkSpaces keeps six declared children, three non-clean and two unserved", async () => {
+test("Amazon WorkSpaces keeps six declared children, four served and two unserved", async () => {
   const rows = await trackerRows();
   const row = rows.find((entry) => entry["service_code"] === "amazonWorkSpaces");
   assert.ok(row, "amazonWorkSpaces is in the tracker");
   assert.equal(row["selector_children"], "6");
   assert.equal(row["selector_unserved"], "workSpacesThinClient;workSpacesSecureBrowser");
-  // workSpacesPools left this list when dependent selectors became native; the
-  // remaining three are blocked by the utilization row, which is still missing.
-  assert.deepEqual(
-    row["selector_nonclean"]!.split(";"),
-    ["amazonWorkspaces", "workSpacesCore", "workSpacesInstances"]
-  );
-  assert.match(row["selector_blockers"]!, /utilization-selector \(amazonWorkspaces, workSpacesCore, workSpacesInstances\)/);
-  assert.doesNotMatch(row["selector_blockers"]!, /dependent-selectors/);
+  // All four served children are clean now: the utilization row is native, so
+  // nothing is non-clean and the parent has no blocker to name.
+  assert.equal(row["selector_nonclean"], "");
+  assert.equal(row["selector_blockers"], "");
+  assert.equal(row["static_class"], "clean");
+  assert.equal(row["priority"], "P2");
 });
 
-test("Amazon EMR names the utilization row on all three node children", async () => {
+test("Amazon EMR's three node children are clean now that utilization rows are native", async () => {
   const rows = await trackerRows();
   const row = rows.find((entry) => entry["service_code"] === "amazonEMR");
   assert.ok(row, "amazonEMR is in the tracker");
-  assert.equal(row["static_class"], "blocked:column-form");
-  assert.equal(
-    row["selector_blockers"],
-    "utilization-selector (amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode)"
-  );
+  assert.equal(row["static_class"], "clean");
+  assert.equal(row["selector_blockers"], "");
+  assert.equal(row["hard_blockers"], "");
+  assert.equal(row["next_action"], "Verify all children with fixtures and a receipt");
 });
 
 test("AWS Mainframe Modernization drops the missing input subtype and names the remap it is blocked by", async () => {

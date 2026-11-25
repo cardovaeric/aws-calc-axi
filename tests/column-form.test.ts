@@ -5,6 +5,7 @@ import {
   columnFormMeterFragments,
   columnFormSelectorValues,
   columnFormSummary,
+  columnFormUtilizationHours,
   evaluateColumnForm,
   resolveColumnFormSelectors,
   type ColumnFormComponent,
@@ -952,4 +953,261 @@ test("a regex-shaped remap key becomes the price-set token, the way live reverse
   };
   const fragments = columnFormMeterFragments(component, { LeaseContractLength: "1 year" }, undefined);
   assert.deepEqual(fragments, ["/1\\s?yr/"]);
+});
+
+// ---------------------------------------------------------------------------
+// `utilization` rows (analysis/FINDINGS.md section 17)
+//
+// A utilization row's saved value is `{unit, selectedId}`. Live `q.a` turns it
+// into the hours a month the Hourly/Monthly price models multiply by, and when
+// the row also carries a selector id its `selectedId` is the value the price
+// tree matches. The two fixtures mirror Amazon EMR (not a pricing selector) and
+// WorkSpaces (a secondary selector whose aggregation values are remapped to the
+// row's `Monthly`/`Hourly` labels).
+// ---------------------------------------------------------------------------
+
+const EMR_MASTER_NODE: ColumnFormComponent = {
+  id: "masterNode_generated_0",
+  label: "EMR master node cost",
+  mappingDefinitionName: "elasticmapreduce-calc",
+  calculationId: { monthly: "monthlyCost" },
+  primaryKey: "Instance Type",
+  secondaryKey: [],
+  row: [
+    {
+      label: "Number of master EMR nodes",
+      type: "textInput",
+      selectorId: "Number of Nodes",
+      exportValueAs: "count",
+      validations: { required: true, allowDecimals: false, minValue: 0 },
+    },
+    { label: "EC2 instance", type: "dropDown", selectorId: "Instance Type" },
+    {
+      label: "Utilization",
+      type: "utilization",
+      selectorId: "Utilization",
+      exportValueAs: "utilization",
+    },
+  ],
+};
+
+const EMR_MASTER_DATA: ColumnFormPricingData = {
+  pricingSelectors: ["Location", "Instance Family", "Instance Type"],
+  selectors: { Location: "US East (Ohio)", "Instance Type": "m5.xlarge" },
+  regionPrices: { "m5.xlarge - Hourly Cost": { price: "0.0480000000" } },
+  setMeters: ["m5.xlarge - Hourly Cost"],
+  manifest: { serviceId: "elasticmapreduce", source: "elasticmapreduce-calc" },
+  metadataUrl: "https://example.invalid/metadata.json",
+};
+
+test("a utilization row supplies the hours the hourly model multiplies", () => {
+  const result = evaluateColumnForm(EMR_MASTER_NODE, EMR_MASTER_DATA, {
+    "Number of Nodes": 1,
+    "Instance Type": "m5.xlarge",
+  });
+  // Live: 1 instance x 0.048 hourly x (100 / 100 Utilized/Month) x 730 = 35.04.
+  assert.equal(result.monthly, 35.04);
+  assert.deepEqual(result.extraValues, { monthlyCost: 35.04, utilization: 730, count: 1 });
+  assert.deepEqual(result.saved.value[0], {
+    "Number of Nodes": { value: "1" },
+    "Instance Type": { value: "m5.xlarge" },
+    Utilization: { value: { unit: "100", selectedId: "%Utilized/Month" } },
+  });
+  assert.equal(
+    result.configSummary,
+    "Number of master EMR nodes (1), EC2 instance (m5.xlarge), Utilization (100 %Utilized/Month)"
+  );
+});
+
+test("utilization hours scale the price and the exported hours", () => {
+  const half = evaluateColumnForm(EMR_MASTER_NODE, EMR_MASTER_DATA, {
+    "Number of Nodes": 1,
+    "Instance Type": "m5.xlarge",
+    Utilization: { unit: "50", selectedId: "%Utilized/Month" },
+  });
+  assert.equal(half.monthly, 17.52);
+  assert.equal(half.extraValues["utilization"], 365);
+  const quarter = evaluateColumnForm(EMR_MASTER_NODE, EMR_MASTER_DATA, {
+    "Number of Nodes": 1,
+    "Instance Type": "m5.xlarge",
+    Utilization: { unit: "25", selectedId: "%Utilized/Month" },
+  });
+  // Live does not round the converted hours: 25% is 182.5 hours.
+  assert.equal(quarter.monthly, 8.76);
+  assert.equal(quarter.extraValues["utilization"], 182.5);
+});
+
+test("a utilization row unit alone takes the row's default duration", () => {
+  const result = evaluateColumnForm(EMR_MASTER_NODE, EMR_MASTER_DATA, {
+    "Number of Nodes": 1,
+    "Instance Type": "m5.xlarge",
+    Utilization: 25,
+  });
+  assert.equal(result.monthly, 8.76);
+  assert.deepEqual(result.saved.value[0]?.Utilization, {
+    value: { unit: "25", selectedId: "%Utilized/Month" },
+  });
+});
+
+test("utilization durations convert to hours like the live q.a helper", () => {
+  assert.equal(columnFormUtilizationHours({ unit: "50", selectedId: "%Utilized/Month" }), 365);
+  assert.equal(columnFormUtilizationHours({ unit: "12", selectedId: "Hours/Day" }), 365);
+  assert.equal(columnFormUtilizationHours({ unit: "84", selectedId: "Hours/Week" }), 365);
+  assert.equal(columnFormUtilizationHours({ unit: "365", selectedId: "Hours/Month" }), 365);
+  assert.equal(columnFormUtilizationHours({ unit: "160", selectedId: "Hourly" }), 160);
+  // An unrecognised duration is a full month, and so is an absent value.
+  assert.equal(columnFormUtilizationHours({ unit: "10", selectedId: "Monthly" }), 730);
+  assert.equal(columnFormUtilizationHours(undefined), 730);
+});
+
+test("utilization unit validations match the live row", () => {
+  assert.throws(
+    () =>
+      evaluateColumnForm(EMR_MASTER_NODE, EMR_MASTER_DATA, {
+        "Number of Nodes": 1,
+        "Instance Type": "m5.xlarge",
+        Utilization: { unit: "0", selectedId: "%Utilized/Month" },
+      }),
+    /must be between 1 and 100 for %Utilized\/Month/
+  );
+  assert.throws(
+    () =>
+      evaluateColumnForm(EMR_MASTER_NODE, EMR_MASTER_DATA, {
+        "Number of Nodes": 1,
+        "Instance Type": "m5.xlarge",
+        Utilization: { unit: "1.5", selectedId: "%Utilized/Month" },
+      }),
+    /decimals are not allowed/
+  );
+});
+
+const WORKSPACES: ColumnFormComponent = {
+  id: "columnFormIPM",
+  label: "WorkSpaces Bundle Configuration",
+  mappingDefinitionName: "workspaces-calc",
+  calculationId: { monthly: "monthly_ipm" },
+  primaryKey: "Operating System",
+  secondaryKey: ["License", "Bundle Description", "Running Mode"],
+  remap: { keyValue: { AlwaysOn: "Monthly", AutoStop: "Hourly" } },
+  pricingUnitModel: {
+    riPricingTypes: {
+      monthly: [{ "Running Mode": "Monthly" }, { "Running Mode": "Hourly" }],
+      hourly: [{ "Running Mode": "Hourly", $overridePriceKeyWith: "workspaces:PricePerUnit" }],
+    },
+  },
+  row: [
+    {
+      label: "Number of WorkSpaces",
+      type: "textInput",
+      selectorId: "Number of WorkSpaces",
+      exportValueAs: "count",
+    },
+    { label: "Operating system", type: "dropDown", selectorId: "Operating System", defaultValue: "Windows" },
+    {
+      label: "License",
+      type: "dropDown",
+      selectorId: "License",
+      defaultValue: "Included",
+      dependent: "Operating System",
+    },
+    {
+      label: "Bundle type",
+      type: "dropDown",
+      selectorId: "Bundle Description",
+      defaultValue: "Standard",
+    },
+    {
+      label: "Billing option",
+      type: "utilization",
+      selectorId: "Running Mode",
+      defaultValue: { unit: "730", selectedId: "Monthly" },
+      dependent: ["Bundle Description", "License"],
+      exportValueAs: "utilization",
+      displayInConfigSummary: false,
+    },
+  ],
+};
+
+// The aggregation rows are already remapped, which is what the live engine
+// matches after `remap.keyValue` turns AlwaysOn/AutoStop into Monthly/Hourly.
+const WORKSPACES_AGGREGATIONS = [
+  {
+    selectors: {
+      Location: "US East (Ohio)",
+      "Operating System": "Windows",
+      License: "Included",
+      "Bundle Description": "Standard",
+      "Running Mode": "Monthly",
+    },
+  },
+  {
+    selectors: {
+      Location: "US East (Ohio)",
+      "Operating System": "Windows",
+      License: "Included",
+      "Bundle Description": "Standard",
+      "Running Mode": "Hourly",
+    },
+  },
+];
+
+function workspacesData(): ColumnFormPricingData {
+  return {
+    pricingSelectors: ["Location", "Operating System", "License", "Bundle Description", "Running Mode"],
+    selectors: { ...WORKSPACES_AGGREGATIONS[0]!.selectors },
+    regionPrices: {
+      // The live engine remaps the price records too, so the record carries the
+      // form label while the meter label keeps the raw aggregation value.
+      "Windows Included Standard AlwaysOn": {
+        price: "33",
+        "Running Mode": "Monthly",
+      } as never,
+      "Windows Included Standard AutoStop": {
+        price: "7.25",
+        "workspaces:PricePerUnit": "0.3",
+        "Running Mode": "Hourly",
+      } as never,
+    },
+    setMeters: ["Windows Included Standard AlwaysOn", "Windows Included Standard AutoStop"],
+    aggregations: WORKSPACES_AGGREGATIONS,
+    manifest: { serviceId: "workspaces", source: "workspaces-calc" },
+    metadataUrl: "https://example.invalid/metadata.json",
+  };
+}
+
+test("a utilization row that is also a selector prices and saves its object", () => {
+  const monthly = evaluateColumnForm(WORKSPACES, workspacesData(), {
+    "Number of WorkSpaces": 1,
+  });
+  // Live: 1 instance x 33 USD monthly = 33.00.
+  assert.equal(monthly.monthly, 33);
+  assert.deepEqual(monthly.saved.value[0]?.["Running Mode"], {
+    value: { unit: "730", selectedId: "Monthly" },
+  });
+  // The row declares displayInConfigSummary: false, so it is not printed.
+  assert.equal(
+    monthly.configSummary,
+    "Number of WorkSpaces (1), Operating system (Windows), License (Included), Bundle type (Standard)"
+  );
+
+  const hourly = evaluateColumnForm(WORKSPACES, workspacesData(), {
+    "Number of WorkSpaces": 1,
+    "Running Mode": { unit: "160", selectedId: "Hourly" },
+  });
+  // Live: (1 x 7.25 monthly) + (1 x 0.3 hourly x 160 hours) = 55.25.
+  assert.equal(hourly.monthly, 55.25);
+  assert.deepEqual(hourly.saved.value[0]?.["Running Mode"], {
+    value: { unit: "160", selectedId: "Hourly" },
+  });
+});
+
+test("a utilization value the price tree does not offer fails closed", () => {
+  assert.throws(
+    () =>
+      evaluateColumnForm(WORKSPACES, workspacesData(), {
+        "Number of WorkSpaces": 1,
+        "Running Mode": { unit: "100", selectedId: "%Utilized/Month" },
+      }),
+    /cannot use "Running Mode" = "%Utilized\/Month"; the live form offers "Monthly", "Hourly"/
+  );
 });

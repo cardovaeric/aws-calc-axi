@@ -1197,3 +1197,108 @@ curl -s --compressed \
 curl -s --compressed \
   'https://calculator.aws/pricing/2.0/meteredUnitMaps/databasesavingsplans/USD/current/dsp-join-with-docdb-calc/US%20East%20(Ohio)/OnDemand/db.r8g.12xlarge/48/384%20GiB/1%20year/No%20Upfront/index.json'
 ```
+
+## 19. The two remap surfaces: `remap.constant` and the primary selector (2026-11-25)
+
+Observed in the live UI (us-east-2 and us-east-1) and in the bundle behind
+`https://calculator.aws/42c3e45d-da28-4f7f-9043-598b787291c1/static/js/bundle.js`
+(sha256 `adbd5f41...`, still the live build). Evidence for every number and screenshot:
+`receipts/remap-surfaces-probe.json`.
+
+### What the live engine does
+
+- **A constant filters, then fills.** Before the option tree exists, the live aggregation fetch
+  keeps only the rows that do not contradict the constant - a row whose value is missing or equal
+  survives, a row that carries a different value is dropped (offset 1464986). The forward remap
+  `b` then maps `keyValue` and writes the constant into every row (`for(const r in o)s[r]=o[r]`,
+  offset 1227218), and `o` does the same to the regional price records. `src/data/column-form.ts`
+  does this per cargo item, which is the same path section 18 uses for the joined Savings Plans
+  artifact.
+- **A constant never names a price set.** In the metered-unit filter `y`
+  (offset 1469061) a selector whose value equals a constant value returns `null` and is dropped,
+  so the selector contributes no fragment; the same loop maps a display value back to its
+  `keyValue` token for the remaining fragments.
+- **The primary selector resolves through its own tree.** `h` (offset 1467544) fills
+  `primaryKey.value[primary]` with a tree of every row's primary value, and `y` takes the
+  selected value or the deepest first key of that tree. `getInitialValue` (offset 2880490) keeps
+  a value only when the option tree offers it, otherwise takes the row's declared `defaultValue`
+  when that is offered, otherwise the first offered value. A declared default that is a
+  `remap.keyValue` **key** is therefore a price token the form never shows; the form lands on the
+  label the remapped aggregation rows carry.
+- **A text input with no declared default holds 1.** `componentType.textInput.defaultValue` is
+  `"1"` (offset 2877758) and `getInitialValue` uses it when the row declares no default. A
+  dropdown with no default stays empty and resolves from the option tree. This is why Mainframe
+  Modernization's instance count and Directory Service's directory count render as 1 while the
+  definition declares nothing, and why `remap.constant` alone was not the whole Mainframe gap.
+
+### The four services the tracker blocked, and what the live form shows
+
+| Service | Live form | Live monthly | Engine before |
+| --- | --- | ---: | --- |
+| Amazon Translate / Real-Time Document Translation | Document Type `Basic - Text, HTML` (the default `Basic` is the price token) | 15.00 for 1M characters | `MISSING_PRICE {"FileType":"Basic"}` |
+| AWS Directory Service | Microsoft AD 1 directory / `Enterprise`, AD Connector 1 / `Large`, Simple AD 1 / `Large` | 292.00 + 109.50 + 109.50 on one estimate | `MISSING_INPUT "Directory Type"` |
+| AWS Mainframe Modernization | Blu Age and Micro Focus, 1 instance of `m5.large` at 160 hours/month on every card | 99.20 Blu Age alone, 2,118.40 Micro Focus alone, 2,217.60 with both | `MISSING_INPUT "Product Name"` |
+| Amazon Chime SDK / PSTN Audio + SIP Trunking | DID `Australia`, inbound `Australia`, outbound `Andorra`; price data only in us-east-1 / us-west-2 | 3,705.88 + 211.10 + 38.99 = 3,955.97 | `MISSING_INPUT "NumberType"` / `"CallType"` |
+
+So none of the four is a tracker mislabel: every one of them has a live surface that prices and an
+engine that failed closed. Two honest corrections to the tracker come out of the same proof:
+
+- `remap.constant` was counted **per declaration, not per blocker**. All 19 components across 9
+  definitions use the same mechanism, and the selector roll-up gave four parents the label from
+  their children. Both are now native, so the rule is retired rather than narrowed.
+- **Mainframe Modernization needed a second live fallback.** After the utilization wave its only
+  remaining gap was not solely the constant: the instance-count text input has no declared
+  default, the engine read that as empty and billed zero, and the live form shows 1. That
+  fallback is part of the same `getInitialValue` contract and is now native for every column-form
+  text input.
+
+### What changed
+
+- `src/data/column-form.ts`: the per-item remap filters the aggregation rows by `remap.constant`
+  before the forward remap, then writes the constant into the rows and the price records (the
+  filter helpers section 18 introduced). A missing index for a path the aggregation file lists now
+  fails closed as `MISSING_PRICE` naming the path (Simple AD is not sold in us-east-2) instead of
+  surfacing an HTTP 404.
+- `src/engine/column-form.ts`: the constant seeds a selector value that has no row; the primary
+  selector resolves through its own option tree with the same keep/replace rule as every other
+  row; a constant value is dropped from the metered-unit fragments; a text input with no declared
+  default holds 1; the config summary iterates rendered rows, so a constant-only selector never
+  appears in it (live has no row for it either).
+- `src/engine/column-form-loader.ts`: the prefetch no longer demands a primary value up front. A
+  constant supplies it, and a remapped default settles into the label on the first fetch, which
+  is what the fixed-point loop already handles.
+- The `remap.constant` and `remap.keyValue-primary` coverage rules are retired (D-034), and
+  `scripts/coverage-column-form.ts` (which existed only for the primary-remap rule) is deleted.
+
+### Receipts
+
+All four were published from this engine and recomputed by the live editor with `mismatches []`:
+
+| Receipt | Live monthly | Upfront | Annual |
+| --- | ---: | ---: | ---: |
+| `receipts/p1-remap-directory-service.json` | 511.00 | 0.00 | 6,132.00 |
+| `receipts/p1-remap-mainframe-modernization.json` | 2,217.60 | 0.00 | 26,611.20 |
+| `receipts/p1-remap-chime-sdk.json` | 3,955.97 | 0.00 | 47,471.64 |
+| `receipts/p1-remap-primary-translate.json` | 15.00 | 0.00 | 180.00 |
+
+### Coverage delta
+
+Re-measured on the final base (`main` at `85ba1d7`, which made column-form `utilization` rows and
+the `additionalPricingData` join native). Baseline: clean 425, partial:column-form 0,
+blocked:column-form 13, blocked:subtype 3; P1 4, P2 139, P3 267. After this change:
+clean 438, partial:column-form 0, blocked:column-form 0, blocked:subtype 3; P1 0, P2 141,
+P3 269.
+
+All 13 blocked:column-form rows at that base carried one of the two remap rules, so this change
+closes the class: the four P1 rows (amazonChimeSdk, aWSDirectoryService,
+amazonMainframeModernization, amazonTranslate) and nine P3 rows (amazonChime,
+chimeBusinessCallingAnalysis, chimeCostAnalysis, mainframeBluAge, mainframeMicroFocus,
+proxyPhoneSession, ptsnAudio, realTimeDocumentTranslation, sipTrunking) became clean. The two P1
+selectors stay P2 (visible and clean, ledger incomplete because only the children proven here have
+receipts), and the two P1 services move to P3 because all of their children now have receipts.
+P1 is therefore 0: no visible service is blocked or partial. That does not mean everything is
+proven - 141 P2 rows are statically clean and still need fixtures and receipts.
+
+No service became clean by relaxing a rule, and the two retired rules had no fail-closed path left
+behind them. The column-form surface that remains is `subComponentsList`, tiered PLC_2.0
+patterns, and multiple price sets, none of which a catalog definition uses.

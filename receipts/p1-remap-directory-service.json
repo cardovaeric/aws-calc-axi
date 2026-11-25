@@ -1,0 +1,191 @@
+{
+  "estimate": "axi-e2e remap constant directory service",
+  "specHash": "ec3be640c73da2bf",
+  "payloadHash": "5cbd254746e83c77",
+  "url": "https://calculator.aws/#/estimate?id=3dc5992ddac74946262f44eb8e1a3c6ddaa901af",
+  "savedKey": "3dc5992ddac74946262f44eb8e1a3c6ddaa901af",
+  "publishedAt": "2026-11-25T01:19:14.149Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 511,
+    "upfront": 0,
+    "total12m": 6132,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "aWSDirectoryService",
+        "template": "managedMicrosoftActiveDirectory",
+        "region": "us-east-2",
+        "monthly": 292,
+        "upfront": 0,
+        "summary": "Total number of directories (1), Number of total additional domain controllers (0), Edition (Enterprise), Number of directories to be shared (0), Number of additional accounts to which each directory is shared (0), Shared Directory edition (Enterprise)"
+      },
+      {
+        "code": "aWSDirectoryService",
+        "template": "activeDirectoryConnecter",
+        "region": "us-east-2",
+        "monthly": 109.5,
+        "upfront": 0,
+        "summary": "Total number of directories (1), AD Connector size (Large)"
+      },
+      {
+        "code": "aWSDirectoryService",
+        "template": "SimpleADirectoryConnecter",
+        "region": "us-east-1",
+        "monthly": 109.5,
+        "upfront": 0,
+        "summary": "Total number of directories (1), Simple AD size (Large)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "aWSDirectoryService",
+        "monthly": 292,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "aWSDirectoryService",
+        "monthly": 109.5,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "aWSDirectoryService",
+        "monthly": 109.5,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 511,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=3dc5992ddac74946262f44eb8e1a3c6ddaa901af",
+    "title": "axi-e2e remap constant directory service",
+    "monthly": "511.00 USD",
+    "upfront": "0.00 USD",
+    "annual": "6,132.00 USD",
+    "monthlyValue": 511,
+    "upfrontValue": 0,
+    "annualValue": 6132,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS Directory Service",
+        "upfront": "0.00 USD",
+        "monthly": "292.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Total number of directories (1), Number of total additional domain controllers (0), Edition (Enterprise), Number of directories to be shared (0), Number of additional accounts to which each directory is shared (0), Shared Directory edition (Enterprise)",
+        "status": null
+      },
+      {
+        "name": "AWS Directory Service",
+        "upfront": "0.00 USD",
+        "monthly": "109.50 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Total number of directories (1), AD Connector size (Large)",
+        "status": null
+      },
+      {
+        "name": "AWS Directory Service",
+        "upfront": "0.00 USD",
+        "monthly": "109.50 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Total number of directories (1), Simple AD size (Large)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:19:19.593Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=3dc5992ddac74946262f44eb8e1a3c6ddaa901af",
+    "savedKey": "3dc5992ddac74946262f44eb8e1a3c6ddaa901af",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=3dc5992ddac74946262f44eb8e1a3c6ddaa901af",
+      "title": "axi-e2e remap constant directory service",
+      "monthly": "511.00 USD",
+      "upfront": "0.00 USD",
+      "annual": "6,132.00 USD",
+      "monthlyValue": 511,
+      "upfrontValue": 0,
+      "annualValue": 6132,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "AWS Directory Service",
+          "upfront": "0.00 USD",
+          "monthly": "292.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Total number of directories (1), Number of total additional domain controllers (0), Edition (Enterprise), Number of directories to be shared (0), Number of additional accounts to which each directory is shared (0), Shared Directory edition (Enterprise)",
+          "status": "-"
+        },
+        {
+          "name": "AWS Directory Service",
+          "upfront": "0.00 USD",
+          "monthly": "109.50 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Total number of directories (1), AD Connector size (Large)",
+          "status": "-"
+        },
+        {
+          "name": "AWS Directory Service",
+          "upfront": "0.00 USD",
+          "monthly": "109.50 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Total number of directories (1), Simple AD size (Large)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:19:45.959Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e remap constant directory service",
+    "monthly": 511,
+    "upfront": 0,
+    "annual": 6132,
+    "services": [
+      {
+        "name": "AWS Directory Service",
+        "monthly": 292,
+        "region": "US East (Ohio)",
+        "configSummary": "Total number of directories (1), Number of total additional domain controllers (0), Edition (Enterprise), Number of directories to be shared (0), Number of additional accounts to which each directory is shared (0), Shared Directory edition (Enterprise)"
+      },
+      {
+        "name": "AWS Directory Service",
+        "monthly": 109.5,
+        "region": "US East (Ohio)",
+        "configSummary": "Total number of directories (1), AD Connector size (Large)"
+      },
+      {
+        "name": "AWS Directory Service",
+        "monthly": 109.5,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Total number of directories (1), Simple AD size (Large)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

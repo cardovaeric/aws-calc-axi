@@ -1,0 +1,19 @@
+name: axi-e2e remap constant directory service
+currency: USD
+locale: en_US
+services:
+  # `remap.constant` pins "Directory Type", which has no form row. The column
+  # form defaults are the live ones: 1 directory, edition Enterprise, and 1
+  # directory of the AD Connector size (Large) for that template.
+  - code: aWSDirectoryService
+    region: us-east-2
+    template: managedMicrosoftActiveDirectory
+  - code: aWSDirectoryService
+    region: us-east-2
+    template: activeDirectoryConnecter
+  # Simple AD is not sold in US East (Ohio): the mapping has rows for six other
+  # regions only, so the live form drops the template there. US East (N.
+  # Virginia) offers it with the same defaults.
+  - code: aWSDirectoryService
+    region: us-east-1
+    template: SimpleADirectoryConnecter

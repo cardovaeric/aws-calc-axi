@@ -1,0 +1,70 @@
+{
+  "kind": "research-probe",
+  "subject": "What the live calculator does with `remap.constant` and with a primary selector whose declared default is a `remap.keyValue` token",
+  "recordedAt": "2026-11-25",
+  "machineChecked": "tests/receipts.test.ts parses every receipts/*.json file",
+  "verdict": "All four services the tracker blocked on a remap surface are real, not mislabels: the live form filters a constant selector's aggregation rows, writes the constant into every row and price record, and drops it from the price-set match, so the live calculator prices them to the cent while this engine used to throw. The primary-selector case is the same kind of defect: the live Document Type dropdown shows the remapped label while this engine kept the raw price token. Two secondary findings came out of the proof. A column-form text input with no declared default holds 1 in the live form (Mainframe Modernization's instance count and Directory Service's directory count), which the engine read as empty and priced at zero. And `remap.constant` was counted per declaration, not per blocker, so the rule marked 9 definitions (19 components) blocked while 4 P1 parents inherited the label from their children.",
+  "liveMechanism": {
+    "aggregation-filter": "analysis/bundle.js offset 1464986: `if(o.remap&&o.remap.constant){const{constant:e}=o.remap;a=i.map(t=>{if(Object.keys(e).every(r=>void 0===t.selectors[r]||t.selectors[r]===e[r]))return t}).filter(e=>e)}`. A row survives when its value is absent or equal to the constant; a contradicting row is dropped before the option tree is built.",
+    "forward-write": "offset 1227218 (`b`): the aggregation rows are remapped by `keyValue` and then `for(const r in o)s[r]=o[r]` writes the constant into every row; `o` does the same to the regional price records.",
+    "fragment-drop": "offset 1469061 (`y`): `if(u&&u.constant)for(const n in u.constant)if(u.constant[n]===t)return null` drops a selector whose value equals a constant from the metered-unit filter, so the pinned selector never names a price set. The same loop then reverses `keyValue` before the filter.",
+    "primary-options": "offset 1467544 (`h`): `d(c.primaryKey.value,f,i)` fills `primaryKey.value[primary]` with a tree of every row's primary value, and `y` takes the selected value or the deepest first key (`v`). The declared `defaultValue` is only used by `getInitialValue` when the tree offers it.",
+    "text-input-default": "offset 2877758 declares `componentType = {textInput:{defaultValue:\"1\"},...}` and `getInitialValue` (offset 2880490) uses it when the row has no `defaultValue`. A dropdown with no default stays empty and resolves from the option tree."
+  },
+  "probes": [
+    {
+      "service": "amazonTranslate / realTimeDocumentTranslation",
+      "region": "US East (Ohio)",
+      "surface": "remap.keyValue-primary",
+      "liveForm": "Document Type dropdown reads `Basic - Text, HTML`; the definition's row default is `Basic`, which the form does not offer.",
+      "live": "1 million characters = 15.00 USD/month",
+      "engineBefore": "MISSING_PRICE: columnFormIPM selector values {\"FileType\":\"Basic\"} do not match a PLC_2.0 aggregation row",
+      "engineAfter": "15.00 USD/month, saved FileType = `Basic - Text, HTML`",
+      "screenshot": "receipts/screenshots/probe-remap-primary-translate.png"
+    },
+    {
+      "service": "aWSDirectoryService",
+      "region": "US East (Ohio) for Microsoft AD and AD Connector, US East (N. Virginia) for Simple AD",
+      "surface": "remap.constant",
+      "liveForm": "Microsoft AD: 1 directory, 0 additional controllers, Edition `Enterprise` (first offered). AD Connector: 1 directory, size `Large` (first offered). Simple AD: 1 directory, size `Large`.",
+      "live": "292.00 + 109.50 + 109.50 USD/month = 511.00",
+      "liveBreakdown": "292.00 = (1 directory x 2 domain controllers) x 730 hours x 0.20; 109.50 = 1 x 730 x 0.15 for both connector editions",
+      "engineBefore": "MISSING_INPUT: columnFormIPM needs a value for \"Directory Type\", which has no form row",
+      "engineAfter": "511.00 USD/month",
+      "note": "Simple AD has no aggregation rows for US East (Ohio) (six other regions only), so the live calculator does not offer the template there; the engine now fails closed with MISSING_PRICE naming the path instead of an HTTP 404.",
+      "screenshots": [
+        "receipts/screenshots/probe-remap-directory-service.png",
+        "receipts/screenshots/remap-directory-service-use2.png"
+      ]
+    },
+    {
+      "service": "amazonMainframeModernization",
+      "region": "US East (Ohio)",
+      "surface": "remap.constant plus the text-input default",
+      "liveForm": "Blu Age: 1 instance m5.large at 160 hours/month on the production and test cards. Micro Focus: the same on its three cards. Both feature checkboxes can be ticked at once.",
+      "live": "Blu Age alone 99.20 USD/month; Micro Focus alone 2,118.40; both 2,217.60",
+      "liveBreakdown": "99.20 = 2 x 1 x 160 x 0.31; 2,118.40 = 2 x 160 x 5.55 + 160 x 2.14",
+      "engineBefore": "MISSING_INPUT: columnFormIPM needs a value for \"Product Name\" (the constant selector)",
+      "engineAfter": "2,217.60 USD/month with both children",
+      "screenshots": [
+        "receipts/screenshots/probe-remap-mainframe-bluage.png",
+        "receipts/screenshots/probe-remap-mainframe-both.png"
+      ]
+    },
+    {
+      "service": "amazonChimeSdk / ptsnAudio + sipTrunking",
+      "region": "US East (N. Virginia)",
+      "surface": "remap.constant",
+      "liveForm": "DID country `Australia`, inbound country `Australia`, outbound country `Andorra`: the first option the constant-filtered aggregation rows carry. Price data exists in US East (N. Virginia) and US West (Oregon) only.",
+      "live": "Toll PSTN 3,705.88 + Toll-Free PSTN 211.10 + SIP Trunking 38.99 = 3,955.97 USD/month for 1 DID, 2 toll-free numbers, 100 joins at 100 minutes, 50 toll-free joins at 60 minutes, and 2 SIP numbers",
+      "engineBefore": "MISSING_INPUT: columnFormIPM needs a value for \"NumberType\" / \"CallType\", which have no form rows",
+      "engineAfter": "3,955.97 USD/month with both children",
+      "screenshot": "receipts/screenshots/probe-remap-chime-sdk.png"
+    }
+  ],
+  "trackerVerdict": {
+    "remap.constant": "Retired as a static blocker. All 19 declarations across 9 definitions (aWSDirectoryService 4, ptsnAudio 5, sipTrunking 1, mainframeBluAge 2, mainframeMicroFocus 3, chimeCostAnalysis 2, chimeBusinessCallingAnalysis 1, proxyPhoneSession 1, amazonChime via its children) are the same live mechanism, and it is now native. The 4 P1 parents that inherited the label from their children (amazonChimeSdk, amazonMainframeModernization, and the P3 amazonChime plus the two Chime analysis services and Proxy Phone Session) became clean.",
+    "remap.keyValue-primary": "Retired as a static blocker. The primary selector now resolves through its own option tree, so the premise of the rule (the primary value is kept verbatim) is gone.",
+    "mislabels": "None of the four services was a mislabel. The honest correction is narrower: `remap.constant` counted declarations rather than blocked components, and Mainframe Modernization's remaining blocker after the utilization wave was the text-input fallback as much as the constant."
+  }
+}

@@ -3,7 +3,6 @@ import { join } from "node:path";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { rollupSelector, type SelectorChildFacts } from "../scripts/coverage-selector.ts";
-import { primaryRemapToken, primarySelectorId } from "../scripts/coverage-column-form.ts";
 import { runtimeLabel } from "../scripts/coverage-runtime.ts";
 import { EngineError } from "../src/engine/errors.ts";
 import { MissingPriceError } from "../src/data/pricing.ts";
@@ -85,7 +84,7 @@ test("a missing child subtype propagates as blocked:subtype, not blocked:column-
 
 test("a missing subtype outranks an unsupported column-form feature", () => {
   const rollup = rollupSelector([
-    child("a", "blocked:column-form", { hard: "remap.constant" }, "Implement column-form remap.constant"),
+    child("a", "blocked:column-form", { hard: "subComponentsList" }, "Implement column-form subComponentsList"),
     child("b", "blocked:subtype", { missing: "input:utilization:2" }, "Implement input:utilization:2"),
   ]);
   assert.equal(rollup.klass, "blocked:subtype");
@@ -250,20 +249,19 @@ test("Amazon EMR's three node children are clean now that utilization rows are n
   assert.equal(row["next_action"], "Verify all children with fixtures and a receipt");
 });
 
-test("AWS Mainframe Modernization drops the missing input subtype and names the remap it is blocked by", async () => {
+test("AWS Mainframe Modernization is clean now that utilization and remap.constant are native", async () => {
   const rows = await trackerRows();
   const row = rows.find((entry) => entry["service_code"] === "amazonMainframeModernization");
   assert.ok(row, "amazonMainframeModernization is in the tracker");
-  // `utilization` is native now, so the subtype gap is gone and the column-form
-  // remap is what still fails closed (analysis/FINDINGS.md section 16).
-  assert.equal(row["static_class"], "blocked:column-form");
+  // `utilization` and `remap.constant` are both native, so the parent's two
+  // children (mainframeBluAge, mainframeMicroFocus) are clean and the selector
+  // has nothing left to report (analysis/FINDINGS.md section 17).
+  assert.equal(row["static_class"], "clean");
   assert.equal(row["missing_subtypes"], "");
-  assert.equal(row["hard_blockers"], "remap.constant");
-  assert.equal(
-    row["selector_blockers"],
-    "remap.constant (mainframeBluAge, mainframeMicroFocus)"
-  );
-  assert.equal(row["plan_phase"], "Phase 2 - column-form v2");
+  assert.equal(row["hard_blockers"], "");
+  assert.equal(row["selector_blockers"], "");
+  assert.equal(row["selector_nonclean"], "");
+  assert.equal(row["kind"], "selector");
 });
 
 test("AWS Elemental MediaLive and MediaConvert are clean now that dependent selectors are native", async () => {
@@ -276,51 +274,46 @@ test("AWS Elemental MediaLive and MediaConvert are clean now that dependent sele
   assert.equal(convert["selector_blockers"], "");
 });
 
-test("Amazon Chime SDK names the constant remap rows that block it", async () => {
+test("Amazon Chime SDK and Amazon Translate are clean after the remap rules were retired", async () => {
   const rows = await trackerRows();
-  const row = rows.find((entry) => entry["service_code"] === "amazonChimeSdk")!;
-  assert.equal(row["static_class"], "blocked:column-form");
-  assert.equal(row["selector_blockers"], "remap.constant (ptsnAudio, sipTrunking)");
+  for (const code of ["amazonChimeSdk", "amazonTranslate"]) {
+    const row = rows.find((entry) => entry["service_code"] === code)!;
+    assert.equal(row["static_class"], "clean", `${code} is clean`);
+    assert.equal(row["hard_blockers"], "", `${code} names no hard blocker`);
+    assert.equal(row["selector_blockers"], "", `${code} names no selector blocker`);
+  }
+  const chime = rows.find((entry) => entry["service_code"] === "amazonChimeSdk")!;
+  // The children are still enumerated even though none is blocked, so a future
+  // regression names the child instead of hiding it.
+  assert.equal(chime["selector_children"], "5");
+  assert.equal(chime["selector_nonclean"], "");
 });
 
-test("the primary selector's remapped default is the only remap blocker left", async () => {
+test("no row carries a retired remap blocker", async () => {
   const rows = await trackerRows();
-  const row = rows.find((entry) => entry["service_code"] === "realTimeDocumentTranslation");
-  assert.ok(row, "realTimeDocumentTranslation is in the tracker");
-  // The direction of `remap.keyValue` is native, so the old
-  // `remap.keyValue-direction` rule is retired. What still breaks this service
-  // is the primary selector: its default "Basic" is the remap key (the price
-  // token) while every offered option and aggregation row holds the label
-  // "Basic - Text, HTML", and the engine keeps the primary value verbatim.
-  assert.equal(row["static_class"], "blocked:column-form");
-  assert.equal(row["hard_blockers"], "remap.keyValue-primary");
-  assert.equal(row["next_action"], "Implement column-form remap.keyValue-primary");
-  // Proof the value is the whole problem: with the label the component prices.
-  // The runtime columns are only filled by `--evaluate`, so a plain
-  // `npm run coverage` must not fail here.
-  if (row["runtime_use1"] !== "not-run") {
-    assert.equal(row["runtime_use1"], "missing-price");
-    assert.equal(row["runtime_use2"], "missing-price");
-  }
-  for (const other of rows) {
-    assert.ok(
-      !other["hard_blockers"]!.includes("remap.keyValue-direction"),
-      `${other["service_code"]} does not carry the retired direction rule`
-    );
+  // D-027 retired `regex-remap`, D-029 the remap direction, and D-030
+  // `remap.constant` and `remap.keyValue-primary`: the engine implements the
+  // live mechanism for each, so a row that claims one is stale.
+  for (const row of rows) {
+    for (const column of ["hard_blockers", "deep_gaps", "selector_blockers"]) {
+      assert.doesNotMatch(
+        row[column] ?? "",
+        /remap\.constant|remap\.keyValue|regex-remap/,
+        `${row["service_code"]} does not carry a retired remap blocker in ${column}`
+      );
+    }
   }
 });
 
-test("a blocked child blocks its selector and keeps the priority visible", async () => {
+test("the two services the retired primary-remap rule blocked are clean and price", async () => {
   const rows = await trackerRows();
-  const row = rows.find((entry) => entry["service_code"] === "amazonTranslate");
-  assert.ok(row, "amazonTranslate is in the tracker");
-  assert.equal(row["kind"], "selector");
-  assert.equal(row["static_class"], "blocked:column-form");
-  assert.equal(row["priority"], "P1");
-  assert.equal(
-    row["selector_blockers"],
-    "remap.keyValue-primary (realTimeDocumentTranslation)"
-  );
+  const child = rows.find((entry) => entry["service_code"] === "realTimeDocumentTranslation")!;
+  assert.equal(child["static_class"], "clean");
+  // `--evaluate` fills the runtime columns; a plain run leaves them `not-run`.
+  if (child["runtime_use1"] !== "not-run") assert.equal(child["runtime_use1"], "ok");
+  const parent = rows.find((entry) => entry["service_code"] === "amazonTranslate")!;
+  assert.equal(parent["static_class"], "clean");
+  assert.equal(parent["priority"], "P2");
 });
 
 test("a regex-shaped remap key is not a gap the engine fails closed on", async () => {
@@ -331,64 +324,6 @@ test("a regex-shaped remap key is not a gap the engine fails closed on", async (
   // `columnFormMeterFragments` also does. No row may claim it as a gap again.
   const flagged = rows.filter((row) => row["deep_gaps"]!.includes("regex-remap"));
   assert.deepEqual(flagged.map((row) => row["service_code"]), []);
-});
-
-test("the primary remap rule fires only on the primary selector's declared default", () => {
-  const component = {
-    primaryKey: "FileType",
-    remap: { keyValue: { Basic: "Basic - Text, HTML", Office: "Office - Docx" } },
-    row: [{ selectorId: "FileType", type: "dropDown", defaultValue: "Basic" }],
-  };
-  assert.equal(primarySelectorId(component), "FileType");
-  assert.deepEqual(primaryRemapToken(component), {
-    selectorId: "FileType",
-    token: "Basic",
-    label: "Basic - Text, HTML",
-  });
-});
-
-test("the primary remap rule ignores every other remap shape", () => {
-  // A default that is already the label is what the option tree offers.
-  assert.equal(
-    primaryRemapToken({
-      primaryKey: "Video Codec",
-      remap: { keyValue: { "AVC/H.264": "AVC" } },
-      row: [{ selectorId: "Video Codec", defaultValue: "AVC" }],
-    }),
-    undefined
-  );
-  // A remap key on a non-primary row is resolved through the option tree.
-  assert.equal(
-    primaryRemapToken({
-      primaryKey: "Storage type",
-      remap: { keyValue: { "50": "50 MBps/TiB" } },
-      row: [
-        { selectorId: "Storage type", defaultValue: "SSD" },
-        { selectorId: "Throughput capacity", defaultValue: "50" },
-      ],
-    }),
-    undefined
-  );
-  // No remap at all, no default, and an identity remap are not blockers.
-  assert.equal(
-    primaryRemapToken({
-      primaryKey: "Stream Class",
-      row: [{ selectorId: "Stream Class", defaultValue: "gen5n_ultra" }],
-    }),
-    undefined
-  );
-  assert.equal(
-    primaryRemapToken({ primaryKey: "FileType", remap: { keyValue: { Basic: "Basic - Text, HTML" } }, row: [] }),
-    undefined
-  );
-  assert.equal(
-    primaryRemapToken({
-      primaryKey: "Term",
-      remap: { keyValue: { "1yr": "1yr" } },
-      row: [{ selectorId: "Term", defaultValue: "1yr" }],
-    }),
-    undefined
-  );
 });
 
 test("a runtime label separates an engine gap from a cache gap and a crash", () => {

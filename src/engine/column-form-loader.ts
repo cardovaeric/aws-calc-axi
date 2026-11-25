@@ -18,7 +18,6 @@ import { EngineError } from "./errors.ts";
 import {
   asColumnFormComponent,
   columnFormSelectorValues,
-  primarySelectorOf,
   resolveColumnFormSelectors,
 } from "./column-form.ts";
 import { evaluateDisplayIf, type ExprContext } from "./expression.ts";
@@ -153,7 +152,7 @@ async function convergeColumnForm(options: {
       currency: options.currency,
       regionName: options.regionName,
       values,
-      ...(component.remap?.keyValue ? { remap: component.remap } : {}),
+      ...(component.remap ? { remap: component.remap } : {}),
       ...(component.additionalPricingData !== undefined &&
       component.additionalPricingData !== null
         ? { additionalPricingData: component.additionalPricingData }
@@ -268,21 +267,11 @@ export async function prepareColumnForms(
         component,
         options.overrides[component.id]
       );
-      // Only the primary selector is required; every other selector is
-      // resolved from the component tree the way the live form does it.
-      const primary = primarySelectorOf(component);
-      if (initial[primary] === undefined || initial[primary] === "") {
-        throw new EngineError(
-          `columnFormIPM "${component.id}" needs a value for "${primary}"; ` +
-            `set ${component.id} with {"${primary}": <value>}`,
-          "MISSING_INPUT",
-          {
-            componentId: component.id,
-            selectorId: primary,
-            valid: component.row.map((row) => row.selectorId).filter(Boolean),
-          }
-        );
-      }
+      // The primary selector is resolved from the component tree the way the
+      // live form does it. It does not have to be known up front: a
+      // `remap.constant` supplies it, and a remapped default only settles into
+      // the label the aggregation rows carry after the first fetch. The
+      // fixed-point loop below resolves it and re-fetches on the final value.
       prepared.set(
         component.id,
         await convergeColumnForm({

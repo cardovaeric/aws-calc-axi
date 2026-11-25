@@ -1,0 +1,14 @@
+name: axi-e2e remap primary translate document
+currency: USD
+locale: en_US
+services:
+  # The live Document Type dropdown shows "Basic - Text, HTML": the definition's
+  # declared default is the `remap.keyValue` price token "Basic", which the form
+  # does not offer, so it lands on the first offered label. 1 million characters
+  # at 15.00 USD per million is the live default configuration.
+  - code: amazonTranslate
+    region: us-east-2
+    subServices:
+      - code: realTimeDocumentTranslation
+        set:
+          Tanslate_chars_RT_D: 1

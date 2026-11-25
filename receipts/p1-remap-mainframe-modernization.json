@@ -1,0 +1,127 @@
+{
+  "estimate": "axi-e2e remap constant mainframe modernization",
+  "specHash": "d4a471f7fed1e9dc",
+  "payloadHash": "dc47db36b7248999",
+  "url": "https://calculator.aws/#/estimate?id=e9fa9fa3d7bb0445c461f5a813e84b9d36d1e435",
+  "savedKey": "e9fa9fa3d7bb0445c461f5a813e84b9d36d1e435",
+  "publishedAt": "2026-11-25T01:19:56.277Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 2217.6,
+    "upfront": 0,
+    "total12m": 26611.2,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonMainframeModernization",
+        "template": "template_Mainframe",
+        "region": "us-east-2",
+        "monthly": 2217.6,
+        "upfront": 0,
+        "summary": "Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month) Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonMainframeModernization",
+        "monthly": 2217.6,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "mainframeBluAge",
+        "monthly": 99.2,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "mainframeMicroFocus",
+        "monthly": 2118.4,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 2217.6,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=e9fa9fa3d7bb0445c461f5a813e84b9d36d1e435",
+    "title": "axi-e2e remap constant mainframe modernization",
+    "monthly": "2,217.60 USD",
+    "upfront": "0.00 USD",
+    "annual": "26,611.20 USD",
+    "monthlyValue": 2217.6,
+    "upfrontValue": 0,
+    "annualValue": 26611.2,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS Mainframe Modernization",
+        "upfront": "0.00 USD",
+        "monthly": "2,217.60 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month) Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:19:58.924Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=e9fa9fa3d7bb0445c461f5a813e84b9d36d1e435",
+    "savedKey": "e9fa9fa3d7bb0445c461f5a813e84b9d36d1e435",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=e9fa9fa3d7bb0445c461f5a813e84b9d36d1e435",
+      "title": "axi-e2e remap constant mainframe modernization",
+      "monthly": "2,217.60 USD",
+      "upfront": "0.00 USD",
+      "annual": "26,611.20 USD",
+      "monthlyValue": 2217.6,
+      "upfrontValue": 0,
+      "annualValue": 26611.2,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "AWS Mainframe Modernization",
+          "upfront": "0.00 USD",
+          "monthly": "2,217.60 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month) Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:20:26.097Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e remap constant mainframe modernization",
+    "monthly": 2217.6,
+    "upfront": 0,
+    "annual": 26611.2,
+    "services": [
+      {
+        "name": "AWS Mainframe Modernization",
+        "monthly": 2217.6,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month) Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month), Number of instances (1), Instance type (m5.large), Monthly utilization (160 Hours/Month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

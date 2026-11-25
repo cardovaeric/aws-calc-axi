@@ -4,12 +4,12 @@
  * Supported shape: selector rows of type `textInput`, `autoSuggest`,
  * `dropDown`, or `utilization`; dependent selectors (`row.dependent`); a single
  * price set; selector price patterns for reserved/upfront records;
- * `remap.keyValue`; `disableCalculation` raw-price mode; and
+ * `remap.keyValue`; `remap.constant`; `disableCalculation` raw-price mode; and
  * `additionalPricingData` joins, which add a joined cargo item's selector
  * options (the Database Savings Plans pricing model) and, when its aggregation
  * row is the one selected, price from that item's own manifest and index. Still
- * fail-closed: `remap.constant`, regex remap keys, `subComponentsList`, tiered
- * PLC_2.0 patterns, `exportTagsAsValue`, and multiple price sets.
+ * fail-closed: `subComponentsList`, tiered PLC_2.0 patterns,
+ * `exportTagsAsValue`, and multiple price sets.
  *
  * A `utilization` row is not a plain selector: its saved value is an object
  * `{unit, selectedId}` (the live `L` component and the `q.a` hours helper in
@@ -34,6 +34,13 @@
  * that is currently selected. A value that is not offered is replaced by the
  * row's `defaultValue` when that is offered, otherwise by the first offered
  * value; a selector with no offered value at all is dropped from the saved row.
+ *
+ * `remap.constant` pins a selector that has no row: the data layer keeps only
+ * the aggregation rows whose value matches (or is absent) and writes the
+ * constant into every row and price record, exactly like live `b` (bundle
+ * offset 1227218). The pinned selector is a normal selector value from then on,
+ * but it never contributes a price-set fragment, because live `y` drops a
+ * fragment equal to a constant value (offset 1469061).
  *
  * Save format matches the live converter: `{value: [{selectorId: {value}}]}`,
  * where a `utilization` row's inner value is `{unit, selectedId}` rather than a
@@ -218,11 +225,31 @@ export function columnFormSelectorValues(
       continue;
     }
     const fallback = row.defaultValue;
-    if (fallback === undefined) {
-      values[row.selectorId] = "";
+    if (fallback === undefined || fallback === null) {
+      // Live `getInitialValue` falls back to the component type's default when
+      // the row declares none, and `componentType.textInput.defaultValue` is
+      // "1" (bundle offset 2877758). A blank text input therefore holds 1 - the
+      // live Mainframe and Directory Service forms show it - while a dropdown
+      // with no default stays empty until the option tree resolves it.
+      values[row.selectorId] = row.type === "textInput" ? "1" : "";
       continue;
     }
     values[row.selectorId] = scalarOf(fallback);
+  }
+  // A constant is a selector whose value only the definition can supply. Live
+  // writes it into every aggregation row and price record and never offers a
+  // form row for it, so it is not a user-supplied value here either.
+  for (const [selectorId, constant] of Object.entries(component.remap?.constant ?? {})) {
+    const supplied = provided.has(selectorId) ? values[selectorId] : undefined;
+    if (supplied !== undefined && supplied !== constant) {
+      throw new EngineError(
+        `columnFormIPM "${component.id}" pins "${selectorId}" to ` +
+          `"${constant}" with remap.constant, so it cannot be "${supplied}"`,
+        "INVALID_SELECTION",
+        { componentId: component.id, selectorId, value: supplied, constant }
+      );
+    }
+    values[selectorId] = constant;
   }
   return { values, provided, utilization };
 }
@@ -432,18 +459,12 @@ export function primarySelectorOf(component: ColumnFormComponent): string {
 }
 
 function assertSupported(component: ColumnFormComponent): void {
-  const rejected: Array<[string, unknown]> = [
-    ["subComponentsList", component.subComponentsList],
-    ["remap.constant", component.remap?.constant],
-  ];
-  for (const [name, value] of rejected) {
-    if (value !== undefined && value !== null && value !== false) {
-      throw new EngineError(
-        `columnFormIPM "${component.id}" uses ${name}, which is not implemented yet`,
-        "UNSUPPORTED_INPUT",
-        { componentId: component.id, feature: name }
-      );
-    }
+  if (component.subComponentsList !== undefined && component.subComponentsList !== null) {
+    throw new EngineError(
+      `columnFormIPM "${component.id}" uses subComponentsList, which is not implemented yet`,
+      "UNSUPPORTED_INPUT",
+      { componentId: component.id, feature: "subComponentsList" }
+    );
   }
   for (const row of component.row) {
     // A `utilization` row is native: with a selector id it is resolved through
@@ -477,6 +498,12 @@ export interface ColumnFormSelectorTree {
   dependents: Record<string, string[]>;
   /** selectorId -> option tree; absent or empty means "not offered". */
   options: Record<string, SelectorOptions>;
+  /**
+   * Every value the primary selector offers, built from the same rows without
+   * narrowing by the primary itself (live `d(primaryKey.value, row, primary)`).
+   * Absent for a composite `primaryKey`, whose value comes from the row state.
+   */
+  primaryOptions?: SelectorOptions;
 }
 
 function dependentChain(
@@ -540,6 +567,7 @@ export function buildColumnFormSelectorTree(
 
   const options: Record<string, SelectorOptions> = {};
   const roots: Record<string, Record<string, SelectorOptions>> = {};
+  const primaryRoot: Record<string, SelectorOptions> = {};
   const missing = new Set<string>();
   for (const selectorId of secondary) {
     roots[selectorId] = {};
@@ -554,6 +582,13 @@ export function buildColumnFormSelectorTree(
       aggregation.selectors["Location"] !== selectors["Location"]
     ) {
       continue;
+    }
+    // The primary's own options come from every row of the region: live builds
+    // `primaryKey.value` before it narrows anything, which is what makes a
+    // remapped default resolve to the label the form shows.
+    const primaryValue = aggregation.selectors[primary];
+    if (typeof component.primaryKey === "string" && primaryValue) {
+      insertOption(primaryRoot, [], primaryValue);
     }
     if (aggregation.selectors[primary] !== selectors[primary]) continue;
     for (const selectorId of secondary) {
@@ -585,7 +620,11 @@ export function buildColumnFormSelectorTree(
     options[selectorId] = sortOptions(root);
   }
 
-  return { dependents, options };
+  return {
+    dependents,
+    options,
+    ...(typeof component.primaryKey === "string" ? { primaryOptions: primaryRoot } : {}),
+  };
 }
 
 /**
@@ -691,21 +730,28 @@ export function resolveColumnFormSelectors(
     // there is no option tree to resolve against. Take the values as given.
     return { values: initial, dropped: [], utilization };
   }
+  const primary = primarySelectorOf(component);
+  // Live resolves the primary selector through its own option tree before it
+  // narrows anything (bundle offset 1467544: `primaryKey.value` is built from
+  // every row, then `y` takes the selected value or the deepest first key). A
+  // declared default that is a `remap.keyValue` key - a price token - is not an
+  // offered value, so the form lands on the label the aggregation rows carry.
+  const primaryValue = resolvePrimaryValue(component, initial, provided, data);
+  const bindings: Record<string, string> = { ...data.selectors, [primary]: primaryValue };
   const tree = buildColumnFormSelectorTree(
     component,
     aggregations,
     data.regionPrices as unknown as Record<string, Record<string, unknown>>,
-    data.selectors
+    bindings
   );
-  const primary = primarySelectorOf(component);
-  const resolved: Record<string, string> = {};
+  const resolved: Record<string, string> = { [primary]: primaryValue };
   const dropped: string[] = [];
   for (const row of selectableRows(component)) {
     const selectorId = row.selectorId;
     const current = initial[selectorId] ?? "";
     const isUtilization = row.type === "utilization";
     if (selectorId === primary) {
-      resolved[selectorId] = current;
+      resolved[selectorId] = primaryValue;
       continue;
     }
     let offered: string[];
@@ -806,6 +852,62 @@ function dependentParents(
   );
 }
 
+/**
+ * Resolve the primary selector the way live `getInitialValue` does: keep the
+ * current value when the option tree offers it, otherwise take the row's
+ * declared default when that is offered, otherwise the first offered value.
+ *
+ * A composite `primaryKey` (`{"Stream Class": ["VCPU", "VRAM", "RAM"]}`) keeps
+ * its row value: the live tree for it is nested by the composite keys and the
+ * surrounding index path supplies the rest.
+ */
+function resolvePrimaryValue(
+  component: ColumnFormComponent,
+  initial: Record<string, string>,
+  provided: Set<string>,
+  data: ColumnFormPricingData
+): string {
+  const primary = primarySelectorOf(component);
+  const current = initial[primary] ?? "";
+  if (typeof component.primaryKey !== "string") return current;
+  const offered = optionKeys(primaryOptionTree(component, data));
+  if (offered.length === 0) return current;
+  if (current !== "" && offered.includes(current)) return current;
+  if (current !== "" && provided.has(primary)) {
+    throw new EngineError(
+      `columnFormIPM "${component.id}" cannot use "${primary}" = "${current}"; ` +
+        `the live form offers ${offered.map((value) => `"${value}"`).join(", ")}`,
+      "INVALID_SELECTION",
+      { componentId: component.id, selectorId: primary, value: current, offered }
+    );
+  }
+  const row = component.row.find((entry) => entry.selectorId === primary);
+  const fallback = row?.defaultValue === undefined ? "" : scalarOf(row.defaultValue);
+  if (fallback !== "" && offered.includes(fallback)) return fallback;
+  return offered[0]!;
+}
+
+/** Values the primary selector offers across this region's rows (live `primaryKey.value`). */
+function primaryOptionTree(
+  component: ColumnFormComponent,
+  data: ColumnFormPricingData
+): SelectorOptions {
+  const primary = primarySelectorOf(component);
+  const root: Record<string, SelectorOptions> = {};
+  for (const aggregation of data.aggregations ?? []) {
+    if (
+      data.selectors["Location"] !== undefined &&
+      aggregation.selectors["Location"] !== data.selectors["Location"]
+    ) {
+      continue;
+    }
+    const value = aggregation.selectors[primary];
+    if (!value) continue;
+    insertOption(root, [], value);
+  }
+  return root;
+}
+
 // ---------------------------------------------------------------------------
 // Price set matching (live `y`, `w`, `m`, and the `riPaymentOptions` block)
 // ---------------------------------------------------------------------------
@@ -867,6 +969,7 @@ export function columnFormMeterFragments(
   const primary = primarySelectorOf(component);
   const secondary = component.secondaryKey ?? [];
   const remap = options.keyValue ?? component.remap?.keyValue ?? {};
+  const constant = options.constant ?? component.remap?.constant;
   const fragments: string[] = [];
   const selectorOrder = [primary, ...secondary];
   const seen = new Set<string>();
@@ -892,8 +995,10 @@ export function columnFormMeterFragments(
       fragment = deepestFirstKey(tree.options[selectorId] ?? null);
     }
     if (fragment === undefined || fragment === "") continue;
-    // Live `y` drops a fragment that the item's remap pins as a constant.
-    if (options.constant?.[selectorId] === fragment) continue;
+    // Live `y` returns null - dropping the fragment - when a selector's value
+    // equals a `remap.constant` value (bundle offset 1469061). The pinned
+    // selector is not rendered, so it never names a metered unit.
+    if (constant && Object.values(constant).includes(fragment)) continue;
     for (const [pattern, display] of Object.entries(remap)) {
       if (display === fragment) {
         fragment = pattern;
@@ -1349,23 +1454,23 @@ export function columnFormSummary(
 ): string {
   const strategyLabels = ["Pricing model", "Purchase option", "Term"];
   let strategyCount = 0;
-  const bySelector = new Map<string, ColumnFormRowDefinition>();
+  // Definition order and rendered rows only: a `remap.constant` selector has no
+  // row and never appears in the live summary.
   for (const row of rows) {
-    bySelector.set(row.selectorId, row);
     if (strategyLabels.includes(row.label)) strategyCount += 1;
   }
   const completeStrategy = strategyCount === strategyLabels.length;
   const strategy: string[] = [];
   const parts: string[] = [];
-  for (const [selectorId, value] of Object.entries(values)) {
+  for (const definition of rows) {
+    const value = values[definition.selectorId] ?? "";
     if (value === "") continue;
-    const definition = bySelector.get(selectorId);
-    const label = definition?.label ?? selectorId;
-    const display = definition?.displayInConfigSummary;
+    const label = definition.label;
+    const display = definition.displayInConfigSummary;
     const shown = display === false ? false : true;
     // Live `ee` joins an object value's members with a space, so a utilization
     // row prints `Billing option (730 Monthly)` / `Utilization (50 %Utilized/Month)`.
-    const util = definition?.type === "utilization" ? utilization[selectorId] : undefined;
+    const util = definition.type === "utilization" ? utilization[definition.selectorId] : undefined;
     const text = util ? `${util.unit} ${util.selectedId}` : value;
     if (!completeStrategy || !strategyLabels.includes(label)) {
       if (shown) parts.push(`${label} (${text})`);

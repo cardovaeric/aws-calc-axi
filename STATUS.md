@@ -109,7 +109,8 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 - The runtime columns separate a real defect from an environment gap: `MissingPriceError` is
   `missing-price` and an uncached offline fetch is `not-cached` instead of both reading `error`
   (D-029), so one row per region is left in the `error` bucket (see the fail-closed list below).
-- Screenshots of every public link: `receipts/screenshots/` (23 PNGs, ledger row ids)
+- Screenshots of every public link: `receipts/screenshots/<row id>.png` for all 23 ledger rows
+  (29 PNGs including the probe captures)
 - `utilization` is native, so seven services changed class: Deadline Cloud, Direct Connect,
   MediaConnect, and AWS PCS are clean, and Amazon Mainframe Modernization plus its two children
   moved from `blocked:subtype` to `blocked:column-form` (`remap.constant` is the real blocker).

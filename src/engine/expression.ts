@@ -70,21 +70,40 @@ function compare(
 ): boolean {
   if (operator === "==") return equalValues(left, right);
   if (operator === "!=") return !equalValues(left, right);
-  const leftNumber = numeric(left);
-  const rightNumber = numeric(right);
-  if (leftNumber === undefined || rightNumber === undefined) return false;
-  switch (operator) {
-    case ">":
-      return leftNumber > rightNumber;
-    case ">=":
-      return leftNumber >= rightNumber;
-    case "<":
-      return leftNumber < rightNumber;
-    case "<=":
-      return leftNumber <= rightNumber;
-    default:
-      return false;
+  // Live's ordering comparisons coerce (`s` in the bundle): a missing or
+  // non-numeric operand becomes 0, and only when both sides are non-numeric
+  // strings does it fall back to string comparison. That matters because a
+  // definition may gate an early maths component on one declared later
+  // (FSx for Lustre's `persistant_billed_storage_low` tests
+  // `persistent_generated_4 <= 2400` before that subtraction runs, so live
+  // sees 0 and rounds the storage up).
+  const leftNumber = Number(left);
+  const rightNumber = Number(right);
+  const bothStrings = Number.isNaN(leftNumber) && Number.isNaN(rightNumber);
+  const lhs: number | string = bothStrings
+    ? String(left)
+    : Number.isNaN(leftNumber)
+      ? 0
+      : leftNumber;
+  const rhs: number | string = bothStrings
+    ? String(right)
+    : Number.isNaN(rightNumber)
+      ? 0
+      : rightNumber;
+  if (typeof lhs === "string" && typeof rhs === "string") {
+    if (operator === ">") return lhs > rhs;
+    if (operator === ">=") return lhs >= rhs;
+    if (operator === "<") return lhs < rhs;
+    if (operator === "<=") return lhs <= rhs;
+    return false;
   }
+  const a = Number(lhs);
+  const b = Number(rhs);
+  if (operator === ">") return a > b;
+  if (operator === ">=") return a >= b;
+  if (operator === "<") return a < b;
+  if (operator === "<=") return a <= b;
+  return false;
 }
 
 /**

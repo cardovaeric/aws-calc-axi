@@ -1107,3 +1107,93 @@ engine keeps definition order, which is what the already-published receipts
 cost-neutral and would invalidate those receipts, so it is left for a wave that
 can republish them; the editor oracle ignores summary text, and the numbers are
 identical either way.
+## 18. `additionalPricingData`: the joined Database Savings Plans artifact (2026-11-25)
+
+The tracker used to call this a column-form v2 gap. It is one mechanism, and it
+is the Database Savings Plans join: every one of the 16 definitions that carry
+the property carries a single cargo item named `Database Savings Plans`, whose
+manifest points at `databasesavingsplans` with a `dsp-join-*` source. Nothing
+else in the catalog uses it.
+
+- Live `getData` (offset 1466650) builds
+  `item: [{name: "default", manifest, pricingUnitModel, remap}, ...additionalPricingData]`
+  and passes the list to the aggregation resolver `c` (offset 1465000).
+- `c` fetches `/{serviceId}/{currency}/current/{source}/{region}/primary-selector-aggregations.json`
+  for every item. The first item's failure is fatal; a joined item's failure is
+  swallowed (`Additional Pricing Artifacts API failed quietly for the reason
+  below`). An item with `manifest.excludedRegions` naming the region is skipped.
+- Each item's rows go through `s.b` (offset 1227400): `keyName` renames selector
+  keys, `keyValue` maps raw price tokens to the labels the form shows, and
+  `constant` both filters rows that contradict it and injects fixed values.
+  The Database Savings Plans rows therefore become ordinary rows with
+  `TermType: "Database Savings Plans"`, `PurchaseOption: "No Upfront"`, and the
+  joined selectors (`LeaseContractLength`, ...). The row order is the item
+  order, and `c` keeps a cumulative boundary table so it can return the item a
+  matched row came from (`selectedCargoItem`).
+- `u` (offset 1467000) then builds the index path from *that item's*
+  `manifest.primarySelectors`, `remap.keyName`, and `remap.keyValue`, and
+  `w`/`y` price with that item's `pricingUnitModel`. `getData` passes
+  `selectedCargoItem` in both places. The component's own `pricingUnitModel` and
+  `remap` are only used while the component's artifact is the selected one.
+- The Saving Plans math is `z` (offset 2874076) with `B.b` (offset 362304):
+  `hours = years * 365 * 24`, `commitment = rate * hours`, `upfront = fraction *
+  commitment`, `effective = (commitment - upfront) / hours`, `monthly =
+  effective * 730`, and the monthly total is rounded **up** to the cent before
+  the display rounds two decimals. `H` reads the term years from the leading
+  digit of the exported term (`"1yr"` -> 1).
+- The pricing model label is the component row's `mappingValue`:
+  `"Database Savings Plans" -> "SavingsPlan"`.
+
+Reachable proof (live editor, US East (Ohio), DocumentDB standard):
+
+- `db.t3.medium` offers only `OnDemand`. `db.r8g.12xlarge` offers `OnDemand` and
+  `Database Savings Plans`. The joined rows only price the r8g family, and
+  secondary selectors are offered per selected primary value, so the option is
+  instance-type dependent exactly like this.
+- Selecting `Database Savings Plans` reveals `Term (1yr)` and
+  `Payment option (No Upfront)`, and the component's `Show calculations` reads
+  `5.30005152 USD x 8760 hours = 46428.4513 USD`, `Hourly cost ... 5.3001`,
+  `Instances cost (monthly): 3,869.04 USD`.
+- The live app requests both files on every column-form mount:
+  `docdb/USD/current/docdb-calc/US East (Ohio)/primary-selector-aggregations.json`
+  and
+  `databasesavingsplans/USD/current/dsp-join-with-docdb-calc/US East (Ohio)/primary-selector-aggregations.json`
+  (both 200).
+- The joined index for that selection is
+  `.../dsp-join-with-docdb-calc/US East (Ohio)/OnDemand/db.r8g.12xlarge/48/384 GiB/1 year/No Upfront/index.json`
+  with `price 5.30005152`, `PurchaseOption "No Upfront"`, `plc:LeaseContract
+  "1 year"`. The path uses the prefixed `docdb:TermType` value (`OnDemand`) and
+  the reverse-remapped `1 year`; the record remaps `plc:LeaseContract` onto
+  `LeaseContractLength` as `1yr`, which is why the form shows `1yr`.
+
+The four P1 rows the tracker still named were not blocked by this in the sense
+of "cannot price at all": DocumentDB already evaluated with defaults, and
+Neptune, Timestream, and DMS were `needs-input` because their primary selector
+rows carry no `defaultValue` (the engine's documented fail-closed stance,
+D-020), not because of the join. What *was* missing is one live-offered pricing
+model. It is implemented now, and the receipts price that model:
+
+| Service | Live editor | Native | Receipt |
+| --- | ---: | ---: | --- |
+| DocumentDB `db.r8g.12xlarge` DSP 1yr No Upfront | 3,869.04 | 3,869.04 | `receipts/p1-documentdb-dsp.json` |
+| Neptune `db.r7g.12xlarge` DSP + 1 GB storage/backup | 5,229.55 | 5,229.55 | `receipts/p1-neptune-dsp.json` |
+| Timestream InfluxDB2 MAZ read replica `db.influx.12xlarge` DSP | 6,701.98 | 6,701.98 | `receipts/p1-timestream-dsp.json` |
+| DMS `c7i.12xlarge` Multiple AZ DSP + 100 GB gp2 | 4,513.78 | 4,513.78 | `receipts/p1-dms-dsp.json` |
+
+Timestream is `disableCalculation`: the 4.5904 joined hourly rate is exported
+through `calculationId` and the template maths multiplies it by two nodes and
+730 hours (`6701.984`, displayed `6,701.98`). Neptune's storage and backup are
+separate inputs (`1 GB` each) that the live form also accepts; DMS adds its
+100 GB gp2 storage.
+
+Reproduce:
+
+```sh
+curl -s --compressed \
+  'https://d1qsjq9pzbk1k6.cloudfront.net/data/amazonDocumentDB/en_US.json' \
+  | jq '.templates[0].cards[1].inputSection.components[0].additionalPricingData'
+curl -s --compressed \
+  'https://calculator.aws/pricing/2.0/meteredUnitMaps/databasesavingsplans/USD/current/dsp-join-with-docdb-calc/US%20East%20(Ohio)/primary-selector-aggregations.json'
+curl -s --compressed \
+  'https://calculator.aws/pricing/2.0/meteredUnitMaps/databasesavingsplans/USD/current/dsp-join-with-docdb-calc/US%20East%20(Ohio)/OnDemand/db.r8g.12xlarge/48/384%20GiB/1%20year/No%20Upfront/index.json'
+```

@@ -230,9 +230,13 @@ function inventory(definition: ServiceDefinition): {
     // `value[0]` and the live form adds a second configuration as a second
     // service, so a column form is not a repeatable-rows gap. Evidence:
     // analysis/FINDINGS.md section 13 and receipts/column-form-rows-probe.json.
-    if (component["additionalPricingData"] !== undefined && component["additionalPricingData"] !== null) {
-      gaps.add("additional-pricing-data");
-    }
+    //
+    // `additionalPricingData` is native since D-033: the joined artifacts (the
+    // Database Savings Plans cargo items) contribute their aggregation rows to
+    // the selector tree and, when the matched row is theirs, price the
+    // component from their own manifest and pricing unit model. Evidence:
+    // analysis/FINDINGS.md section 18 and the four Database Savings Plans
+    // receipts.
     if (component["subComponentsList"] !== undefined && component["subComponentsList"] !== null) {
       hard.add("subComponentsList");
     }

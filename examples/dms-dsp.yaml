@@ -1,0 +1,14 @@
+name: axi-e2e DMS Database Savings Plans
+currency: USD
+locale: en_US
+services:
+  - code: awsDatabaseMigrationService
+    region: us-east-2
+    set:
+      columnFormIPM:
+        Number of Instances: 1
+        Instance Type: c7i.12xlarge
+        Availability Zone: Multiple
+        TermType: Database Savings Plans
+        LeaseContractLength: 1yr
+        PurchaseOption: No Upfront

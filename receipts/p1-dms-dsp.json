@@ -1,0 +1,118 @@
+{
+  "estimate": "axi-e2e DMS Database Savings Plans",
+  "specHash": "d716b82112a93856",
+  "payloadHash": "0ebaa3311f33d802",
+  "url": "https://calculator.aws/#/estimate?id=9f63d7b29caaf86b8869d6850ed5b255f7a103eb",
+  "savedKey": "9f63d7b29caaf86b8869d6850ed5b255f7a103eb",
+  "publishedAt": "2026-11-25T01:13:55.030Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 4513.78,
+    "upfront": 0,
+    "total12m": 54165.36,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsDatabaseMigrationService",
+        "template": "awsDatabaseMigrationSvc",
+        "region": "us-east-2",
+        "monthly": 4513.78,
+        "upfront": 0,
+        "summary": "Number of instances (1), Instance type (c7i.12xlarge), Deployment option (Multiple), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront), Storage for each database migration instance (General Purpose SSD (gp2)), Storage amount (multiple AZ) (100 GB), Storage amount (single AZ) (100 GB)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsDatabaseMigrationService",
+        "monthly": 4513.78,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 4513.78,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=9f63d7b29caaf86b8869d6850ed5b255f7a103eb",
+    "title": "axi-e2e DMS Database Savings Plans",
+    "monthly": "4,513.78 USD",
+    "upfront": "0.00 USD",
+    "annual": "54,165.36 USD",
+    "monthlyValue": 4513.78,
+    "upfrontValue": 0,
+    "annualValue": 54165.36,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS Database Migration Service",
+        "upfront": "0.00 USD",
+        "monthly": "4,513.78 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of instances (1), Instance type (c7i.12xlarge), Deployment option (Multiple), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront), Storage for each database migration instance (General Purpose SSD (gp2)), Storage amount (multiple AZ) (100 GB), Storage amount (single AZ) (100 GB)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:13:58.330Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=9f63d7b29caaf86b8869d6850ed5b255f7a103eb",
+    "savedKey": "9f63d7b29caaf86b8869d6850ed5b255f7a103eb",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=9f63d7b29caaf86b8869d6850ed5b255f7a103eb",
+      "title": "axi-e2e DMS Database Savings Plans",
+      "monthly": "4,513.78 USD",
+      "upfront": "0.00 USD",
+      "annual": "54,165.36 USD",
+      "monthlyValue": 4513.78,
+      "upfrontValue": 0,
+      "annualValue": 54165.36,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "AWS Database Migration Service",
+          "upfront": "0.00 USD",
+          "monthly": "4,513.78 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of instances (1), Instance type (c7i.12xlarge), Deployment option (Multiple), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront), Storage for each database migration instance (General Purpose SSD (gp2)), Storage amount (multiple AZ) (100 GB), Storage amount (single AZ) (100 GB)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:14:25.511Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e DMS Database Savings Plans",
+    "monthly": 4513.78,
+    "upfront": 0,
+    "annual": 54165.36,
+    "services": [
+      {
+        "name": "AWS Database Migration Service",
+        "monthly": 4513.78,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of instances (1), Instance type (c7i.12xlarge), Deployment option (Multiple), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront), Storage for each database migration instance (General Purpose SSD (gp2)), Storage amount (multiple AZ) (100 GB), Storage amount (single AZ) (100 GB)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

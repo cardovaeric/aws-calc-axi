@@ -1,0 +1,17 @@
+name: axi-e2e DocumentDB Database Savings Plans
+currency: USD
+locale: en_US
+services:
+  - code: amazonDocumentDB
+    region: us-east-2
+    template: documentDB
+    set:
+      # The joined Database Savings Plans artifact offers this pricing model
+      # only for instance types it prices (the r8g family here); the live form
+      # shows `Term` and `Payment option` only once it is selected.
+      columnFormIPM:
+        Quantity: 1
+        Instance Type: db.r8g.12xlarge
+        TermType: Database Savings Plans
+        LeaseContractLength: 1yr
+        PurchaseOption: No Upfront

@@ -4,10 +4,12 @@
  * Supported shape: selector rows of type `textInput`, `autoSuggest`,
  * `dropDown`, or `utilization`; dependent selectors (`row.dependent`); a single
  * price set; selector price patterns for reserved/upfront records;
- * `remap.keyValue`; and `disableCalculation` raw-price mode. Still fail-closed:
- * `additionalPricingData` joins (Database Savings Plans), `remap.constant`,
- * regex remap keys, `subComponentsList`, tiered PLC_2.0 patterns,
- * `exportTagsAsValue`, and multiple price sets.
+ * `remap.keyValue`; `disableCalculation` raw-price mode; and
+ * `additionalPricingData` joins, which add a joined cargo item's selector
+ * options (the Database Savings Plans pricing model) and, when its aggregation
+ * row is the one selected, price from that item's own manifest and index. Still
+ * fail-closed: `remap.constant`, regex remap keys, `subComponentsList`, tiered
+ * PLC_2.0 patterns, `exportTagsAsValue`, and multiple price sets.
  *
  * A `utilization` row is not a plain selector: its saved value is an object
  * `{unit, selectedId}` (the live `L` component and the `q.a` hours helper in
@@ -37,6 +39,7 @@
  * where a `utilization` row's inner value is `{unit, selectedId}` rather than a
  * string.
  */
+import { Decimal } from "decimal.js";
 import { EngineError, InputValidationError } from "./errors.ts";
 import type {
   ColumnFormPricingData,
@@ -842,15 +845,28 @@ function fragmentMatches(label: string, fragment: string | RegExp, serviceId: st
  * parent values; `remap.keyValue` maps a display value back to its raw key; and
  * a selected `riPaymentOptions` key adds its unit (`Hrs`/`Quantity`) as a
  * fragment so an `All Upfront` row is priced from the `Quantity` record.
+ *
+ * `component` covers the component's own cargo item: when an
+ * `additionalPricingData` join priced the configuration, live takes the
+ * `remap.keyValue` and `pricingUnitModel` from that joined item instead, so the
+ * caller passes the priced item's model and remap here. A fragment that equals
+ * the item's `remap.constant` for that selector is dropped, because live `y`
+ * returns null for it: the joined artifact's meters spell the fixed part
+ * differently (`DatabaseSavingsPlans ...`).
  */
 export function columnFormMeterFragments(
   component: ColumnFormComponent,
   values: Record<string, string>,
-  tree: ColumnFormSelectorTree | undefined
+  tree: ColumnFormSelectorTree | undefined,
+  options: {
+    pricingUnitModel?: ColumnFormComponent["pricingUnitModel"];
+    keyValue?: Record<string, string>;
+    constant?: Record<string, string>;
+  } = {}
 ): string[] {
   const primary = primarySelectorOf(component);
   const secondary = component.secondaryKey ?? [];
-  const remap = component.remap?.keyValue ?? {};
+  const remap = options.keyValue ?? component.remap?.keyValue ?? {};
   const fragments: string[] = [];
   const selectorOrder = [primary, ...secondary];
   const seen = new Set<string>();
@@ -876,6 +892,8 @@ export function columnFormMeterFragments(
       fragment = deepestFirstKey(tree.options[selectorId] ?? null);
     }
     if (fragment === undefined || fragment === "") continue;
+    // Live `y` drops a fragment that the item's remap pins as a constant.
+    if (options.constant?.[selectorId] === fragment) continue;
     for (const [pattern, display] of Object.entries(remap)) {
       if (display === fragment) {
         fragment = pattern;
@@ -884,7 +902,8 @@ export function columnFormMeterFragments(
     }
     fragments.push(fragment);
   }
-  const paymentOptions = component.pricingUnitModel?.riPaymentOptions;
+  const paymentOptions =
+    (options.pricingUnitModel ?? component.pricingUnitModel)?.riPaymentOptions;
   if (paymentOptions) {
     for (const [option, units] of Object.entries(paymentOptions)) {
       if (!fragments.includes(option)) continue;
@@ -968,17 +987,76 @@ function pricingModelOf(
   return monthly !== undefined && monthly > 0 ? "Monthly" : "Hourly";
 }
 
-function assertNoSavingsPlan(component: ColumnFormComponent, values: Record<string, string>): void {
-  for (const row of selectableRows(component)) {
-    if (values[row.selectorId] === "Database Savings Plans") {
-      throw new EngineError(
-        `columnFormIPM "${component.id}" needs Database Savings Plans pricing, ` +
-          `which is not implemented yet`,
-        "UNSUPPORTED_INPUT",
-        { componentId: component.id, feature: "Database Savings Plans" }
-      );
-    }
+/**
+ * Live `H`: the term in years is the leading number of the exported term
+ * (`"1yr"` -> 1, `"3yr"` -> 3). Anything else is a definition error; live would
+ * turn it into a negative commitment, which no receipt could reproduce.
+ */
+function savingsPlanTermYears(component: ColumnFormComponent, values: Record<string, string>): number {
+  const term = exportValue(component, values, "term")?.value ?? "";
+  if (typeof term === "number") return term;
+  const years = Number(term.substring(0, 1));
+  if (!Number.isFinite(years) || years <= 0) {
+    throw new EngineError(
+      `columnFormIPM "${component.id}" needs a "Database Savings Plans" term ` +
+        `selector whose value starts with a number of years; got "${term}"`,
+      "BAD_DEFINITION",
+      { componentId: component.id, term }
+    );
   }
+  return years;
+}
+
+/** Live `a`: the upfront fraction of a purchase option. */
+function upfrontFraction(purchaseOption: string): number {
+  switch (purchaseOption) {
+    case "NoUpfront":
+    case "No Upfront":
+      return 0;
+    case "PartialUpfront":
+    case "Partial Upfront":
+      return 0.5;
+    case "AllUpfront":
+    case "All Upfront":
+      return 1;
+    default:
+      return 0;
+  }
+}
+
+const TOTAL_DAYS_IN_YEAR = 365;
+const HOURS_IN_DAY = 24;
+
+/**
+ * Live `z` and `B.b`: the Savings Plans model. The commitment is the hourly
+ * rate times every hour of the term; the upfront option pays a fraction of it
+ * up front and the rest is the effective hourly rate. Live rounds the monthly
+ * figure *up* to the cent (`Math.ceil(100 * total) / 100`) before the display
+ * rounds two decimals, which is why a receipt has to use the same rounding.
+ */
+function savingsPlanCost(
+  hourly: number,
+  count: number,
+  termYears: number,
+  purchaseOption: string
+): { monthly: number; upfront: number } {
+  const hours = new Decimal(termYears).times(TOTAL_DAYS_IN_YEAR).times(HOURS_IN_DAY);
+  const totalCommitment = new Decimal(hourly).times(hours);
+  // `B.b.calculateUpfrontCost`: fraction * rate * hours, trimmed to 13 places.
+  const upfrontPerUnit = new Decimal(upfrontFraction(purchaseOption))
+    .times(totalCommitment)
+    .toFixed(13);
+  // `B.b.calculateEffectiveHourlyRate`: (commitment - upfront) / hours.
+  const effectiveHourly = totalCommitment
+    .minus(upfrontPerUnit)
+    .dividedBy(hours)
+    .toFixed(13);
+  // `B.b.calculateMonthlyRate`, then `z`'s ceiling to the cent.
+  const monthlyPerUnit = new Decimal(effectiveHourly).times(HOURS_IN_MONTH).toFixed(13);
+  const monthlyTotal = new Decimal(monthlyPerUnit).times(count).toFixed(4);
+  const monthly = new Decimal(Math.ceil(100 * Number(monthlyTotal))).dividedBy(100);
+  const upfront = new Decimal(upfrontPerUnit).times(count).toFixed(4);
+  return { monthly: monthly.toNumber(), upfront: Number(upfront) };
 }
 
 export interface ColumnFormResult {
@@ -1026,9 +1104,20 @@ export function evaluateColumnForm(
       { componentId: component.id, selectorId: primary }
     );
   }
-  assertNoSavingsPlan(component, { ...values, ...data.selectors });
+  // A joined cargo item, when it priced the configuration, supplies the
+  // pricing unit model and remap that live `y`/`w` read from
+  // `selectedCargoItem` instead of from the component.
+  const unitModel = data.pricedItem?.pricingUnitModel
+    ? (data.pricedItem.pricingUnitModel as ColumnFormComponent["pricingUnitModel"])
+    : component.pricingUnitModel;
+  const meterKeyValue = data.pricedItem?.remap?.keyValue ?? component.remap?.keyValue;
+  const meterConstant = data.pricedItem?.remap?.constant ?? component.remap?.constant;
 
-  const fragments = columnFormMeterFragments(component, values, resolved.tree);
+  const fragments = columnFormMeterFragments(component, values, resolved.tree, {
+    ...(unitModel ? { pricingUnitModel: unitModel } : {}),
+    ...(meterKeyValue ? { keyValue: meterKeyValue } : {}),
+    ...(meterConstant ? { constant: meterConstant } : {}),
+  });
   const meters = filterColumnFormMeters(data.setMeters, fragments, data.manifest.serviceId);
   if (meters.length === 0) {
     throw new EngineError(
@@ -1039,7 +1128,7 @@ export function evaluateColumnForm(
     );
   }
 
-  const pricingTypes = component.pricingUnitModel?.riPricingTypes ?? { hourly: "*" };
+  const pricingTypes = unitModel?.riPricingTypes ?? { hourly: "*" };
   const prices: Record<string, number> = {};
   const matchedTypes = new Set<string>();
   for (const [type, patterns] of Object.entries(pricingTypes)) {
@@ -1181,13 +1270,19 @@ export function evaluateColumnForm(
       monthly = hourlyPrice * totalHours * count;
       upfront = 0;
       break;
-    case "SavingsPlan":
-      throw new EngineError(
-        `columnFormIPM "${component.id}" needs Savings Plans pricing, which is ` +
-          `not implemented yet`,
-        "UNSUPPORTED_INPUT",
-        { componentId: component.id, feature: "Savings Plans" }
-      );
+    case "SavingsPlan": {
+      // Live `z`: the commitment covers every hour of the term, the purchase
+      // option takes a fraction of it up front, and the remaining effective
+      // hourly rate times the month is the monthly cost. The monthly figure is
+      // rounded up to the cent exactly like live (`Math.ceil(100 * total)/100`).
+      const termYears = savingsPlanTermYears(component, values);
+      const purchaseOption =
+        exportValue(component, values, "purchaseOption")?.value ?? "";
+      const savings = savingsPlanCost(hourlyPrice, count, termYears, purchaseOption);
+      monthly = savings.monthly;
+      upfront = savings.upfront;
+      break;
+    }
     default:
       throw new EngineError(
         `columnFormIPM "${component.id}" has an unknown pricing model "${model}"`,

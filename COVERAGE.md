@@ -31,6 +31,10 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 | amazonWorkspaces (Monthly + Hourly) + workSpacesCore + workSpacesInstances | workspaces + workspacesInstances | us-east-2 | Personal Monthly (33.00) and Hourly 160h (55.25), Core Monthly (29.00), managed c5.12xlarge Monthly (2,180.33) | native | 2297.58 | 2,297.58 USD | pass | pass | https://calculator.aws/#/estimate?id=d51c53b3d4f11abcd999128bf1c12904e6ccb900 |
 | amazonFSxForLustre | persistent | us-east-2 | 1200 GB SSD, 125 MBps/TiB, 50% compression savings, no backup | native | 174.32 | 174.32 USD | pass | pass | https://calculator.aws/#/estimate?id=2c468a43ab3f709f06ab11b4c5fac7c9b27723a1 |
 | amazonKeyspaces | keyspacesOnDemandCapacityNew | us-east-2 | 1M writes, 1M reads, 100 GB, LOCAL_ONE reads at the 100% default | native | 25.69 | 25.69 USD | pass | pass | https://calculator.aws/#/estimate?id=17757fae2a38867cb590bbfb27ca4b3e89eff427 |
+| amazonDocumentDB | documentDB | us-east-2 | 1 x db.r8g.12xlarge, Database Savings Plans, 1yr, No Upfront | native | 3869.04 | 3,869.04 USD | pass | pass | https://calculator.aws/#/estimate?id=2064aa73a0455894c95fef6ef92b6e1f209b5e2f |
+| amazonNeptune | template_0 | us-east-2 | 1 x db.r7g.12xlarge Database Savings Plans 1yr No Upfront, 1 GB storage + 1 GB backup, no workbench | native | 5229.55 | 5,229.55 USD | pass | pass | https://calculator.aws/#/estimate?id=a9e5a5fc3fbee037b6dbf3b20f18c31cd2c19cec |
+| amazonTimestream | AmazonTimestream | us-east-2 | InfluxDB2 Multi-AZ read replica db.influx.12xlarge, Database Savings Plans 1yr No Upfront, no storage | native | 6701.98 | 6,701.98 USD | pass | pass | https://calculator.aws/#/estimate?id=01ab9ef932d0bd0f22eb584018bf8b315fbbaf5f |
+| awsDatabaseMigrationService | awsDatabaseMigrationSvc | us-east-2 | 1 x c7i.12xlarge, Multiple AZ, Database Savings Plans 1yr No Upfront, 100 GB gp2 storage | native | 4513.78 | 4,513.78 USD | pass | pass | https://calculator.aws/#/estimate?id=9f63d7b29caaf86b8869d6850ed5b255f7a103eb |
 | group: Data -> Data Compute (S3 + Lambda) | simpleStorageServiceClassesGroup + lambdaWithFreeTier | us-east-2 | nested groups with Business Support+ | native | 14.10 | 43.10 USD | none | pass | https://calculator.aws/#/estimate?id=41bc364a547ab7429de00d8d39cb29f70210d12a |
 
 ## Evidence
@@ -64,6 +68,10 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 - utilization-selector-workspaces-use2: the Billing option utilization row is also a price selector; remap.keyValue turns the aggregation's AlwaysOn/AutoStop into the row's Monthly/Hourly (analysis/FINDINGS.md section 17)
 - fsx-lustre-use2: replace is a global substring substitution and a displayIf ordering comparison coerces an uncomputed component to 0, so the 1200 GB branch rounds up (174.32 = 1200 x 0.000199 x 730)
 - keyspaces-percent-input-use2: percentInput saves the entered percent, so the rehydrated summary keeps LOCAL_ONE reads (1); this is the 25.69 vs 25.63 oracle from D-026
+- documentdb-dsp-use2: the joined Database Savings Plans artifact offers the pricing model only for the instance types it prices (r8g here) and prices it from its own manifest: 5.30005152 x 730 = 3869.0376, rounded up to the cent like live `z`
+- neptune-dsp-use2: 7.1636 x 730 = 5229.43 for the joined item, plus 0.10 storage and 0.021 backup; the strategy block reads (Database Savings Plans 1yr No Upfront)
+- timestream-dsp-use2: the compute column form is disableCalculation, so the joined 4.5904 hourly rate feeds the template maths: 4.5904 x 2 nodes x 730 = 6701.984
+- dms-dsp-use2: 6.136 x 730 = 4479.28 for the joined item plus 34.50 for 100 GB gp2 storage
 - groups-support-business-use2: support is recomputed by the share page; groups render as rows plus a tree
 
 Regenerate with `npm run ledger`. Receipts are in `receipts/`; each one stores the native result,

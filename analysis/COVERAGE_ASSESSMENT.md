@@ -86,9 +86,11 @@ matrix.
   service, not a second row.
 - Column-form hard blockers in the current tree: `remap.constant`, `subComponentsList`,
   selector-bearing `utilization` rows, and unknown row types.
-- Column-form soft gaps: `additionalPricingData` (Database Savings Plans and similar joins),
-  `riPricingTypes` selector patterns, dependent selectors, `exportTagsAsValue`, regex remaps,
-  multiple price sets, and upfront totals.
+- Column-form soft gaps: `riPricingTypes` selector patterns, dependent selectors, `exportTagsAsValue`,
+  regex remaps, multiple price sets, and upfront totals. `additionalPricingData` (the joined
+  Database Savings Plans artifact) is implemented as of 2026-11-25 (`docs/DECISIONS.md` D-033,
+  `analysis/FINDINGS.md` section 18); the counts below predate that and are kept as the historical
+  assessment.
 - Selector groups (`subServiceSelector`) are scored by their children, not by their empty
   template list.
 
@@ -305,7 +307,7 @@ transfer oracle caveat.
 
 | Blocker | Services affected | Components | Top services | Workstream |
 | --- | ---: | ---: | --- | --- |
-| `additionalPricingData` (Database Savings Plans and joins) | 16 | 31 | RDS, Aurora, DocumentDB, Neptune, ElastiCache, Keyspaces, Timestream, DMS, Dedicated Hosts | Column form v2 |
+| `additionalPricingData` (Database Savings Plans and joins) | 16 | 31 | RDS, Aurora, DocumentDB, Neptune, ElastiCache, Keyspaces, Timestream, DMS, Dedicated Hosts | Column form v2 - implemented 2026-11-25 (D-033) |
 | `riPricingTypes` selector patterns (payment units, upfront) | 15 | 30 | RDS, Aurora, Redshift, OpenSearch, MemoryDB, WorkSpaces | Column form v2 |
 | Dependent selectors | 31 | - | RDS, ElastiCache, DocumentDB, Neptune, Redshift, DMS, AppStream | Column form v2 |
 | Repeatable rows (single-row engine) | 55 | - | Every column-form service | Column form v2 |
@@ -384,7 +386,8 @@ This is the largest unlock: 55 partial and 12 blocked standalone services, inclu
   dependent selectors.
 
 **A2. Price sets and advanced pricing**
-- Implement `additionalPricingData` joins, starting with Database Savings Plans.
+- `additionalPricingData` joins are implemented (joined cargo items, per-item remap, selected-item
+  index and pricing unit model, Savings Plans math); D-033 and `analysis/FINDINGS.md` section 18.
 - Implement regex remaps, not literal map lookups.
 - Honor `riPaymentOptions` and payment units (`Quantity` vs `Hrs`), disambiguating All Upfront
   and Partial Upfront meters.
@@ -572,7 +575,7 @@ has the same rows plus the clean definitions and the runtime error text.
 `utilization-selector` left this table on 2026-11-25: column-form `utilization`
 rows are native, so the three Amazon EMR node children, WorkSpaces Personal,
 WorkSpaces Core Bundles, and WorkSpaces Core Managed Instances are clean
-(`analysis/FINDINGS.md` section 17). `analysis/COVERAGE_TABLE.md` is the
+(`analysis/FINDINGS.md` section 18). `analysis/COVERAGE_TABLE.md` is the
 generated, current view.
 
 | Service | Visible us-east-2 | Hard feature | Runtime |
@@ -585,6 +588,11 @@ generated, current view.
 | `sipTrunking` | no | remap.constant | fail:MISSING_INPUT |
 
 ### Partial column-form services
+
+> Status 2026-11-25: this table is the original assessment (commit `4e28e01`). `single-row`,
+> `dependent`, and `riPricingTypes[]` are native, and `additionalPricingData` is implemented
+> (`docs/DECISIONS.md` D-024, D-027, D-033). `analysis/COVERAGE_TABLE.md` is the live tracker; the
+> rows below record what the probe saw at the time.
 
 | Service | Visible us-east-2 | Column forms | Gaps | Runtime |
 | --- | --- | --- | --- | --- |

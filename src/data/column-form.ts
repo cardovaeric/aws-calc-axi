@@ -8,8 +8,17 @@
  * labels. This module fetches and resolves that chain; the price math lives in
  * `src/engine/column-form.ts`.
  *
- * Evidence: analysis/FINDINGS.md section 10 and `analysis/bundle.js`
- * (`getData`, `getPlc2Data`, `processPrices` for PLC_2.0 metadata).
+ * A component may also carry `additionalPricingData`: extra PLC_2.0 cargo items
+ * (joined artifacts) that the live form merges into the same selector tree. The
+ * Database Savings Plans artifact is the only one in the catalog: it adds a
+ * `Database Savings Plans` pricing model and prices that selection from its own
+ * manifest and index path. Live `getData` spreads the list into `item`, `c`
+ * concatenates every item's aggregation rows (remapped per item) and returns the
+ * item the matched row came from, and `u`/`w` price from that item's index and
+ * `pricingUnitModel`. This module reproduces that.
+ *
+ * Evidence: analysis/FINDINGS.md sections 10 and 18, `analysis/bundle.js`
+ * (`getData` at bundle offset 1466650, `c` at 1465000, `s.b`/`s.a` at 1227400).
  */
 import { fetchCachedJson, type CacheOptions } from "../cache.ts";
 import { pricingUrl } from "../endpoints.ts";
@@ -20,7 +29,37 @@ export interface Plc2Manifest {
   serviceId: string;
   source: string;
   currencyCode?: string;
+  /** Selectors that make up the index path, in order. Additional items only. */
+  primarySelectors?: string[];
+  secondarySelectors?: string[];
+  /** Regions the item does not price; live skips the item entirely. */
+  excludedRegions?: string[];
   [key: string]: unknown;
+}
+
+/**
+ * A PLC_2.0 remap, in live `s.b`/`s.a` terms: `keyName` renames selector keys,
+ * `keyValue` maps raw price tokens to the labels the form shows, and
+ * `constant` injects fixed selector values (and, for aggregations, filters the
+ * rows that already disagree with them).
+ */
+export interface Plc2Remap {
+  keyName?: Record<string, string>;
+  keyValue?: Record<string, string>;
+  constant?: Record<string, string>;
+}
+
+/**
+ * One cargo item: the component's own PLC_2.0 artifact, or an
+ * `additionalPricingData` join. Live `getData` builds
+ * `{manifest, pricingUnitModel, remap}` and prices from whichever item's
+ * aggregation row the selected values matched (`selectedCargoItem`).
+ */
+export interface Plc2CargoItem {
+  name?: string;
+  manifest: Plc2Manifest;
+  pricingUnitModel?: Record<string, unknown>;
+  remap?: Plc2Remap;
 }
 
 export interface Plc2Metadata {
@@ -67,6 +106,14 @@ export interface ColumnFormPricingData {
   aggregations?: Plc2Aggregation[];
   /** True when the supplied values matched an aggregation row exactly. */
   exactMatch?: boolean;
+  /**
+   * The cargo item that priced this configuration. Equal to the component's own
+   * artifact unless the matched aggregation row came from an
+   * `additionalPricingData` join; `regionPrices`, `setMeters`, the pricing unit
+   * model, and the remap all come from this item. Absent for hand-built
+   * fixtures, which then fall back to the component itself.
+   */
+  pricedItem?: Plc2CargoItem;
 }
 
 export interface LoadColumnFormOptions {
@@ -82,6 +129,12 @@ export interface LoadColumnFormOptions {
    * and the price records before matching (`b` and `o` in analysis/bundle.js).
    */
   remap?: { keyValue?: Record<string, string> };
+  /**
+   * `additionalPricingData` from the component: joined PLC_2.0 cargo items.
+   * Their aggregation rows join the selector tree and, when a supplied value
+   * only exists there, they price the component.
+   */
+  additionalPricingData?: unknown;
   cache?: CacheOptions;
 }
 
@@ -91,7 +144,7 @@ export function remapValue(
   value: string
 ): string {
   if (!keyValue) return value;
-  return keyValue[value] ?? value;
+  return keyValue[value] || value;
 }
 
 /** Apply `remap.keyValue` in reverse, the way the live meter list and path do. */
@@ -106,32 +159,62 @@ export function reverseRemapValue(
   return value;
 }
 
+/**
+ * Remap a record's fields the way live `s.b` (records) does: rename keys with
+ * `keyName`, map values with `keyValue`, then overwrite `constant` fields.
+ */
+function remapFields(
+  fields: Record<string, unknown>,
+  remap: Plc2Remap | undefined
+): Record<string, unknown> {
+  if (!remap) return fields;
+  const keyName = remap.keyName ?? {};
+  const keyValue = remap.keyValue ?? {};
+  const constant = remap.constant ?? {};
+  const next: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(fields)) {
+    next[keyName[key] || key] =
+      typeof value === "string" ? keyValue[value] || value : value;
+  }
+  for (const [key, value] of Object.entries(constant)) next[key] = value;
+  return next;
+}
+
 function remapAggregations(
   aggregations: Plc2Aggregation[],
-  keyValue: Record<string, string> | undefined
+  remap: Plc2Remap | undefined
 ): Plc2Aggregation[] {
-  if (!keyValue) return aggregations;
-  return aggregations.map((row) => {
-    const selectors: Record<string, string> = {};
-    for (const [key, value] of Object.entries(row.selectors)) {
-      selectors[key] = remapValue(keyValue, String(value));
-    }
-    return { ...row, selectors };
-  });
+  if (!remap) return aggregations;
+  const constant = remap.constant ?? {};
+  // Live `c`: a row survives when it carries no value that contradicts a
+  // constant, so a joined artifact that only prices one option can be filtered
+  // down before the constant fills the rest in.
+  const rows =
+    Object.keys(constant).length > 0
+      ? aggregations.filter((row) =>
+          Object.entries(constant).every(
+            ([key, value]) =>
+              row.selectors[key] === undefined || row.selectors[key] === value
+          )
+        )
+      : aggregations;
+  return rows.map((row) => ({
+    ...row,
+    selectors: remapFields(row.selectors, remap) as Record<string, string>,
+  }));
 }
 
 function remapRecords(
   records: Record<string, PriceRecord>,
-  keyValue: Record<string, string> | undefined
+  remap: Plc2Remap | undefined
 ): Record<string, PriceRecord> {
-  if (!keyValue) return records;
+  if (!remap) return records;
   const remapped: Record<string, PriceRecord> = {};
   for (const [meter, record] of Object.entries(records)) {
-    const next: Record<string, unknown> = { ...(record as unknown as Record<string, unknown>) };
-    for (const [key, value] of Object.entries(next)) {
-      if (typeof value === "string") next[key] = remapValue(keyValue, value);
-    }
-    remapped[meter] = next as unknown as PriceRecord;
+    remapped[meter] = remapFields(
+      { ...(record as unknown as Record<string, unknown>) },
+      remap
+    ) as unknown as PriceRecord;
   }
   return remapped;
 }
@@ -162,6 +245,8 @@ export interface AggregationMatch {
   exact: boolean;
   /** Selectors whose supplied value the matched row does not carry. */
   diffs: string[];
+  /** Position of the matched row in the array that was searched. */
+  rowIndex?: number;
 }
 
 /**
@@ -202,9 +287,16 @@ export function resolveAggregationMatch(
     // Live takes the first aggregation row that carries every supplied value
     // (`break` in `c`). Selectors the caller did not supply are resolved from
     // that row's tree in the next pass, which is what makes the state settle.
-    return { selectors: { ...wanted, ...exact[0]!.selectors }, exact: true, diffs: [] };
+    const row = exact[0]!;
+    return {
+      selectors: { ...wanted, ...row.selectors },
+      exact: true,
+      diffs: [],
+      rowIndex: aggregations.indexOf(row),
+    };
   }
   let best: Record<string, string> | undefined;
+  let bestIndex = -1;
   let bestScore = -1;
   for (const row of pool) {
     let score = 0;
@@ -218,11 +310,12 @@ export function resolveAggregationMatch(
     if (score > bestScore) {
       bestScore = score;
       best = row.selectors;
+      bestIndex = aggregations.indexOf(row);
     }
   }
   if (!best) return undefined;
   const diffs = Object.keys(wanted).filter((selector) => best![selector] !== wanted[selector]);
-  return { selectors: { ...wanted, ...best }, exact: false, diffs };
+  return { selectors: { ...wanted, ...best }, exact: false, diffs, rowIndex: bestIndex };
 }
 
 /**
@@ -295,6 +388,19 @@ export async function loadColumnFormPricing(
   }
   const pricingSelectors = [...primarySelectors, ...secondarySelectors];
 
+  // Live `getData`: `item: [{name: "default", manifest, pricingUnitModel,
+  // remap}, ...additionalPricingData]`. The component's own artifact comes
+  // first; every joined artifact contributes its aggregation rows to the same
+  // selector tree and can price the component when the matched row is its own.
+  const items: Plc2CargoItem[] = [
+    {
+      name: "default",
+      manifest: metadata.manifest,
+      ...(options.remap ? { remap: options.remap } : {}),
+    },
+    ...additionalCargoItems(options.additionalPricingData),
+  ];
+
   const aggregationsUrl = `${base}/primary-selector-aggregations.json`;
   const aggregationFile = requireObject<Plc2Aggregations>(
     await fetchCachedJson(aggregationsUrl, options.cache ?? {}),
@@ -308,11 +414,26 @@ export async function loadColumnFormPricing(
       { url: aggregationsUrl }
     );
   }
-  const keyValue = options.remap?.keyValue;
   // The live engine remaps the aggregation rows and the price records before it
-  // matches anything (`b` and `o`), so both sides speak the display labels the
-  // form shows (`1000 MBps/TiB`, `No Cache`).
-  const aggregations = remapAggregations(aggregationFile.aggregations, keyValue);
+  // matches anything (`s.b` and `s.a`, keys with `keyName`, values with
+  // `keyValue`, fixed values with `constant`), so both sides speak the display
+  // labels the form shows (`1000 MBps/TiB`, `No Cache`, `Database Savings
+  // Plans`). Each cargo item remaps with its own map.
+  const joined: JoinedCargoRows[] = [];
+  for (let index = 1; index < items.length; index += 1) {
+    const item = items[index]!;
+    const excluded = item.manifest.excludedRegions;
+    if (Array.isArray(excluded) && excluded.includes(options.regionName)) continue;
+    const rows = await fetchJoinedAggregations(item, options);
+    if (!rows) continue;
+    joined.push({ itemIndex: index, rows, ...(item.remap ? { remap: item.remap } : {}) });
+  }
+  const { rows: aggregations, rowItem } = mergeCargoAggregations(
+    aggregationFile.aggregations,
+    items[0]?.remap,
+    joined
+  );
+
   const match = resolveAggregationMatch(
     aggregations,
     options.values,
@@ -327,6 +448,15 @@ export async function loadColumnFormPricing(
     );
   }
   const selectors = match.selectors;
+  // Live returns the cargo item the matched aggregation row came from and
+  // prices from that item's manifest, index path, and pricing unit model.
+  const pricedIndex = match.rowIndex === undefined ? 0 : rowItem[match.rowIndex] ?? 0;
+  const priced = items[pricedIndex] ?? items[0]!;
+  const pricedPrimary =
+    pricedIndex === 0 ? primarySelectors : priced.manifest.primarySelectors ?? primarySelectors;
+  const pricedSecondary =
+    pricedIndex === 0 ? secondarySelectors : priced.manifest.secondarySelectors ?? [];
+  const pricedKeyValue = priced.remap?.keyValue;
   // Live injects the region name for both location selectors right before it
   // builds the index path (`{...state, Location: regionName, "From Location":
   // regionName}`, bundle offset 1466476). Direct Connect declares `From
@@ -338,20 +468,33 @@ export async function loadColumnFormPricing(
     Location: options.regionName,
     "From Location": options.regionName,
   };
-  const pathValues = primarySelectors.map((selector) => pathSelectors[selector]);
-  if (pathValues.some((value) => value === undefined)) {
+  const keyName = priced.remap?.keyName ?? {};
+  const pathKeys = pricedPrimary.concat(pricedSecondary);
+  const pathValues = pathKeys.map((selector) => {
+    const value = pathSelectors[keyName[selector] ?? selector];
+    // The index path uses the raw price values, so display labels are mapped
+    // back with this item's `keyValue` map.
+    return value === undefined ? undefined : reverseRemapValue(pricedKeyValue, String(value));
+  });
+  // Live `u` joins the primary and secondary selectors and drops the empty
+  // ones (`filter(Boolean)`); a joined artifact can put a selector in either
+  // list. A declared primary selector that never got a value is still a
+  // definition error here, because the shorter path would silently price a
+  // different configuration.
+  if (pathValues.slice(0, pricedPrimary.length).some((value) => value === undefined)) {
     throw new EngineError(
       `PLC_2.0 aggregation row is missing a primary selector value for ` +
-        `${primarySelectors.join(", ")}`,
+        `${pricedPrimary.join(", ")}`,
       "BAD_DEFINITION",
-      { selectors, primarySelectors }
+      { selectors, primarySelectors: pricedPrimary }
     );
   }
-  // The index path uses the raw price values, so display labels are mapped back.
   const indexPath = pathValues
-    .map((value) => encodeURIComponent(reverseRemapValue(keyValue, String(value))))
+    .filter((value): value is string => value !== undefined && value !== "")
+    .map((value) => encodeURIComponent(value))
     .join("/");
-  const indexUrl = `${base}/${indexPath}/index.json`;
+  const indexBase = pricedIndex === 0 ? base : cargoBase(priced, options.currency);
+  const indexUrl = `${indexBase}/${indexPath}/index.json`;
   const index = requireObject<Plc2Index>(
     await fetchCachedJson(indexUrl, options.cache ?? {}),
     "PLC_2.0 index",
@@ -365,7 +508,7 @@ export async function loadColumnFormPricing(
       { url: indexUrl, regionName: options.regionName }
     );
   }
-  const regionPrices = remapRecords(rawRegionPrices, keyValue);
+  const regionPrices = remapRecords(rawRegionPrices, priced.remap);
   const firstSet = Object.keys(index.sets ?? {})[0];
   const setMeters = (firstSet ? index.sets[firstSet] ?? [] : []).map((meter) =>
     meter
@@ -387,5 +530,102 @@ export async function loadColumnFormPricing(
     metadataUrl,
     aggregations,
     exactMatch: match.exact,
+    pricedItem: priced,
   };
+}
+
+/**
+ * Normalize `additionalPricingData` into cargo items. The catalog carries the
+ * joined artifacts as an array of `{name, manifest, remap, pricingUnitModel}`;
+ * anything without a usable manifest is inert, which is what the live fetch
+ * does when the extra artifact request fails (`Additional Pricing Artifacts API
+ * failed quietly`).
+ */
+export function additionalCargoItems(raw: unknown): Plc2CargoItem[] {
+  if (!Array.isArray(raw)) return [];
+  const items: Plc2CargoItem[] = [];
+  for (const entry of raw) {
+    if (!entry || typeof entry !== "object") continue;
+    const record = entry as Record<string, unknown>;
+    const manifest = record["manifest"];
+    if (!manifest || typeof manifest !== "object") continue;
+    const typed = manifest as Plc2Manifest;
+    if (typeof typed.serviceId !== "string" || typeof typed.source !== "string") continue;
+    items.push({
+      ...(typeof record["name"] === "string" ? { name: record["name"] } : {}),
+      manifest: typed,
+      ...(record["remap"] && typeof record["remap"] === "object"
+        ? { remap: record["remap"] as Plc2Remap }
+        : {}),
+      ...(record["pricingUnitModel"] && typeof record["pricingUnitModel"] === "object"
+        ? { pricingUnitModel: record["pricingUnitModel"] as Record<string, unknown> }
+        : {}),
+    });
+  }
+  return items;
+}
+
+/** One fetched joined item and the rows live would append for it. */
+export interface JoinedCargoRows {
+  /** Position in `getData`'s `item` list (0 is the component's own artifact). */
+  itemIndex: number;
+  rows: Plc2Aggregation[];
+  remap?: Plc2Remap;
+}
+
+/**
+ * Concatenate the aggregation rows of every cargo item the way live `c` does:
+ * the component's own rows first, then each joined item in list order, each
+ * remapped with its own map. `rowItem` keeps the item each row came from, which
+ * is how `selectedCargoItem` is found after the values match a row.
+ */
+export function mergeCargoAggregations(
+  mainRows: Plc2Aggregation[],
+  mainRemap: Plc2Remap | undefined,
+  joined: JoinedCargoRows[]
+): { rows: Plc2Aggregation[]; rowItem: number[] } {
+  const rows: Plc2Aggregation[] = [];
+  const rowItem: number[] = [];
+  for (const row of remapAggregations(mainRows, mainRemap)) {
+    rows.push(row);
+    rowItem.push(0);
+  }
+  for (const item of joined) {
+    for (const row of remapAggregations(item.rows, item.remap)) {
+      rows.push(row);
+      rowItem.push(item.itemIndex);
+    }
+  }
+  return { rows, rowItem };
+}
+
+function cargoBase(item: Plc2CargoItem, currency: string): string {
+  return pricingUrl(
+    `pricing/2.0/meteredUnitMaps/${item.manifest.serviceId}/${currency}/current/` +
+      `${item.manifest.source}`,
+    currency
+  );
+}
+
+/**
+ * Fetch one joined artifact's aggregation rows for this region. Live fetches
+ * every additional item quietly: a failed extra request is dropped instead of
+ * failing the component.
+ */
+async function fetchJoinedAggregations(
+  item: Plc2CargoItem,
+  options: LoadColumnFormOptions
+): Promise<Plc2Aggregation[] | undefined> {
+  const url =
+    `${cargoBase(item, options.currency)}/` +
+    `${encodeURIComponent(options.regionName)}/primary-selector-aggregations.json`;
+  let body: unknown;
+  try {
+    body = await fetchCachedJson(url, options.cache ?? {});
+  } catch {
+    return undefined;
+  }
+  if (!body || typeof body !== "object") return undefined;
+  const file = body as Plc2Aggregations;
+  return Array.isArray(file.aggregations) ? file.aggregations : undefined;
 }

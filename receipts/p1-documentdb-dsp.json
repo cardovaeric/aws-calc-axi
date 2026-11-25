@@ -1,0 +1,118 @@
+{
+  "estimate": "axi-e2e DocumentDB Database Savings Plans",
+  "specHash": "d17a374839dc8345",
+  "payloadHash": "77860ba69eba32e1",
+  "url": "https://calculator.aws/#/estimate?id=2064aa73a0455894c95fef6ef92b6e1f209b5e2f",
+  "savedKey": "2064aa73a0455894c95fef6ef92b6e1f209b5e2f",
+  "publishedAt": "2026-11-25T01:11:47.459Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 3869.04,
+    "upfront": 0,
+    "total12m": 46428.48,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonDocumentDB",
+        "template": "documentDB",
+        "region": "us-east-2",
+        "monthly": 3869.04,
+        "upfront": 0,
+        "summary": "DocumentDB Cluster Configuration Option (Amazon DocumentDB Standard), Quantity (1), Instance type (db.r8g.12xlarge), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonDocumentDB",
+        "monthly": 3869.04,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 3869.04,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=2064aa73a0455894c95fef6ef92b6e1f209b5e2f",
+    "title": "axi-e2e DocumentDB Database Savings Plans",
+    "monthly": "3,869.04 USD",
+    "upfront": "0.00 USD",
+    "annual": "46,428.48 USD",
+    "monthlyValue": 3869.04,
+    "upfrontValue": 0,
+    "annualValue": 46428.48,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon DocumentDB (with MongoDB compatibility)",
+        "upfront": "0.00 USD",
+        "monthly": "3,869.04 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "DocumentDB Cluster Configuration Option (Amazon DocumentDB Standard), Quantity (1), Instance type (db.r8g.12xlarge), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:11:53.681Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=2064aa73a0455894c95fef6ef92b6e1f209b5e2f",
+    "savedKey": "2064aa73a0455894c95fef6ef92b6e1f209b5e2f",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=2064aa73a0455894c95fef6ef92b6e1f209b5e2f",
+      "title": "axi-e2e DocumentDB Database Savings Plans",
+      "monthly": "3,869.04 USD",
+      "upfront": "0.00 USD",
+      "annual": "46,428.48 USD",
+      "monthlyValue": 3869.04,
+      "upfrontValue": 0,
+      "annualValue": 46428.48,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon DocumentDB (with MongoDB compatibility)",
+          "upfront": "0.00 USD",
+          "monthly": "3,869.04 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "DocumentDB Cluster Configuration Option (Amazon DocumentDB Standard), Quantity (1), Instance type (db.r8g.12xlarge), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront), Quantity (1)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:12:20.124Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e DocumentDB Database Savings Plans",
+    "monthly": 3869.04,
+    "upfront": 0,
+    "annual": 46428.48,
+    "services": [
+      {
+        "name": "Amazon DocumentDB (with MongoDB compatibility)",
+        "monthly": 3869.04,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "DocumentDB Cluster Configuration Option (Amazon DocumentDB Standard), Quantity (1), Instance type (db.r8g.12xlarge), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

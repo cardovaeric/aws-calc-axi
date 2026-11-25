@@ -154,6 +154,10 @@ async function convergeColumnForm(options: {
       regionName: options.regionName,
       values,
       ...(component.remap?.keyValue ? { remap: component.remap } : {}),
+      ...(component.additionalPricingData !== undefined &&
+      component.additionalPricingData !== null
+        ? { additionalPricingData: component.additionalPricingData }
+        : {}),
       ...(options.cache ? { cache: options.cache } : {}),
     });
     resolvedValues = resolveColumnFormSelectors(component, options.raw, data).values;

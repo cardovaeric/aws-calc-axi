@@ -13,28 +13,27 @@ no calculator surface.
 | --- | ---: |
 | blocked:column-form | 13 |
 | blocked:subtype | 3 |
-| clean | 409 |
-| partial:column-form | 16 |
+| clean | 425 |
 
 | Priority | Services |
 | --- | ---: |
 | P0 | 31 |
-| P1 | 8 |
+| P1 | 4 |
 | P2 | 139 |
-| P3 | 263 |
+| P3 | 267 |
 
 | Plan phase | Services |
 | --- | ---: |
 | Conformance passed - add ledger | 16 |
-| Done - ledger receipt | 26 |
-| Phase 1 - promote simulation | 1 |
+| Done - ledger receipt | 34 |
+| Phase 1 - certify | 1 |
+| Phase 1 - promote simulation | 8 |
 | Phase 1 - receipts | 366 |
-| Phase 2 - column-form v2 | 28 |
-| Phase 3 - EC2 module | 4 |
+| Phase 2 - column-form v2 | 13 |
+| Phase 3 - EC2 module | 3 |
 
 | Blocker | Services |
 | --- | ---: |
-| additional-pricing-data | 16 |
 | remap.constant | 11 |
 | radioTiles | 3 |
 | ec2PriceDisplay | 2 |
@@ -124,9 +123,19 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P0 | ec2Enhancement | Amazon EC2 | yes | 85.1% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement maths:ec2PriceDisplay:5;maths:ec2Variable:2;pricing:ec2PriceFetcher:1;input:radioTiles:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategyV2:1;maths:ec2AdvPricingStrategyMath:1;input:ec2AdvPricingMetrics:1 |
 | P0 | eC2Next | Amazon EC2 | no | 80.2% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement input:priceSelector:5;maths:ec2PriceDisplay:5;pricing:ec2PriceFetcher:2;input:radioTiles:2;input:instanceFinder:1;input:pricingStrategy:1;input:workload:1;input:ec2InstanceSearch:1;input:ec2AdvPricingStrategy:1;maths:ec2AdvPricingStrategyMath:1;maths:ec2Variable:1 |
 | P0 | windowsWorkloads | Windows Server and SQL Server on Amazon EC2 | yes | 29.2% | blocked:subtype | - | unsupported | unsupported | no | no | Phase 3 - EC2 module | Implement input:workloadsConditionalComponent:5;input:workloadDropdown:3;input:conditionalCheckboxes:2;input:pricingStrategy:2;input:workloadPriceSetFetcher:1;pricing:workloadStoragePricing:1;input:workflowInstruction:1;input:uploadTable:1;input:dedicatedHostsReviewTable:1;input:dedicatedHostsCostTable:1;maths:dedicatedHostsMath:1;input:sqlSummary:1;input:windowsSummary:1;input:inputField:1;input:windowsWorkloadStorage:1;input:radioTiles:1;maths:instanceRecommendation:1;input:workloadsInstanceSearch:1;input:sqlPassiveNode:1;maths:workloadInstanceMath:1;maths:instanceCostSummary:1;maths:workloadStorageMath:1;maths:storageCostSummary:1;maths:instanceCostSummaryTable:1;maths:storageCostSummaryTable:1;maths:sqlLicenseSummary:1 |
+| P0 | amazonAuroraMySQLCompatible | Amazon Aurora MySQL-Compatible | yes | 100.0% | clean | - | not-cached | not-cached | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonEc2DedicatedHosts | Amazon EC2 Dedicated Hosts | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - certify | Add fixtures and a rendered receipt |
 | P0 | amazonElasticBlockStore | Amazon Elastic Block Store (EBS) | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
+| P0 | amazonRDSAuroraPostgreSQLCompatibleDB | Amazon Aurora PostgreSQL-Compatible DB | yes | 100.0% | clean | - | not-cached | not-cached | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonRdsCustomForOracle | Amazon RDS Custom for Oracle | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P0 | amazonRdsCustomForSqlServer | Amazon RDS Custom for SQL Server | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonRdsForDb2 | Amazon RDS for Db2 | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonRdsForOracle | Amazon RDS for Oracle | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P0 | amazonRdsForOutposts | Amazon RDS on AWS Outposts | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P0 | amazonRDSForSQLServer | Amazon RDS for SQL server | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonRDSMariaDB | Amazon RDS for MariaDB | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonRDSMySQLDB | Amazon RDS for MySQL | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
+| P0 | amazonRDSPostgreSQLDB | Amazon RDS for PostgreSQL | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - promote simulation | Promote the simulation to a ledger receipt |
 | P0 | amazonVirtualPrivateCloud | Amazon Virtual Private Cloud (VPC) | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | awsEks | Amazon EKS | yes | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | awsPrivateLinkVpc | AWS PrivateLink | no | 100.0% | clean | - | needs-input | needs-input | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
@@ -142,16 +151,6 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P0 | transitGatewayVpc | Transit Gateway | no | 100.0% | clean | - | needs-input | needs-input | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | vpcRouteServer | VPC Route Server | no | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
 | P0 | vpnConnectionVpc | VPN Connection | no | 100.0% | clean | - | ok | ok | no | yes | Conformance passed - add ledger | Add a ledger receipt and keep the conformance batch |
-| P0 | amazonAuroraMySQLCompatible | Amazon Aurora MySQL-Compatible | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P0 | amazonEc2DedicatedHosts | Amazon EC2 Dedicated Hosts | no | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 3 - EC2 module | Column-form v2: additional-pricing-data |
-| P0 | amazonRDSAuroraPostgreSQLCompatibleDB | Amazon Aurora PostgreSQL-Compatible DB | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P0 | amazonRdsCustomForOracle | Amazon RDS Custom for Oracle | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P0 | amazonRdsForDb2 | Amazon RDS for Db2 | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P0 | amazonRdsForOracle | Amazon RDS for Oracle | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P0 | amazonRDSForSQLServer | Amazon RDS for SQL server | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P0 | amazonRDSMariaDB | Amazon RDS for MariaDB | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P0 | amazonRDSMySQLDB | Amazon RDS for MySQL | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P0 | amazonRDSPostgreSQLDB | Amazon RDS for PostgreSQL | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 
 ## P1 - visible blocked or partial
 
@@ -161,10 +160,6 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P1 | amazonMainframeModernization | AWS Mainframe Modernization | yes | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant (mainframeBluAge, mainframeMicroFocus) |
 | P1 | amazonTranslate | Amazon Translate | yes | 100.0% | blocked:column-form | - | ok | ok | no | no | Phase 2 - column-form v2 | Implement column-form remap.keyValue-primary (realTimeDocumentTranslation) |
 | P1 | aWSDirectoryService | AWS Directory Service | yes | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
-| P1 | amazonDocumentDB | Amazon DocumentDB (with MongoDB compatibility) | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P1 | amazonNeptune | Amazon Neptune | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P1 | amazonTimestream | Amazon Timestream | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P1 | awsDatabaseMigrationService | AWS Database Migration Service | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 
 ## P2 - visible clean without a receipt
 
@@ -339,6 +334,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | amazonChimeTCO | Amazon Chime cost comparison tool | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonCloudWatch | Amazon CloudWatch | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonDevOpsGuru | Amazon DevOps Guru | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | amazonDocumentDB | Amazon DocumentDB (with MongoDB compatibility) | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonDocumentDbBackup | DocumentDB | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonDynamoDbBackup | DynamoDB | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonDynamoDbDaxClusters | DynamoDB Accelerator (DAX) clusters | no | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
@@ -346,6 +342,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | amazonDynamoDbStreams | DynamoDB Streams | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonEbsBackup | EBS | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonEfsBackup | EFS Backup | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | amazonElastiCache | Amazon ElastiCache | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonElasticIP | Amazon Elastic IP | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonElasticsearchService | Amazon OpenSearch Service | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonEmrCoreNode | Amazon EMR core node on EC2 | no | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
@@ -360,7 +357,9 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | amazonFSxOpenZfsBackup | FSx OpenZFS | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonFSxWindowsBackup | FSx Windows | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonIVS | Amazon Interactive Video Service (IVS) | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | amazonKeyspaces | Amazon Keyspaces | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonManagedStreamingForApacheKafkaMsk | Amazon Managed Streaming for Apache Kafka (MSK) | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
+| P3 | amazonNeptune | Amazon Neptune | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonNeptuneBackup | Neptune | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonQuickSightAnomalyDetection | Amazon QuickSight Alerts & Anomaly Detection | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonQuickSightReadersAuthorsSpice | Amazon QuickSight Readers, Authors, SPICE | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -378,6 +377,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | amazonSimpleQueueService | Amazon Simple Queue Service (SQS) | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonStorageGatewayBackup | Storage Gateway | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonTechnic | AWS MDC Rack | no | 100.0% | clean | - | ok | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | amazonTimestream | Amazon Timestream | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonVMwareBackup | VMware | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonWorkspaces | WorkSpaces Personal | no | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | anthropic | Anthropic | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -395,6 +395,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | awsCloudFormation | AWS CloudFormation | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsCodeBuild | AWS CodeBuild | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsCodeCommit | AWS CodeCommit | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | awsDatabaseMigrationService | AWS Database Migration Service | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsDeadlineCloud | AWS Deadline Cloud | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsDeviceFarm | AWS Device Farm | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | awsDirectConnect | AWS Direct Connect | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
@@ -575,8 +576,6 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | workSpacesInstances | WorkSpaces Core Managed Instances | no | 100.0% | clean | - | not-cached | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | workSpacesPools | WorkSpaces Pools | no | 100.0% | clean | - | needs-input | unknown-region | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | writer | Writer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P3 | amazonElastiCache | Amazon ElastiCache | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P3 | amazonKeyspaces | Amazon Keyspaces | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 
 ## Rebuild
 

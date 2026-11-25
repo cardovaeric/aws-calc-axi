@@ -1,0 +1,117 @@
+{
+  "estimate": "axi-e2e FSx for Lustre SSD 125",
+  "specHash": "161befed462d7c4f",
+  "payloadHash": "33f791af409bed01",
+  "url": "https://calculator.aws/#/estimate?id=2c468a43ab3f709f06ab11b4c5fac7c9b27723a1",
+  "savedKey": "2c468a43ab3f709f06ab11b4c5fac7c9b27723a1",
+  "publishedAt": "2026-11-25T00:30:05.113Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 174.32,
+    "upfront": 0,
+    "total12m": 2091.84,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonFSxForLustre",
+        "template": "persistent",
+        "region": "us-east-2",
+        "monthly": 174.32,
+        "upfront": 0,
+        "summary": "Storage Type (SSD), Cache Type (No Cache), Throughput  Capacity (125 MBps/TiB), Storage capacity (1200 GB per month), Backup storage (0 GB per month)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonFSxForLustre",
+        "monthly": 174.32,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 174.32,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=2c468a43ab3f709f06ab11b4c5fac7c9b27723a1",
+    "title": "axi-e2e FSx for Lustre SSD 125",
+    "monthly": "174.32 USD",
+    "upfront": "0.00 USD",
+    "annual": "2,091.84 USD",
+    "monthlyValue": 174.32,
+    "upfrontValue": 0,
+    "annualValue": 2091.84,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon FSx for Lustre",
+        "upfront": "0.00 USD",
+        "monthly": "174.32 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Storage Type (SSD), Cache Type (No Cache), Throughput  Capacity (125 MBps/TiB), Storage capacity (1200 GB per month), Backup storage (0 GB per month)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T00:30:07.904Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=2c468a43ab3f709f06ab11b4c5fac7c9b27723a1",
+    "savedKey": "2c468a43ab3f709f06ab11b4c5fac7c9b27723a1",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=2c468a43ab3f709f06ab11b4c5fac7c9b27723a1",
+      "title": "axi-e2e FSx for Lustre SSD 125",
+      "monthly": "174.32 USD",
+      "upfront": "0.00 USD",
+      "annual": "2,091.84 USD",
+      "monthlyValue": 174.32,
+      "upfrontValue": 0,
+      "annualValue": 2091.84,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon FSx for Lustre",
+          "upfront": "0.00 USD",
+          "monthly": "174.32 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Storage Type (SSD), Cache Type (No Cache), Throughput  Capacity (125 MBps/TiB), Storage capacity (1200 GB per month)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T00:30:34.273Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e FSx for Lustre SSD 125",
+    "monthly": 174.32,
+    "upfront": 0,
+    "annual": 2091.84,
+    "services": [
+      {
+        "name": "Amazon FSx for Lustre",
+        "monthly": 174.32,
+        "region": "US East (Ohio)",
+        "configSummary": "Storage Type (SSD), Cache Type (No Cache), Throughput  Capacity (125 MBps/TiB), Storage capacity (1200 GB per month), Backup storage (0 GB per month)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

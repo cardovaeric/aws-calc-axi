@@ -1,0 +1,191 @@
+{
+  "estimate": "axi-e2e utilization Direct Connect",
+  "specHash": "75f9cdef3e1b2d32",
+  "payloadHash": "40a7a433985dad4b",
+  "url": "https://calculator.aws/#/estimate?id=0dc55dd9b0a6dd6b306b70f1086bb430eb7bbb36",
+  "savedKey": "0dc55dd9b0a6dd6b306b70f1086bb430eb7bbb36",
+  "publishedAt": "2026-11-25T00:16:14.080Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 2463.75,
+    "upfront": 0,
+    "total12m": 29565,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "awsDirectConnect",
+        "template": "template",
+        "region": "us-east-1",
+        "monthly": 0,
+        "upfront": 0,
+        "summary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)"
+      },
+      {
+        "code": "awsDirectConnect",
+        "template": "template",
+        "region": "us-east-1",
+        "monthly": 821.25,
+        "upfront": 0,
+        "summary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)"
+      },
+      {
+        "code": "awsDirectConnect",
+        "template": "template",
+        "region": "us-east-1",
+        "monthly": 1642.5,
+        "upfront": 0,
+        "summary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "awsDirectConnect",
+        "monthly": 0,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsDirectConnect",
+        "monthly": 821.25,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "awsDirectConnect",
+        "monthly": 1642.5,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 2463.75,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=0dc55dd9b0a6dd6b306b70f1086bb430eb7bbb36",
+    "title": "axi-e2e utilization Direct Connect",
+    "monthly": "2,463.75 USD",
+    "upfront": "0.00 USD",
+    "annual": "29,565.00 USD",
+    "monthlyValue": 2463.75,
+    "upfrontValue": 0,
+    "annualValue": 29565,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "AWS Direct Connect",
+        "upfront": "0.00 USD",
+        "monthly": "0.00 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)",
+        "status": null
+      },
+      {
+        "name": "AWS Direct Connect",
+        "upfront": "0.00 USD",
+        "monthly": "821.25 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)",
+        "status": null
+      },
+      {
+        "name": "AWS Direct Connect",
+        "upfront": "0.00 USD",
+        "monthly": "1,642.50 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T00:16:17.536Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=0dc55dd9b0a6dd6b306b70f1086bb430eb7bbb36",
+    "savedKey": "0dc55dd9b0a6dd6b306b70f1086bb430eb7bbb36",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=0dc55dd9b0a6dd6b306b70f1086bb430eb7bbb36",
+      "title": "axi-e2e utilization Direct Connect",
+      "monthly": "2,463.75 USD",
+      "upfront": "0.00 USD",
+      "annual": "29,565.00 USD",
+      "monthlyValue": 2463.75,
+      "upfrontValue": 0,
+      "annualValue": 29565,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "AWS Direct Connect",
+          "upfront": "0.00 USD",
+          "monthly": "0.00 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)",
+          "status": "-"
+        },
+        {
+          "name": "AWS Direct Connect",
+          "upfront": "0.00 USD",
+          "monthly": "821.25 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)",
+          "status": "-"
+        },
+        {
+          "name": "AWS Direct Connect",
+          "upfront": "0.00 USD",
+          "monthly": "1,642.50 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T00:16:43.886Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e utilization Direct Connect",
+    "monthly": 2463.75,
+    "upfront": 0,
+    "annual": 29565,
+    "services": [
+      {
+        "name": "AWS Direct Connect",
+        "monthly": 0,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)"
+      },
+      {
+        "name": "AWS Direct Connect",
+        "monthly": 821.25,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)"
+      },
+      {
+        "name": "AWS Direct Connect",
+        "monthly": 1642.5,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Number of ports (1), Location (Equinix LD4 - LD6), Port type (Dedicated), Port capacity (10G)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

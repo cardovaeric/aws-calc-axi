@@ -95,29 +95,30 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 149 tests, pass
-- `npm run e2e`: 28 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
-  ledger rows including the editor-recompute oracle)
-- `npm run ledger`: 19 rows, all pass
+- `npm test`: 167 tests, pass
+- `npm run e2e`: 47 tests, pass (live DOM re-reads, live catalog parity, native goldens, all 23
+  ledger rows including the editor-recompute oracle, and the utilization suites, which now assert
+  Deadline Cloud, Direct Connect, and FSx for Lustre as native goldens)
+- `npm run ledger`: 23 rows, all pass
 - `npm run coverage -- --evaluate --offline`: 441-row exhaustive tracker in
   `analysis/COVERAGE_TABLE.md` (401 clean, 16 partial column-form, 21 blocked column-form,
-  3 blocked by subtype; P1 11, P2 140).
+  3 blocked by subtype; P1 10, P2 137, P3 263).
 - Selector rows are scored by the children the live calculator serves and name the blocker and
   the children that carry it (`analysis/FINDINGS.md` sections 14 and 15, D-028). Two Amazon
   WorkSpaces children are dangling references in the live manifest and have no surface.
 - The runtime columns separate a real defect from an environment gap: `MissingPriceError` is
   `missing-price` and an uncached offline fetch is `not-cached` instead of both reading `error`
   (D-029), so one row per region is left in the `error` bucket (see the fail-closed list below).
-- Screenshots of every public link: `receipts/screenshots/` (16 PNGs)
-- Screenshots of every public link: `receipts/screenshots/` (19 PNGs, ledger row ids)
-- `utilization` is native, so the seven services that were blocked on the subtype changed class:
-  Deadline Cloud, Direct Connect, MediaConnect, and AWS PCS are clean (P1 15 -> 11), and three
-  column-form-only rows moved from `blocked:subtype` to `blocked:column-form`. Evidence:
-  `analysis/FINDINGS.md` section 16, D-030.
+- Screenshots of every public link: `receipts/screenshots/` (23 PNGs, ledger row ids)
+- `utilization` is native, so seven services changed class: Deadline Cloud, Direct Connect,
+  MediaConnect, and AWS PCS are clean, and Amazon Mainframe Modernization plus its two children
+  moved from `blocked:subtype` to `blocked:column-form` (`remap.constant` is the real blocker).
+  Five of them plus Keyspaces also gained ledger receipts, so P1 went 15 -> 10. Evidence:
+  `analysis/FINDINGS.md` section 16, D-030 and D-031.
 
 ## Coverage ledger summary
 
-19 rows: 15 service fixtures, 1 group/support fixture, and 3 P0 conformance batches (EKS+EBS,
+23 rows: 19 service fixtures, 1 group/support fixture, and 3 P0 conformance batches (EKS+EBS,
 and two VPC batches) proven by editor recompute. All native, all pass. Details in `COVERAGE.md`
 and `analysis/P0_CONFORMANCE.md`. The column-form batch
 (`receipts/p2-column-form-rows.json`) proves CodeBuild twice, ElastiCache, and MSK against the
@@ -152,13 +153,16 @@ editor at 957.46/month.
   `docs/DECISIONS.md` D-020, D-021, D-024, and D-030.
 - `percentInput` saves the entered percent, which the live editor rehydrates by dividing by 100
   again; saving the fraction made a rehydrated 100% read as 1% (the Keyspaces 25.69 vs 25.63
-  oracle). D-026 has the bundle evidence.
-- P1 is 11 rows, all engine gaps rather than tracker noise: five selectors name their children
+  oracle). Fixed, republished, and now a ledger row: `receipts/p1-keyspaces.json` recomputes at
+  `25.69` with `LOCAL_ONE reads (1)` (`analysis/FINDINGS.md` section 16.1, D-026). The same change
+  set landed the P0 run's typed-amount fix: `allowDecimals` is checked on the amount the user
+  typed, so 1000 operations per day (30416.67 per month) is a valid integer entry.
+- P1 is 10 rows, all engine gaps rather than tracker noise: five selectors name their children
   (Amazon Chime SDK `remap.constant`, Amazon EMR and Amazon WorkSpaces `utilization-selector`,
   Amazon Translate `remap.keyValue-primary`, AWS Mainframe Modernization `remap.constant`), plus
-  AWS Directory Service (`remap.constant`) and five partial on `additional-pricing-data`
-  (DocumentDB, Keyspaces, Neptune, Timestream, DMS). Evidence: `analysis/FINDINGS.md` sections 15
-  and 16, D-028 to D-030.
+  AWS Directory Service (`remap.constant`) and four partial on `additional-pricing-data`
+  (DocumentDB, Neptune, Timestream, DMS; Keyspaces left P1 by gaining a ledger receipt).
+  Evidence: `analysis/FINDINGS.md` sections 15 and 16, D-028 to D-031.
 - The `remap.keyValue` direction is native since `bf27e34` (forward on aggregation rows and price
   records, reverse on meter tokens and the index path). What is still missing is resolving the
   **primary** selector through the remapped option tree, which is
@@ -166,14 +170,15 @@ editor at 957.46/month.
   and aggregation row holds `Basic - Text, HTML`. The tracker blocks it with
   `remap.keyValue-primary`, the rule that replaced the retired `remap.keyValue-direction` and
   `regex-remap` rules, so no row carries a stale fail-closed label.
-- Two clean rows still cannot evaluate their defaults, both in files this tracker does not own:
-  `realTimeDocumentTranslation` (primary remap token, above) and `amazonLookoutForEquipment`,
-  whose `fileSize` `defaultOption.frequency` ("month") is not in `dropDownFrequency`, so
-  `src/engine/inputs.ts` rejects a default the live form accepts.
-- Deadline Cloud and Direct Connect are clean now that `utilization` is native. Deadline Cloud
-  evaluates (its price-set labels resolve through the dependent-selector work); Direct Connect
-  needed the live region gate (`Array.isArray(availableLocation) && !includes()`) and the
-  `Location` / `From Location` region injection on the index path (`docs/DECISIONS.md` D-030).
+- One clean row still cannot evaluate its default in a file this tracker does not own:
+  `amazonLookoutForEquipment`, whose `fileSize` `defaultOption.frequency` ("month") is not in
+  `dropDownFrequency`, so `src/engine/inputs.ts` rejects a default the live form accepts. Its
+  runtime column reads `error` for that reason, not `missing-price`.
+- Deadline Cloud, Direct Connect, MediaConnect, AWS PCS, and FSx for Lustre all evaluate at the
+  live editor's numbers now. Direct Connect needed the live region gate
+  (`Array.isArray(availableLocation) && !includes()`) and the `Location` / `From Location` region
+  injection on the index path; FSx for Lustre needed the `replace` global substring and the
+  `displayIf` ordering coercion (`docs/DECISIONS.md` D-030, D-031).
 - Six services reference meters that are absent from their regional price file (Personalize,
   Transcribe, ACM, MediaTailor, Firewall Manager, IoT SiteWise). The engine fails closed
   instead of publishing a zero. The same `missing-price` verdict now covers 28 us-east-1 and 67
@@ -184,16 +189,18 @@ editor at 957.46/month.
 
 ## Next three actions
 
-1. Finish the two newly clean `utilization` services: the `regionAttributes.Location` gate in
-   `src/data/column-form.ts` (Direct Connect has no such region attribute) and price-set label
-   matching for spaced labels such as `c5 large Linux Compute Instance 4 GiB 2` (Deadline Cloud).
-2. Add ledger rows with receipts for RDS for PostgreSQL (488.02) and ElastiCache Valkey (14.02),
+1. `additional-pricing-data` is the only blocker left on four P1 rows (DocumentDB, Neptune,
+   Timestream, DMS) and on Keyspaces; the Database Savings Plans rows are the next column-form
+   surface after `remap.constant` and `utilization-selector`.
+2. `remap.constant` blocks the six remaining P1/P2 selectors (Amazon Chime SDK, AWS Directory
+   Service, AWS Mainframe Modernization, and their children); `utilization-selector` blocks Amazon
+   EMR and Amazon WorkSpaces. Both are named per child in the tracker.
+3. Add ledger rows with receipts for RDS for PostgreSQL (488.02) and ElastiCache Valkey (14.02),
    now that both evaluate natively, then the EBS `snapShotMaths` adapter and the EC2
-   pricing-`sets` path.
-3. Resolve the primary selector through the remapped option tree
-   (`realTimeDocumentTranslation`), accept a `fileSize` `defaultOption.frequency` that is not in
-   `dropDownFrequency` (`amazonLookoutForEquipment`), and give the live form's "first available
-   selector value" fallback to the remaining needs-input services (`docs/DECISIONS.md` D-029).
+   pricing-`sets` path. `realTimeDocumentTranslation` (primary remap token) and
+   `amazonLookoutForEquipment` (a `fileSize` default whose frequency is not in
+   `dropDownFrequency`) are the two clean rows that still need engine work (`docs/DECISIONS.md`
+   D-029).
 
 ## Last commit
 
@@ -223,7 +230,7 @@ What passed:
 What failed (or is not done):
 
 - Advanced `columnFormIPM` features and the bespoke EC2/Windows/RDS math remain fail-closed
-  adapter tasks; Deadline Cloud and Direct Connect wait on the column-form fixes recorded above.
+  adapter tasks (Deadline Cloud and Direct Connect have since landed; see the ledger above).
 - Column-form services without selector defaults need explicit values instead of the live
   "first option" fallback.
 - The publish budget for the day is spent (46); new links wait for the next UTC day.

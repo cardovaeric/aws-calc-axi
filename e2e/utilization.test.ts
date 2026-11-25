@@ -160,26 +160,38 @@ test("Elemental MediaConnect evaluates natively at utilization min, middle, and 
 });
 
 /**
- * Known gaps, owned by the column-form work (repeatable rows and dependent
- * selectors), not by this subtype. These fixtures pin the fixtures so the day
- * the column form lands the assertions below fail loudly and the fixtures
- * promote to native goldens and ledger rows.
+ * The two services that were blocked on `utilization` plus a column form are
+ * native now: Deadline Cloud resolves through the dependent-selector work and
+ * Direct Connect through the live region gate and the `Location` /
+ * `From Location` region injection on the PLC_2.0 index path
+ * (`docs/DECISIONS.md` D-030). Both are also live ledger rows.
  */
-const COLUMN_FORM_GAPS = [
-  { spec: "examples/utilization-deadline-cloud.yaml", service: "awsDeadlineCloud" },
-  { spec: "examples/utilization-direct-connect.yaml", service: "awsDirectConnect" },
+const NATIVE_FIXTURES = [
+  { spec: "examples/utilization-deadline-cloud.yaml", service: "awsDeadlineCloud", rows: [109.41, 144.36, 155.31], total: 409.08 },
+  { spec: "examples/utilization-direct-connect.yaml", service: "awsDirectConnect", rows: [0, 821.25, 1642.5], total: 2463.75 },
 ] as const;
 
-for (const gap of COLUMN_FORM_GAPS) {
-  test(`${gap.service} still stops on a column-form gap, never on utilization`, async () => {
-    const spec = await loadSpecFile(join(ROOT, gap.spec));
-    await assert.rejects(
-      () => buildFromSpec(spec),
-      (error: Error) => {
-        assert.match(error.message, /PLC_2\.0/, "remaining blocker is the column form");
-        assert.doesNotMatch(error.message, /utilization/);
-        return true;
-      }
+for (const fixture of NATIVE_FIXTURES) {
+  test(`${fixture.service} evaluates at utilization min, middle, and max`, async () => {
+    const spec = await loadSpecFile(join(ROOT, fixture.spec));
+    const { result } = await buildFromSpec(spec);
+    assert.deepEqual(
+      result.services.map((entry) => entry.evaluated.serviceCode),
+      [fixture.service, fixture.service, fixture.service]
     );
+    assert.deepEqual(
+      result.services.map((entry) => entry.evaluated.serviceCost.monthly),
+      [...fixture.rows]
+    );
+    assert.equal(result.serviceTotal.monthly, fixture.total);
   });
 }
+
+test("FSx for Lustre applies the live replace substitution and displayIf coercion", async () => {
+  // `replace` is a global regex substitution in the live engine, and a displayIf
+  // ordering comparison coerces a component that is not computed yet to 0, so
+  // the 1200 GB branch rounds up and bills (analysis/FINDINGS.md section 16).
+  const spec = await loadSpecFile(join(ROOT, "examples/fsx-lustre.yaml"));
+  const { result } = await buildFromSpec(spec);
+  assert.equal(result.serviceTotal.monthly, 174.32);
+});

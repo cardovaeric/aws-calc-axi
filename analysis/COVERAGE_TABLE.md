@@ -19,16 +19,16 @@ no calculator surface.
 | Priority | Services |
 | --- | ---: |
 | P0 | 31 |
-| P1 | 11 |
-| P2 | 140 |
-| P3 | 259 |
+| P1 | 10 |
+| P2 | 137 |
+| P3 | 263 |
 
 | Plan phase | Services |
 | --- | ---: |
 | Conformance passed - add ledger | 16 |
-| Done - ledger receipt | 17 |
+| Done - ledger receipt | 20 |
 | Phase 1 - promote simulation | 1 |
-| Phase 1 - receipts | 367 |
+| Phase 1 - receipts | 364 |
 | Phase 2 - column-form v2 | 36 |
 | Phase 3 - EC2 module | 4 |
 
@@ -165,7 +165,6 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P1 | amazonWorkSpaces | Amazon WorkSpaces | yes | 100.0% | blocked:column-form | - | unsupported | unsupported | no | no | Phase 2 - column-form v2 | Implement column-form utilization-selector (amazonWorkspaces, workSpacesCore, workSpacesInstances) |
 | P1 | aWSDirectoryService | AWS Directory Service | yes | 100.0% | blocked:column-form | - | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Implement column-form remap.constant |
 | P1 | amazonDocumentDB | Amazon DocumentDB (with MongoDB compatibility) | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
-| P1 | amazonKeyspaces | Amazon Keyspaces | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 | P1 | amazonNeptune | Amazon Neptune | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 | P1 | amazonTimestream | Amazon Timestream | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 | P1 | awsDatabaseMigrationService | AWS Database Migration Service | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | no | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
@@ -199,7 +198,6 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P2 | amazonForecast | Amazon Forecast | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFraudDetector | Amazon Fraud Detector | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSx | Amazon FSx for Windows File Server | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P2 | amazonFSxForLustre | Amazon FSx for Lustre | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSxForNetAppOntap | Amazon FSx for NetApp ONTAP | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonFSxForOpenZfs | Amazon FSx for OpenZFS | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | amazonGameLift | Amazon GameLift Servers | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -270,9 +268,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P2 | awsDataPipeline | AWS Data Pipeline | no | 100.0% | clean | - | ok | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | aWSDataSync | AWS DataSync | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | aWSDataTransfer | AWS Data Transfer | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P2 | awsDeadlineCloud | AWS Deadline Cloud | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsDeepRacer | AWS DeepRacer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
-| P2 | awsDirectConnect | AWS Direct Connect | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P2 | awsElasticDisasterRecovery | AWS Elastic Disaster Recovery | yes | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | awsElementalMediaLive | AWS Elemental MediaLive | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Verify all children with fixtures and a receipt |
 | P2 | awsElementalMediaPackage | AWS Elemental MediaPackage | yes | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -362,6 +358,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | amazonEmrOnEks | Amazon EMR on EKS | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonEmrServerless | Amazon EMR Serverless | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonEventBridge | Amazon EventBridge | yes | 100.0% | clean | - | ok | ok | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
+| P3 | amazonFSxForLustre | Amazon FSx for Lustre | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | amazonFSxLustreBackup | FSx Lustre | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonFSxNetAppOntapBackup | FSx NetApp ONTAP | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonFSxOpenZfsBackup | FSx OpenZFS | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
@@ -401,7 +398,9 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | awsCloudFormation | AWS CloudFormation | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsCodeBuild | AWS CodeBuild | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsCodeCommit | AWS CodeCommit | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | awsDeadlineCloud | AWS Deadline Cloud | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsDeviceFarm | AWS Device Farm | no | 100.0% | clean | - | missing-price | missing-price | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
+| P3 | awsDirectConnect | AWS Direct Connect | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
 | P3 | awsDrsDrill | AWS DRS - Drill/Recovery | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | awsDrsRecoveryReplication | AWS DRS - Replication | no | 100.0% | clean | - | needs-input | needs-input | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | awsElementalMediaConnect | AWS Elemental MediaConnect | yes | 100.0% | clean | - | needs-input | needs-input | yes | no | Done - ledger receipt | Keep the rendered receipt and add regression coverage |
@@ -578,6 +577,7 @@ Selector rules (`subServiceSelector` rows, `kind: selector`):
 | P3 | workSpacesPools | WorkSpaces Pools | no | 100.0% | clean | - | needs-input | unknown-region | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | writer | Writer | no | 100.0% | clean | - | ok | ok | no | no | Phase 1 - receipts | Add fixtures and a rendered receipt |
 | P3 | amazonElastiCache | Amazon ElastiCache | yes | 100.0% | partial:column-form | additional-pricing-data | needs-input | needs-input | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
+| P3 | amazonKeyspaces | Amazon Keyspaces | yes | 100.0% | partial:column-form | additional-pricing-data | ok | ok | yes | no | Phase 2 - column-form v2 | Column-form v2: additional-pricing-data |
 
 ## Rebuild
 

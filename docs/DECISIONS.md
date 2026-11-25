@@ -303,7 +303,7 @@ Each publish above the default 25 used an explicit `AWSCALC_MAX_PUBLISHES_PER_DA
 for that single publish. The default cap is unchanged, and the counter was left at the value the
 main worktree's run reached.
 
-## D-026: `percentInput` saves the entered percent, not the fraction (2026-11-24, open)
+## D-026: `percentInput` saves the entered percent, not the fraction (2026-11-24, done 2026-11-25)
 
 The first batch receipt included Keyspaces and the editor oracle failed by exactly `0.06`:
 native `25.69`, editor `25.63`. The editor's config summary showed `LOCAL_ONE reads (0.01)` where
@@ -315,6 +315,15 @@ saved value and summary), which another worker owns in this session; it was left
 Until it lands, any published estimate with a percent input will disagree with the editor
 recompute. The batch receipt therefore excludes Keyspaces, which keeps a native golden
 (`examples/keyspaces-column-form.yaml`) and stays partial in the tracker.
+
+Resolved on 2026-11-25 in the utilization worktree: `percentInput` now saves the entry
+(`{value: <typed text>}`) while the engine value and the summary keep the fraction. Keyspaces was
+republished and the editor recompute matches natively - `25.69 USD` with `LOCAL_ONE reads (1)` -
+and the row is now `receipts/p1-keyspaces.json` with a ledger entry. The same work also landed
+the P0 run's typed-amount fix that this one depends on: `allowDecimals` is checked on the amount
+the user typed (`assertDecimals` in `requireNumeric`), not on a converted value, so 1000
+operations per day is a valid integer entry that converts to 30416.67 per month. Evidence:
+`analysis/FINDINGS.md` section 16.1.
 
 ## D-027: Dependent selectors, upfront totals, and the resolved prefetch (2026-11-24)
 
@@ -485,8 +494,42 @@ two for AWS PCS and two for MediaConnect, each publish run with
 `AWSCALC_MAX_PUBLISHES_PER_DAY=88` for that process only. The default cap stays
 25.
 
-Still fail-closed: Deadline Cloud and Direct Connect, on column-form gaps that
-this subtype does not touch. Direct Connect's PLC_2.0 metadata has no
-`regionAttributes.Location`, so `loadColumnFormPricing` rejects every region;
-Deadline Cloud's price-set label uses spaces (`c5 large Linux ...`) while the
-engine substring-matches dotted selector values (`c5.large`).
+Both remaining services were finished on 2026-11-25, and only one needed engine
+work: Deadline Cloud's spaced price-set labels (`c5 large Linux ...`) resolved
+through the dependent-selector work, and Direct Connect needed the live region
+gate (`Array.isArray(availableLocation) && !includes()`, so a map with no
+`regionAttributes.Location` is not region-scoped) plus the region-name injection
+for `Location` and `From Location` on the index path. Live editor oracles:
+Direct Connect `2463.75`, Deadline Cloud `409.08`
+(`receipts/p2-direct-connect-utilization.json`,
+`receipts/p2-deadline-cloud-utilization.json`). Evidence:
+`analysis/FINDINGS.md` section 16.2.
+
+## D-031: A price map may be region-free, and `displayIf` coerces like live (2026-11-25)
+
+Two engine behaviours that are wider than `utilization` came out of finishing Direct Connect and
+FSx for Lustre, both taken from the bundle rather than from the symptom.
+
+- **Region gating follows `Array.isArray`.** The live `getData` gate rejects a location only when
+  the price map declares one (`Array.isArray(availableLocation) &&
+  !availableLocation.includes(location)`, offset 1471833). A PLC_2.0 map with no
+  `regionAttributes.Location` is not region-scoped, so `loadColumnFormPricing` now fails closed
+  only for a map that lists locations and omits this region. A missing attribute is not evidence
+  of a data gap; it is the shape Direct Connect ships. Real data gaps still fail closed, and the
+  index lookup still rejects an index that has no prices for the region.
+- **The index path takes the region for `Location` and `From Location`.** Live merges
+  `{...state, Location: regionName, "From Location": regionName}` right before it builds the path
+  (offset 1466476). Those two selector ids are region-derived, not form values, even when a
+  definition declares one as a primary selector (Direct Connect declares `From Location` and
+  never asks for it).
+- **`displayIf` ordering comparisons coerce to zero.** Live's comparison helper maps a
+  non-numeric operand to 0 and only compares as strings when both sides are non-numeric
+  (offset 817504). An operand whose component is declared later in the same maths section
+  therefore compares as 0, not as hidden. Keeping the strict "undefined is false" rule silently
+  zeroed every rounding branch of the FSx for Lustre storage table and billed `0.00` against the
+  live editor's `174.32`; the FSx maths deliberately gates an early rounding on a later
+  subtraction, so this is the live contract, not a malformed definition.
+
+Verified by the live editor oracle on both services (`receipts/p2-direct-connect-utilization.json`
+`2463.75`, `receipts/p2-fsx-lustre.json` `174.32`), the full test suite, and a tracker rerun whose
+only class changes are the intended ones. Evidence: `analysis/FINDINGS.md` sections 16.2 and 16.3.

@@ -72,6 +72,12 @@ The verifier uses `aws-cal-axi-e2e` by default, overridable with `--session` or
 `AGENT_BROWSER_SESSION`. The session is closed at the end of an interactive session, not after
 every publish, so repeated verifications reuse one browser.
 
+Addendum 2026-11-24: the E2E matrix harness (`e2e/matrix.test.ts`) appends the worktree name
+(`aws-cal-axi-e2e-<worktree>`) to its default. Several worktrees run at once, and sharing one
+session lets a concurrent run navigate the browser away mid-read: 13 ledger rows failed with
+timeouts or another estimate's title until the session was scoped per worktree. The CLI's
+documented default is unchanged.
+
 ## D-009: Publish with the native `metaData.source` (2026-11-23)
 
 The share page trusts stored service costs only when `metaData.source` is the calculator's own
@@ -359,3 +365,91 @@ are scoped as follows.
 `keyValue` remap is a plain object lookup (`d = (e,t) => t.keyValue[e] || e`, offset 1227218), so
 `"/1\\s?yr/"` keys never match a value. Removing that rule changes eight P0 rows and belongs to
 whoever owns the tracker cleanup, not to this feature.
+
+## D-028: Selector rows score their served children and name them (2026-11-24)
+
+The tracker's selector rule was unverified and it was flagging six P1 services with a single
+opaque line. Verification (`receipts/selector-children-probe.json`, `analysis/FINDINGS.md`
+section 15) found the gaps are real, plus one scoring artifact.
+
+- A selector is the live calculator's service menu: no parent form, no parent price, one child
+  configured, and the parent's runtime columns are its `defaultTemplates` children. Its coverage
+  is the union of the children it serves, with `classifyStatic`'s precedence, so a parent whose
+  children are blocked by a missing input subtype reports `blocked:subtype` rather than
+  `blocked:column-form` (that is Amazon Mainframe Modernization).
+- A declared child that the manifest does not define has no live surface. Amazon WorkSpaces
+  declares six children; `workSpacesThinClient` and `workSpacesSecureBrowser` are absent from the
+  manifest, answer 403 on their definition URL, and are not offered by
+  `https://calculator.aws/#/createCalculator/WorkSpaces`. They are now `selector_unserved`:
+  recorded in their own column, not scored as non-clean, and not hidden. Scoring them made the
+  parent look blocked by two phantom children.
+- The parent row carries the cause: `selector_blockers` pairs each blocker with the children that
+  carry it, the blocker columns hold the union, and `next_action` repeats the concrete child
+  actions. The constant string `Resolve the non-clean children` is removed; the pure rule lives in
+  `scripts/coverage-selector.ts` and is covered by `tests/coverage-selector.test.ts`.
+
+Coverage delta from `main`: `blocked:subtype` 9 to 10, `blocked:column-form` 17 to 18, `clean`
+382 to 380, `partial:column-form` 33 unchanged, P1 23 to 24, P2 132 to 131. Three rows changed:
+Amazon Mainframe Modernization (reclassified), `realTimeDocumentTranslation` (below) and Amazon
+Translate, which lists it as a child. No service is called clean because a child was excluded;
+the two unserved children are listed on the Amazon WorkSpaces row.
+
+The audit also found that `remap.keyValue` is applied in the wrong direction in
+`src/engine/column-form.ts` (UI value to map value, while the live engine maps UI value to the map
+key, which is the price token), and that `matchAggregation` in `src/data/column-form.ts` ignores
+the remap. Those files belong to the column-form selector worker, so the engine is untouched; the
+tracker records the blocker instead. `remap.keyValue-direction` fires when a pricing selector's
+default value is itself a remap key, the case where this engine substitutes a form label for the
+token and the live engine keeps the value. It moves `realTimeDocumentTranslation` from `clean` to
+`blocked:column-form`, and Amazon Translate, which offers it as a child, from `clean`/P2 to
+`blocked:column-form`/P1 naming that child. A clean label that errors is worse than a blocked one
+because it is trusted.
+
+The mirror state (the default is a remap value, so the live engine substitutes and this one does
+not) is the same inversion from the other side. Six definitions are in it today and all six are
+already blocked and `missing-price` at runtime, so the rule deliberately does not fire twice:
+`amazonFSxForLustre`, `amazonManagedBlockchain`, `amazonAppStream`, `outputConfiguration1`,
+`outputConfiguration2`, `workSpacesCore`. They are listed in the probe receipt so the fix starts
+from all of them.
+
+`amazonGameLiftStreams` is also statically clean and `missing-price` at runtime, from a different
+and unproven cause (no remap; composite primary selector; the price-set label match for the
+default `gen5n_ultra` finds nothing). It is recorded in `analysis/FINDINGS.md` section 14 and left
+unchanged, because guessing a blocker would be worse than naming the open question.
+
+Superseded in part by D-029: the `remap.keyValue-direction` rule, the `regex-remap` cleanup, and
+the `amazonGameLiftStreams` open question are resolved there.
+
+## D-029: The remap rule names the primary selector, not the direction (2026-11-24)
+
+D-028's remap rule was written against the pre-merge engine and its premise did not survive the
+merge: `bf27e34` fixed `remap.keyValue` to the live direction (forward on aggregation rows and
+price records, reverse on meter tokens and the index path), so `remap.keyValue-direction` would
+have flagged services that now work. It is retired, and the tracker carries the real residual
+cause instead.
+
+- **Kept, renamed and narrowed:** `remap.keyValue-primary` (`primaryRemapToken` in
+  `scripts/coverage-column-form.ts`). It fires when the primary selector's declared default is a
+  `remap.keyValue` key that maps to a different label. The form's options are the remapped labels,
+  the live form replaces an unoffered default with the first offered value, and the engine keeps
+  the primary value verbatim, so the default cannot match an aggregation row. One definition
+  (`realTimeDocumentTranslation`) and its parent selector change class. Proof, including a
+  successful run with the label: `analysis/FINDINGS.md` section 15.
+- **Retired:** `regex-remap`, as D-027 asked the tracker owner to do. The live forward remap is a
+  plain object lookup, so a regex-shaped key is an inert literal key on both sides, and the only
+  regex use is the reversed key as a price-set token, which the engine also does. It never
+  classified a row on its own (all 13 definitions carry `additional-pricing-data`), but it did put
+  a fail-closed label on 8 P0 rows that do not fail closed.
+- **Retired open question:** `amazonGameLiftStreams` prices. Its composite primary selector only
+  needed the matched aggregation row to fill the index path, which the merge does. The engine's
+  8,726.40 at 100 users x 2 hours/day is exactly 6,000 hours x the 1.4544 price record, so no
+  blocker is guessed at.
+
+The runtime pass also stopped calling `MissingPriceError` a generic `error` (it is not an
+`EngineError`) and gave an uncached offline fetch its own `not-cached` bucket, so the `error`
+column now means a real defect. The mapping lives in `scripts/coverage-runtime.ts` (`runtimeLabel`,
+unit tested) instead of an inline ternary chain, and the tracker test tolerates a CSV generated
+without `--evaluate` so `npm run coverage` followed by `npm test` stays green. Two defects are left alone because they are not tracker files and
+are reported instead: the primary-selector resolution in `src/engine/column-form.ts`, and
+`fileSize` defaults whose `defaultOption.frequency` is not in `dropDownFrequency`
+(`amazonLookoutForEquipment`, `src/engine/inputs.ts`). No engine file is touched here.

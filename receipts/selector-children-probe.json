@@ -1,0 +1,241 @@
+{
+  "kind": "research-probe",
+  "subject": "What the coverage tracker's non-clean selector children actually point at",
+  "recordedAt": "2026-11-24",
+  "machineChecked": "tests/receipts.test.ts parses every receipts/*.json file",
+  "verdict": "The rule is not inventing the gap. Every child it flags for the six P1 selector services is blocked or partial because of a feature the live calculator prices and this engine does not implement: remap.constant, a column-form utilization row, or a dependent-selector value derived from the PLC_2.0 aggregation tree. One tracker artifact is real: Amazon WorkSpaces declares six children, two of them (workSpacesThinClient, workSpacesSecureBrowser) have no manifest entry and answer 403 on their definition URL, and the live calculator never offers them, so the parent counted two phantom children as blocked work. Re-tested after bf27e34: the remap direction is native, so only realTimeDocumentTranslation stays blocked, for a narrower reason, and amazonGameLiftStreams is closed.",
+  "liveEstimate": {
+    "name": "axi-e2e non-clean children probe",
+    "url": "https://calculator.aws/#/estimate?id=ffbbd711ef61089b32c08e2a394c5b232c606526",
+    "createdHow": "Built by hand in the live calculator (Add service flow), saved through the calculator's own Share flow. This client's publisher cannot produce it: the engine fails closed on both services.",
+    "region": "US East (Ohio)",
+    "rendered": {
+      "monthly": "1,525.00 USD",
+      "annual": "18,300.00 USD",
+      "services": [
+        {
+          "service": "Amazon WorkSpaces",
+          "monthly": "33.00 USD",
+          "config": "Windows, License Included, Standard (2 vCPU, 4GB RAM), root 80 GB, user 10 GB, 1 WorkSpace, Billing option 730 Monthly",
+          "child": "amazonWorkspaces",
+          "engineResult": "MISSING_PRICE: no PLC_2.0 price row matches {\"Running Mode\":\"[object Object]\", ...}"
+        },
+        {
+          "service": "AWS Elemental MediaConvert",
+          "monthly": "1,492.00 USD",
+          "config": "Video Codec (AVC), Tier (Basic), Video Quality Setting (Single pass), Video Resolution (4K), Video Frame Rate (<=30fps), Normalization_Ratio (4), Output basic usage (1000 Hours per month)",
+          "child": "outputConfiguration1",
+          "engineResult": "MISSING_PRICE: no PLC_2.0 price row matches {\"Tier\":\"Basic\",\"Video Codec\":\"AVC\"}"
+        }
+      ]
+    },
+    "liveCalculationBreakdown": [
+      "Output basic usage: 1000 hours = 60000 minutes",
+      "60,000 basic minutes utilized x 4 normalization ratio = 240,000.00 basic normalized minutes",
+      "Normalized Minutes Basic: 240,000.00",
+      "100,000 normalized minutes x 0.0075 USD = 750.00 USD",
+      "140,000 normalized minutes x 0.0053 USD = 742.00 USD",
+      "Total tier cost: 750.00 USD + 742.00 USD = 1,492.00 USD (per month)"
+    ],
+    "screenshots": [
+      "receipts/screenshots/probe-non-clean-children.png",
+      "receipts/screenshots/probe-non-clean-mediaconvert-calc.png",
+      "receipts/screenshots/probe-workspaces-children.png"
+    ]
+  },
+  "rule": {
+    "before": "selector_nonclean = declared children whose row static_class != clean, where a child with no row is scored missing-definition; the parent class collapses any blocked child to blocked:column-form, the parent's own blocker columns stay empty, and the action is the constant string 'Resolve the non-clean children'.",
+    "after": "A selector is the live calculator's service menu: the parent has no form and no price, and the user configures one child. The parent class is the union of the children the live calculator serves, with classifyStatic's precedence (blocked:subtype > blocked:column-form > partial:column-form > clean). A declared child with no manifest entry is selector_unserved (no live surface, recorded but not scored). selector_blockers names each blocker and the children that carry it, and next_action repeats the concrete child actions.",
+    "evidence": "scripts/coverage-selector.ts, analysis/FINDINGS.md section 14, docs/DECISIONS.md D-027"
+  },
+  "services": [
+    {
+      "service": "amazonChimeSdk",
+      "children": 5,
+      "nonclean": [
+        "ptsnAudio",
+        "sipTrunking"
+      ],
+      "cause": "remap.constant",
+      "real": true,
+      "detail": "ptsnAudio has five column forms whose primary key (NumberType or CallType) has no row at all: the value comes from remap.constant ({\"NumberType\":\"DDI\"}, {\"CallType\":\"SMA Local\"}, ...). The override map rejects a user-supplied NumberType with INVALID_SPEC (valid selectors: FromCountry), so the constant is the only source of the primary key. The engine throws UNSUPPORTED_INPUT for remap.constant before pricing.",
+      "liveProof": "The live matcher drops a constant-valued selector from the label match (bundle offset 1469061: `if(u&&u.constant)for(const n in u.constant)if(u.constant[n]===t)return null`) and the aggregation fetch filters rows by the same constant (offset 1464986)."
+    },
+    {
+      "service": "amazonEMR",
+      "children": 5,
+      "nonclean": [
+        "amazonEmrMasterNode",
+        "amazonEmrCoreNode",
+        "amazonEmrTaskNode"
+      ],
+      "cause": "utilization-selector",
+      "real": true,
+      "detail": "Each node child has a column-form row of type utilization with a selectorId (Utilization / Running Mode). The engine rejects it: UNSUPPORTED_INPUT columnFormIPM \"masterNode_generated_0\" has a \"utilization\" row, which is not implemented yet.",
+      "liveProof": "The live component exports hours from a utilization row: `if(t&&\"utilization\"===t.type&&\"object\"==typeof r&&r!==null){const{totalHour:e}=Object(q.a)(r);r=Number(e)||0}` (offset 2890391), with the component default `utilization:{defaultValue:{unit:\"100\",selectedId:\"%Utilized/Month\"}}` (offset 2877843)."
+    },
+    {
+      "service": "amazonMainframeModernization",
+      "children": 2,
+      "nonclean": [
+        "mainframeBluAge",
+        "mainframeMicroFocus"
+      ],
+      "cause": "input:utilization (2 and 3 per child) and remap.constant",
+      "real": true,
+      "detail": "Both children use the utilization input subtype, which the w1-utilization branch implements and this base does not; the coverage row now reports blocked:subtype instead of blocked:column-form. Both also carry a component-level remap.constant ({\"Product Name\":\"Blu Age Runtime\"} / {\"Product Name\":\"Enterprise Server\"}), so they stay blocked after utilization lands."
+    },
+    {
+      "service": "amazonWorkSpaces",
+      "children": 6,
+      "nonclean": [
+        "amazonWorkspaces",
+        "workSpacesCore",
+        "workSpacesInstances",
+        "workSpacesPools"
+      ],
+      "unserved": [
+        "workSpacesThinClient",
+        "workSpacesSecureBrowser"
+      ],
+      "cause": "utilization-selector, dependent-selectors, ri-payment-upfront",
+      "real": true,
+      "phantom": 2,
+      "detail": "The three Personal/Core children have a utilization row (Billing option, default {unit:\"730\",selectedId:\"Monthly\"}) and dependent selectors; workSpacesPools has only dependent selectors. Two declared children are not services: the manifest has no entry for them, their definition URLs answer 403, and the live page offers exactly four children (WorkSpaces Pools is disabled in US East (Ohio), which matches the tracker's runtime unknown-region).",
+      "liveProof": "https://calculator.aws/#/createCalculator/WorkSpaces shows WorkSpaces Personal, WorkSpaces Core Bundles, WorkSpaces Core Managed Instances and a disabled WorkSpaces Pools. No Thin Client and no Secure Browser card exists. Screenshot receipts/screenshots/probe-workspaces-children.png."
+    },
+    {
+      "service": "awsElementalMediaLive",
+      "children": 4,
+      "nonclean": [
+        "mediaLiveInput1",
+        "mediaLiveOutput1",
+        "mediaLiveAudioAddOns"
+      ],
+      "cause": "dependent-selectors",
+      "real": true,
+      "detail": "Pipeline, Resolution, Bit Rate, Video Quality, Frame Rate and Reserve Type are all dependent rows with no default for most cards. mediaLiveInput1 prices at defaults (7.30/month) and mediaLiveAnywhereChannel is clean, but mediaLiveOutput1 fails closed: MISSING_PRICE for {Pipeline, Output, Video Quality, Resolution, Frame Rate, Bit Rate, Reserve Type}."
+    },
+    {
+      "service": "elementalMediaConvert",
+      "children": 2,
+      "nonclean": [
+        "outputConfiguration1",
+        "outputConfiguration2"
+      ],
+      "cause": "dependent-selectors",
+      "real": true,
+      "detail": "Video Quality Setting, Video Resolution, Video Frame Rate and Normalization_Ratio have defaultValue \"\" and a dependent list. In the live UI they resolve to Single pass / 4K / <=30fps / 4, and Normalization_Ratio multiplies the metered minutes. This engine skips the empty values and cannot match an aggregation row: MISSING_PRICE. The same component also exposes a second, separate gap: remap.keyValue is applied in the wrong direction, see engineGaps."
+    }
+  ],
+  "bundle": {
+    "file": "analysis/bundle.js",
+    "sha256": "adbd5f41de571332731f4900784216ad1e26b0473d17449e21e271d61f0ada9c",
+    "evidence": [
+      {
+        "what": "remap.keyValue maps a price token (key) to a UI value (value), not the other way round",
+        "code": "index path builder (offset 1466154): m=p.map(e=>{let t=h[e];if(d&&d.keyValue)for(const r in d.keyValue)if(d.keyValue[r]===t){t=r;break}return t})",
+        "meaning": "h is the user value; the key r is used as the selector token for the index path. Definition {\"AVC/H.264\":\"AVC\"} plus aggregation Video Codec \"AVC/H.264\" confirms it."
+      },
+      {
+        "what": "The label matcher uses the same direction",
+        "code": "offset 1469061: if(u&&u.keyValue)for(const n in u.keyValue)if(u.keyValue[n]===t)return n;",
+        "meaning": "A UI value equal to a map value is replaced by the map key before substring matching against the price set labels."
+      },
+      {
+        "what": "A dependent selector's value is derived from the aggregation tree, not from the user's untouched input",
+        "code": "offset 1469061: const r=s.find(t=>t.selectorId===e&&!!t.dependent);if(r){const n=[].concat(r.dependent,e),i=n.map(e=>d[e]).filter(Boolean);if(n.length===i.length){const r=b(f[e],i);t!==r&&(t=r)}}  with  function b(e,t){const r=t.shift();return Object.keys(e).includes(r)?0===t.length?r:b(e[r],t):Object.keys(e)[0]}",
+        "meaning": "The live engine walks the aggregation selector tree with the parent values and takes the nested leaf, so an empty dependent row still gets a token."
+      },
+      {
+        "what": "remap.constant filters aggregation rows and drops the constant selector from the label match",
+        "code": "offset 1464986: if(o.remap&&o.remap.constant){const{constant:e}=o.remap;a=i.map(t=>{if(Object.keys(e).every(r=>void 0===t.selectors[r]||t.selectors[r]===e[r]))return t}).filter(e=>e)}",
+        "meaning": "Constant values are a filter over candidate rows, plus a token that is not required in the label."
+      },
+      {
+        "what": "A column-form utilization row exports hours per month",
+        "code": "offset 2890391: if(t&&\"utilization\"===t.type&&\"object\"==typeof r&&r!==null){const{totalHour:e}=Object(q.a)(r);r=Number(e)||0}",
+        "meaning": "The row's object value becomes the billed hour count, so it is a pricing input, not display text."
+      }
+    ]
+  },
+  "engineGaps": [
+    {
+      "owner": "column-form selector worker (src/engine/column-form.ts, src/data/column-form.ts)",
+      "component": "elementalMediaConvert outputConfiguration1/columnFormIPM, realTimeDocumentTranslation columnFormIPM",
+      "what": "HISTORICAL: remap.keyValue was inverted and never applied to the aggregation match. src/engine/column-form.ts did remap[primaryValue] ?? primaryValue (UI value -> map value) while the live engine maps UI value -> map key. src/data/column-form.ts matchAggregation ignored remap entirely and required exact equality with the raw UI value.",
+      "proof": "HISTORICAL: realTimeDocumentTranslation failed at runtime with MISSING_PRICE. After bf27e34 realTimeDocumentTranslation still fails at its default, but not because of the direction: the primary selector's value is never resolved through the remapped option tree. analysis/FINDINGS.md section 15 records the re-test.",
+      "scope": "25 definitions carry a non-identity remap.keyValue. realTimeDocumentTranslation was the only one scored clean while failing at runtime; the tracker now blocks it. The mirror case, where the default value is a remap value so the live engine substitutes and this one does not, is listed in mirrorCase: all 6 definitions are already blocked and all fail with missing-price.",
+      "mirrorCase": [
+        "amazonFSxForLustre/columnFormIPM Throughput capacity: default 50 MBps/TiB, key 50",
+        "amazonManagedBlockchain/columnFormIPM Framework Type: default Starter, key Hyperledger Fabric - Starter",
+        "amazonAppStream/columnFormIPM Multi Session: default False, key false",
+        "elementalMediaConvert outputConfiguration1/columnFormIPM Video Codec: default AVC, key AVC/H.264",
+        "elementalMediaConvert outputConfiguration2/columnFormIPM Video Codec: default AVC, key AVC/H.264",
+        "amazonWorkSpaces workSpacesCore/columnFormIPM Operating System: default WorkSpaces Core Windows, key Any"
+      ],
+      "trackerCorrection": {
+        "rule": "remap.keyValue-direction: a pricing selector's default value is itself a remap key, so this engine substitutes the map value (a form label) for the token while the live engine keeps the value. The check is static and needs no network.",
+        "rows": [
+          "realTimeDocumentTranslation: clean -> blocked:column-form, hard_blockers remap.keyValue-direction",
+          "amazonTranslate: clean/P2 -> blocked:column-form/P1, selector_blockers remap.keyValue-direction (realTimeDocumentTranslation)"
+        ],
+        "whyItMatters": "A clean label that errors is worse than a blocked one because it is trusted."
+      },
+      "status": "resolved (direction fixed in bf27e34); the residual defect is narrower, see residual",
+      "residual": "resolveColumnFormSelectors in src/engine/column-form.ts keeps the primary selector's declared value verbatim while every other row is resolved against the narrowed option tree (live getInitialValue, analysis/FINDINGS.md 14.3). The definition's default FileType=Basic is the remap key (price token) and every aggregation row and option is the label (Basic - Text, HTML), so the default cannot match. Proof: defaults MISSING_PRICE 'selector values {\"FileType\":\"Basic\"} do not match a PLC_2.0 aggregation row'; with FileType set to 'Basic - Text, HTML' and 1 million characters the same service prices at 15.00 USD/month.",
+      "trackerRule": {
+        "retired": "remap.keyValue-direction (premise gone: the direction is native now)",
+        "replacement": "remap.keyValue-primary (scripts/coverage-column-form.ts, primaryRemapToken)",
+        "rows": [
+          "realTimeDocumentTranslation: blocked:column-form / remap.keyValue-primary",
+          "amazonTranslate: blocked:column-form / P1, selector_blockers remap.keyValue-primary (realTimeDocumentTranslation)"
+        ]
+      },
+      "mirrorCaseNote": "The six definitions listed in mirrorCase are no longer a direction defect: their defaults are already the label the option tree offers. Their remaining failures have other causes (amazonFSxForLustre is the replace boundary in analysis/FINDINGS.md 14.9)."
+    },
+    {
+      "owner": "column-form selector worker (src/engine/column-form.ts)",
+      "component": "amazonEmrMasterNode/amazonEmrCoreNode/amazonEmrTaskNode, amazonWorkspaces/workSpacesCore/workSpacesInstances",
+      "what": "Support a row of type utilization that has a selectorId: read the {unit, selectedId} object, export hours, and use the selectedId as the price token. Today the object is stringified to \"[object Object]\" and the row is then rejected."
+    },
+    {
+      "owner": "column-form selector worker (src/data/column-form.ts, src/engine/column-form.ts)",
+      "component": "amazonChimeSdk ptsnAudio/sipTrunking, amazonMainframeModernization mainframeBluAge/mainframeMicroFocus",
+      "what": "Support remap.constant: filter candidate price rows whose selector is absent or equal, supply the constant value as the primary token, and drop it from the label match."
+    },
+    {
+      "owner": "column-form selector worker (src/data/column-form.ts, src/engine/column-form.ts)",
+      "component": "mediaLiveInput1/mediaLiveOutput1/mediaLiveAudioAddOns, outputConfiguration1/outputConfiguration2, workSpacesPools",
+      "what": "Derive dependent selector values from the aggregation tree (live function b / v) and tolerate rows whose dependent selectors are absent instead of skipping them and demanding an exact match.",
+      "status": "resolved in bf27e34 (dependent selectors native); area now depends on each child's own blocker"
+    }
+  ],
+  "retest": {
+    "date": "2026-11-24",
+    "branch": "cardovaeric/w4-non-clean-children rebased onto 80bbda0 (005bcc4 + 4cb3e62)",
+    "command": "npm run coverage -- --evaluate --offline",
+    "verdict": "The direction rule is retired; the real residual cause is the primary selector's unresolved remap default. MediaLive, MediaConvert, mediaLiveInput1/mediaLiveOutput1/mediaLiveAudioAddOns and workSpacesPools are clean, so the six-service list above is historical.",
+    "gameLiftStreams": {
+      "status": "closed, it prices",
+      "evidence": {
+        "aggregationRow": {
+          "Product Family": "Compute Instance",
+          "Stream Class": "gen5n_ultra",
+          "Reservation Class": "OnDemand",
+          "VCPU": "8",
+          "VRAM": "24",
+          "RAM": "32"
+        },
+        "indexPrice": "1.4544000000",
+        "engine": "8,726.40 USD/month at 100 users x 2 hours/day = 100 x 2 x 30 x 1.4544"
+      },
+      "why": "The composite primary selector only needed the matched aggregation row to fill the index path, which the merge does."
+    },
+    "retiredRules": [
+      "remap.keyValue-direction",
+      "regex-remap"
+    ],
+    "runtimeLabels": "scripts/coverage.ts now reports MissingPriceError as missing-price and an uncached offline fetch as not-cached instead of both as error"
+  }
+}

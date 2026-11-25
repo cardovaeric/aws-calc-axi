@@ -10,7 +10,7 @@ import {
   type ColumnFormComponent,
 } from "../src/engine/column-form.ts";
 import { columnFormVisibility } from "../src/engine/column-form-loader.ts";
-import { matchAggregation } from "../src/data/column-form.ts";
+import { matchAggregation, remapValue, reverseRemapValue } from "../src/data/column-form.ts";
 import type { ColumnFormPricingData } from "../src/data/column-form.ts";
 import type { Template } from "../src/data/definitions.ts";
 
@@ -919,4 +919,37 @@ test("a reverse key remap maps a display value back to its price key", () => {
     undefined
   );
   assert.deepEqual(fragments, ["1000"]);
+});
+
+test("a forward key remap is a literal lookup, so a regex-shaped key stays inert", () => {
+  // Live `d = (e,t) => t.keyValue[e] || e` is a plain object lookup, so a key
+  // such as `"/1\\s?yr/"` never substring-matches a value. That is why the
+  // tracker's old `regex-remap` gap had no fail-closed behaviour behind it
+  // (docs/DECISIONS.md D-027, analysis/FINDINGS.md section 14.2).
+  const keyValue = { "/1\\s?yr/": "1 year" };
+  assert.equal(remapValue(keyValue, "1yr"), "1yr");
+  assert.equal(remapValue(keyValue, "/1\\s?yr/"), "1 year");
+  assert.equal(remapValue(keyValue, "1 year"), "1 year");
+  // Live `u` (bundle offset 1466571) reverses the same map the same way.
+  assert.equal(reverseRemapValue(keyValue, "1 year"), "/1\\s?yr/");
+  assert.equal(reverseRemapValue(keyValue, "1yr"), "1yr");
+});
+
+test("a regex-shaped remap key becomes the price-set token, the way live reverses it", () => {
+  // Amazon Keyspaces' definition carries `{"/1\\s?yr/": "1 year"}`. The form
+  // value is the label; live's token builder (`u`, bundle offset 1466571) maps
+  // the label back to the key, and the token filter (`y`) runs it through
+  // `String.match`, which is what `columnFormMeterFragments` and
+  // `filterColumnFormMeters` do.
+  const component: ColumnFormComponent = {
+    id: "columnFormIPM",
+    label: "Term",
+    mappingDefinitionName: "mcs-provisioned-write-calc",
+    primaryKey: "LeaseContractLength",
+    secondaryKey: [],
+    remap: { keyValue: { "/1\\s?yr/": "1 year", "/3\\s?yr/": "3 year" } },
+    row: [{ label: "Term", type: "dropDown", selectorId: "LeaseContractLength", defaultValue: "1 year" }],
+  };
+  const fragments = columnFormMeterFragments(component, { LeaseContractLength: "1 year" }, undefined);
+  assert.deepEqual(fragments, ["/1\\s?yr/"]);
 });

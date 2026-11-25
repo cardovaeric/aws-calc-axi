@@ -21,7 +21,13 @@ import {
 } from "../src/data/catalog.ts";
 import { loadDefinition, type Card, type Component, type ServiceDefinition } from "../src/data/definitions.ts";
 import { evaluateService } from "../src/engine/service.ts";
-import { EngineError } from "../src/engine/errors.ts";
+import {
+  rollupSelector,
+  type SelectorChildFacts,
+  type StaticClass,
+} from "./coverage-selector.ts";
+import { primaryRemapToken } from "./coverage-column-form.ts";
+import { runtimeLabel } from "./coverage-runtime.ts";
 
 const SUPPORTED_INPUT = new Set([
   "bodyText",
@@ -130,14 +136,6 @@ function cleanCell(value: string): string {
   return value.replace(/\|/g, "\\|").replace(/\s+/g, " ").trim();
 }
 
-type StaticClass =
-  | "clean"
-  | "partial:column-form"
-  | "blocked:column-form"
-  | "blocked:subtype"
-  | "no-surface"
-  | "missing-definition";
-
 interface Row {
   priority: string;
   plan_phase: string;
@@ -158,6 +156,8 @@ interface Row {
   deep_gaps: string;
   selector_children: number;
   selector_nonclean: string;
+  selector_unserved: string;
+  selector_blockers: string;
   runtime_use1: string;
   runtime_use2: string;
   ledger_receipt: string;
@@ -238,12 +238,19 @@ function inventory(definition: ServiceDefinition): {
     const remap = asRecord(component["remap"]);
     const constant = asRecord(remap?.["constant"]);
     if (constant && Object.keys(constant).length > 0) hard.add("remap.constant");
-    const keyValue = asRecord(remap?.["keyValue"]);
-    // The live engine treats keyValue remap keys as regular expressions. The
-    // engine currently does a plain lookup, so regex keys are a real gap.
-    if (keyValue && Object.keys(keyValue).some((key) => key.startsWith("/"))) {
-      gaps.add("regex-remap");
-    }
+    // `remap.keyValue` is a price-token (key) to form-value (value) map in the
+    // live engine, applied forward to aggregation rows and price records and in
+    // reverse to meter lists and the index path. `src/data/column-form.ts`
+    // implements both directions (`remapValue`, `reverseRemapValue`), so a
+    // remap direction is not a gap. The live forward remap is a plain object
+    // lookup (`d = (e,t) => t.keyValue[e] || e`), so a regex-shaped key is an
+    // inert literal key there and here, and the reversed key is used as the
+    // price-set token regex, which `columnFormMeterFragments` also does. The
+    // `regex-remap` gap this replaced had no fail-closed path behind it, so it
+    // is retired (docs/DECISIONS.md D-027, D-029). What is left is the primary
+    // selector: its value is never resolved through the remapped tree.
+    // Evidence: analysis/FINDINGS.md sections 14.2, 14.3, 15.
+    if (primaryRemapToken(component)) hard.add("remap.keyValue-primary");
     if (component["exportTagsAsValue"] !== undefined) gaps.add("export-tags");
     const unitModel = asRecord(component["pricingUnitModel"]);
     const pricingTypes = asRecord(unitModel?.["riPricingTypes"]);
@@ -310,14 +317,32 @@ function classifyStatic(
   return "clean";
 }
 
-function selectorClass(children: string[], byCode: Map<string, Row>): StaticClass {
-  if (children.length === 0) return "no-surface";
-  const classes = children.map((child) => byCode.get(child)?.static_class ?? "missing-definition");
-  if (classes.some((item) => item.startsWith("blocked") || item === "missing-definition")) {
-    return "blocked:column-form";
-  }
-  if (classes.some((item) => item.startsWith("partial"))) return "partial:column-form";
-  return "clean";
+/**
+ * Facts for one declared selector child. A declared child that is absent from
+ * the catalog is a dangling live reference: the manifest has no entry for it,
+ * so it has no surface. See `scripts/coverage-selector.ts`.
+ */
+function selectorChildFacts(
+  children: string[],
+  byCode: Map<string, Row>,
+  catalogCodes: Set<string>
+): SelectorChildFacts[] {
+  return children.map((code) => {
+    const row = byCode.get(code);
+    return {
+      code,
+      inCatalog: catalogCodes.has(code),
+      row: row
+        ? {
+            static_class: row.static_class,
+            missing_subtypes: row.missing_subtypes,
+            hard_blockers: row.hard_blockers,
+            deep_gaps: row.deep_gaps,
+            next_action: row.next_action,
+          }
+        : undefined,
+    };
+  });
 }
 
 function phaseFor(code: string, klass: string, action: string): string {
@@ -377,7 +402,9 @@ function nextAction(
   }
   if (klass === "missing-definition") return "Fetch the missing definition and re-run coverage";
   if (selector) {
-    if (klass !== "clean") return "Resolve the non-clean children";
+    // A selector is a menu: its blockers are always the children's, and the
+    // parent row names them in `selector_blockers`.
+    if (klass !== "clean") return "Resolve the blockers named in selector_blockers";
     if (conformance) return "Add a ledger receipt and keep the conformance batch";
     return simulated
       ? "Promote the simulation to a ledger receipt"
@@ -402,22 +429,7 @@ async function runtimeFor(
     await evaluateService({ code, region }, { cache: { offline } });
     return `${region}:ok`;
   } catch (error) {
-    const engineCode = error instanceof EngineError ? error.code : "ERROR";
-    const label =
-      engineCode === "MISSING_INPUT"
-        ? "needs-input"
-        : engineCode === "MISSING_PRICE"
-          ? "missing-price"
-          : engineCode === "AMBIGUOUS_SELECTION"
-            ? "ambiguous"
-            : engineCode === "UNSUPPORTED_COMPONENT" || engineCode === "UNSUPPORTED_INPUT"
-              ? "unsupported"
-              : engineCode === "UNKNOWN_REGION"
-                ? "unknown-region"
-                : engineCode === "BAD_DEFINITION"
-                  ? "bad-definition"
-                  : "error";
-    return `${region}:${label}`;
+    return `${region}:${runtimeLabel(error)}`;
   }
 }
 
@@ -509,6 +521,9 @@ if (args.evaluate) {
   }
 }
 
+// A selector template code is only a service if the live manifest lists it.
+const catalogCodes = new Set(catalog.awsServices.map((entry) => entry.serviceCode));
+
 for (const entry of catalog.awsServices) {
   if (entry.type !== "AWSService" || definitions.has(entry.serviceCode)) continue;
   rowsByCode.set(entry.serviceCode, {
@@ -531,6 +546,8 @@ for (const entry of catalog.awsServices) {
     deep_gaps: "",
     selector_children: 0,
     selector_nonclean: "",
+    selector_unserved: "",
+    selector_blockers: "",
     runtime_use1: "not-run",
     runtime_use2: "not-run",
     ledger_receipt: "no",
@@ -553,14 +570,22 @@ for (const [code, definition] of definitions) {
   const hard = [...inv.hard].sort().join(";");
   const gaps = [...inv.gaps].sort().join(";");
   const staticClass = isSelector
-    ? selectorClass(children, rowsByCode)
+    ? rollupSelector(selectorChildFacts(children, rowsByCode, catalogCodes)).klass
     : classifyStatic(false, inv.total, inv.missing, inv.hard, inv.gaps);
   const ledger = receiptSets.ledger.has(code);
   const sim = receiptSets.simulation.has(code);
   const conform = receiptSets.conformance.has(code);
   const verified = ledger || sim || conform;
   const visible = visible2.has(code) || visible1.has(code);
-  const action = nextAction(staticClass, missing, hard, gaps, ledger, sim, conform, isSelector);
+  // Selector children are resolved after this pass, so a selector row is
+  // finalized below once every child row exists.
+  const rollup = isSelector ? rollupSelector(selectorChildFacts(children, rowsByCode, catalogCodes)) : undefined;
+  const missingColumn = isSelector ? (rollup?.missingSubtypes ?? "") : missing;
+  const hardColumn = isSelector ? (rollup?.hardBlockers ?? "") : hard;
+  const gapsColumn = isSelector ? (rollup?.deepGaps ?? "") : gaps;
+  const action = isSelector
+    ? rollup?.nextAction || ""
+    : nextAction(staticClass, missing, hard, gaps, ledger, sim, conform, isSelector);
   const row: Row = {
     priority: priorityFor(code, visible, staticClass, verified),
     plan_phase: phaseForRow(code, staticClass, ledger, sim, conform, action),
@@ -575,14 +600,14 @@ for (const [code, definition] of definitions) {
     components_total: inv.total,
     surface_pct: inv.total === 0 ? "" : `${((100 * inv.supported) / inv.total).toFixed(1)}%`,
     static_class: staticClass,
-    missing_subtypes: missing,
+    missing_subtypes: isSelector ? missingColumn : missing,
     column_forms: inv.columnForms.length,
-    hard_blockers: hard,
-    deep_gaps: gaps,
+    hard_blockers: isSelector ? hardColumn : hard,
+    deep_gaps: isSelector ? gapsColumn : gaps,
     selector_children: children.length,
-    selector_nonclean: isSelector
-      ? children.filter((child) => (rowsByCode.get(child)?.static_class ?? "missing-definition") !== "clean").join(";")
-      : "",
+    selector_nonclean: isSelector ? (rollup?.nonclean ?? []).join(";") : "",
+    selector_unserved: isSelector ? (rollup?.unserved ?? []).join(";") : "",
+    selector_blockers: isSelector ? (rollup?.blockers ?? "") : "",
     runtime_use1: runtime.get(code)?.["us-east-1"] ?? "not-run",
     runtime_use2: runtime.get(code)?.["us-east-2"] ?? "not-run",
     ledger_receipt: ledger ? "yes" : "no",
@@ -601,10 +626,14 @@ for (const [code, definition] of definitions) {
   const children = asArray(definition.templates)
     .map((item) => (typeof item === "string" ? item : ""))
     .filter(Boolean);
-  row.static_class = selectorClass(children, rowsByCode);
-  row.selector_nonclean = children
-    .filter((child) => (rowsByCode.get(child)?.static_class ?? "missing-definition") !== "clean")
-    .join(";");
+  const rollup = rollupSelector(selectorChildFacts(children, rowsByCode, catalogCodes));
+  row.static_class = rollup.klass;
+  row.selector_nonclean = rollup.nonclean.join(";");
+  row.selector_unserved = rollup.unserved.join(";");
+  row.selector_blockers = rollup.blockers;
+  row.missing_subtypes = rollup.missingSubtypes;
+  row.hard_blockers = rollup.hardBlockers;
+  row.deep_gaps = rollup.deepGaps;
   const childRows = children
     .map((child) => rowsByCode.get(child))
     .filter((child): child is Row => child !== undefined);
@@ -627,16 +656,18 @@ for (const [code, definition] of definitions) {
   if (!(children.length > 0 && children.every((child) => rowsByCode.get(child)?.ledger_receipt === "yes"))) {
     row.ledger_receipt = "no";
   }
-  row.next_action = nextAction(
-    row.static_class,
-    row.missing_subtypes,
-    row.hard_blockers,
-    row.deep_gaps,
-    row.ledger_receipt === "yes",
-    row.simulation_receipt === "yes",
-    row.conformance_receipt === "yes",
-    true
-  );
+  row.next_action =
+    rollup.nextAction ||
+    nextAction(
+      row.static_class,
+      row.missing_subtypes,
+      row.hard_blockers,
+      row.deep_gaps,
+      row.ledger_receipt === "yes",
+      row.simulation_receipt === "yes",
+      row.conformance_receipt === "yes",
+      true
+    );
   row.priority = priorityFor(
     code,
     row.visible_use2 === "yes" || row.visible_use1 === "yes",
@@ -683,6 +714,8 @@ const columns: Array<keyof Row> = [
   "deep_gaps",
   "selector_children",
   "selector_nonclean",
+  "selector_unserved",
+  "selector_blockers",
   "runtime_use1",
   "runtime_use2",
   "ledger_receipt",
@@ -793,11 +826,36 @@ Priority rules:
 
 The static class is intentionally conservative. A \`columnFormIPM\` service is
 \`partial\` only while it uses a feature the engine still fails closed on:
-additional pricing data, regex key remaps, tiered PLC_2.0 price patterns,
-sub-components, or unsupported row types. A plain one-row column form is native,
-and so are dependent selectors, reserved/upfront payment models, and selector
-price patterns (\`analysis/FINDINGS.md\` section 14). Runtime \`needs-input\` is not
-a failure; it means the service needs a fixture with explicit required values.
+additional pricing data, tiered PLC_2.0 price patterns, sub-components, or
+unsupported row types. A plain one-row column form is native, and so are
+dependent selectors, reserved/upfront payment models, selector price patterns,
+and a \`remap.keyValue\` in either direction (\`analysis/FINDINGS.md\` section 14).
+One remap case is still blocked: a primary selector whose declared default is a
+\`remap.keyValue\` key. The form's options are the remapped labels and the live
+form replaces an unoffered default with the first offered value, while this
+engine keeps the primary value verbatim, so the default cannot match an
+aggregation row (section 15). It is \`blocked\` when the engine cannot reach a
+price at all. Runtime \`needs-input\` is not a failure; it means the service needs
+a fixture with explicit required values. Runtime \`not-cached\` is a property of
+this offline run, not of the service.
+
+Selector rules (\`subServiceSelector\` rows, \`kind: selector\`):
+
+- A selector is the live calculator's service menu. The parent has no form and
+  no price; the user configures exactly one child. Its class is therefore the
+  union of the children the live calculator serves, with the same precedence a
+  single service uses (\`blocked:subtype\` > \`blocked:column-form\` >\n  \`partial:column-form\` > \`clean\`).
+- \`selector_children\` counts the children the definition declares.\n  \`selector_unserved\` lists declared children that the live manifest does not
+  define at all: the calculator never offers them (Amazon WorkSpaces shows 4 of
+  its 6 declared children) and their definition URLs answer 403, so they have no
+  surface to score and do not make the parent look blocked.
+- \`selector_blockers\` names the blocker and the children that carry it, and
+  \`next_action\` repeats the concrete child actions instead of a generic
+  "resolve the non-clean children". Nothing is hidden by excluding a child: an
+  unserved child is recorded in its own column.
+- The \`runtime\` columns of a selector are the evaluation of its
+  \`defaultTemplates\` children, which is what the calculator configures when the
+  service is added with defaults.
 
 ## P0 - top services
 

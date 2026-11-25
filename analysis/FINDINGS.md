@@ -483,8 +483,8 @@ Consequences:
 - Users express a second configuration as a second service, which is what the live UI does.
 - The coverage tracker no longer emits a `repeatable-rows` gap. It also no longer treats a
   column form itself as partial; only the features that still fail closed do (dependent
-  selectors, additional pricing data, regex key remaps, reserved/upfront payment models,
-  sub-components, unsupported row types).
+  selectors, additional pricing data, reserved/upfront payment models, sub-components,
+  unsupported row types). `regex-remap` was in that list and is retired; see section 15.
 - While proving this, two engine gaps surfaced and were fixed: `displayIf` gating for column
   form prefetch (every CodeBuild compute type card used to demand the selected card's
   selectors), and count exports with a suffix (`countDT`, `count_1`, ...), which the live
@@ -663,7 +663,8 @@ selectors":
   no/ambiguous price sets.
 - **Not a dependency at all:** `awsDeadlineCloud` and `awsDirectConnect` carry the label but their
   real blocker is `input:utilization`; 24 of the 36 also still need `additional-pricing-data`
-  (Database Savings Plans), `regex-remap`, or `remap.constant`.
+  (Database Savings Plans) or `remap.constant`. The `regex-remap` gap this section counted was
+  retired in section 15: the remap is a plain lookup on both sides.
 
 While proving this, one further engine bug surfaced inside the same mechanism and was fixed:
 `remap.keyValue` was applied in the wrong direction for price-set tokens, so a service such as
@@ -681,3 +682,184 @@ the key.
 - `utilization` rows that carry a `selectorId`, `remap.constant`, `additionalPricingData` joins,
   `subComponentsList`, `exportTagsAsValue`, multiple price sets, and tiered PLC_2.0 patterns
   (`StartingRange`/`EndingRange`) remain fail-closed.
+
+## 15. Selector children are real gaps; two WorkSpaces children do not exist (2026-11-24)
+
+The tracker scored `subServiceSelector` rows "by their children" and the six P1 services it
+blocked with `Resolve the non-clean children` needed a verdict. Evidence, live links, and the
+exact bundle lines are in `receipts/selector-children-probe.json`.
+
+### What the rule did
+
+`selector_children` counted the codes in the selector definition's `templates`. A child was
+non-clean when its own row's `static_class` was not `clean`, and a child with no row at all was
+scored `missing-definition`. The parent then collapsed every blocked child to
+`blocked:column-form`, kept its own `missing_subtypes`/`hard_blockers`/`deep_gaps` empty, and got
+the constant action `Resolve the non-clean children`.
+
+### What the live calculator does
+
+A selector is a menu of child services. The parent has no form and no price; the user configures
+exactly one child, and the parent's runtime columns are the evaluation of its `defaultTemplates`
+children. And the menu is built from the live service list, so a declared child that the manifest
+does not define is never offered at all.
+
+### The six services, child by child
+
+| Service | Non-clean children | Cause | Verdict |
+| --- | --- | --- | --- |
+| amazonChimeSdk | ptsnAudio, sipTrunking | `remap.constant` | real gap |
+| amazonEMR | amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode | `utilization` row | real gap |
+| amazonMainframeModernization | mainframeBluAge, mainframeMicroFocus | `input:utilization` + `remap.constant` | real gap |
+| amazonWorkSpaces | amazonWorkspaces, workSpacesCore, workSpacesInstances, workSpacesPools | utilization row, dependent selectors, upfront totals | real gap, and 2 phantom children |
+| awsElementalMediaLive | mediaLiveInput1, mediaLiveOutput1, mediaLiveAudioAddOns | dependent selectors | real gap |
+| elementalMediaConvert | outputConfiguration1, outputConfiguration2 | dependent selectors (+ remap direction) | real gap |
+
+- **Chime SDK.** ptsnAudio has five column forms whose primary key (`NumberType` or `CallType`)
+  has no row: the value can only come from `remap.constant`. Supplying it in the spec is rejected
+  (`INVALID_SPEC`, valid selectors: `FromCountry`), and the engine throws `UNSUPPORTED_INPUT` for
+  `remap.constant` before pricing. The live engine filters candidate price rows by the constant
+  and drops that selector from the label match (bundle offsets 1464986 and 1469061).
+- **EMR.** Each node child has a column-form row of type `utilization` with a `selectorId`.
+  `columnFormIPM "masterNode_generated_0" has a "utilization" row, which is not implemented yet`.
+  The live component exports the row's object value as hours (`{const{totalHour:e}=...}`, offset
+  2890391), so it is a pricing input.
+- **Mainframe Modernization.** Both children use the `utilization` input subtype (the
+  `w1-utilization` branch implements it) and both also carry a component-level
+  `remap.constant`, so they stay blocked after that lands. The parent now reports
+  `blocked:subtype` in `Phase 5 - long tail` instead of claiming a column-form block.
+- **WorkSpaces.** The Personal/Core children have a utilization "Billing option" row (default
+  `{unit:"730",selectedId:"Monthly"}`) and dependent selectors; workSpacesPools has dependent
+  selectors only. The parent fails closed with `Running Mode: "[object Object]"`, because a
+  utilization row's object value is stringified before matching.
+- **MediaLive.** Pipeline, Resolution, Bit Rate, Video Quality, Frame Rate and Reserve Type are
+  dependent rows with no default on most cards. `mediaLiveInput1` prices at defaults (7.30) and
+  `mediaLiveAnywhereChannel` is clean, but the default child pair includes `mediaLiveOutput1`,
+  which fails closed.
+- **MediaConvert.** The live UI resolves the dependent rows to Single pass / 4K / <=30fps / 4 and
+  prices 1000 hours at 1,492.00: `60,000 basic minutes x 4 normalization ratio = 240,000
+  normalized minutes`, then 100,000 x 0.0075 + 140,000 x 0.0053. This engine skips the empty
+  dependent values and matches nothing.
+
+### The one artifact: Amazon WorkSpaces declares two children that do not exist
+
+The live `amazonWorkSpaces` manifest entry lists six `templates`, but the manifest has no service
+entry for `workSpacesThinClient` or `workSpacesSecureBrowser`, and
+`https://d1qsjq9pzbk1k6.cloudfront.net/data/workSpacesThinClient/en_US.json` answers **403**.
+`https://calculator.aws/#/createCalculator/WorkSpaces` offers exactly four children (Personal,
+Core Bundles, Core Managed Instances, and a disabled Pools) and no Thin Client or Secure Browser.
+So those two are dangling references in the live data plane: there is no surface to cover, and
+scoring them `missing-definition` made the parent count two phantom blockers.
+
+### The rule now
+
+- A selector's class is the union of its **served** children, using the same precedence a single
+  service uses (`blocked:subtype` > `blocked:column-form` > `partial:column-form` > `clean`). A
+  parent whose children are blocked by a missing input subtype no longer claims a column-form gap.
+- A declared child with no manifest entry is `selector_unserved`: recorded in its own column,
+  never scored as non-clean, and never hidden. If every declared child is unserved the parent is
+  `no-surface`, which is what the calculator shows.
+- `selector_blockers` names each blocker and the children that carry it
+  (`utilization-selector (amazonEmrMasterNode, amazonEmrCoreNode, amazonEmrTaskNode)`), the
+  parent's `missing_subtypes`/`hard_blockers`/`deep_gaps` carry the union, and `next_action`
+  repeats the concrete child actions. `Resolve the non-clean children` is gone from the tracker.
+- Worked example, Amazon WorkSpaces: `selector_children=6`, `selector_nonclean` is the four real
+  children, `selector_unserved=workSpacesThinClient;workSpacesSecureBrowser`.
+
+Coverage delta from `main` at the time of the selector rule (`blocked:subtype` 9, `clean` 399,
+`partial:column-form` 16, `blocked:column-form` 17, P1 14, P2 139): `blocked:subtype` 10 (Amazon
+Mainframe Modernization reclassified), `blocked:column-form` 16 after the two WorkSpaces children
+stopped being scored, `clean` and `partial` unchanged, P1 unchanged. No service became clean by
+dropping an unserved child, and the two unserved children are listed on the Amazon WorkSpaces row.
+The remap re-test below adds a second blocked service and its parent, which is where the final
+numbers in the last subsection come from.
+
+### Second finding: the direction was fixed; the primary selector still keeps its token
+
+The first version of this section recorded that `src/engine/column-form.ts` looked up
+`remap[uiValue]` while the live engine maps the other way. That is fixed (w3, `bf27e34`):
+`src/data/column-form.ts` applies `remapValue` **forward** to the aggregation rows and the price
+records and `reverseRemapValue` to the meter tokens and the index path, which is exactly live `b`,
+`o` and `u` (offsets 1227218, 1466571). The coverage rule proposed here then,
+`remap.keyValue-direction`, is **retired**: its premise is gone, and a rule that fires on the
+direction would now be flagging services that work.
+
+The symptom it caught was real, so the section was re-tested against the merged engine
+(`80bbda0`, this branch rebased) instead of trusting the earlier note. `realTimeDocumentTranslation`
+still cannot price its own default, and the cause is narrower than the direction:
+
+| Probe (us-east-1, offline cache) | Result |
+| --- | --- |
+| `evaluateService` with defaults | `MISSING_PRICE columnFormIPM selector values {"FileType":"Basic"} do not match a PLC_2.0 aggregation row` |
+| same, `--set columnFormIPM={"FileType":"Basic - Text, HTML"}` + 1M characters | 15.00 USD/month, config summary `Document Type (Basic - Text, HTML)` |
+
+The evidence lines up with section 14.2 and 14.3:
+
+- The definition's remap is `{"Basic": "Basic - Text, HTML", "Office": "Office - Docx"}` and its
+  single row is `{selectorId: "FileType", defaultValue: "Basic"}` on `primaryKey: "FileType"`.
+- `.../translate-document-calc/metadata.json` declares `primarySelectors`
+  `["Location", "operation", "FileType"]`, and the aggregation rows carry the **price tokens**
+  (`FileType: "Basic"` / `"Office"`), so the form's options are the remapped labels
+  (`Basic - Text, HTML`, `Office - Docx`). Live `getInitialValue` keeps a default only when the
+  option set offers it, otherwise takes the first offered value (section 14.3), so the live form
+  saves the label.
+- `resolveColumnFormSelectors` in `src/engine/column-form.ts` keeps the **primary** selector's
+  value verbatim and only resolves every other row through the narrowed option tree. The raw token
+  `Basic` therefore survives into the value map while every aggregation row has been remapped to
+  the label, and no row can match.
+
+The tracker names that cause with a static, offline rule instead of trusting the clean label:
+`remap.keyValue-primary` (`primaryRemapToken` in `scripts/coverage-column-form.ts`, unit tested).
+It fires when the primary selector's declared default is a `remap.keyValue` key that maps to a
+different label, which is one definition today, `realTimeDocumentTranslation`. It moves to
+`blocked:column-form` with `Implement column-form remap.keyValue-primary`, and Amazon Translate,
+which offers it as a child, moves from `clean`/P2 to `blocked:column-form`/P1 and names the child.
+The mirror state from the first version (the default is already the label, so 14.3 keeps it) is
+**not** a defect now that the direction is right; those six definitions' remaining failures have
+other causes (`amazonFSxForLustre` is the `replace` boundary in 14.9).
+
+`amazonGameLiftStreams`, the open question in the first version, is **closed: it prices**.
+There is no remap; its primary selector is composite (`{"Stream Class": ["VCPU", "VRAM", "RAM"]}`)
+and one supplied value could not fill the index path before the merge. The aggregation row now
+supplies the rest, and the numbers match the price data:
+
+| Evidence | Value |
+| --- | --- |
+| aggregation row (us-east-1) | `Product Family: Compute Instance, Stream Class: gen5n_ultra, Reservation Class: OnDemand, VCPU: 8, VRAM: 24, RAM: 32` |
+| index record at that path | `price: "1.4544000000"` |
+| engine, 100 users x 2 hours/day | 8,726.40 USD/month = 100 x 2 x 30 x 1.4544 |
+
+### Tracker honesty fixes from the re-test
+
+Two reporting defects came out of the same pass:
+
+- `regex-remap` is retired. D-027 already recorded that the live forward remap is a plain object
+  lookup, so `"/1\\s?yr/"` is an inert literal key on both sides, and the only regex use is the
+  reversed key as a price-set token, which `columnFormMeterFragments` and `filterColumnFormMeters`
+  do too (`bundle` offsets 1466571 and 1468802). There was never a fail-closed path behind the
+  label, and it never classified a row on its own: all 13 definitions that carry one also carry
+  `additional-pricing-data`. Tests: `remapValue`/`reverseRemapValue` parity and the reversed
+  regex-shaped token in `tests/column-form.test.ts`.
+- The runtime pass reported `error` for `MissingPriceError`, because that class is not an
+  `EngineError`. `runtimeLabel` in `scripts/coverage-runtime.ts` now maps it to `missing-price`
+  and gives an uncached offline fetch its own `not-cached` bucket (unit tested). That is why 27
+  us-east-1 and 66 us-east-2 rows changed label without changing class, and why the generic
+  `error` bucket is now one row per region (`amazonLookoutForEquipment`, below) plus `awsBackup`
+  (`not-cached`).
+
+Two defects are left alone because they live in other workers' files, not in the tracker:
+
+- `resolveColumnFormSelectors` (above): the primary selector needs the same 14.3 resolution every
+  other row gets. `src/engine/column-form.ts` belongs to the column-form worker.
+- `amazonLookoutForEquipment` is statically clean and throws `VALIDATION_ERROR` at defaults: its
+  `fileSize` component declares `defaultOption: {size: "gb", frequency: "month"}`, but
+  `src/engine/inputs.ts` only accepts a frequency from `dropDownFrequency` or `outputFrequency`
+  (`allowsFrequency = frequencyOptions.length > 0 || outputFrequency !== "NA"`), and this component
+  declares neither. The live form shows "GB per month".
+
+Coverage delta from `main` after the re-test (P1 14, `clean` 399, `partial:column-form` 16,
+`blocked:column-form` 17, `blocked:subtype` 9): `clean` 397, `partial:column-form` 16,
+`blocked:column-form` 18, `blocked:subtype` 10, P1 15, P2 138. Three services changed class:
+`realTimeDocumentTranslation` and Amazon Translate are blocked by the primary-remap rule, and
+Amazon Mainframe Modernization is `blocked:subtype` because a missing input subtype outranks a
+column-form feature. Nothing became clean.

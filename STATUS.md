@@ -86,12 +86,19 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 107 tests, pass
+- `npm test`: 149 tests, pass
 - `npm run e2e`: 28 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
   ledger rows including the editor-recompute oracle)
 - `npm run ledger`: 16 rows, all pass
-- `npm run coverage`: 441-row exhaustive tracker in `analysis/COVERAGE_TABLE.md`
-  (382 clean, 33 partial column-form, 17 blocked column-form, 9 blocked by subtype)
+- `npm run coverage -- --evaluate --offline`: 441-row exhaustive tracker in
+  `analysis/COVERAGE_TABLE.md` (397 clean, 16 partial column-form, 18 blocked column-form,
+  10 blocked by subtype; P1 15, P2 138).
+- Selector rows are scored by the children the live calculator serves and name the blocker and
+  the children that carry it (`analysis/FINDINGS.md` sections 14 and 15, D-028). Two Amazon
+  WorkSpaces children are dangling references in the live manifest and have no surface.
+- The runtime columns separate a real defect from an environment gap: `MissingPriceError` is
+  `missing-price` and an uncached offline fetch is `not-cached` instead of both reading `error`
+  (D-029), so one row per region is left in the `error` bucket (see the fail-closed list below).
 - Screenshots of every public link: `receipts/screenshots/` (16 PNGs)
 
 ## Coverage ledger summary
@@ -125,14 +132,36 @@ editor at 957.46/month.
 - Fail-closed gaps (adapter tasks, not silent zeros): `utilization` (12 services), bespoke
   EC2/Windows/RDS math (`ec2PriceDisplay`, `ec2Variable`, `snapShotMaths`,
   `workloadInstanceMath`), pricing `sets`-based instance data, and the remaining
-  `columnFormIPM` surface (Database Savings Plans, dependent selectors, regex key remaps,
-  sub-components, reserved/upfront totals) listed in `docs/DECISIONS.md` D-020, D-021, and D-024.
+  `columnFormIPM` surface (Database Savings Plans, sub-components, reserved/upfront totals,
+  `remap.constant`) listed in `docs/DECISIONS.md` D-020, D-021, and D-024.
 - `percentInput` saves the fraction where the live calculator saves the entered percent, so a
   published estimate with a percent input disagrees with the editor recompute by the square of
   the percent. D-026 has the bundle evidence and the failing Keyspaces 25.69 vs 25.63 oracle.
+- P1 is 15 rows, all engine gaps rather than tracker noise: five selectors name their children
+  (Amazon Chime SDK `remap.constant`, Amazon EMR and Amazon WorkSpaces `utilization-selector`,
+  Amazon Translate `remap.keyValue-primary`, AWS Mainframe Modernization the missing
+  `utilization` input subtype), plus AWS Directory Service (`remap.constant`), four services
+  blocked by a missing `utilization` subtype (Deadline Cloud, Direct Connect, MediaConnect, AWS
+  PCS) and five partial on `additional-pricing-data` (DocumentDB, Keyspaces, Neptune, Timestream,
+  DMS). Evidence: `analysis/FINDINGS.md` section 15, D-028, D-029.
+- The `remap.keyValue` direction is native since `bf27e34` (forward on aggregation rows and price
+  records, reverse on meter tokens and the index path). What is still missing is resolving the
+  **primary** selector through the remapped option tree, which is
+  `realTimeDocumentTranslation` alone: its default `Basic` is the price token while every option
+  and aggregation row holds `Basic - Text, HTML`. The tracker blocks it with
+  `remap.keyValue-primary`, the rule that replaced the retired `remap.keyValue-direction` and
+  `regex-remap` rules, so no row carries a stale fail-closed label.
+- Two clean rows still cannot evaluate their defaults, both in files this tracker does not own:
+  `realTimeDocumentTranslation` (primary remap token, above) and `amazonLookoutForEquipment`,
+  whose `fileSize` `defaultOption.frequency` ("month") is not in `dropDownFrequency`, so
+  `src/engine/inputs.ts` rejects a default the live form accepts.
 - Six services reference meters that are absent from their regional price file (Personalize,
   Transcribe, ACM, MediaTailor, Firewall Manager, IoT SiteWise). The engine fails closed
-  instead of publishing a zero.
+  instead of publishing a zero. The same `missing-price` verdict now covers 28 us-east-1 and 67
+  us-east-2 rows, which also makes the AI model rows visible. For `ai21` (and `amazon`,
+  `workload1`) the meter token exists in the `bedrockfoundationmodels` file while the component
+  reads `bedrock`, so the meter lookup, not the data, is the gap. Those rows are left alone:
+  they need per-service analysis, and relabelling them is not a tracker-only change.
 
 ## Next three actions
 
@@ -140,15 +169,17 @@ editor at 957.46/month.
    editor, then add the Keyspaces receipt that currently fails by 0.06 (`docs/DECISIONS.md` D-026).
 2. Implement `utilization` (12 services) and the EBS `snapShotMaths` adapter, then the EC2
    pricing-`sets` path.
-3. Add the live "first available selector value" fallback for column forms so the needs-input
-   services can evaluate with defaults, then take ElastiCache, Timestream, FSx for Lustre and
-   Redshift past dependent selectors (`docs/DECISIONS.md` D-024).
+3. Resolve the primary selector through the remapped option tree
+   (`realTimeDocumentTranslation`), accept a `fileSize` `defaultOption.frequency` that is not in
+   `dropDownFrequency` (`amazonLookoutForEquipment`), and give the live form's "first available
+   selector value" fallback to the remaining needs-input services (`docs/DECISIONS.md` D-029).
 
 ## Last commit
 
-See `git log -1`. This session's work: P3 receipts, data transfer pricing, `columnFormIPM`,
-throughput, fileSize wire-unit normalization, the BINUS estimate (Update + Share), and the
-public repository/skill install docs.
+See `git log -1`. This branch's work: the non-clean selector audit, the remap re-test after the
+dependent-selector merge, the P3 receipts, data transfer pricing, `columnFormIPM`, throughput,
+fileSize wire-unit normalization, the BINUS estimate (Update + Share), and the public
+repository/skill install docs.
 
 ## Final summary
 

@@ -533,3 +533,34 @@ FSx for Lustre, both taken from the bundle rather than from the symptom.
 Verified by the live editor oracle on both services (`receipts/p2-direct-connect-utilization.json`
 `2463.75`, `receipts/p2-fsx-lustre.json` `174.32`), the full test suite, and a tracker rerun whose
 only class changes are the intended ones. Evidence: `analysis/FINDINGS.md` sections 16.2 and 16.3.
+
+## D-032: Column-form `utilization` rows are native, and a missing single price point bills 0 (2026-11-25)
+
+The `utilization-selector` blocker on Amazon EMR and Amazon WorkSpaces was real, but it had two
+parts. Both are taken from the live bundle and confirmed in the live editor.
+
+- **A column-form `utilization` row is a value object, not a selector string.** Its save format is
+  `{unit, selectedId}`; live `q.a` (offset 1271617) turns it into the hours a month the `Hourly`
+  and `Monthly` price models multiply by, and the models no longer use a hardcoded 730
+  (`G`/`V`, offset 2875759). The typed unit is validated as a whole number in `1..max(duration)`
+  (`L.validateChange`), and the four durations the row offers when it is not a selector come from
+  `P`. When the row also carries a `selectorId` that the component tree holds, its `selectedId`
+  is the value the price set matches: WorkSpaces' `Running Mode` is a `secondaryKey` and its
+  `remap.keyValue` turns the aggregation's `AlwaysOn`/`AutoStop` into the row's
+  `Monthly`/`Hourly`. The row is saved as `{selectorId: {value: {unit, selectedId}}}`, matching a
+  native live save byte for byte on the value.
+- **`singlePricePoint` bills 0 for a meter the loaded region does not carry.** Live reads
+  `a[o] ? a[o] : 0` and returns `{value: 0}` when the meter is absent (offset 497900). WorkSpaces
+  Personal/Core declare `additionalBundleUnitPrice2` on a meter no region carries, so the live
+  form bills 0 while this engine threw `no price for metered unit`. The engine now returns 0 for
+  an absent meter in a region whose map loaded, and still fails closed when the mapping never
+  loaded that region - a data gap is not a live zero. This mirrors the `pricingComboV2` rule from
+  D-030.
+
+Scope note: live also seeds its value map with rows that declare a truthy `defaultValue` first, so
+a natively saved WorkSpaces row and summary list the defaulted rows before `Number of
+WorkSpaces`. The engine keeps definition order; matching live's key order is cost-neutral and
+would invalidate the already-published ElastiCache/OpenSearch/Redshift receipts, so it was left
+alone. Evidence and live numbers: `analysis/FINDINGS.md` section 17,
+`receipts/p1-utilization-emr.json` (113.88) and `receipts/p1-utilization-workSpaces.json`
+(2,297.58), both editor recompute with zero mismatches.

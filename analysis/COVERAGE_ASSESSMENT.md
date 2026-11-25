@@ -569,20 +569,20 @@ has the same rows plus the clean definitions and the runtime error text.
 
 ### Blocked by column-form hard features
 
+`utilization-selector` left this table on 2026-11-25: column-form `utilization`
+rows are native, so the three Amazon EMR node children, WorkSpaces Personal,
+WorkSpaces Core Bundles, and WorkSpaces Core Managed Instances are clean
+(`analysis/FINDINGS.md` section 17). `analysis/COVERAGE_TABLE.md` is the
+generated, current view.
+
 | Service | Visible us-east-2 | Hard feature | Runtime |
 | --- | --- | --- | --- |
 | `aWSDirectoryService` | yes | remap.constant | fail:MISSING_INPUT |
-| `amazonEmrCoreNode` | no | utilization-selector | fail:MISSING_INPUT |
-| `amazonEmrMasterNode` | no | utilization-selector | fail:MISSING_INPUT |
-| `amazonEmrTaskNode` | no | utilization-selector | fail:MISSING_INPUT |
-| `amazonWorkspaces` | no | utilization-selector | fail:MISSING_PRICE |
 | `chimeBusinessCallingAnalysis` | no | remap.constant | fail:MISSING_INPUT |
 | `chimeCostAnalysis` | no | remap.constant | fail:MISSING_INPUT |
 | `proxyPhoneSession` | no | remap.constant | fail:MISSING_INPUT |
 | `ptsnAudio` | no | remap.constant | fail:MISSING_INPUT |
 | `sipTrunking` | no | remap.constant | fail:MISSING_INPUT |
-| `workSpacesCore` | no | utilization-selector | fail:MISSING_PRICE |
-| `workSpacesInstances` | no | utilization-selector | fail:MISSING_PRICE |
 
 ### Partial column-form services
 
@@ -656,7 +656,7 @@ has the same rows plus the clean definitions and the runtime error text.
 | `amazonComprehend` | 12 | clean | - | ok | ok |
 | `amazonComprehendMedical` | 5 | clean | - | fail:MISSING_INPUT | fail:MISSING_INPUT |
 | `amazonDynamoDb` | 8 | partial | amazonDynamoDbDaxClusters | fail:MISSING_INPUT | fail:MISSING_INPUT |
-| `amazonEMR` | 5 | blocked | amazonEmrMasterNode;amazonEmrCoreNode;amazonEmrTaskNode | fail:MISSING_INPUT | fail:MISSING_INPUT |
+| `amazonEMR` | 5 | clean | - | ok | ok |
 | `amazonLightsail` | 8 | partial | lightsailVirtualServers;lightsailManagedDatabases;lightsailContainers;lightsailObjectStorage | fail:MISSING_INPUT | fail:MISSING_INPUT |
 | `amazonMainframeModernization` | 2 | blocked | mainframeBluAge;mainframeMicroFocus | fail:MISSING_INPUT | fail:MISSING_INPUT |
 | `amazonOmics` | 4 | partial | omicsWorkflows;omicsReady2RunWorkflows | fail:MISSING_INPUT | fail:MISSING_INPUT |

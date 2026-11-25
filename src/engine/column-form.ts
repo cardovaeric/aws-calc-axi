@@ -9,6 +9,14 @@
  * regex remap keys, `subComponentsList`, tiered PLC_2.0 patterns,
  * `exportTagsAsValue`, and multiple price sets.
  *
+ * A `utilization` row is not a plain selector: its saved value is an object
+ * `{unit, selectedId}` (the live `L` component and the `q.a` hours helper in
+ * `analysis/bundle.js`), which supplies the hours a month the `Hourly` and
+ * `Monthly` price models multiply by. Used with a `selectorId` it is also a
+ * pricing selector, and its `selectedId` is the value the price tree shows
+ * (WorkSpaces `remap.keyValue` turns the aggregation's `AlwaysOn`/`AutoStop`
+ * into the row's `Monthly`/`Hourly`). See `analysis/FINDINGS.md` section 17.
+ *
  * A component holds exactly one row, which is what the live calculator does: its
  * save format is an array but both rehydration paths take `value[0]`, and the
  * live form adds a second configuration as a second service. More than one row
@@ -25,7 +33,9 @@
  * row's `defaultValue` when that is offered, otherwise by the first offered
  * value; a selector with no offered value at all is dropped from the saved row.
  *
- * Save format matches the live converter: `{value: [{selectorId: {value}}]}`.
+ * Save format matches the live converter: `{value: [{selectorId: {value}}]}`,
+ * where a `utilization` row's inner value is `{unit, selectedId}` rather than a
+ * string.
  */
 import { EngineError, InputValidationError } from "./errors.ts";
 import type {
@@ -133,6 +143,18 @@ function scalarOf(raw: unknown): string {
 export interface ColumnFormRowValues {
   values: Record<string, string>;
   provided: Set<string>;
+  /** `utilization` rows keep their live value object beside the selector id. */
+  utilization: Record<string, ColumnFormUtilization>;
+}
+
+/**
+ * A `utilization` row's live value: the number the user typed plus the unit
+ * label the dropdown shows (live `L.createOptions` and `q.a` in
+ * `analysis/bundle.js`).
+ */
+export interface ColumnFormUtilization {
+  unit: string;
+  selectedId: string;
 }
 
 /** Rows that carry a selector id and therefore take part in pricing. */
@@ -140,10 +162,7 @@ export function selectableRows(
   component: ColumnFormComponent
 ): ColumnFormRowDefinition[] {
   return component.row.filter(
-    (row) =>
-      row.selectorId !== undefined &&
-      row.selectorId !== "" &&
-      !(row.type === "utilization" && (row.selectorId === undefined || row.selectorId === ""))
+    (row) => row.selectorId !== undefined && row.selectorId !== ""
   );
 }
 
@@ -167,7 +186,28 @@ export function columnFormSelectorValues(
   }
   const values: Record<string, string> = {};
   const provided = new Set<string>();
+  const utilization: Record<string, ColumnFormUtilization> = {};
   for (const row of rows) {
+    if (row.type === "utilization") {
+      const override = overrides[row.selectorId];
+      const fallback = utilizationOf(row.defaultValue) ?? {
+        ...COLUMN_FORM_UTILIZATION_DEFAULT,
+      };
+      const value = override === undefined ? fallback : utilizationOf(override, fallback);
+      if (!value) {
+        throw new EngineError(
+          `columnFormIPM "${component.id}" needs "${row.selectorId}" as ` +
+            `{unit, selectedId} (for example {"unit": "100", "selectedId": ` +
+            `"%Utilized/Month"}) or a bare number for the unit`,
+          "INVALID_SPEC",
+          { componentId: component.id, selectorId: row.selectorId, value: override }
+        );
+      }
+      if (override !== undefined) provided.add(row.selectorId);
+      values[row.selectorId] = value.selectedId;
+      utilization[row.selectorId] = value;
+      continue;
+    }
     const override = overrides[row.selectorId];
     if (override !== undefined) {
       values[row.selectorId] = scalarOf(override);
@@ -181,7 +221,7 @@ export function columnFormSelectorValues(
     }
     values[row.selectorId] = scalarOf(fallback);
   }
-  return { values, provided };
+  return { values, provided, utilization };
 }
 
 function assertValid(
@@ -240,6 +280,140 @@ function assertValid(
 
 const HOURS_IN_MONTH = 730;
 
+/**
+ * The four duration labels a `utilization` row offers when it is not also a
+ * pricing selector (live `P` in `analysis/bundle.js`, offset 2870678).
+ */
+export const COLUMN_FORM_UTILIZATION_OPTIONS = [
+  "%Utilized/Month",
+  "Hours/Day",
+  "Hours/Week",
+  "Hours/Month",
+] as const;
+
+/**
+ * The unit a duration gets when the live form has to (re)select it (live `D`,
+ * offset 2870901). `Monthly` and `Hourly` are the WorkSpaces billing option.
+ */
+export const COLUMN_FORM_UTILIZATION_UNITS: Record<string, string> = {
+  "%Utilized/Month": "100",
+  "Hours/Day": "24",
+  "Hours/Week": "168",
+  "Hours/Month": "730",
+  Hourly: "160",
+  Monthly: "730",
+};
+
+/** Live `L.defaultProps.initialValue` and the component default value. */
+export const COLUMN_FORM_UTILIZATION_DEFAULT: ColumnFormUtilization = {
+  unit: "100",
+  selectedId: "%Utilized/Month",
+};
+
+function asRecord(value: unknown): Record<string, unknown> | undefined {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : undefined;
+}
+
+/**
+ * Read a `utilization` row value from the live save shape
+ * (`{value: {unit, selectedId}}`), the bare object, or a scalar unit.
+ * `fallback.selectedId` fills in the duration when only a unit is given.
+ */
+export function utilizationOf(
+  raw: unknown,
+  fallback: ColumnFormUtilization = COLUMN_FORM_UTILIZATION_DEFAULT
+): ColumnFormUtilization | undefined {
+  let candidate = raw;
+  const wrapper = asRecord(candidate);
+  if (wrapper && !("unit" in wrapper) && "value" in wrapper) candidate = wrapper["value"];
+  const record = asRecord(candidate);
+  if (record && "unit" in record) {
+    const unit = record["unit"];
+    if (unit === undefined || unit === null || unit === "") return undefined;
+    const selectedId = record["selectedId"];
+    return {
+      unit: String(unit),
+      selectedId:
+        typeof selectedId === "string" && selectedId !== ""
+          ? selectedId
+          : fallback.selectedId,
+    };
+  }
+  if (typeof candidate === "string" || typeof candidate === "number") {
+    const unit = String(candidate).trim();
+    if (unit === "") return undefined;
+    return { unit, selectedId: fallback.selectedId };
+  }
+  return undefined;
+}
+
+/**
+ * Live `q.a` (offset 1271617): the hours in a month a `utilization` value
+ * stands for. Unlike the `utilization` input subtype this helper does not
+ * round, and a value it does not recognise (such as `Monthly`) means a full
+ * 730-hour month.
+ */
+export function columnFormUtilizationHours(value: ColumnFormUtilization | undefined): number {
+  if (!value || value.unit === "" || value.selectedId === "") return HOURS_IN_MONTH;
+  const unit = Number(value.unit);
+  if (!Number.isFinite(unit)) return HOURS_IN_MONTH;
+  switch (value.selectedId) {
+    case "%Utilized/Month":
+      return (unit / 100) * HOURS_IN_MONTH;
+    case "Hours/Day":
+      return (unit / 24) * HOURS_IN_MONTH;
+    case "Hours/Week":
+      return (unit / 168) * HOURS_IN_MONTH;
+    case "Hours/Month":
+    case "Hourly":
+      return unit;
+    default:
+      return HOURS_IN_MONTH;
+  }
+}
+
+/**
+ * Live `L.validateChange`: the typed unit must be a whole number in
+ * `1..max`, where `max` depends on the selected duration.
+ */
+function assertUtilizationValid(
+  component: ColumnFormComponent,
+  row: ColumnFormRowDefinition,
+  value: ColumnFormUtilization
+): void {
+  const unit = Number(value.unit);
+  if (!Number.isFinite(unit)) {
+    throw new InputValidationError({
+      serviceCode: component.mappingDefinitionName,
+      componentId: component.id,
+      label: row.label,
+      problem: `"${value.unit}" is not a number`,
+      value: value.unit,
+    });
+  }
+  const max = Number(COLUMN_FORM_UTILIZATION_UNITS[value.selectedId] ?? HOURS_IN_MONTH);
+  if (!Number.isInteger(unit)) {
+    throw new InputValidationError({
+      serviceCode: component.mappingDefinitionName,
+      componentId: component.id,
+      label: row.label,
+      problem: "decimals are not allowed",
+      value: value.unit,
+    });
+  }
+  if (unit < 1 || unit > max) {
+    throw new InputValidationError({
+      serviceCode: component.mappingDefinitionName,
+      componentId: component.id,
+      label: row.label,
+      problem: `must be between 1 and ${max} for ${value.selectedId}`,
+      value: value.unit,
+    });
+  }
+}
+
 export function primarySelectorOf(component: ColumnFormComponent): string {
   const primaryKey = component.primaryKey;
   if (typeof primaryKey === "string") return primaryKey;
@@ -269,12 +443,11 @@ function assertSupported(component: ColumnFormComponent): void {
     }
   }
   for (const row of component.row) {
-    // The utilization row has no selector id; the live form always bills it at
-    // 100% for these templates, so it does not take part in pricing selectors.
-    if (row.type === "utilization" && (row.selectorId === undefined || row.selectorId === "")) {
-      continue;
-    }
-    if (!["textInput", "autoSuggest", "dropDown"].includes(row.type)) {
+    // A `utilization` row is native: with a selector id it is resolved through
+    // the same option tree as the other rows and its `selectedId` takes part in
+    // price matching; its `{unit, selectedId}` value supplies the hours the
+    // Hourly/Monthly models multiply by.
+    if (!["textInput", "autoSuggest", "dropDown", "utilization"].includes(row.type)) {
       throw new EngineError(
         `columnFormIPM "${component.id}" has a "${row.type}" row, which is not implemented yet`,
         "UNSUPPORTED_INPUT",
@@ -483,6 +656,8 @@ export interface ResolvedColumnFormSelectors {
   values: Record<string, string>;
   /** Selectors the live form would not render for this configuration. */
   dropped: string[];
+  /** Resolved `{unit, selectedId}` for every rendered utilization row. */
+  utilization: Record<string, ColumnFormUtilization>;
   tree?: ColumnFormSelectorTree;
 }
 
@@ -501,12 +676,17 @@ export function resolveColumnFormSelectors(
   raw: unknown,
   data: ColumnFormPricingData
 ): ResolvedColumnFormSelectors {
-  const { values: initial, provided } = columnFormSelectorValues(component, raw);
+  const {
+    values: initial,
+    provided,
+    utilization: initialUtilization,
+  } = columnFormSelectorValues(component, raw);
+  const utilization: Record<string, ColumnFormUtilization> = { ...initialUtilization };
   const aggregations = data.aggregations ?? [];
   if (aggregations.length === 0) {
     // Hand-built pricing data (unit fixtures) carries no aggregation rows, so
     // there is no option tree to resolve against. Take the values as given.
-    return { values: initial, dropped: [] };
+    return { values: initial, dropped: [], utilization };
   }
   const tree = buildColumnFormSelectorTree(
     component,
@@ -520,21 +700,29 @@ export function resolveColumnFormSelectors(
   for (const row of selectableRows(component)) {
     const selectorId = row.selectorId;
     const current = initial[selectorId] ?? "";
+    const isUtilization = row.type === "utilization";
     if (selectorId === primary) {
       resolved[selectorId] = current;
       continue;
     }
+    let offered: string[];
     if (!(selectorId in tree.options)) {
-      // Not a pricing selector (text inputs, the count row): keep as given.
-      resolved[selectorId] = current;
-      continue;
+      if (!isUtilization) {
+        // Not a pricing selector (text inputs, the count row): keep as given.
+        resolved[selectorId] = current;
+        continue;
+      }
+      // A utilization row the price tree does not carry is the live `P` list:
+      // the four durations, always offered.
+      offered = [...COLUMN_FORM_UTILIZATION_OPTIONS];
+    } else {
+      const narrowed = narrowOptions(
+        tree.options[selectorId] ?? null,
+        dependentChain(tree.dependents, selectorId),
+        resolved
+      );
+      offered = optionKeys(narrowed ?? null);
     }
-    const narrowed = narrowOptions(
-      tree.options[selectorId] ?? null,
-      dependentChain(tree.dependents, selectorId),
-      resolved
-    );
-    const offered = optionKeys(narrowed ?? null);
     if (offered.length === 0) {
       if (provided.has(selectorId)) {
         throw new EngineError(
@@ -559,6 +747,7 @@ export function resolveColumnFormSelectors(
         );
       }
       dropped.push(selectorId);
+      delete utilization[selectorId];
       continue;
     }
     if (current !== "" && offered.includes(current)) {
@@ -580,22 +769,28 @@ export function resolveColumnFormSelectors(
         { componentId: component.id, selectorId, value: current, offered }
       );
     }
-    const fallback = row.defaultValue === undefined ? "" : scalarOf(row.defaultValue);
-    if (fallback !== "" && offered.includes(fallback)) {
-      resolved[selectorId] = fallback;
-      continue;
+    if (!isUtilization) {
+      const fallback = row.defaultValue === undefined ? "" : scalarOf(row.defaultValue);
+      if (fallback !== "" && offered.includes(fallback)) {
+        resolved[selectorId] = fallback;
+        continue;
+      }
     }
-    if (current !== "") {
-      // The value became invalid because a parent changed. The live form
-      // silently re-selects the first offered value; a user-supplied value is
-      // rejected above, so this is a definition default that the parent no
-      // longer allows.
-      resolved[selectorId] = offered[0]!;
-      continue;
+    // The value became invalid because a parent changed. The live form
+    // silently re-selects the first offered value; a user-supplied value is
+    // rejected above, so this is a definition default that the parent no
+    // longer allows. A utilization row also resets its unit, exactly like live
+    // `L.createOptions` (`{unit: D[label], selectedId: label}`).
+    const first = offered[0]!;
+    resolved[selectorId] = first;
+    if (isUtilization) {
+      utilization[selectorId] = {
+        unit: COLUMN_FORM_UTILIZATION_UNITS[first] ?? "100",
+        selectedId: first,
+      };
     }
-    resolved[selectorId] = offered[0]!;
   }
-  return { values: resolved, dropped, tree };
+  return { values: resolved, dropped, utilization, tree };
 }
 
 function dependentParents(
@@ -789,7 +984,9 @@ function assertNoSavingsPlan(component: ColumnFormComponent, values: Record<stri
 export interface ColumnFormResult {
   monthly: number;
   upfront: number;
-  saved: { value: Array<Record<string, { value: string }>> };
+  saved: {
+    value: Array<Record<string, { value: string | ColumnFormUtilization }>>;
+  };
   configSummary: string;
   /** Values other components reference (`calculationId` targets and exports). */
   extraValues: Record<string, number | string>;
@@ -805,9 +1002,16 @@ export function evaluateColumnForm(
   // User-supplied values go through the row validations before anything is
   // replaced by an offered option.
   {
-    const { provided, values: initial } = columnFormSelectorValues(component, raw);
+    const { provided, values: initial, utilization } = columnFormSelectorValues(
+      component,
+      raw
+    );
     for (const row of selectableRows(component)) {
       if (!provided.has(row.selectorId)) continue;
+      if (row.type === "utilization") {
+        assertUtilizationValid(component, row, utilization[row.selectorId]!);
+        continue;
+      }
       assertValid(component, row, initial[row.selectorId] ?? "");
     }
   }
@@ -909,6 +1113,11 @@ export function evaluateColumnForm(
   const extraValues: Record<string, number | string> = {};
   const rows = selectableRows(component);
   const utilizationRow = component.row.find((row) => row.type === "utilization");
+  // Live `te`/`q.a`: the exported hours come from the utilization row's value,
+  // and a component with no utilization row prices a full 730-hour month.
+  const totalHours = columnFormUtilizationHours(
+    utilizationRow?.selectorId ? resolved.utilization[utilizationRow.selectorId] : undefined
+  );
 
   if (component.disableCalculation) {
     // The live form computes no subtotal here; it exposes the raw pricing
@@ -918,17 +1127,21 @@ export function evaluateColumnForm(
     }
     for (const row of rows) {
       if (!row.exportValueAs) continue;
+      if (row.type === "utilization") continue;
       const value = values[row.selectorId] ?? "";
       if (value === "") continue;
       extraValues[row.exportValueAs] = row.exportValueAs.startsWith("count") || row.type === "textInput"
         ? Number(value)
         : value;
     }
+    if (utilizationRow?.exportValueAs) {
+      extraValues[utilizationRow.exportValueAs] = totalHours;
+    }
     return {
       monthly: 0,
       upfront: 0,
-      saved: { value: [savedRow(rows, values)] },
-      configSummary: columnFormSummary(values, component.row),
+      saved: { value: [savedRow(rows, values, resolved.utilization)] },
+      configSummary: columnFormSummary(values, component.row, resolved.utilization),
       extraValues,
     };
   }
@@ -956,13 +1169,16 @@ export function evaluateColumnForm(
       upfront = upfrontPrice * count;
       break;
     case "Monthly":
-      // Live `V`: hourly for a partial month plus a flat monthly fee.
-      monthly = hourlyPrice * HOURS_IN_MONTH * count + monthlyPrice * count;
+      // Live `V`: hourly for a partial month plus a flat monthly fee. The live
+      // helper skips the hourly term entirely when the hourly rate is 0.
+      monthly = hourlyPrice
+        ? hourlyPrice * totalHours * count + monthlyPrice * count
+        : monthlyPrice * count;
       upfront = 0;
       break;
     case "Hourly":
-      // Live `G`: a pure hourly rate.
-      monthly = hourlyPrice * HOURS_IN_MONTH * count;
+      // Live `G`: a pure hourly rate over the utilization row's hours.
+      monthly = hourlyPrice * totalHours * count;
       upfront = 0;
       break;
     case "SavingsPlan":
@@ -982,7 +1198,9 @@ export function evaluateColumnForm(
   monthly = Number(monthly.toFixed(4));
   upfront = Number(upfront.toFixed(4));
 
-  if (utilizationRow?.exportValueAs) extraValues[utilizationRow.exportValueAs] = HOURS_IN_MONTH;
+  if (utilizationRow?.exportValueAs) {
+    extraValues[utilizationRow.exportValueAs] = totalHours;
+  }
   for (const [type, id] of Object.entries(component.calculationId ?? {})) {
     if (type === "monthly") extraValues[id] = monthly;
     else if (type === "hourly") extraValues[id] = hourlyPrice;
@@ -990,6 +1208,7 @@ export function evaluateColumnForm(
   }
   for (const row of rows) {
     if (!row.exportValueAs) continue;
+    if (row.type === "utilization") continue;
     const value = values[row.selectorId] ?? "";
     if (value === "") continue;
     extraValues[row.exportValueAs] = row.exportValueAs.startsWith("count") || row.type === "textInput"
@@ -1000,8 +1219,8 @@ export function evaluateColumnForm(
   return {
     monthly,
     upfront,
-    saved: { value: [savedRow(rows, values)] },
-    configSummary: columnFormSummary(values, component.row),
+    saved: { value: [savedRow(rows, values, resolved.utilization)] },
+    configSummary: columnFormSummary(values, component.row, resolved.utilization),
     extraValues,
   };
 }
@@ -1009,10 +1228,17 @@ export function evaluateColumnForm(
 /** The saved row: one entry per rendered selector, in definition order. */
 function savedRow(
   rows: ColumnFormRowDefinition[],
-  values: Record<string, string>
-): Record<string, { value: string }> {
-  const rowMap: Record<string, { value: string }> = {};
+  values: Record<string, string>,
+  utilization: Record<string, ColumnFormUtilization>
+): Record<string, { value: string | ColumnFormUtilization }> {
+  const rowMap: Record<string, { value: string | ColumnFormUtilization }> = {};
   for (const row of rows) {
+    if (row.type === "utilization") {
+      const value = utilization[row.selectorId];
+      if (!value) continue;
+      rowMap[row.selectorId] = { value };
+      continue;
+    }
     const value = values[row.selectorId] ?? "";
     if (value === "") continue;
     rowMap[row.selectorId] = { value };
@@ -1023,7 +1249,8 @@ function savedRow(
 /** Config summary: `label (value)` per row, plus the pricing strategy block. */
 export function columnFormSummary(
   values: Record<string, string>,
-  rows: ColumnFormRowDefinition[]
+  rows: ColumnFormRowDefinition[],
+  utilization: Record<string, ColumnFormUtilization> = {}
 ): string {
   const strategyLabels = ["Pricing model", "Purchase option", "Term"];
   let strategyCount = 0;
@@ -1041,11 +1268,15 @@ export function columnFormSummary(
     const label = definition?.label ?? selectorId;
     const display = definition?.displayInConfigSummary;
     const shown = display === false ? false : true;
+    // Live `ee` joins an object value's members with a space, so a utilization
+    // row prints `Billing option (730 Monthly)` / `Utilization (50 %Utilized/Month)`.
+    const util = definition?.type === "utilization" ? utilization[selectorId] : undefined;
+    const text = util ? `${util.unit} ${util.selectedId}` : value;
     if (!completeStrategy || !strategyLabels.includes(label)) {
-      if (shown) parts.push(`${label} (${value})`);
+      if (shown) parts.push(`${label} (${text})`);
       continue;
     }
-    strategy.push(value);
+    strategy.push(text);
   }
   const text = parts.join(", ");
   if (strategy.length === 0) return text;

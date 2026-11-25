@@ -277,13 +277,15 @@ function inventory(definition: ServiceDefinition): {
       const row = asRecord(raw);
       if (!row) continue;
       const type = text(row["type"]);
-      const selectorId = text(row["selectorId"]);
       // Dependent selectors are native: the option tree is rebuilt from the
       // aggregation rows and the price records, a value the parent no longer
       // offers falls to the fixture default or the first offered value, and a
       // selector with no offered value is dropped from the saved row. Evidence:
       // analysis/FINDINGS.md section 14 and receipts/p1-dependent-selectors.json.
-      if (type === "utilization" && selectorId !== "") hard.add("utilization-selector");
+      // `utilization` rows are native too: `{unit, selectedId}` supplies the
+      // hours the Hourly/Monthly models multiply by and its `selectedId` takes
+      // part in price matching when the row is also a selector. Evidence:
+      // analysis/FINDINGS.md section 17 and receipts/p1-utilization-selector.json.
       if (type !== "" && !["textInput", "autoSuggest", "dropDown", "utilization"].includes(type)) {
         hard.add(`row:${type}`);
       }

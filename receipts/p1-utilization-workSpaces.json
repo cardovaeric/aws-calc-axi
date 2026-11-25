@@ -1,0 +1,228 @@
+{
+  "estimate": "axi-e2e P1 WorkSpaces utilization rows",
+  "specHash": "6c8181f460ccd88d",
+  "payloadHash": "f22253265f6988f4",
+  "url": "https://calculator.aws/#/estimate?id=d51c53b3d4f11abcd999128bf1c12904e6ccb900",
+  "savedKey": "d51c53b3d4f11abcd999128bf1c12904e6ccb900",
+  "publishedAt": "2026-11-25T01:15:19.899Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 2297.58,
+    "upfront": 0,
+    "total12m": 27570.96,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonWorkspaces",
+        "template": "workspaces",
+        "region": "us-east-2",
+        "monthly": 33,
+        "upfront": 0,
+        "summary": "Number of WorkSpaces (1), Product (Enterprise Applications), Operating system (Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)"
+      },
+      {
+        "code": "amazonWorkspaces",
+        "template": "workspaces",
+        "region": "us-east-2",
+        "monthly": 55.25,
+        "upfront": 0,
+        "summary": "Number of WorkSpaces (1), Product (Enterprise Applications), Operating system (Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)"
+      },
+      {
+        "code": "workSpacesCore",
+        "template": "workspaces",
+        "region": "us-east-2",
+        "monthly": 29,
+        "upfront": 0,
+        "summary": "Number of WorkSpaces (1), Operating system (WorkSpaces Core Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)"
+      },
+      {
+        "code": "workSpacesInstances",
+        "template": "workspacesInstances",
+        "region": "us-east-2",
+        "monthly": 2180.33,
+        "upfront": 0,
+        "summary": "Number of instances (1), Operating system (Windows), Instance type (c5.12xlarge), Tenancy (Shared), Storage amount per instance (80 GB)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonWorkspaces",
+        "monthly": 33,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "amazonWorkspaces",
+        "monthly": 55.25,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "workSpacesCore",
+        "monthly": 29,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "workSpacesInstances",
+        "monthly": 2180.33,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 2297.58,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=d51c53b3d4f11abcd999128bf1c12904e6ccb900",
+    "title": "axi-e2e P1 WorkSpaces utilization rows",
+    "monthly": "2,297.58 USD",
+    "upfront": "0.00 USD",
+    "annual": "27,570.96 USD",
+    "monthlyValue": 2297.58,
+    "upfrontValue": 0,
+    "annualValue": 27570.96,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "WorkSpaces Personal",
+        "upfront": "0.00 USD",
+        "monthly": "33.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of WorkSpaces (1), Product (Enterprise Applications), Operating system (Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)",
+        "status": null
+      },
+      {
+        "name": "WorkSpaces Personal",
+        "upfront": "0.00 USD",
+        "monthly": "55.25 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of WorkSpaces (1), Product (Enterprise Applications), Operating system (Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)",
+        "status": null
+      },
+      {
+        "name": "WorkSpaces Core Bundles",
+        "upfront": "0.00 USD",
+        "monthly": "29.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of WorkSpaces (1), Operating system (WorkSpaces Core Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)",
+        "status": null
+      },
+      {
+        "name": "WorkSpaces Core Managed Instances",
+        "upfront": "0.00 USD",
+        "monthly": "2,180.33 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of instances (1), Operating system (Windows), Instance type (c5.12xlarge), Tenancy (Shared), Storage amount per instance (80 GB)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:15:23.626Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=d51c53b3d4f11abcd999128bf1c12904e6ccb900",
+    "savedKey": "d51c53b3d4f11abcd999128bf1c12904e6ccb900",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=d51c53b3d4f11abcd999128bf1c12904e6ccb900",
+      "title": "axi-e2e P1 WorkSpaces utilization rows",
+      "monthly": "2,297.58 USD",
+      "upfront": "0.00 USD",
+      "annual": "27,570.96 USD",
+      "monthlyValue": 2297.58,
+      "upfrontValue": 0,
+      "annualValue": 27570.96,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "WorkSpaces Personal",
+          "upfront": "0.00 USD",
+          "monthly": "33.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of WorkSpaces (1), Product (Enterprise Applications), Operating system (Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "WorkSpaces Personal",
+          "upfront": "0.00 USD",
+          "monthly": "55.25 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of WorkSpaces (1), Product (Enterprise Applications), Operating system (Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "WorkSpaces Core Bundles",
+          "upfront": "0.00 USD",
+          "monthly": "29.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of WorkSpaces (1), Operating system (WorkSpaces Core Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)",
+          "status": "-"
+        },
+        {
+          "name": "WorkSpaces Core Managed Instances",
+          "upfront": "0.00 USD",
+          "monthly": "2,180.33 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of instances (1), Operating system (Windows), Instance type (c5.12xlarge), Tenancy (Shared), Storage amount per instance (80 GB)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:15:50.716Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e P1 WorkSpaces utilization rows",
+    "monthly": 2297.58,
+    "upfront": 0,
+    "annual": 27570.96,
+    "services": [
+      {
+        "name": "WorkSpaces Personal",
+        "monthly": 33,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of WorkSpaces (1), Product (Enterprise Applications), Operating system (Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)"
+      },
+      {
+        "name": "WorkSpaces Personal",
+        "monthly": 55.25,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of WorkSpaces (1), Product (Enterprise Applications), Operating system (Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)"
+      },
+      {
+        "name": "WorkSpaces Core Bundles",
+        "monthly": 29,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of WorkSpaces (1), Operating system (WorkSpaces Core Windows), License (Included), Bundle type (Standard (2 vCPU, 4GB RAM)), Root volume (80 GB), User volume (10 GB)"
+      },
+      {
+        "name": "WorkSpaces Core Managed Instances",
+        "monthly": 2180.33,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of instances (1), Operating system (Windows), Instance type (c5.12xlarge), Tenancy (Shared), Storage amount per instance (80 GB)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

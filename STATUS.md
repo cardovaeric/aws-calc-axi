@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-11-24 (session 3)
+Updated: 2026-11-25 (session 4)
 
 Full service coverage assessment and implementation plan: `analysis/COVERAGE_ASSESSMENT.md`
 (2026-11-24). It supersedes the scanner picture below for planning.
@@ -28,15 +28,18 @@ Full service coverage assessment and implementation plan: `analysis/COVERAGE_ASS
   group, destination overrides, the intra-region double charge, and the live
   `DT <type>: <region> (<n> <unit>)` summary. Unselected rows and unknown destinations fail
   closed.
-- `columnFormIPM` is native for the PLC_2.0 row set: `textInput`/`autoSuggest`/`dropDown`
-  selectors, selector-pattern price extraction (On-Demand, Reserved, `$overridePriceKeyWith`),
-  hidden dependent selectors, a 100% utilization row, `disableCalculation` rate components, one
+- `columnFormIPM` is native for the PLC_2.0 row set: `textInput`/`autoSuggest`/`dropDown`/
+  `utilization` selectors, selector-pattern price extraction (On-Demand, Reserved,
+  `$overridePriceKeyWith`), hidden dependent selectors, `disableCalculation` rate components, one
   price set, hourly or monthly model, `calculationId` targets exposed to the maths section, live
   save format and summary, and `displayIf`-gated prefetch (only visible cards fetch PLC_2.0 data).
-  A component holds exactly one row, like the live calculator: its editor recompute reads
-  `value[0]` and a second configuration is a second service (`analysis/FINDINGS.md` section 13).
-  Database Savings Plans, aggregation remaps, sub-components, and tiered PLC_2.0 patterns still
-  fail closed (`docs/DECISIONS.md` D-024 and D-027).
+  A `utilization` row keeps its live `{unit, selectedId}` value, supplies the hours the
+  Hourly/Monthly models multiply by, and takes part in price matching when it is also a selector
+  (WorkSpaces Billing option). A component holds exactly one row, like the live calculator: its
+  editor recompute reads `value[0]` and a second configuration is a second service
+  (`analysis/FINDINGS.md` sections 13 and 17). Database Savings Plans, `remap.constant`,
+  sub-components, and tiered PLC_2.0 patterns still fail closed (`docs/DECISIONS.md` D-024 and
+  D-027).
 - `throughput` inputs are native (kbps/mbps/gbps with binary conversion to MBps), which unlocks
   gp3 volume and RDS storage inputs.
 - `utilization` inputs are native (percentage, hours, or minutes per day, week, or month to hours
@@ -79,11 +82,14 @@ Full service coverage assessment and implementation plan: `analysis/COVERAGE_ASS
 | DAX 3 x r5.large nodes | 558.45 | 558.45 USD | probe pass | pass |
 | Groups (S3 + Lambda) + Business Support+ | 14.10 (+29.00 support) | 43.10 USD | none | pass |
 | Top-service simulation (EKS+VPC+EBS+RDS+EC2) | 16313.62 (+1538.08 upfront) | 16,313.62 USD (+1,538.08 upfront) | editor recompute pass | pass |
+| EMR master/core/task at 50/100/25% | 113.88 | 113.88 USD | editor recompute pass | pass |
+| WorkSpaces Personal Monthly+Hourly, Core, Managed | 2,297.58 | 2,297.58 USD | editor recompute pass | pass |
 
 Public links and full receipts: `COVERAGE.md` and `receipts/`.
 
 Receipts: `receipts/p0-s3-standard.json`, `receipts/p1-*.json` (S3, Lambda, CloudWatch, SNS,
-SQS, utilization PCS, utilization MediaConnect), `receipts/p2-groups-support.json`,
+SQS, utilization PCS, utilization MediaConnect, utilization EMR, utilization WorkSpaces),
+`receipts/p2-groups-support.json`,
 `receipts/p3-*.json` (X-Ray, CloudFormation,
 EventBridge, Athena, S3 data transfer, DAX). Each stores the public link, the stored JSON
 comparison, the rendered DOM, the oracle, and the verdict. The 37-service top-service
@@ -95,27 +101,33 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 167 tests, pass
-- `npm run e2e`: 47 tests, pass (live DOM re-reads, live catalog parity, native goldens, all 23
-  ledger rows including the editor-recompute oracle, and the utilization suites, which now assert
-  Deadline Cloud, Direct Connect, and FSx for Lustre as native goldens)
-- `npm run ledger`: 23 rows, all pass
+- `npm test`: 174 tests, pass
+- `npm run e2e`: 49 tests, pass (live DOM re-reads, live catalog parity, native goldens, all 25
+  ledger rows including the editor-recompute oracle, and the utilization suites)
+- `npm run ledger`: 25 rows, all pass
 - `npm run coverage -- --evaluate --offline`: 441-row exhaustive tracker in
-  `analysis/COVERAGE_TABLE.md` (401 clean, 16 partial column-form, 21 blocked column-form,
-  3 blocked by subtype; P1 10, P2 137, P3 263).
+  `analysis/COVERAGE_TABLE.md` (409 clean, 16 partial column-form, 13 blocked column-form,
+  3 blocked by subtype; P1 8, P2 139, P3 263).
 - Selector rows are scored by the children the live calculator serves and name the blocker and
   the children that carry it (`analysis/FINDINGS.md` sections 14 and 15, D-028). Two Amazon
   WorkSpaces children are dangling references in the live manifest and have no surface.
 - The runtime columns separate a real defect from an environment gap: `MissingPriceError` is
   `missing-price` and an uncached offline fetch is `not-cached` instead of both reading `error`
   (D-029), so one row per region is left in the `error` bucket (see the fail-closed list below).
-- Screenshots of every public link: `receipts/screenshots/<row id>.png` for all 23 ledger rows
-  (29 PNGs including the probe captures)
+- Screenshots of every public link: `receipts/screenshots/<row id>.png` for all 25 ledger rows
+  (31 PNGs including the probe captures)
 - `utilization` is native, so seven services changed class: Deadline Cloud, Direct Connect,
   MediaConnect, and AWS PCS are clean, and Amazon Mainframe Modernization plus its two children
   moved from `blocked:subtype` to `blocked:column-form` (`remap.constant` is the real blocker).
   Five of them plus Keyspaces also gained ledger receipts, so P1 went 15 -> 10. Evidence:
   `analysis/FINDINGS.md` section 16, D-030 and D-031.
+- Column-form `utilization` rows are native (their `{unit, selectedId}` value supplies the hours
+  the Hourly/Monthly models multiply by, and `selectedId` is a price selector when the row is
+  one). That unlocked Amazon EMR's three node children and WorkSpaces Personal/Core/Managed:
+  clean went 401 -> 409, blocked column-form 21 -> 13, P1 10 -> 8. WorkSpaces also needed the
+  live `singlePricePoint` zero for an absent meter. Amazon WorkSpaces still declares two
+  unserved children (Thin Client, Secure Browser). Evidence: `analysis/FINDINGS.md` section 17,
+  `receipts/p1-utilization-emr.json`, `receipts/p1-utilization-workSpaces.json`.
 
 ## Coverage ledger summary
 
@@ -150,20 +162,20 @@ editor at 957.46/month.
 - Fail-closed gaps (adapter tasks, not silent zeros): bespoke EC2/Windows/RDS math
   (`ec2PriceDisplay`, `ec2Variable`, `snapShotMaths`, `workloadInstanceMath`), pricing
   `sets`-based instance data, and the remaining `columnFormIPM` surface (Database Savings Plans,
-  sub-components, reserved/upfront totals, `remap.constant`, `utilization-selector`) listed in
-  `docs/DECISIONS.md` D-020, D-021, D-024, and D-030.
+  sub-components, reserved/upfront totals, `remap.constant`) listed in `docs/DECISIONS.md`
+  D-020, D-021, D-024, and D-030.
 - `percentInput` saves the entered percent, which the live editor rehydrates by dividing by 100
   again; saving the fraction made a rehydrated 100% read as 1% (the Keyspaces 25.69 vs 25.63
   oracle). Fixed, republished, and now a ledger row: `receipts/p1-keyspaces.json` recomputes at
   `25.69` with `LOCAL_ONE reads (1)` (`analysis/FINDINGS.md` section 16.1, D-026). The same change
   set landed the P0 run's typed-amount fix: `allowDecimals` is checked on the amount the user
   typed, so 1000 operations per day (30416.67 per month) is a valid integer entry.
-- P1 is 10 rows, all engine gaps rather than tracker noise: five selectors name their children
-  (Amazon Chime SDK `remap.constant`, Amazon EMR and Amazon WorkSpaces `utilization-selector`,
-  Amazon Translate `remap.keyValue-primary`, AWS Mainframe Modernization `remap.constant`), plus
-  AWS Directory Service (`remap.constant`) and four partial on `additional-pricing-data`
-  (DocumentDB, Neptune, Timestream, DMS; Keyspaces left P1 by gaining a ledger receipt).
-  Evidence: `analysis/FINDINGS.md` sections 15 and 16, D-028 to D-031.
+- P1 is 8 rows, all engine gaps rather than tracker noise: four selectors name their children
+  (Amazon Chime SDK `remap.constant`, Amazon Translate `remap.keyValue-primary`, AWS Mainframe
+  Modernization `remap.constant`), plus AWS Directory Service (`remap.constant`) and four partial
+  on `additional-pricing-data` (DocumentDB, Neptune, Timestream, DMS; Keyspaces left P1 by
+  gaining a ledger receipt, and Amazon EMR + Amazon WorkSpaces left when utilization rows became
+  native). Evidence: `analysis/FINDINGS.md` sections 15 to 17, D-028 to D-031.
 - The `remap.keyValue` direction is native since `bf27e34` (forward on aggregation rows and price
   records, reverse on meter tokens and the index path). What is still missing is resolving the
   **primary** selector through the remapped option tree, which is
@@ -180,22 +192,21 @@ editor at 957.46/month.
   (`Array.isArray(availableLocation) && !includes()`) and the `Location` / `From Location` region
   injection on the index path; FSx for Lustre needed the `replace` global substring and the
   `displayIf` ordering coercion (`docs/DECISIONS.md` D-030, D-031).
-- Six services reference meters that are absent from their regional price file (Personalize,
-  Transcribe, ACM, MediaTailor, Firewall Manager, IoT SiteWise). The engine fails closed
-  instead of publishing a zero. The same `missing-price` verdict now covers 28 us-east-1 and 67
-  us-east-2 rows, which also makes the AI model rows visible. For `ai21` (and `amazon`,
-  `workload1`) the meter token exists in the `bedrockfoundationmodels` file while the component
-  reads `bedrock`, so the meter lookup, not the data, is the gap. Those rows are left alone:
-  they need per-service analysis, and relabelling them is not a tracker-only change.
+- `singlePricePoint` now bills 0 for a meter the loaded region does not carry, which is what
+  live does (`n = a[o] ? a[o] : 0`, offset 497900); a mapping that never loaded the region still
+  fails closed. That moved the runtime label from `missing-price` to `ok`/`needs-input` on 27
+  rows and left `missing-price` on 10 us-east-1 and 27 us-east-2 rows (mostly `bedrock` model
+  components whose meter token exists in `bedrockfoundationmodels`). Those remaining rows are
+  left alone: they need per-service analysis, and relabelling them is not a tracker-only change.
+  Evidence: `analysis/FINDINGS.md` section 17, `docs/DECISIONS.md` D-032.
 
 ## Next three actions
 
 1. `additional-pricing-data` is the only blocker left on four P1 rows (DocumentDB, Neptune,
    Timestream, DMS) and on Keyspaces; the Database Savings Plans rows are the next column-form
-   surface after `remap.constant` and `utilization-selector`.
+   surface after `remap.constant`.
 2. `remap.constant` blocks the six remaining P1/P2 selectors (Amazon Chime SDK, AWS Directory
-   Service, AWS Mainframe Modernization, and their children); `utilization-selector` blocks Amazon
-   EMR and Amazon WorkSpaces. Both are named per child in the tracker.
+   Service, AWS Mainframe Modernization, and their children), named per child in the tracker.
 3. Add ledger rows with receipts for RDS for PostgreSQL (488.02) and ElastiCache Valkey (14.02),
    now that both evaluate natively, then the EBS `snapShotMaths` adapter and the EC2
    pricing-`sets` path. `realTimeDocumentTranslation` (primary remap token) and

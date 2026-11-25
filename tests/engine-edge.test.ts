@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { evaluateInput } from "../src/engine/inputs.ts";
 import { evaluateTemplate } from "../src/engine/template.ts";
 import type { Component, ServiceDefinition } from "../src/data/definitions.ts";
+import type { EngineError } from "../src/engine/errors.ts";
 import { regionMaps, resolverFor } from "./helpers.ts";
 
 const pricing = resolverFor({});
@@ -199,6 +200,59 @@ test("throughput overrides convert gigabytes per second to megabytes", () => {
   );
   assert.equal(result.value, 1024);
   assert.deepEqual(result.saved, { value: 1, unit: "gbps" });
+});
+
+test("allowDecimals checks the typed amount, not the converted value", () => {
+  // Live `performFrequencyCalculation` validates the amount the user typed for
+  // decimals and the converted rate for min/max. 1000 operations per day is a
+  // valid integer entry that converts to 30416.67 per month, so the converted
+  // rate's decimals must not be rejected.
+  const component = input({
+    subType: "frequency",
+    label: "Operations",
+    defaultValue: 1000,
+    defaultFrequency: "perDay",
+    outputFrequency: "perMonth",
+    decimalPlaces: 2,
+    validations: { required: true, allowDecimals: false, minValue: 0, maxValue: 100000000 },
+    options: [
+      { label: "per day", value: "perDay", id: "perDay" },
+      { label: "per month", value: "perMonth", id: "perMonth" },
+    ],
+  });
+  const converted = evaluateInput(component, {
+    ...context,
+    overrides: { field: { value: 1000, unit: "perDay" } },
+  });
+  assert.equal(converted.value, 30416.67);
+
+  // A typed fractional amount is still rejected, and the error quotes the entry.
+  assert.throws(
+    () =>
+      evaluateInput(component, {
+        ...context,
+        overrides: { field: { value: 1000.5, unit: "perDay" } },
+      }),
+    (error: EngineError) => {
+      assert.match(error.message, /decimals are not allowed/);
+      assert.equal(error.details["value"], 1000.5);
+      return true;
+    }
+  );
+
+  // min/max still apply to the converted value, not the entry.
+  const capped = input({
+    ...component,
+    validations: { required: true, allowDecimals: false, maxValue: 100 },
+  });
+  assert.throws(
+    () =>
+      evaluateInput(capped, {
+        ...context,
+        overrides: { field: { value: 1000, unit: "perDay" } },
+      }),
+    /must be at most 100/
+  );
 });
 
 test("concatenate joins constants and components without separators", () => {

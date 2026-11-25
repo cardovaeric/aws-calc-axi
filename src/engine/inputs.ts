@@ -91,9 +91,9 @@ function validationProblem(component: Component, numeric: number): string | unde
   const validations = validationsOf(component);
   const minValue = validations["minValue"];
   const maxValue = validations["maxValue"];
-  if (validations["allowDecimals"] === false && !Number.isInteger(numeric)) {
-    return "decimals are not allowed";
-  }
+  // `allowDecimals` is not checked here. It applies to the amount the user typed,
+  // not to a converted value: 1000 operations per day is a valid integer input
+  // that converts to 30416.667 per month. `assertDecimals` owns that check.
   if (typeof minValue === "number" && numeric < minValue) return `must be at least ${minValue}`;
   if (typeof maxValue === "number" && numeric > maxValue) return `must be at most ${maxValue}`;
   return undefined;
@@ -195,6 +195,7 @@ function assertDecimals(
 function requireNumeric(component: Component, raw: unknown, context: InputValidationContext): number {
   const numeric = numericValue(component, raw, context);
   assertValid(component, numeric, raw, context);
+  assertDecimals(component, numeric, raw, context);
   return numeric;
 }
 

@@ -425,6 +425,62 @@ export const LEDGER: LedgerEntry[] = [
     oracle: "none",
     notes: "support is recomputed by the share page; groups render as rows plus a tree",
   },
+  {
+    id: "remap-directory-service-use2",
+    service: "aWSDirectoryService",
+    template: "managedMicrosoftActiveDirectory + activeDirectoryConnecter + SimpleADirectoryConnecter",
+    region: "us-east-2 (Simple AD in us-east-1)",
+    fixture: "live defaults for all three templates: 1 directory, Enterprise, Large, Large",
+    specPath: "examples/remap-constant-directory-service.yaml",
+    receiptPath: "receipts/p1-remap-directory-service.json",
+    expectedMonthlyCents: 51100,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "remap.constant pins Directory Type, which has no form row: 292.00 Microsoft AD Enterprise (2 domain controllers x 730 x 0.20), 109.50 AD Connector Large, 109.50 Simple AD Large",
+  },
+  {
+    id: "remap-mainframe-modernization-use2",
+    service: "amazonMainframeModernization",
+    template: "mainframeBluAge + mainframeMicroFocus",
+    region: "us-east-2",
+    fixture: "both children at live defaults: 1 instance of m5.large at 160 hours per month",
+    specPath: "examples/remap-constant-mainframe-modernization.yaml",
+    receiptPath: "receipts/p1-remap-mainframe-modernization.json",
+    expectedMonthlyCents: 221760,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "remap.constant pins Product Name (Blu Age Runtime / Enterprise Server / Enterprise Developer) and an unset instance count text input holds 1, like the live form: 2 x 49.60 + 2 x 888.00 + 342.40",
+  },
+  {
+    id: "remap-chime-sdk-use1",
+    service: "amazonChimeSdk",
+    template: "ptsnAudio + sipTrunking",
+    region: "us-east-1",
+    fixture: "1 DID and 2 toll-free numbers, 100 joins at 100 minutes, 50 toll-free joins at 60 minutes, SIP 2 numbers",
+    specPath: "examples/remap-constant-chime-sdk.yaml",
+    receiptPath: "receipts/p1-remap-chime-sdk.json",
+    expectedMonthlyCents: 395597,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "remap.constant pins NumberType (DDI / Toll Free) and CallType (SMA Local / SMA Outbound / SMA Toll-Free); the unset countries take the live first-offered values Australia and Andorra",
+  },
+  {
+    id: "remap-primary-translate-use2",
+    service: "amazonTranslate",
+    template: "realTimeDocumentTranslation",
+    region: "us-east-2",
+    fixture: "1 million characters at the default document type",
+    specPath: "examples/remap-primary-translate.yaml",
+    receiptPath: "receipts/p1-remap-primary-translate.json",
+    expectedMonthlyCents: 1500,
+    path: "native",
+    oracle: "editor",
+    notes:
+      "the declared default FileType=Basic is the remap price token, so the primary selector resolves to the offered label Basic - Text, HTML and the token builder maps it back to Basic: 1 x 15.00",
+  },
 ];
 
 export interface LedgerReceiptView {

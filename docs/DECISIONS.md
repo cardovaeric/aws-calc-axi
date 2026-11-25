@@ -570,7 +570,7 @@ The tracker called `additionalPricingData` a column-form v2 gap on 16 rows, incl
 rows (DocumentDB, Neptune, Timestream, DMS). It is neither a broad blocker nor inert: every
 definition that carries it carries one joined cargo item named `Database Savings Plans`, and the
 live form offers that pricing model on instance types the joined artifact prices. Proved from the
-bundle and a live editor run before any code changed (`analysis/FINDINGS.md` section 18).
+bundle and a live editor run before any code changed (`analysis/FINDINGS.md` section 19).
 
 - **Implemented:** live `getData` spreads `additionalPricingData` into the item list, the
   aggregation resolver merges every item's rows (per-item `keyName`/`keyValue`/`constant`) and
@@ -592,3 +592,41 @@ bundle and a live editor run before any code changed (`analysis/FINDINGS.md` sec
 - **Not touched:** `src/engine/inputs.ts`, `src/engine/expression.ts`, `src/engine/template.ts`,
   and the selector/remap resolution logic. The prefetch caller only forwards the component's
   `additionalPricingData` to the data loader.
+
+## D-034: `remap.constant` and the primary selector are native, and two rules retire (2026-11-25)
+
+The last two remap surfaces were implemented from the bundle rather than from the symptom, and
+both tracker rules that named them are retired because the fail-closed path behind each one is
+gone. Evidence: `analysis/FINDINGS.md` section 19 and `receipts/remap-surfaces-probe.json`.
+
+- **`remap.constant` is a live mechanism, not a declaration count.** The live aggregation fetch
+  keeps only rows whose constant selector is absent or equal, the forward remap writes the
+  constant into every row and price record, and the metered-unit filter drops a selector whose
+  value equals a constant (offsets 1464986, 1227218, 1469061). The per-item remap helper that
+  D-033 introduced for the joined Savings Plans artifact already filters and fills a constant, so
+  the engine only had to seed the pinned selector value and drop it from the fragments. The rule
+  that added `remap.constant` to `hard_blockers` for every declaration is deleted; all 19
+  declarations across 9 definitions were the same mechanism.
+- **The primary selector resolves through its own option tree.** Live builds `primaryKey.value`
+  from every aggregation row and applies the same keep/replace rule as every other row
+  (offset 1467544 and `getInitialValue` at 2880490). Keeping the primary value verbatim was the
+  whole of `remap.keyValue-primary`, so the rule and the `scripts/coverage-column-form.ts` helper
+  it lived in are deleted. An explicit primary value that the form does not offer fails closed with
+  the offered labels, like every other selector.
+- **A column-form text input with no declared default holds 1.** `componentType.textInput
+  .defaultValue` is `"1"` (offset 2877758). This was a second, independent live fallback behind
+  Mainframe Modernization: its instance count has no `defaultValue`, the engine read it as empty
+  and billed zero while the live form shows 1. Dropdowns are unchanged - a dropdown with no
+  default stays empty until the option tree resolves it.
+- **A 404 index is a price gap, not a transport failure.** Simple AD has no aggregation rows for
+  US East (Ohio), so the derived index path does not exist; `loadColumnFormPricing` now fails
+  closed with `MISSING_PRICE` naming the path instead of surfacing an `HttpError`. Real transport
+  failures still surface as transport failures.
+
+Receipts (all editor-recompute `pass`, `mismatches []`): Directory Service `511.00`,
+Mainframe Modernization `2,217.60`, Chime SDK `3,955.97`, Amazon Translate document translation
+`15.00`. Coverage, measured on `main` at `85ba1d7`: blocked:column-form 13 -> 0 with clean
+425 -> 438, so the whole class was the two remap rules. P1 goes 4 -> 0 (two rows become P2 because
+their ledger is incomplete, two become P3 because every child has a receipt); P2 139 -> 141 and
+P3 267 -> 269. P1 0 means no visible service is blocked or partial, not that every clean row is
+proven.

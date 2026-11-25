@@ -36,6 +36,10 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 | amazonTimestream | AmazonTimestream | us-east-2 | InfluxDB2 Multi-AZ read replica db.influx.12xlarge, Database Savings Plans 1yr No Upfront, no storage | native | 6701.98 | 6,701.98 USD | pass | pass | https://calculator.aws/#/estimate?id=01ab9ef932d0bd0f22eb584018bf8b315fbbaf5f |
 | awsDatabaseMigrationService | awsDatabaseMigrationSvc | us-east-2 | 1 x c7i.12xlarge, Multiple AZ, Database Savings Plans 1yr No Upfront, 100 GB gp2 storage | native | 4513.78 | 4,513.78 USD | pass | pass | https://calculator.aws/#/estimate?id=9f63d7b29caaf86b8869d6850ed5b255f7a103eb |
 | group: Data -> Data Compute (S3 + Lambda) | simpleStorageServiceClassesGroup + lambdaWithFreeTier | us-east-2 | nested groups with Business Support+ | native | 14.10 | 43.10 USD | none | pass | https://calculator.aws/#/estimate?id=41bc364a547ab7429de00d8d39cb29f70210d12a |
+| aWSDirectoryService | managedMicrosoftActiveDirectory + activeDirectoryConnecter + SimpleADirectoryConnecter | us-east-2 (Simple AD in us-east-1) | live defaults for all three templates: 1 directory, Enterprise, Large, Large | native | 511.00 | 511.00 USD | pass | pass | https://calculator.aws/#/estimate?id=3dc5992ddac74946262f44eb8e1a3c6ddaa901af |
+| amazonMainframeModernization | mainframeBluAge + mainframeMicroFocus | us-east-2 | both children at live defaults: 1 instance of m5.large at 160 hours per month | native | 2217.60 | 2,217.60 USD | pass | pass | https://calculator.aws/#/estimate?id=e9fa9fa3d7bb0445c461f5a813e84b9d36d1e435 |
+| amazonChimeSdk | ptsnAudio + sipTrunking | us-east-1 | 1 DID and 2 toll-free numbers, 100 joins at 100 minutes, 50 toll-free joins at 60 minutes, SIP 2 numbers | native | 3955.97 | 3,955.97 USD | pass | pass | https://calculator.aws/#/estimate?id=659480aba9359d36ea23edb0c5941070065f8667 |
+| amazonTranslate | realTimeDocumentTranslation | us-east-2 | 1 million characters at the default document type | native | 15.00 | 15.00 USD | pass | pass | https://calculator.aws/#/estimate?id=80bc60515b630173702ba7b74e50b788fdf6ce3c |
 
 ## Evidence
 
@@ -73,6 +77,10 @@ drops, the editor recomputation behind `Update estimate` (`oracle: editor`).
 - timestream-dsp-use2: the compute column form is disableCalculation, so the joined 4.5904 hourly rate feeds the template maths: 4.5904 x 2 nodes x 730 = 6701.984
 - dms-dsp-use2: 6.136 x 730 = 4479.28 for the joined item plus 34.50 for 100 GB gp2 storage
 - groups-support-business-use2: support is recomputed by the share page; groups render as rows plus a tree
+- remap-directory-service-use2: remap.constant pins Directory Type, which has no form row: 292.00 Microsoft AD Enterprise (2 domain controllers x 730 x 0.20), 109.50 AD Connector Large, 109.50 Simple AD Large
+- remap-mainframe-modernization-use2: remap.constant pins Product Name (Blu Age Runtime / Enterprise Server / Enterprise Developer) and an unset instance count text input holds 1, like the live form: 2 x 49.60 + 2 x 888.00 + 342.40
+- remap-chime-sdk-use1: remap.constant pins NumberType (DDI / Toll Free) and CallType (SMA Local / SMA Outbound / SMA Toll-Free); the unset countries take the live first-offered values Australia and Andorra
+- remap-primary-translate-use2: the declared default FileType=Basic is the remap price token, so the primary selector resolves to the offered label Basic - Text, HTML and the token builder maps it back to Basic: 1 x 15.00
 
 Regenerate with `npm run ledger`. Receipts are in `receipts/`; each one stores the native result,
 the stored result, the rendered DOM snapshot, the recompute probe, and the verdict.

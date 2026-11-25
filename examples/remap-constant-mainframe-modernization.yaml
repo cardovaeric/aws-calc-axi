@@ -1,0 +1,13 @@
+name: axi-e2e remap constant mainframe modernization
+currency: USD
+locale: en_US
+services:
+  # Both children are selected, which is what the live calculator does when both
+  # feature checkboxes are ticked. Every column form carries a
+  # `remap.constant` ("Product Name"), and the instance count text input has no
+  # declared default, so the live form shows 1.
+  - code: amazonMainframeModernization
+    region: us-east-2
+    subServices:
+      - code: mainframeBluAge
+      - code: mainframeMicroFocus

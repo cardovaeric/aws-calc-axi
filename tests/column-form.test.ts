@@ -1358,3 +1358,217 @@ test("a utilization value the price tree does not offer fails closed", () => {
     /cannot use "Running Mode" = "%Utilized\/Month"; the live form offers "Monthly", "Hourly"/
   );
 });
+
+// ---------------------------------------------------------------------------
+// `remap.constant` and the primary selector (analysis/FINDINGS.md section 18)
+//
+// Live filters the aggregation rows by a constant, writes it into every row and
+// price record, and drops it from the price-set match. The primary selector is
+// resolved through its own option tree like every other row, so a declared
+// default that is a `remap.keyValue` token lands on the label the rows carry.
+// ---------------------------------------------------------------------------
+
+const CHIME_DID: ColumnFormComponent = {
+  id: "columnFormIPM_did",
+  label: "Select country for DID",
+  mappingDefinitionName: "chimevoiceconnector-smain-calc",
+  primaryKey: "NumberType",
+  secondaryKey: ["FromCountry"],
+  disableCalculation: true,
+  calculationId: { hourly: "didFromContryPrice" },
+  remap: { constant: { NumberType: "DDI" } },
+  row: [{ label: "Select country for DID", type: "dropDown", selectorId: "FromCountry" }],
+};
+
+// The data layer has already dropped the rows that contradict the constant and
+// written it into the rest, which is exactly what live `b` hands the form.
+const CHIME_DID_AGGREGATIONS = [
+  { selectors: { Location: "US East (N. Virginia)", NumberType: "DDI", FromCountry: "Australia" } },
+  {
+    selectors: {
+      Location: "US East (N. Virginia)",
+      NumberType: "DDI",
+      FromCountry: "United States of America",
+    },
+  },
+];
+
+function chimeDidData(records: Record<string, Record<string, unknown>>): ColumnFormPricingData {
+  return {
+    pricingSelectors: ["Location", "NumberType", "FromCountry"],
+    selectors: {
+      Location: "US East (N. Virginia)",
+      NumberType: "DDI",
+      FromCountry: "Australia",
+    },
+    regionPrices: records as never,
+    setMeters: Object.keys(records),
+    manifest: { serviceId: "chimevoiceconnector", source: "chimevoiceconnector-smain-calc" },
+    metadataUrl: "https://example.invalid/metadata.json",
+    aggregations: CHIME_DID_AGGREGATIONS,
+  };
+}
+
+const CHIME_DID_RECORDS = {
+  "DDI Australia": { price: "2.2500000000", NumberType: "DDI", FromCountry: "Australia" },
+  "DDI United States of America": {
+    price: "1.0000000000",
+    NumberType: "DDI",
+    FromCountry: "United States of America",
+  },
+};
+
+test("remap.constant supplies a primary selector that has no form row", () => {
+  const resolved = resolveColumnFormSelectors(CHIME_DID, {}, chimeDidData(CHIME_DID_RECORDS));
+  // The constant is a selector value, but it is not offered as an editable row
+  // and live's first offered country (the aggregation row order) is the value.
+  assert.equal(resolved.values["NumberType"], "DDI");
+  assert.equal(resolved.values["FromCountry"], "Australia");
+  const result = evaluateColumnForm(CHIME_DID, chimeDidData(CHIME_DID_RECORDS), undefined);
+  assert.equal(result.extraValues["didFromContryPrice"], 2.25);
+  // The pinned selector never names a metered unit and never enters the saved
+  // row or the config summary: live has no row for it.
+  assert.deepEqual(columnFormMeterFragments(CHIME_DID, resolved.values, resolved.tree), [
+    "Australia",
+  ]);
+  assert.deepEqual(result.saved.value[0], { FromCountry: { value: "Australia" } });
+  assert.equal(result.configSummary, "Select country for DID (Australia)");
+});
+
+test("a constant that contradicts an explicit row value fails closed", () => {
+  const component: ColumnFormComponent = {
+    ...CHIME_DID,
+    row: [
+      { label: "Number type", type: "dropDown", selectorId: "NumberType", defaultValue: "DDI" },
+      ...CHIME_DID.row,
+    ],
+  };
+  assert.throws(
+    () => columnFormSelectorValues(component, { NumberType: "Toll Free" }),
+    /pins "NumberType" to "DDI"/
+  );
+});
+
+const TRANSLATE_RT: ColumnFormComponent = {
+  id: "columnFormIPM",
+  label: "Real-Time Document Translation",
+  mappingDefinitionName: "translate-document-calc",
+  primaryKey: "FileType",
+  secondaryKey: [],
+  disableCalculation: true,
+  calculationId: { hourly: "monthly_ipm" },
+  remap: { keyValue: { Basic: "Basic - Text, HTML", Office: "Office - Docx" } },
+  row: [{ label: "Document Type", type: "dropDown", selectorId: "FileType", defaultValue: "Basic" }],
+};
+
+const TRANSLATE_AGGREGATIONS = [
+  {
+    selectors: {
+      Location: "US East (Ohio)",
+      operation: "TranslateDocument",
+      FileType: "Basic - Text, HTML",
+    },
+  },
+  {
+    selectors: {
+      Location: "US East (Ohio)",
+      operation: "TranslateDocument",
+      FileType: "Office - Docx",
+    },
+  },
+];
+
+const TRANSLATE_RECORDS = {
+  "TranslateDocument Basic": { price: "15.0000000000" },
+  "TranslateDocument Office": { price: "15.0000000000" },
+};
+
+function translateData(): ColumnFormPricingData {
+  return {
+    pricingSelectors: ["Location", "operation", "FileType"],
+    // The first fetch carries the declared default, which is the remap key.
+    selectors: {
+      Location: "US East (Ohio)",
+      operation: "TranslateDocument",
+      FileType: "Basic",
+    },
+    regionPrices: TRANSLATE_RECORDS as never,
+    setMeters: Object.keys(TRANSLATE_RECORDS),
+    manifest: { serviceId: "translate", source: "translate-document-calc" },
+    metadataUrl: "https://example.invalid/metadata.json",
+    aggregations: TRANSLATE_AGGREGATIONS,
+  };
+}
+
+test("the primary selector resolves its remapped default to the offered label", () => {
+  // "Basic" is the price token; the aggregation rows and the live dropdown hold
+  // "Basic - Text, HTML". Live replaces an unoffered default with the first
+  // offered value, and so does this engine now.
+  const resolved = resolveColumnFormSelectors(TRANSLATE_RT, undefined, translateData());
+  assert.equal(resolved.values["FileType"], "Basic - Text, HTML");
+  const result = evaluateColumnForm(TRANSLATE_RT, translateData(), undefined);
+  assert.equal(result.extraValues["monthly_ipm"], 15);
+  assert.deepEqual(result.saved.value[0], { FileType: { value: "Basic - Text, HTML" } });
+  assert.equal(result.configSummary, "Document Type (Basic - Text, HTML)");
+});
+
+test("an explicit primary that the form does not offer fails closed with the labels", () => {
+  assert.throws(
+    () => resolveColumnFormSelectors(TRANSLATE_RT, { FileType: "Basic" }, translateData()),
+    /cannot use "FileType" = "Basic"; the live form offers "Basic - Text, HTML", "Office - Docx"/
+  );
+});
+
+test("a text input with no declared default holds 1, like the live form", () => {
+  // Live's `componentType.textInput.defaultValue` is "1" and `getInitialValue`
+  // uses it when the row declares no default (bundle offset 2877758). Mainframe
+  // Modernization's instance count and Directory Service's directory count both
+  // rely on it: the live forms show 1 with an empty definition default.
+  const component: ColumnFormComponent = {
+    id: "columnFormIPM",
+    label: "Blu Age runtime",
+    mappingDefinitionName: "m2-calc",
+    primaryKey: "Product Name",
+    secondaryKey: ["Instance Type"],
+    disableCalculation: true,
+    calculationId: { hourly: "bluAgeRuntimePrice" },
+    remap: { constant: { "Product Name": "Blu Age Runtime" } },
+    row: [
+      {
+        label: "Number of instances",
+        type: "textInput",
+        selectorId: "Number of Directories",
+        exportValueAs: "numberOfInstances",
+        validations: { required: true, minValue: 1 },
+      },
+      {
+        label: "Instance type",
+        type: "dropDown",
+        selectorId: "Instance Type",
+        defaultValue: "m5.large",
+      },
+    ],
+  };
+  const { values } = columnFormSelectorValues(component, {});
+  assert.equal(values["Number of Directories"], "1");
+  const data: ColumnFormPricingData = {
+    pricingSelectors: ["Location", "Product Name", "Instance Type"],
+    selectors: { Location: "US East (Ohio)", "Product Name": "Blu Age Runtime", "Instance Type": "m5.large" },
+    regionPrices: { "Blu Age Runtime m5 large": { price: "0.3100000000" } } as never,
+    setMeters: ["Blu Age Runtime m5 large"],
+    manifest: { serviceId: "m2", source: "m2-calc" },
+    metadataUrl: "https://example.invalid/metadata.json",
+    aggregations: [
+      {
+        selectors: {
+          Location: "US East (Ohio)",
+          "Product Name": "Blu Age Runtime",
+          "Instance Type": "m5.large",
+        },
+      },
+    ],
+  };
+  const result = evaluateColumnForm(component, data, undefined);
+  assert.equal(result.extraValues["numberOfInstances"], 1);
+  assert.equal(result.extraValues["bluAgeRuntimePrice"], 0.31);
+});

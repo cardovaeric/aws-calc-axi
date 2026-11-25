@@ -1,0 +1,127 @@
+{
+  "estimate": "axi-e2e remap constant Chime SDK PSTN audio",
+  "specHash": "2ddeea7c835bdef1",
+  "payloadHash": "866249dd3f8afe72",
+  "url": "https://calculator.aws/#/estimate?id=659480aba9359d36ea23edb0c5941070065f8667",
+  "savedKey": "659480aba9359d36ea23edb0c5941070065f8667",
+  "publishedAt": "2026-11-25T01:20:32.218Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 3955.97,
+    "upfront": 0,
+    "total12m": 47471.64,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonChimeSdk",
+        "template": "template_ChimeSDK",
+        "region": "us-east-1",
+        "monthly": 3955.97,
+        "upfront": 0,
+        "summary": "Select country for DID (Australia), Number of DIDs (1), Monthly PSTN meeting joins (100), Average Lambda request invocations per call (20), Select inbound country (Same as DID) (Australia), Select country (outbound) (Andorra), Select country for DID (Australia), Number of DIDs or toll-free numbers (2), Monthly PSTN meeting joins (50), Average Lambda request invocations per call (20), Select inbound country (same as DID) (Australia), Average Lambda request invocations per call (20) Number of DIDs or toll-free numbers (2), Select country (Outbound) (Andorra), Number of audio streaming minutes (for SIPREC streaming) (20)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonChimeSdk",
+        "monthly": 3955.97,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "ptsnAudio",
+        "monthly": 3916.98,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "sipTrunking",
+        "monthly": 38.99,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 3955.97,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=659480aba9359d36ea23edb0c5941070065f8667",
+    "title": "axi-e2e remap constant Chime SDK PSTN audio",
+    "monthly": "3,955.97 USD",
+    "upfront": "0.00 USD",
+    "annual": "47,471.64 USD",
+    "monthlyValue": 3955.97,
+    "upfrontValue": 0,
+    "annualValue": 47471.64,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Chime SDK",
+        "upfront": "0.00 USD",
+        "monthly": "3,955.97 USD",
+        "description": "-",
+        "region": "US East (N. Virginia)",
+        "configSummary": "Select country for DID (Australia), Number of DIDs (1), Monthly PSTN meeting joins (100), Average Lambda request invocations per call (20), Select inbound country (Same as DID) (Australia), Select country (outbound) (Andorra), Select country for DID (Australia), Number of DIDs or toll-free numbers (2), Monthly PSTN meeting joins (50), Average Lambda request invocations per call (20), Select inbound country (same as DID) (Australia), Average Lambda request invocations per call (20) Number of DIDs or toll-free numbers (2), Select country (Outbound) (Andorra), Number of audio streaming minutes (for SIPREC streaming) (20)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:20:34.736Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=659480aba9359d36ea23edb0c5941070065f8667",
+    "savedKey": "659480aba9359d36ea23edb0c5941070065f8667",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=659480aba9359d36ea23edb0c5941070065f8667",
+      "title": "axi-e2e remap constant Chime SDK PSTN audio",
+      "monthly": "3,955.97 USD",
+      "upfront": "0.00 USD",
+      "annual": "47,471.64 USD",
+      "monthlyValue": 3955.97,
+      "upfrontValue": 0,
+      "annualValue": 47471.64,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon Chime SDK",
+          "upfront": "0.00 USD",
+          "monthly": "3,955.97 USD",
+          "description": "-",
+          "region": "US East (N. Virginia)",
+          "configSummary": "Select country for DID (Australia), Number of DIDs (1), Monthly PSTN meeting joins (100), Average Lambda request invocations per call (20), Select inbound country (Same as DID) (Australia), Select country (outbound) (Andorra), Select country for DID (Australia), Number of DIDs or toll-free numbers (2), Monthly PSTN meeting joins (50), Average Lambda request invocations per call (20), Select inbound country (same as DID) (Australia), Average Lambda request invocations per call (20) Number of DIDs or toll-free numbers (2), Select country (Outbound) (Andorra), Number of audio streaming minutes (for SIPREC streaming) (20)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:21:01.288Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e remap constant Chime SDK PSTN audio",
+    "monthly": 3955.97,
+    "upfront": 0,
+    "annual": 47471.64,
+    "services": [
+      {
+        "name": "Amazon Chime SDK",
+        "monthly": 3955.97,
+        "region": "US East (N. Virginia)",
+        "configSummary": "Select country for DID (Australia), Number of DIDs (1), Monthly PSTN meeting joins (100), Average Lambda request invocations per call (20), Select inbound country (Same as DID) (Australia), Select country (outbound) (Andorra), Select country for DID (Australia), Number of DIDs or toll-free numbers (2), Monthly PSTN meeting joins (50), Average Lambda request invocations per call (20), Select inbound country (same as DID) (Australia), Average Lambda request invocations per call (20) Number of DIDs or toll-free numbers (2), Select country (Outbound) (Andorra), Number of audio streaming minutes (for SIPREC streaming) (20)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

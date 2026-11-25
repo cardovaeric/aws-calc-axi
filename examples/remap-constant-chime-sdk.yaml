@@ -1,0 +1,28 @@
+name: axi-e2e remap constant Chime SDK PSTN audio
+currency: USD
+locale: en_US
+services:
+  # Chime Voice Connector price data exists only in US East (N. Virginia) and US
+  # West (Oregon). Both audio children carry `remap.constant` on the selector
+  # their column forms never render: NumberType (DDI / Toll Free) and CallType
+  # (SMA Local / SMA Outbound / SMA Toll-Free). Unset countries keep the live
+  # first-offered value (Australia for DID, Andorra for outbound).
+  - code: amazonChimeSdk
+    region: us-east-1
+    subServices:
+      - code: ptsnAudio
+        set:
+          numberOfTollNumbers: 1
+          avgCalls1: 100
+          durationCallTollFree1: { value: 100, unit: min }
+          durationOutboundCall: { value: 100, unit: min }
+          numberOfTollNumbers1: 2
+          avgCalls: 50
+          durationCallTollFree: { value: 60, unit: min }
+      - code: sipTrunking
+        set:
+          numberOfPhoneNumbersForVoiceConnector: 2
+          numberOfInboundUSAudioMinsForVoiceConnector: { value: 100, unit: min }
+          numberOfInboundUSAudioMinsForVoiceConnectorTollFree: { value: 50, unit: min }
+          numberOfOutboundUSAudioMinsForVoiceConnector: { value: 100, unit: min }
+          numberOfaudiorecordingMins: 20

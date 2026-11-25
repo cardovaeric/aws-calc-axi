@@ -23,6 +23,7 @@
 import { fetchCachedJson, type CacheOptions } from "../cache.ts";
 import { pricingUrl } from "../endpoints.ts";
 import { EngineError } from "../engine/errors.ts";
+import { HttpError } from "../http.ts";
 import type { PriceRecord } from "./pricing.ts";
 
 export interface Plc2Manifest {
@@ -127,8 +128,11 @@ export interface LoadColumnFormOptions {
    * `remap` from the component. `keyValue` maps a raw price value to the label
    * the live form shows, and the live engine applies it to the aggregation rows
    * and the price records before matching (`b` and `o` in analysis/bundle.js).
+   * `constant` pins a selector that has no form row: the live engine keeps only
+   * the aggregation rows whose value matches, then writes the constant into
+   * every row and record (bundle offsets 1464986 and 1227218).
    */
-  remap?: { keyValue?: Record<string, string> };
+  remap?: Plc2Remap;
   /**
    * `additionalPricingData` from the component: joined PLC_2.0 cargo items.
    * Their aggregation rows join the selector tree and, when a supplied value
@@ -495,11 +499,26 @@ export async function loadColumnFormPricing(
     .join("/");
   const indexBase = pricedIndex === 0 ? base : cargoBase(priced, options.currency);
   const indexUrl = `${indexBase}/${indexPath}/index.json`;
-  const index = requireObject<Plc2Index>(
-    await fetchCachedJson(indexUrl, options.cache ?? {}),
-    "PLC_2.0 index",
-    indexUrl
-  );
+  let rawIndex: unknown;
+  try {
+    rawIndex = await fetchCachedJson(indexUrl, options.cache ?? {});
+  } catch (error) {
+    // A path the aggregation file lists but the price plane has no index for is
+    // not a price here, not a transport failure. This is how a template the
+    // region does not sell fails (Simple AD in US East (Ohio): the mapping has
+    // rows for six other regions only).
+    if (error instanceof HttpError && error.status === 404) {
+      throw new EngineError(
+        `PLC_2.0 has no price index at ${indexPath} for ${priced.manifest.serviceId}; ` +
+          `selector values ${JSON.stringify(options.values)} are not sold in ` +
+          `${options.regionName}`,
+        "MISSING_PRICE",
+        { url: indexUrl, regionName: options.regionName, values: options.values }
+      );
+    }
+    throw error;
+  }
+  const index = requireObject<Plc2Index>(rawIndex, "PLC_2.0 index", indexUrl);
   const rawRegionPrices = index.regions?.[options.regionName];
   if (!rawRegionPrices) {
     throw new EngineError(

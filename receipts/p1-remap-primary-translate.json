@@ -1,0 +1,122 @@
+{
+  "estimate": "axi-e2e remap primary translate document",
+  "specHash": "bd51853187ccd1bb",
+  "payloadHash": "235c2750c9664dbf",
+  "url": "https://calculator.aws/#/estimate?id=80bc60515b630173702ba7b74e50b788fdf6ce3c",
+  "savedKey": "80bc60515b630173702ba7b74e50b788fdf6ce3c",
+  "publishedAt": "2026-11-25T01:21:07.414Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 15,
+    "upfront": 0,
+    "total12m": 180,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonTranslate",
+        "template": "amazonTranslateGroups",
+        "region": "us-east-2",
+        "monthly": 15,
+        "upfront": 0,
+        "summary": "Number of characters including white spaces and punctuations (Real-Time Document Translation) (1 million per month), Document Type (Basic - Text, HTML)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonTranslate",
+        "monthly": 15,
+        "upfront": 0
+      },
+      {
+        "serviceCode": "realTimeDocumentTranslation",
+        "monthly": 15,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 15,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=80bc60515b630173702ba7b74e50b788fdf6ce3c",
+    "title": "axi-e2e remap primary translate document",
+    "monthly": "15.00 USD",
+    "upfront": "0.00 USD",
+    "annual": "180.00 USD",
+    "monthlyValue": 15,
+    "upfrontValue": 0,
+    "annualValue": 180,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Translate",
+        "upfront": "0.00 USD",
+        "monthly": "15.00 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Number of characters including white spaces and punctuations (Real-Time Document Translation) (1 million per month), Document Type (Basic - Text, HTML)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:21:11.094Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=80bc60515b630173702ba7b74e50b788fdf6ce3c",
+    "savedKey": "80bc60515b630173702ba7b74e50b788fdf6ce3c",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=80bc60515b630173702ba7b74e50b788fdf6ce3c",
+      "title": "axi-e2e remap primary translate document",
+      "monthly": "15.00 USD",
+      "upfront": "0.00 USD",
+      "annual": "180.00 USD",
+      "monthlyValue": 15,
+      "upfrontValue": 0,
+      "annualValue": 180,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon Translate",
+          "upfront": "0.00 USD",
+          "monthly": "15.00 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Number of characters including white spaces and punctuations (Real-Time Document Translation) (1 million per month), Document Type (Basic - Text, HTML)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:21:37.756Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e remap primary translate document",
+    "monthly": 15,
+    "upfront": 0,
+    "annual": 180,
+    "services": [
+      {
+        "name": "Amazon Translate",
+        "monthly": 15,
+        "region": "US East (Ohio)",
+        "configSummary": "Number of characters including white spaces and punctuations (Real-Time Document Translation) (1 million per month), Document Type (Basic - Text, HTML)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

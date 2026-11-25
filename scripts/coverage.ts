@@ -26,7 +26,6 @@ import {
   type SelectorChildFacts,
   type StaticClass,
 } from "./coverage-selector.ts";
-import { primaryRemapToken } from "./coverage-column-form.ts";
 import { runtimeLabel } from "./coverage-runtime.ts";
 
 const SUPPORTED_INPUT = new Set([
@@ -241,8 +240,11 @@ function inventory(definition: ServiceDefinition): {
       hard.add("subComponentsList");
     }
     const remap = asRecord(component["remap"]);
-    const constant = asRecord(remap?.["constant"]);
-    if (constant && Object.keys(constant).length > 0) hard.add("remap.constant");
+    // `remap.constant` pins a selector that has no form row. Live filters the
+    // aggregation rows by the constant, writes it into every row and price
+    // record, and drops it from the price-set match (`b` at 1227218 and `y` at
+    // 1469061); `src/data/column-form.ts` and `src/engine/column-form.ts` do the
+    // same. The rule that flagged every declaration is retired (D-034).
     // `remap.keyValue` is a price-token (key) to form-value (value) map in the
     // live engine, applied forward to aggregation rows and price records and in
     // reverse to meter lists and the index path. `src/data/column-form.ts`
@@ -252,10 +254,14 @@ function inventory(definition: ServiceDefinition): {
     // inert literal key there and here, and the reversed key is used as the
     // price-set token regex, which `columnFormMeterFragments` also does. The
     // `regex-remap` gap this replaced had no fail-closed path behind it, so it
-    // is retired (docs/DECISIONS.md D-027, D-029). What is left is the primary
-    // selector: its value is never resolved through the remapped tree.
-    // Evidence: analysis/FINDINGS.md sections 14.2, 14.3, 15.
-    if (primaryRemapToken(component)) hard.add("remap.keyValue-primary");
+    // is retired (docs/DECISIONS.md D-027, D-029).
+    // The old `remap.keyValue-primary` rule was the last remap gap: this engine
+    // kept the primary selector's value verbatim, so a default that is a remap
+    // token never matched the remapped rows. `resolveColumnFormSelectors` now
+    // resolves the primary through its own option tree like every other row
+    // (live `getInitialValue`, offset 2880490), so that rule is retired too
+    // (D-034, analysis/FINDINGS.md section 19).
+    void remap;
     if (component["exportTagsAsValue"] !== undefined) gaps.add("export-tags");
     const unitModel = asRecord(component["pricingUnitModel"]);
     const pricingTypes = asRecord(unitModel?.["riPricingTypes"]);
@@ -836,15 +842,15 @@ The static class is intentionally conservative. A \`columnFormIPM\` service is
 additional pricing data, tiered PLC_2.0 price patterns, sub-components, or
 unsupported row types. A plain one-row column form is native, and so are
 dependent selectors, reserved/upfront payment models, selector price patterns,
-and a \`remap.keyValue\` in either direction (\`analysis/FINDINGS.md\` section 14).
-One remap case is still blocked: a primary selector whose declared default is a
-\`remap.keyValue\` key. The form's options are the remapped labels and the live
-form replaces an unoffered default with the first offered value, while this
-engine keeps the primary value verbatim, so the default cannot match an
-aggregation row (section 15). It is \`blocked\` when the engine cannot reach a
-price at all. Runtime \`needs-input\` is not a failure; it means the service needs
-a fixture with explicit required values. Runtime \`not-cached\` is a property of
-this offline run, not of the service.
+\`remap.constant\`, and a \`remap.keyValue\` in either direction
+(\`analysis/FINDINGS.md\` sections 14 to 19). The primary selector resolves
+through its own option tree exactly like every other row (live
+\`getInitialValue\`), so a declared default that is a \`remap.keyValue\` token
+lands on the label the aggregation rows carry instead of failing the match. It
+is \`blocked\` when the engine cannot reach a price at all. Runtime
+\`needs-input\` is not a failure; it means the service needs a fixture with
+explicit required values. Runtime \`not-cached\` is a property of this offline
+run, not of the service.
 
 Selector rules (\`subServiceSelector\` rows, \`kind: selector\`):
 

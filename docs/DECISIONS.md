@@ -564,3 +564,31 @@ would invalidate the already-published ElastiCache/OpenSearch/Redshift receipts,
 alone. Evidence and live numbers: `analysis/FINDINGS.md` section 17,
 `receipts/p1-utilization-emr.json` (113.88) and `receipts/p1-utilization-workSpaces.json`
 (2,297.58), both editor recompute with zero mismatches.
+## D-033: `additionalPricingData` is the Database Savings Plans join, and it is native (2026-11-25)
+
+The tracker called `additionalPricingData` a column-form v2 gap on 16 rows, including four P1
+rows (DocumentDB, Neptune, Timestream, DMS). It is neither a broad blocker nor inert: every
+definition that carries it carries one joined cargo item named `Database Savings Plans`, and the
+live form offers that pricing model on instance types the joined artifact prices. Proved from the
+bundle and a live editor run before any code changed (`analysis/FINDINGS.md` section 18).
+
+- **Implemented:** live `getData` spreads `additionalPricingData` into the item list, the
+  aggregation resolver merges every item's rows (per-item `keyName`/`keyValue`/`constant`) and
+  returns the item the matched row came from, and the index path and `pricingUnitModel` follow that
+  item. `src/data/column-form.ts` does the same and exposes the selected item as `pricedItem`;
+  `src/engine/column-form.ts` reads the pricing unit model, remap, and price patterns from it and
+  implements `z`/`B.b` (Savings Plans commitment, effective hourly rate, and the live ceiling of
+  the monthly total to the cent). A joined-item fetch failure is dropped, exactly like live's
+  quiet path, and the component's own artifact remains the fallback.
+- **Tracker:** `additional-pricing-data` is retired from `scripts/coverage.ts`. The 16 rows are
+  `clean` now; `partial:column-form` no longer exists. P1 drops from 10 to 6. The four P1 rows
+  gained editor-oracle receipts with screenshots and are `Done - ledger receipt`.
+- **What was *not* the blocker:** DocumentDB already evaluated with defaults (3,869.04 DSP aside,
+  4,836.30 On-Demand), and Neptune, Timestream, and DMS were `needs-input` because their primary
+  selector rows have no `defaultValue`; that is the documented fail-closed stance from D-020, not
+  unfinished join machinery. The class was a missing pricing model, not a service that could not be
+  priced. `remap.constant` on the *component* still fails closed; only the joined item's constants
+  are applied, which is the live scope for this mechanism.
+- **Not touched:** `src/engine/inputs.ts`, `src/engine/expression.ts`, `src/engine/template.ts`,
+  and the selector/remap resolution logic. The prefetch caller only forwards the component's
+  `additionalPricingData` to the data loader.

@@ -1,0 +1,117 @@
+{
+  "estimate": "axi-e2e Timestream Database Savings Plans",
+  "specHash": "7521204e8a6c7a7e",
+  "payloadHash": "6c4507f192f08cd6",
+  "url": "https://calculator.aws/#/estimate?id=01ab9ef932d0bd0f22eb584018bf8b315fbbaf5f",
+  "savedKey": "01ab9ef932d0bd0f22eb584018bf8b315fbbaf5f",
+  "publishedAt": "2026-11-25T01:13:17.144Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 6701.98,
+    "upfront": 0,
+    "total12m": 80423.76,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonTimestream",
+        "template": "AmazonTimestream",
+        "region": "us-east-2",
+        "monthly": 6701.98,
+        "upfront": 0,
+        "summary": "InfluxDB Product (Database Instance), Version (InfluxDB2), Deployment Option (Multi-AZ Read Replica/Cluster), Instance Type (db.influx.12xlarge), Pricing Model (Database Savings Plans), Lease Offering Term (1yr), Purchase Option (No Upfront), InfluxDB Product (Influx Optimized Storage), Version (InfluxDB2), Deployment Option (Multi-AZ Read Replica/Cluster), Volume Type (Influx IOPS Included with 12k IOPS)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonTimestream",
+        "monthly": 6701.98,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 6701.98,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=01ab9ef932d0bd0f22eb584018bf8b315fbbaf5f",
+    "title": "axi-e2e Timestream Database Savings Plans",
+    "monthly": "6,701.98 USD",
+    "upfront": "0.00 USD",
+    "annual": "80,423.76 USD",
+    "monthlyValue": 6701.98,
+    "upfrontValue": 0,
+    "annualValue": 80423.76,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Timestream",
+        "upfront": "0.00 USD",
+        "monthly": "6,701.98 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "InfluxDB Product (Database Instance), Version (InfluxDB2), Deployment Option (Multi-AZ Read Replica/Cluster), Instance Type (db.influx.12xlarge), Pricing Model (Database Savings Plans), Lease Offering Term (1yr), Purchase Option (No Upfront), InfluxDB Product (Influx Optimized Storage), Version (InfluxDB2), Deployment Option (Multi-AZ Read Replica/Cluster), Volume Type (Influx IOPS Included with 12k IOPS)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:13:22.668Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=01ab9ef932d0bd0f22eb584018bf8b315fbbaf5f",
+    "savedKey": "01ab9ef932d0bd0f22eb584018bf8b315fbbaf5f",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=01ab9ef932d0bd0f22eb584018bf8b315fbbaf5f",
+      "title": "axi-e2e Timestream Database Savings Plans",
+      "monthly": "6,701.98 USD",
+      "upfront": "0.00 USD",
+      "annual": "80,423.76 USD",
+      "monthlyValue": 6701.98,
+      "upfrontValue": 0,
+      "annualValue": 80423.76,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon Timestream",
+          "upfront": "0.00 USD",
+          "monthly": "6,701.98 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "InfluxDB Product (Database Instance), Version (InfluxDB2), Deployment Option (Multi-AZ Read Replica/Cluster), Instance Type (db.influx.12xlarge), Pricing Model (Database Savings Plans), Lease Offering Term (1yr), Purchase Option (No Upfront), InfluxDB Product (Influx Optimized Storage), Version (InfluxDB2), Deployment Option (Multi-AZ Read Replica/Cluster), Volume Type (Influx IOPS Included with 12k IOPS)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:13:49.179Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e Timestream Database Savings Plans",
+    "monthly": 6701.98,
+    "upfront": 0,
+    "annual": 80423.76,
+    "services": [
+      {
+        "name": "Amazon Timestream",
+        "monthly": 6701.98,
+        "region": "US East (Ohio)",
+        "configSummary": "InfluxDB Product (Database Instance), Version (InfluxDB2), Deployment Option (Multi-AZ Read Replica/Cluster), Instance Type (db.influx.12xlarge), Pricing Model (Database Savings Plans), Lease Offering Term (1yr), Purchase Option (No Upfront), InfluxDB Product (Influx Optimized Storage), Version (InfluxDB2), Deployment Option (Multi-AZ Read Replica/Cluster), Volume Type (Influx IOPS Included with 12k IOPS)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

@@ -1,0 +1,118 @@
+{
+  "estimate": "axi-e2e Neptune Database Savings Plans",
+  "specHash": "afb3995644890878",
+  "payloadHash": "1a949480cf7e17e3",
+  "url": "https://calculator.aws/#/estimate?id=a9e5a5fc3fbee037b6dbf3b20f18c31cd2c19cec",
+  "savedKey": "a9e5a5fc3fbee037b6dbf3b20f18c31cd2c19cec",
+  "publishedAt": "2026-11-25T01:12:33.226Z",
+  "expires": "2027-11-25",
+  "native": {
+    "monthly": 5229.55,
+    "upfront": 0,
+    "total12m": 62754.6,
+    "currency": "USD",
+    "services": [
+      {
+        "code": "amazonNeptune",
+        "template": "template_0",
+        "region": "us-east-2",
+        "monthly": 5229.55,
+        "upfront": 0,
+        "summary": "Neptune Cluster Configuration Option (Neptune Standard), Number of instances (1), Neptune instance type (db.r7g.12xlarge), Pricing strategy (Database Savings Plans 1yr No Upfront), Number of workbench instances (0), Workbench Instances (ml.t2.2xlarge), Data stored (1 GB), Backup storage (1 GB)"
+      }
+    ]
+  },
+  "stored": {
+    "services": [
+      {
+        "serviceCode": "amazonNeptune",
+        "monthly": 5229.55,
+        "upfront": 0
+      }
+    ],
+    "totalCost": {
+      "monthly": 5229.55,
+      "upfront": 0
+    }
+  },
+  "rendered": {
+    "url": "https://calculator.aws/#/estimate?id=a9e5a5fc3fbee037b6dbf3b20f18c31cd2c19cec",
+    "title": "axi-e2e Neptune Database Savings Plans",
+    "monthly": "5,229.55 USD",
+    "upfront": "0.00 USD",
+    "annual": "62,754.60 USD",
+    "monthlyValue": 5229.55,
+    "upfrontValue": 0,
+    "annualValue": 62754.6,
+    "estimateDate": "Estimate date: November 25, 2026",
+    "banner": "last updated on November 25, 2026",
+    "readOnlyNotice": true,
+    "services": [
+      {
+        "name": "Amazon Neptune",
+        "upfront": "0.00 USD",
+        "monthly": "5,229.55 USD",
+        "description": "-",
+        "region": "US East (Ohio)",
+        "configSummary": "Neptune Cluster Configuration Option (Neptune Standard), Number of instances (1), Neptune instance type (db.r7g.12xlarge), Pricing strategy (Database Savings Plans 1yr No Upfront), Number of workbench instances (0), Workbench Instances (ml.t2.2xlarge), Data stored (1 GB), Backup storage (1 GB)",
+        "status": null
+      }
+    ],
+    "groups": [],
+    "supportRow": null,
+    "capturedAt": "2026-11-25T01:12:37.564Z"
+  },
+  "oracle": {
+    "kind": "editor-recompute",
+    "url": "https://calculator.aws/#/estimate?id=a9e5a5fc3fbee037b6dbf3b20f18c31cd2c19cec",
+    "savedKey": "a9e5a5fc3fbee037b6dbf3b20f18c31cd2c19cec",
+    "recomputed": {
+      "url": "https://calculator.aws/#/estimate?id=a9e5a5fc3fbee037b6dbf3b20f18c31cd2c19cec",
+      "title": "axi-e2e Neptune Database Savings Plans",
+      "monthly": "5,229.55 USD",
+      "upfront": "0.00 USD",
+      "annual": "62,754.60 USD",
+      "monthlyValue": 5229.55,
+      "upfrontValue": 0,
+      "annualValue": 62754.6,
+      "estimateDate": "Estimate date: November 25, 2026",
+      "banner": null,
+      "readOnlyNotice": false,
+      "services": [
+        {
+          "name": "Amazon Neptune",
+          "upfront": "0.00 USD",
+          "monthly": "5,229.55 USD",
+          "description": "-",
+          "region": "US East (Ohio)",
+          "configSummary": "Neptune Cluster Configuration Option (Neptune Standard), Number of instances (1), Neptune instance type (db.r7g.12xlarge), Pricing strategy (Database Savings Plans 1yr No Upfront), Number of workbench instances (0), Workbench Instances (ml.t2.2xlarge), Data stored (1 GB), Backup storage (1 GB)",
+          "status": "-"
+        }
+      ],
+      "groups": [],
+      "supportRow": null,
+      "capturedAt": "2026-11-25T01:13:03.919Z"
+    },
+    "mismatches": [],
+    "verdict": "pass"
+  },
+  "expectation": {
+    "title": "axi-e2e Neptune Database Savings Plans",
+    "monthly": 5229.55,
+    "upfront": 0,
+    "annual": 62754.6,
+    "services": [
+      {
+        "name": "Amazon Neptune",
+        "monthly": 5229.55,
+        "upfront": 0,
+        "region": "US East (Ohio)",
+        "configSummary": "Neptune Cluster Configuration Option (Neptune Standard), Number of instances (1), Neptune instance type (db.r7g.12xlarge), Pricing strategy (Database Savings Plans 1yr No Upfront), Number of workbench instances (0), Workbench Instances (ml.t2.2xlarge), Data stored (1 GB), Backup storage (1 GB)"
+      }
+    ],
+    "groups": [],
+    "groupRows": []
+  },
+  "mismatches": [],
+  "verdict": "pass"
+}

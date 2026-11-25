@@ -1,0 +1,22 @@
+name: axi-e2e Neptune Database Savings Plans
+currency: USD
+locale: en_US
+services:
+  - code: amazonNeptune
+    region: us-east-2
+    set:
+      columnFormIPM:
+        Number of nodes: 1
+        Instance Type: db.r7g.12xlarge
+        TermType: Database Savings Plans
+        LeaseContractLength: 1yr
+        PurchaseOption: No Upfront
+      columnFormIPM_io:
+        Number of nodes: 0
+        Instance Type: db.r7g.12xlarge
+        TermType: OnDemand
+      columnFormIPM_1:
+        Number of workbench nodes: 0
+        Instance Name: ml.t2.2xlarge
+      Neptune_storageAmount: { value: 1, unit: gb|NA }
+      Neptune_BackupStorage: { value: 1, unit: gb|NA }

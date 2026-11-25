@@ -101,21 +101,21 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
 
 - `npm run typecheck`: pass
 - `npm run lint`: pass
-- `npm test`: 174 tests, pass
-- `npm run e2e`: 49 tests, pass (live DOM re-reads, live catalog parity, native goldens, all 25
-  ledger rows including the editor-recompute oracle, and the utilization suites)
-- `npm run ledger`: 25 rows, all pass
+- `npm test`: 177 tests, pass
+- `npm run e2e`: 53 tests, pass (live DOM re-reads, live catalog parity, native goldens, all
+  29 ledger rows including the editor-recompute oracle, and the utilization suites)
+- `npm run ledger`: 29 rows, all pass
 - `npm run coverage -- --evaluate --offline`: 441-row exhaustive tracker in
-  `analysis/COVERAGE_TABLE.md` (409 clean, 16 partial column-form, 13 blocked column-form,
-  3 blocked by subtype; P1 8, P2 139, P3 263).
+  `analysis/COVERAGE_TABLE.md` (425 clean, 0 partial column-form, 13 blocked
+  column-form, 3 blocked by subtype; P1 4, P2 139, P3 267).
 - Selector rows are scored by the children the live calculator serves and name the blocker and
   the children that carry it (`analysis/FINDINGS.md` sections 14 and 15, D-028). Two Amazon
   WorkSpaces children are dangling references in the live manifest and have no surface.
 - The runtime columns separate a real defect from an environment gap: `MissingPriceError` is
   `missing-price` and an uncached offline fetch is `not-cached` instead of both reading `error`
   (D-029), so one row per region is left in the `error` bucket (see the fail-closed list below).
-- Screenshots of every public link: `receipts/screenshots/<row id>.png` for all 25 ledger rows
-  (31 PNGs including the probe captures)
+- Screenshots of every public link: `receipts/screenshots/<row id>.png` for all 29 ledger
+  rows (35 PNGs including the probe captures)
 - `utilization` is native, so seven services changed class: Deadline Cloud, Direct Connect,
   MediaConnect, and AWS PCS are clean, and Amazon Mainframe Modernization plus its two children
   moved from `blocked:subtype` to `blocked:column-form` (`remap.constant` is the real blocker).
@@ -128,12 +128,20 @@ simulation is in `receipts/sim-top-services.json` with the full stored estimate 
   live `singlePricePoint` zero for an absent meter. Amazon WorkSpaces still declares two
   unserved children (Thin Client, Secure Browser). Evidence: `analysis/FINDINGS.md` section 17,
   `receipts/p1-utilization-emr.json`, `receipts/p1-utilization-workSpaces.json`.
+- `additionalPricingData` is native: the joined Database Savings Plans cargo item contributes its
+  aggregation rows to the selector tree and prices that model from its own index and pricing unit
+  model, with live's Savings Plans math. The class was one missing pricing model, not a service
+  that could not be priced (DocumentDB already evaluated with defaults; Neptune, Timestream, and
+  DMS were `needs-input` on missing selector defaults). P1 closed 8 -> 4 and four editor-oracle
+  receipts landed. Evidence: `analysis/FINDINGS.md` section 18, D-033,
+  `receipts/p1-{documentdb,neptune,timestream,dms}-dsp.json`.
 
 ## Coverage ledger summary
 
-23 rows: 19 service fixtures, 1 group/support fixture, and 3 P0 conformance batches (EKS+EBS,
+29 rows: 25 service fixtures, 1 group/support fixture, and 3 P0 conformance batches (EKS+EBS,
 and two VPC batches) proven by editor recompute. All native, all pass. Details in `COVERAGE.md`
-and `analysis/P0_CONFORMANCE.md`. The column-form batch
+and `analysis/P0_CONFORMANCE.md`. The four Database Savings Plans rows are
+`receipts/p1-{documentdb,neptune,timestream,dms}-dsp.json` (`analysis/FINDINGS.md` section 18). The column-form batch
 (`receipts/p2-column-form-rows.json`) proves CodeBuild twice, ElastiCache, and MSK against the
 editor at 957.46/month.
 
@@ -161,21 +169,22 @@ editor at 957.46/month.
   `--oracle-editor`. Evidence in `analysis/FINDINGS.md` section 9.
 - Fail-closed gaps (adapter tasks, not silent zeros): bespoke EC2/Windows/RDS math
   (`ec2PriceDisplay`, `ec2Variable`, `snapShotMaths`, `workloadInstanceMath`), pricing
-  `sets`-based instance data, and the remaining `columnFormIPM` surface (Database Savings Plans,
-  sub-components, reserved/upfront totals, `remap.constant`) listed in `docs/DECISIONS.md`
-  D-020, D-021, D-024, and D-030.
+  `sets`-based instance data, and the remaining `columnFormIPM` surface (sub-components,
+  reserved/upfront totals, component-level `remap.constant`) listed in `docs/DECISIONS.md`
+  D-020, D-021, D-024, and D-030. `additionalPricingData` (the joined Database Savings Plans
+  artifact) is implemented and no longer a gap (D-033, `analysis/FINDINGS.md` section 18).
 - `percentInput` saves the entered percent, which the live editor rehydrates by dividing by 100
   again; saving the fraction made a rehydrated 100% read as 1% (the Keyspaces 25.69 vs 25.63
   oracle). Fixed, republished, and now a ledger row: `receipts/p1-keyspaces.json` recomputes at
   `25.69` with `LOCAL_ONE reads (1)` (`analysis/FINDINGS.md` section 16.1, D-026). The same change
   set landed the P0 run's typed-amount fix: `allowDecimals` is checked on the amount the user
   typed, so 1000 operations per day (30416.67 per month) is a valid integer entry.
-- P1 is 8 rows, all engine gaps rather than tracker noise: four selectors name their children
-  (Amazon Chime SDK `remap.constant`, Amazon Translate `remap.keyValue-primary`, AWS Mainframe
-  Modernization `remap.constant`), plus AWS Directory Service (`remap.constant`) and four partial
-  on `additional-pricing-data` (DocumentDB, Neptune, Timestream, DMS; Keyspaces left P1 by
-  gaining a ledger receipt, and Amazon EMR + Amazon WorkSpaces left when utilization rows became
-  native). Evidence: `analysis/FINDINGS.md` sections 15 to 17, D-028 to D-031.
+- P1 is 4 rows, all component-level `remap.constant` / `remap.keyValue-primary` selectors:
+  Amazon Chime SDK, Amazon Translate, AWS Mainframe Modernization, and AWS Directory Service
+  (each named per child in the tracker). The four `additional-pricing-data` rows (DocumentDB,
+  Neptune, Timestream, DMS) closed with Database Savings Plans receipts, and Amazon EMR +
+  Amazon WorkSpaces left when utilization rows became native. Evidence:
+  `analysis/FINDINGS.md` sections 15 to 18, D-028 to D-033.
 - The `remap.keyValue` direction is native since `bf27e34` (forward on aggregation rows and price
   records, reverse on meter tokens and the index path). What is still missing is resolving the
   **primary** selector through the remapped option tree, which is
@@ -202,12 +211,12 @@ editor at 957.46/month.
 
 ## Next three actions
 
-1. `additional-pricing-data` is the only blocker left on four P1 rows (DocumentDB, Neptune,
-   Timestream, DMS) and on Keyspaces; the Database Savings Plans rows are the next column-form
-   surface after `remap.constant`.
-2. `remap.constant` blocks the six remaining P1/P2 selectors (Amazon Chime SDK, AWS Directory
-   Service, AWS Mainframe Modernization, and their children), named per child in the tracker.
-3. Add ledger rows with receipts for RDS for PostgreSQL (488.02) and ElastiCache Valkey (14.02),
+1. `remap.constant` on the *component* blocks the four remaining P1 selectors (Amazon Chime SDK,
+   AWS Directory Service, AWS Mainframe Modernization, and their children), named per child in the
+   tracker. The joined artifact's own `remap.constant` is already applied (D-033); only the
+   component-level blocker is open because the engine's summary/price path for it has not been
+   reproduced yet.
+2. Add ledger rows with receipts for RDS for PostgreSQL (488.02) and ElastiCache Valkey (14.02),
    now that both evaluate natively, then the EBS `snapShotMaths` adapter and the EC2
    pricing-`sets` path. `realTimeDocumentTranslation` (primary remap token) and
    `amazonLookoutForEquipment` (a `fileSize` default whose frequency is not in

@@ -11,7 +11,13 @@ import {
   type ColumnFormComponent,
 } from "../src/engine/column-form.ts";
 import { columnFormVisibility } from "../src/engine/column-form-loader.ts";
-import { matchAggregation, remapValue, reverseRemapValue } from "../src/data/column-form.ts";
+import {
+  additionalCargoItems,
+  matchAggregation,
+  mergeCargoAggregations,
+  remapValue,
+  reverseRemapValue,
+} from "../src/data/column-form.ts";
 import type { ColumnFormPricingData } from "../src/data/column-form.ts";
 import type { Template } from "../src/data/definitions.ts";
 
@@ -215,18 +221,159 @@ test("no matching pricing pattern fails closed", () => {
   );
 });
 
-test("Database Savings Plans fail closed", () => {
-  const component: ColumnFormComponent = {
+/**
+ * The Database Savings Plans shape: the joined artifact offers a TermType value
+ * the component's own aggregation rows do not carry, and prices it from its own
+ * index with its own pricing unit model and remap. Live `z` rounds the monthly
+ * figure up to the cent.
+ */
+function savingsPlanComponent(): ColumnFormComponent {
+  return {
     ...DAX,
-    pricingUnitModel: { riPricingTypes: { hourly: [{ TermType: "OnDemand" }] } },
-    row: [...DAX.row, { label: "Pricing model", type: "dropDown", selectorId: "TermType" }],
+    secondaryKey: ["TermType", "LeaseContractLength", "PurchaseOption"],
+    pricingUnitModel: { riPaymentOptions: { hourly: "*" } },
+    additionalPricingData: [{ name: "Database Savings Plans" }],
+    row: [
+      DAX.row[0]!,
+      DAX.row[1]!,
+      {
+        label: "Pricing model",
+        type: "dropDown",
+        selectorId: "TermType",
+        exportValueAs: "pricingModel",
+        mappingValue: { OnDemand: "Hourly", "Database Savings Plans": "SavingsPlan" },
+      },
+      {
+        label: "Term",
+        type: "dropDown",
+        selectorId: "LeaseContractLength",
+        exportValueAs: "term",
+      },
+      {
+        label: "Payment option",
+        type: "dropDown",
+        selectorId: "PurchaseOption",
+        exportValueAs: "purchaseOption",
+        dependent: "LeaseContractLength",
+      },
+    ],
   };
-  assert.throws(
-    () =>
-      evaluateColumnForm(component, DAX_DATA, [
-        { "Instance Type": "r5.large", TermType: "Database Savings Plans" },
-      ]),
-    /Database Savings Plans pricing/
+}
+
+function savingsPlanData(price: string): ColumnFormPricingData {
+  return {
+    ...DAX_DATA,
+    setMeters: ["DatabaseSavingsPlans r5.large OnDemand"],
+    regionPrices: {
+      "DatabaseSavingsPlans r5.large OnDemand": {
+        price,
+        PurchaseOption: "No Upfront",
+      } as never,
+    },
+    pricedItem: {
+      name: "Database Savings Plans",
+      manifest: { serviceId: "databasesavingsplans", source: "dsp-join-with-dax-calc" },
+      remap: { keyValue: { "1 year": "1yr" } },
+      pricingUnitModel: {
+        riPricingTypes: { hourly: [{ PurchaseOption: "No Upfront" }] },
+      },
+    },
+  };
+}
+
+test("Database Savings Plans prices the committed rate and rounds the month up", () => {
+  // Live DocumentDB, US East (Ohio), db.r8g.12xlarge, Database Savings Plans,
+  // 1yr, No Upfront: 5.30005152 * 730 = 3869.0376 -> 3,869.04 USD.
+  const result = evaluateColumnForm(savingsPlanComponent(), savingsPlanData("5.30005152"), [
+    {
+      "Number of nodes": 1,
+      "Instance Type": "r5.large",
+      TermType: "Database Savings Plans",
+      LeaseContractLength: "1yr",
+      PurchaseOption: "No Upfront",
+    },
+  ]);
+  assert.equal(result.monthly, 3869.04);
+  assert.equal(result.upfront, 0);
+  assert.equal(
+    result.configSummary,
+    "DAX nodes (1), DAX instance type (r5.large), Pricing model (Database Savings Plans), Term (1yr), Payment option (No Upfront)"
+  );
+});
+
+test("a partial-upfront Savings Plan splits the commitment", () => {
+  const data = savingsPlanData("8");
+  data.regionPrices["DatabaseSavingsPlans r5.large OnDemand"] = {
+    price: "8",
+    PurchaseOption: "Partial Upfront",
+  } as never;
+  const component = savingsPlanComponent();
+  data.pricedItem = {
+    ...data.pricedItem!,
+    pricingUnitModel: {
+      riPricingTypes: { hourly: [{ PurchaseOption: "Partial Upfront" }] },
+    },
+  };
+  const result = evaluateColumnForm(component, data, [
+    {
+      "Number of nodes": 2,
+      "Instance Type": "r5.large",
+      TermType: "Database Savings Plans",
+      LeaseContractLength: "3yr",
+      PurchaseOption: "Partial Upfront",
+    },
+  ]);
+  // 3 years is 26280 hours: commitment 210240/unit, half paid up front.
+  assert.equal(result.monthly, 5840);
+  assert.equal(result.upfront, 210240);
+});
+
+test("joined cargo rows are appended and keep their item index", () => {
+  const main = [
+    { selectors: { "Instance Type": "db.r8g.12xlarge", TermType: "OnDemand" } },
+  ];
+  const joined = [
+    {
+      itemIndex: 1,
+      remap: {
+        keyName: { "docdb:Instance Type": "Instance Type" },
+        keyValue: { "1 year": "1yr" },
+        constant: { TermType: "Database Savings Plans", PurchaseOption: "No Upfront" },
+      },
+      rows: [
+        {
+          selectors: {
+            "docdb:Instance Type": "db.r8g.12xlarge",
+            "plc:LeaseContract": "1 year",
+            PurchaseOption: "No Upfront",
+          },
+        },
+        // A row the constant contradicts is filtered out before the merge.
+        { selectors: { "docdb:Instance Type": "db.r8g.2xlarge", TermType: "Reserved" } },
+      ],
+    },
+  ];
+  const merged = mergeCargoAggregations(main, undefined, joined);
+  assert.equal(merged.rows.length, 2);
+  assert.deepEqual(merged.rowItem, [0, 1]);
+  assert.deepEqual(merged.rows[1]?.selectors, {
+    "Instance Type": "db.r8g.12xlarge",
+    "plc:LeaseContract": "1yr",
+    PurchaseOption: "No Upfront",
+    TermType: "Database Savings Plans",
+  });
+});
+
+test("additionalPricingData normalizes only usable joined artifacts", () => {
+  assert.deepEqual(additionalCargoItems(undefined), []);
+  assert.deepEqual(additionalCargoItems({ nope: true }), []);
+  assert.deepEqual(
+    additionalCargoItems([
+      { name: "Database Savings Plans", manifest: { serviceId: "databasesavingsplans", source: "x" } },
+      { name: "no manifest" },
+      "not an object",
+    ]).map((item) => item.name),
+    ["Database Savings Plans"]
   );
 });
 

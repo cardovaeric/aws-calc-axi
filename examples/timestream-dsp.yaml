@@ -1,0 +1,22 @@
+name: axi-e2e Timestream Database Savings Plans
+currency: USD
+locale: en_US
+services:
+  - code: amazonTimestream
+    region: us-east-2
+    set:
+      # The column form is disableCalculation: it exports the joined artifact's
+      # hourly rate and the template's maths multiplies it (2 nodes x 730).
+      columnFormIPM:
+        Product Family: Database Instance
+        operation: InfluxDB2
+        Deployment Option: Multi-AZ Read Replica/Cluster
+        Instance Type: db.influx.12xlarge
+        TermType: Database Savings Plans
+        LeaseContractLength: 1yr
+        PurchaseOption: No Upfront
+      columnFormIPMstorage:
+        Product Family: Influx Optimized Storage
+        operation: InfluxDB2
+        Deployment Option: Multi-AZ Read Replica/Cluster
+        Volume Type: Influx IOPS Included with 12k IOPS
